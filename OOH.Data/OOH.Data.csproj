@@ -4,10 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Folder Include="Dtos\Provedor\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Dtos\" />
-    <Folder Include="Models\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
