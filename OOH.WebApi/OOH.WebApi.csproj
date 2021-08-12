@@ -12,12 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApiControllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OOH.Data\OOH.Data.csproj" />
-    <ProjectReference Include="..\OOH.Handlers\OOH.Handlers.csproj" />
   </ItemGroup>
 
 </Project>
