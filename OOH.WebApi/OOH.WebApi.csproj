@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    
+    <Folder Include="PowerpointTemplate\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OOH.Data\OOH.Data.csproj" />
   </ItemGroup>
 
