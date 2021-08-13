@@ -10,8 +10,6 @@ namespace OOH.Data.Interfaces
     {
         Task<IEnumerable<T>> SelectData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null);
         Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null);
-        Task<int> PostData(string _query, bool _isProcedure = false, DynamicParameters parameters = null);
-        Task<T> PostData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null);
-
+        Task<int> PostData(string _query, bool withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false);
     }
 }

@@ -9,6 +9,11 @@ namespace OOH.Data.Models
     /// </summary>
     public class Proveedores
     {
+        public Proveedores()
+        {
+            Activo = true;
+        }
+
         public Int64 ProveedorId { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }

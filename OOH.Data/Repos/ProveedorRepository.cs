@@ -1,4 +1,5 @@
-﻿using OOH.Data.Interfaces;
+﻿using Dapper;
+using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,22 @@ namespace OOH.Data.Repos
     /// </summary>
     public class ProveedorRepository : OOHContext, IProveedorRepository
     {
-        public async Task<Proveedores> Create(string _Where = "")
+        public async Task<int> Create(Proveedores proveedor)
         {
-            throw new NotImplementedException();
+            try
+            {
+                #region sql
+                string sql = "INSERT INTO [dbo].[Proveedores] ([Codigo] ,[Nombre] ,[NRC] ,[NIT] ,[Giro] ,[Email] ,[Direccion] ,[Telefono] ,[Celular] ,[PersonaJuridica] ,[Activo] ,[CategoriaId]) VALUES (@Codigo, @Nombre, @NRC, @NIT, @Giro, @Email, @Direccion, @Telefono, @Celular, @PersonaJuridica, @Activo, @CategoriaId);";
+                #endregion
+                //var parameters = new DynamicParameters({});
+                var id = await PostData(sql, true, new DynamicParameters(proveedor));
+                return id;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<Proveedores> Find(string _Where = "")
@@ -26,7 +40,7 @@ namespace OOH.Data.Repos
 
         public async Task<int> Remove(string _Where = "")
         {
-            return PostData("Update Proveedores set Activo = false where ProveedorId = "+ _Where).Result;
+            return PostData("Update Proveedores set Activo = false where ProveedorId = " + _Where).Result;
         }
 
         public async Task<IEnumerable<Proveedores>> Select(string _Where = "")
@@ -35,7 +49,7 @@ namespace OOH.Data.Repos
             return ReturnSelect;
         }
 
-        public async Task<Proveedores> Update(string _Where = "")
+        public async Task<int> Update(string _Where = "")
         {
             throw new NotImplementedException();
         }

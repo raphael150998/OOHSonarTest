@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OOH.Data.Interfaces;
+using OOH.Data.Models;
 using OOH.WebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,32 @@ namespace OOH.WebApi.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProveedorRepository _proveedorRepo;
+
+        public HomeController(IProveedorRepository proveedorRepo, ILogger<HomeController> logger)
         {
+            _proveedorRepo = proveedorRepo;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            var proveedor = new Proveedores()
+            {
+                Activo = true,
+                CategoriaId = 1,
+                Celular = "sadfsdf",
+                Codigo = "001",
+                Direccion = "asdfsdf",
+                Email = "email@test.com",
+                Giro = "sadfsdf",
+                NIT = "sdfasdf",
+                Nombre = "Rafael",
+                NRC = "sadfasdfd",
+                PersonaJuridica = true,
+                Telefono = "fasdfsdf"
+            };
+            _proveedorRepo.Create(proveedor);
             return View();
         }
 

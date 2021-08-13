@@ -16,93 +16,41 @@ namespace OOH.Data
 
         public async Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
         {
-            try
+            using (IDbConnection cn = new SqlConnection(StringConnection))
             {
-                using (IDbConnection cn = new SqlConnection(StringConnection))
-                {
-                    var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,
-                        commandType: _isProcedure == true ?
-                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+                var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,
+                    commandType: _isProcedure == true ?
+                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
-                    return ObjetoReturn;
-
-                }
-
-            }
-            catch (Exception e)
-            {
-
-                return (T)Convert.ChangeType(null, typeof(T));
+                return ObjetoReturn;
 
             }
         }
 
-        public async Task<int> PostData(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
+        public async Task<int> PostData(string _query, bool withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
         {
-            try
+            using (IDbConnection cn = new SqlConnection(StringConnection))
             {
 
-                using (IDbConnection cn = new SqlConnection(StringConnection))
-                {
-
-                    var ObjetoReturn = await cn.ExecuteAsync(_query, param: _isProcedure == true ? parameters : null,
-                        commandType: _isProcedure == true ?
-                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+                var ObjetoReturn = await cn.ExecuteAsync(_query, param: withParameters == true ? parameters : null,
+                    commandType: _isProcedure == true ?
+                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
 
-                    return ObjetoReturn;
-                }
-            }
-            catch (Exception e)
-            {
-
-                return 0;
-
-            }
-        }
-
-        public async Task<T> PostData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
-        {
-            try
-            {
-
-                using (IDbConnection cn = new SqlConnection(StringConnection))
-                {
-
-                    var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,
-                        commandType: _isProcedure == true ?
-                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
-
-
-                    return ObjetoReturn;
-                }
-            }
-            catch (Exception e)
-            {
-
-                return (T)Convert.ChangeType(null, typeof(T));
-
+                return ObjetoReturn;
             }
         }
 
         public async Task<IEnumerable<T>> SelectData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
         {
-            try
+            using (IDbConnection cn = new SqlConnection(StringConnection))
             {
-
-                using (IDbConnection cn = new SqlConnection(StringConnection))
-                {
-                    var ObjetoReturn = await cn.QueryAsync<T>(_query, param: _isProcedure == true ? parameters : null,
-                        commandType: _isProcedure == true ?
-                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+                var ObjetoReturn = await cn.QueryAsync<T>(_query, param: _isProcedure == true ? parameters : null,
+                    commandType: _isProcedure == true ?
+                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
 
-                    return ObjetoReturn.ToList();
-                }
-            }
-            catch (Exception e)
-            {
-                return (List<T>)Convert.ChangeType(null, typeof(T));
+                return ObjetoReturn.ToList();
             }
         }
     }
