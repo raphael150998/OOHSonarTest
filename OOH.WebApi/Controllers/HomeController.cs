@@ -25,22 +25,25 @@ namespace OOH.WebApi.Controllers
 
         public IActionResult Index()
         {
-            var proveedor = new Proveedores()
-            {
-                Activo = true,
-                CategoriaId = 1,
-                Celular = "sadfsdf",
-                Codigo = "001",
-                Direccion = "asdfsdf",
-                Email = "email@test.com",
-                Giro = "sadfsdf",
-                NIT = "sdfasdf",
-                Nombre = "Rafael",
-                NRC = "sadfasdfd",
-                PersonaJuridica = true,
-                Telefono = "fasdfsdf"
-            };
-            _proveedorRepo.Create(proveedor);
+            //var proveedor = new Proveedores()
+            //{
+            //    Activo = true,
+            //    CategoriaId = 1,
+            //    Celular = "gjhjghj",
+            //    Codigo = "0dd01",
+            //    Direccion = "asdfdssdfsdf",
+            //    Email = "email@test.com",
+            //    Giro = "sadfsdf",
+            //    NIT = "sdfsdfdfnbbasdf",
+            //    Nombre = "Rabbbbfael",
+            //    NRC = "sadfavbvbvbsdfd",
+            //    PersonaJuridica = true,
+            //    Telefono = "fasddfgfgbbbblkjhkhfsdf"
+            //};
+            //_proveedorRepo.Create(proveedor);
+
+
+
             return View();
         }
 

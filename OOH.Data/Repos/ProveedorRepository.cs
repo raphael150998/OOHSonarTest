@@ -16,42 +16,34 @@ namespace OOH.Data.Repos
     {
         public async Task<int> Create(Proveedores proveedor)
         {
-            try
-            {
-                #region sql
-                string sql = "INSERT INTO [dbo].[Proveedores] ([Codigo] ,[Nombre] ,[NRC] ,[NIT] ,[Giro] ,[Email] ,[Direccion] ,[Telefono] ,[Celular] ,[PersonaJuridica] ,[Activo] ,[CategoriaId]) VALUES (@Codigo, @Nombre, @NRC, @NIT, @Giro, @Email, @Direccion, @Telefono, @Celular, @PersonaJuridica, @Activo, @CategoriaId);";
-                #endregion
-                //var parameters = new DynamicParameters({});
-                var id = await PostData(sql, true, new DynamicParameters(proveedor));
-                return id;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            #region sql
+            string sql = "INSERT INTO [dbo].[Proveedores] ([Codigo] ,[Nombre] ,[NRC] ,[NIT] ,[Giro] ,[Email] ,[Direccion] ,[Telefono] ,[Celular] ,[PersonaJuridica] ,[Activo] ,[CategoriaId]) VALUES (@Codigo, @Nombre, @NRC, @NIT, @Giro, @Email, @Direccion, @Telefono, @Celular, @PersonaJuridica, @Activo, @CategoriaId)";
+            #endregion
+            var id = await PostData(sql, true, new DynamicParameters(proveedor));
+            return id;
         }
 
-        public async Task<Proveedores> Find(string _Where = "")
+        public async Task<Proveedores> Find(int id)
         {
-            var ReturnFind = FilterData<Proveedores>("Select * from Proveedores Where = " + _Where).Result;
-            return ReturnFind;
+            return FilterData<Proveedores>($"Select * from Proveedores Where ProveedorId = {id}").Result;
         }
 
-        public async Task<int> Remove(string _Where = "")
+        public async Task Remove(int id)
         {
-            return PostData("Update Proveedores set Activo = false where ProveedorId = " + _Where).Result;
+           await PostData($"Update Proveedores set Activo = false where ProveedorId = {id}");
         }
 
         public async Task<IEnumerable<Proveedores>> Select(string _Where = "")
         {
-            var ReturnSelect = SelectData<Proveedores>("Select * from Proveedor " + _Where).Result.ToList();
-            return ReturnSelect;
+            return SelectData<Proveedores>("Select * from Proveedor " + _Where).Result.ToList();
         }
 
-        public async Task<int> Update(string _Where = "")
+        public async Task Update(Proveedores proveedor)
         {
-            throw new NotImplementedException();
+            #region sql
+            string sql = "UPDATE [dbo].[Proveedores] SET [Codigo] = @Codigo ,[Nombre] = @Nombre,[NRC] = @NRC ,[NIT] = @NIT,[Giro] = @Giro,[Email] = @Email,[Direccion] = @Direccion,[Telefono] = @Telefono,[Celular] = @Celular,[PersonaJuridica] = @PersonaJuridica,[Activo] = @Activo,[CategoriaId] = @CategoriaId where ProveedorId = @ProveedorId";
+            #endregion
+            var id = await PostData(sql, true, new DynamicParameters(proveedor));
         }
     }
 }
