@@ -1,0 +1,64 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Proveedores";
+}
+
+
+<div>
+    <div>
+
+    </div>
+    <div>
+        <table id="tablaProveedor" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre Comercial / Nombre o Razón Social</th>
+                    <th>NRC</th>
+                    <th>NIT</th>
+                </tr>
+            </thead>
+            <tbody>
+           
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>
+<script>
+    $().ready(function ($) {
+
+        DrawDatatable();
+    });
+    function GetDataProvideer() {
+        fns.CallGetAsync("api/Provideer/Get", "", function (dataResult) {
+            $("#tablaProveedor").DataTable().clear();
+            $("#tablaProveedor").DataTable().rows.add(dataResult).draw();
+
+        });
+    }
+    function DrawDatatable() {
+        DataTableHelper.Draw("#tablaProveedor", {
+            destroy:true,
+            orderCellsTop: true,
+            fixedHeader: true,
+            data: [],
+            columns: [
+                {
+                    data: "proveedorId",
+                    render: function (data, type, full, meta) {
+                        return "<a href='index'>" + data + "</a>";
+                    }
+                },
+                { data: "nombre" },
+                { data: "nrc" },
+                { data: "nit" },
+            ]
+        }).FilterColum();
+        GetDataProvideer();
+    }
+</script>

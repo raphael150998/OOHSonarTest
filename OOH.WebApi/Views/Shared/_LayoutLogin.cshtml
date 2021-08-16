@@ -1,24 +1,27 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OOH.WebApi</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link href="~/assets/css/login.css" rel="stylesheet" />
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Login - VIVA</title>
+    <script src="~/assets/js/core/jquery.3.2.1.min.js"></script>
 
-    <link href="~/Content/login.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery.blockUI.js"></script>
-    <script src="~/Scripts/jquery.functions.js"></script>
+    <script src="~/js/jquery.blockUI.js"></script>
+    <script src="~/js/jquery.functions.js"></script>
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
+    <section class="material-half-bg">
+        <div class="cover"></div>
+    </section>
+    <section class="login-content">
+     @RenderBody()
+     
+    </section>
 
-
-    @RenderBody()
-
-
-
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>
