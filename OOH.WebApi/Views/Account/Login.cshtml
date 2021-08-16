@@ -1,0 +1,32 @@
+﻿@model OOH.Data.Dtos.Usuario.UserLoginDto
+@{
+    ViewData["Title"] = "Login Account";
+    Layout = "_LayoutLogin";
+}
+<div class="login-box">
+    <div class="login-form">
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+        <div class="form-group">
+            <label class="control-label">USERNAME</label>
+            @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            <label class="control-label">PASSWORD</label>
+            @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            <div class="utility">
+                <div class="animated-checkbox">
+                    <label>
+                        <input type="checkbox"><span class="label-text">Stay Signed in</span>
+                    </label>
+                </div>
+                <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+            </div>
+        </div>
+        <div class="form-group btn-container">
+            <button id="btnLogin" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+        </div>
+    </div>
+</div>
+<script src="~/js/Account/jquery.login.js"></script>
