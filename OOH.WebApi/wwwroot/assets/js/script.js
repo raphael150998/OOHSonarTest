@@ -97,7 +97,7 @@ $(document).ready(function() {
     $.mCustomScrollbar.defaults.axis = "yx";
     $("#styleSelector .style-cont").slimScroll({
         setTop: "1px",
-        height:"calc(100vh - 495px)",
+        height:"calc(100vh - 300px)",
     });
     $(".main-menu").mCustomScrollbar({
         setTop: "1px",
@@ -227,26 +227,26 @@ $('#styleSelector').append('' +
     '</div>' +
     '<ul>' +
         '<li>' +
-            '<p class="selector-title main-title st-main-title"><b>Gradient </b>able Customizer</p>' +
-            '<span class="text-muted">Live customizer with tons of options</span>'+
+            '<p class="selector-title main-title st-main-title"><b>Personalizar entorno</b></p>' +
+            '<span class="text-muted">opciones para personalizar el entorno de trabajo</span>'+
         '</li>' +
         '<li>' +
-            '<p class="selector-title">Main layouts</p>' +
+            '<p class="selector-title">Dise&ntilde;os principales</p>' +
         '</li>' +
         '<li>' +
             '<div class="theme-color">' +
-                '<a href="#" data-toggle="tooltip" title="light Sidebar" class="navbar-theme" navbar-theme="themelight1"><span class="head"></span><span class="cont"></span></a>' +
-                '<a href="#" data-toggle="tooltip" title="Dark Sidebar" class="navbar-theme" navbar-theme="theme1"><span class="head"></span><span class="cont"></span></a>' +
-                '<a href="#" data-toggle="tooltip" title="Sidebar with image" class="Layout-type" layout-type="img"><span class="head"></span><span class="cont"></span></a>' +
-                '<a href="#" data-toggle="tooltip" title="light Layout" class="Layout-type" layout-type="light"><span class="head"></span><span class="cont"></span></a>' +
-                '<a href="#" data-toggle="tooltip" title="Dark Layout" class="Layout-type" layout-type="dark"><span class="head"></span><span class="cont"></span></a>' +
+                '<a href="#" data-toggle="tooltip" title="Men&uacute; claro" class="navbar-theme" navbar-theme="themelight1"><span class="head"></span><span class="cont"></span></a>' +
+                '<a href="#" data-toggle="tooltip" title="Men&uacute; oscuro" class="navbar-theme" navbar-theme="theme1"><span class="head"></span><span class="cont"></span></a>' +
+                '<a href="#" data-toggle="tooltip" title="Men&uacute; con imagen" class="Layout-type" layout-type="img"><span class="head"></span><span class="cont"></span></a>' +
+                '<a href="#" data-toggle="tooltip" title="Claro" class="Layout-type" layout-type="light"><span class="head"></span><span class="cont"></span></a>' +
+                '<a href="#" data-toggle="tooltip" title="Oscuro" class="Layout-type" layout-type="dark"><span class="head"></span><span class="cont"></span></a>' +
             '</div>' +
         '</li>' +
     '</ul>' +
     '<div class="style-cont m-t-10">' +
         '<ul class="nav nav-tabs  tabs" role="tablist">' +
-            '<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#sel-layout" role="tab">Layouts</a></li>' +
-            '<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sel-sidebar-setting" role="tab">Sidebar Settings</a></li>' +
+            '<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#sel-layout" role="tab">Dise&ntilde;os</a></li>' +
+            '<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sel-sidebar-setting" role="tab">Ajustes de men&uacute;</a></li>' +
         '</ul>' +
         '<div class="tab-content tabs">' +
             '<div class="tab-pane active" id="sel-layout" role="tabpanel">' +
@@ -256,7 +256,7 @@ $('#styleSelector').append('' +
                             '<label>' +
                                 '<input type="checkbox" value="false" id="theme-layout" name="vertical-item-border">' +
                                 '<span class="cr"><i class="cr-icon fa fa-check txt-success"></i></span>' +
-                                '<span>Box Layout - with patterns</span>' +
+                                '<span>Dise&ntilde;o de caja con patrones</span>' +
                             '</label>' +
                         '</div>' +
                     '</li>' +
@@ -275,7 +275,7 @@ $('#styleSelector').append('' +
                             '<label>' +
                                 '<input type="checkbox" value="false" id="sidebar-position" name="sidebar-position" checked>' +
                                 '<span class="cr"><i class="cr-icon fa fa-check txt-success"></i></span>' +
-                                '<span>Fixed Sidebar Position</span>' +
+                                '<span>Posici&oacute;n de men&uacute; fija</span>' +
                             '</label>' +
                         '</div>' +
                     '</li>' +
@@ -284,7 +284,7 @@ $('#styleSelector').append('' +
                             '<label>' +
                                 '<input type="checkbox" value="false" id="header-position" name="header-position" checked>' +
                                 '<span class="cr"><i class="cr-icon fa fa-check txt-success"></i></span>' +
-                                '<span>Fixed Header Position</span>' +
+                                '<span>Posici&oacute;n de encabezado fija</span>' +
                             '</label>' +
                         '</div>' +
                     '</li>' +
@@ -293,67 +293,67 @@ $('#styleSelector').append('' +
             '<div class="tab-pane" id="sel-sidebar-setting" role="tabpanel">' +
                 '<ul>' +
                     '<li class="theme-option">' +
-                        '<p class="sub-title drp-title">Menu Type</p>' +
+                        '<p class="sub-title drp-title">Tipo de men&uacute;</p>' +
                         '<div class="form-radio" id="menu-effect">'+
-                            '<div class="radio radiofill radio-primary radio-inline" data-toggle="tooltip" title="Color icon">'+
+                            '<div class="radio radiofill radio-primary radio-inline" data-toggle="tooltip" title="&Iacute;conos de color">'+
                                 '<label>'+
-                                    '<input type="radio" name="radio" value="st1" onclick="handlemenutype(this.value)">'+
+                                    '<input type="radio" name="radio" value="st1" onclick="handlemenutype(this.value)" checked="true">'+
                                     '<i class="helper"></i><span class="micon st1"><i class="ti-home"></i></span>'+
                                 '</label>'+
                             '</div>'+
-                            '<div class="radio radiofill radio-success radio-inline" data-toggle="tooltip" title="simple icon">'+
+                            '<div class="radio radiofill radio-success radio-inline" data-toggle="tooltip" title="&Iacute;conos simples">'+
                                 '<label>'+
-                                    '<input type="radio" name="radio" value="st2" onclick="handlemenutype(this.value)" checked="true">'+
+                                    '<input type="radio" name="radio" value="st2" onclick="handlemenutype(this.value)">'+
                                     '<i class="helper"></i><span class="micon st2"><i class="ti-home"></i></span>'+
                                 '</label>'+
                             '</div>'+
                         '</div>'+
                     '</li>' +
                     '<li class="theme-option">' +
-                        '<p class="sub-title drp-title">SideBar Effect</p>' +
+                        '<p class="sub-title drp-title">Efectos de men&uacute;</p>' +
                         '<select id="vertical-menu-effect" class="form-control minimal">' +
-                            '<option name="vertical-menu-effect" value="shrink">shrink</option>' +
-                            '<option name="vertical-menu-effect" value="overlay">overlay</option>' +
-                            '<option name="vertical-menu-effect" value="push">Push</option>' +
+                            '<option name="vertical-menu-effect" value="shrink">Retraer</option>' +
+                            '<option name="vertical-menu-effect" value="overlay">Superponer</option>' +
+                            '<option name="vertical-menu-effect" value="push">Empujar</option>' +
                         '</select>' +
                     '</li>' +
                     '<li class="theme-option">' +
-                        '<p class="sub-title drp-title">Hide/Show Border</p>' +
+                        '<p class="sub-title drp-title">Mostrar/Esconder bordes</p>' +
                         '<select id="vertical-border-style" class="form-control minimal">' +
-                            '<option name="vertical-border-style" value="solid">Style 1</option>' +
-                            '<option name="vertical-border-style" value="dotted">Style 2</option>' +
-                            '<option name="vertical-border-style" value="dashed">Style 3</option>' +
-                            '<option name="vertical-border-style" value="none">No Border</option>' +
+                            '<option name="vertical-border-style" value="solid">Estilo 1</option>' +
+                            '<option name="vertical-border-style" value="dotted">Estilo 2</option>' +
+                            '<option name="vertical-border-style" value="dashed">Estilo 3</option>' +
+                            '<option name="vertical-border-style" value="none">Sin bordes</option>' +
                         '</select>' +
                     '</li>' +
                     '<li class="theme-option">' +
-                        '<p class="sub-title drp-title">Drop-Down Icon</p>' +
+                        '<p class="sub-title drp-title">&Iacute;cono desplegable</p>' +
                         '<select id="vertical-dropdown-icon" class="form-control minimal">' +
-                            '<option name="vertical-dropdown-icon" value="style1">Style 1</option>' +
-                            '<option name="vertical-dropdown-icon" value="style2">style 2</option>' +
-                            '<option name="vertical-dropdown-icon" value="style3">style 3</option>' +
+                            '<option name="vertical-dropdown-icon" value="style1">Estilo 1</option>' +
+                            '<option name="vertical-dropdown-icon" value="style2">Estilo 2</option>' +
+                            '<option name="vertical-dropdown-icon" value="style3">Estilo 3</option>' +
                         '</select>' +
                     '</li>' +
                     '<li class="theme-option">' +
-                        '<p class="sub-title drp-title">Sub Menu Drop-down Icon</p>' +
+                        '<p class="sub-title drp-title">&Iacute;cono desplegable de submen&uacute;</p>' +
                         '<select id="vertical-subitem-icon" class="form-control minimal">' +
-                            '<option name="vertical-subitem-icon" value="style1">Style 1</option>' +
-                            '<option name="vertical-subitem-icon" value="style2">style 2</option>' +
-                            '<option name="vertical-subitem-icon" value="style3">style 3</option>' +
-                            '<option name="vertical-subitem-icon" value="style4">style 4</option>' +
-                            '<option name="vertical-subitem-icon" value="style5">style 5</option>' +
-                            '<option name="vertical-subitem-icon" value="style6">style 6</option>' +
-                            '<option name="vertical-subitem-icon" value="style7">style 7</option>' +
+                            '<option name="vertical-subitem-icon" value="style1">Estilo 1</option>' +
+                            '<option name="vertical-subitem-icon" value="style2">Estilo 2</option>' +
+                            '<option name="vertical-subitem-icon" value="style3">Estilo 3</option>' +
+                            '<option name="vertical-subitem-icon" value="style4">Estilo 4</option>' +
+                            '<option name="vertical-subitem-icon" value="style5">Estilo 5</option>' +
+                            '<option name="vertical-subitem-icon" value="style6">Estilo 6</option>' +
+                            '<option name="vertical-subitem-icon" value="style7">Estilo 7</option>' +
                         '</select>' +
                     '</li>' +
                 '</ul>' +
             '</div>' +
         '<ul>' +
             '<li>' +
-                '<p class="selector-title">Header color</p>' +
+                '<p class="selector-title">Color de encabezado</p>' +
             '</li>' +
             '<li>' +
-                '<span class="selector-title">Dark</span>' +
+                '<span class="selector-title">Oscuro</span>' +
             '</li>' +
             '<li class="theme-option">' +
                 '<div class="theme-color">' +
@@ -366,7 +366,7 @@ $('#styleSelector').append('' +
                 '</div>' +
             '</li>' +
             '<li>' +
-                '<span class="selector-title">light</span>' +
+                '<span class="selector-title">Claro</span>' +
             '</li>' +
             '<li class="theme-option">' +
                 '<div class="theme-color">' +
@@ -379,7 +379,7 @@ $('#styleSelector').append('' +
                 '</div>' +
             '</li>' +
             '<li>' +
-                '<p class="selector-title">Navbar image</p>' +
+                '<p class="selector-title">Imagen de men&uacute;</p>' +
             '</li>' +
             '<li class="theme-option">' +
                 '<div class="theme-color">' +
@@ -391,7 +391,7 @@ $('#styleSelector').append('' +
                 '</div>' +
             '</li>' +
             '<li>' +
-                '<p class="selector-title">Active link color</p>' +
+                '<p class="selector-title">Color de enlace activo</p>' +
             '</li>' +
             '<li class="theme-option">' +
                 '<div class="theme-color">' +
@@ -410,7 +410,7 @@ $('#styleSelector').append('' +
                 '</div>' +
             '</li>' +
             '<li>' +
-                '<p class="selector-title">Menu Caption Color</p>' +
+                '<p class="selector-title">Color de t&iacute;tulo de men&uacute;</p>' +
             '</li>' +
             '<li class="theme-option">' +
                 '<div class="theme-color">' +
@@ -425,15 +425,15 @@ $('#styleSelector').append('' +
         '</ul>' +
     '</div>' +
 '</div>' +
-'<ul>'+
-    '<li>' +
-        '<a href="#" class="btn btn-success btn-block m-r-15 m-t-10 m-b-10">Profile</a>' +
-        '<a href="http://html.codedthemes.com/gradient-able/doc" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Online Documentation</a>' +
-    '</li>' +
-    '<li class="text-center">' +
-        '<span class="text-center f-18 m-t-15 m-b-15 d-block">Thank you for sharing !</span>' +
-        '<a href="https://www.facebook.com/codedthemes" target="_blank" class="btn btn-facebook soc-icon m-b-20"><i class="fa fa-facebook"></i></a>' +
-        '<a href="https://twitter.com/codedthemes" target="_blank" class="btn btn-twitter soc-icon m-l-20 m-b-20"><i class="fa fa-twitter"></i></a>' +
-    '</li>' +
-'</ul>'+
+//'<ul>'+
+//    '<li>' +
+//        '<a href="#" class="btn btn-success btn-block m-r-15 m-t-10 m-b-10">Profile</a>' +
+//        '<a href="http://html.codedthemes.com/gradient-able/doc" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Online Documentation</a>' +
+//    '</li>' +
+//    '<li class="text-center">' +
+//        '<span class="text-center f-18 m-t-15 m-b-15 d-block">Thank you for sharing !</span>' +
+//        '<a href="https://www.facebook.com/codedthemes" target="_blank" class="btn btn-facebook soc-icon m-b-20"><i class="fa fa-facebook"></i></a>' +
+//        '<a href="https://twitter.com/codedthemes" target="_blank" class="btn btn-twitter soc-icon m-l-20 m-b-20"><i class="fa fa-twitter"></i></a>' +
+//    '</li>' +
+//'</ul>'+
 '');

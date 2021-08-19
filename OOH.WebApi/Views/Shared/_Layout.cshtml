@@ -81,7 +81,7 @@
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
+                            @*<li class="header-search">
                                 <div class="main-search morphsearch-search">
                                     <div class="input-group">
                                         <span class="input-group-addon search-close"><i class="ti-close"></i></span>
@@ -89,7 +89,7 @@
                                         <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
                                     </div>
                                 </div>
-                            </li>
+                            </li>*@
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()">
                                     <i class="ti-fullscreen"></i>
@@ -104,8 +104,8 @@
                                 </a>
                                 <ul class="show-notification">
                                     <li>
-                                        <h6>Notificationes</h6>
-                                        <label class="label label-danger">New</label>
+                                        <h6>Notificaciones</h6>
+                                        <label class="label label-danger">3</label>
                                     </li>
                                     <li>
                                         <div class="media">
@@ -113,7 +113,7 @@
                                             <div class="media-body">
                                                 <h5 class="notification-user">Carlos Contreras</h5>
                                                 <p class="notification-msg">Una cotización ha sido modificada.<a href="#"> Ir a Detalles</a> </p>
-                                                <span class="notification-time">hace 30 minutos</span>
+                                                <span class="notification-time">hace 10 minutos</span>
                                             </div>
                                         </div>
                                     </li>
@@ -122,8 +122,8 @@
                                             <img class="d-flex align-self-center img-radius" src="~/assets/images/avatar-4.jpg" alt="Generic placeholder image">
                                             <div class="media-body">
                                                 <h5 class="notification-user">Gabriela Valladares</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">hace 30 minutos</span>
+                                                <p class="notification-msg">Ha subido un nuevo diseño a la cotización 24533</p>
+                                                <span class="notification-time">hace 35 minutos</span>
                                             </div>
                                         </div>
                                     </li>
@@ -132,8 +132,8 @@
                                             <img class="d-flex align-self-center img-radius" src="~/assets/images/avatar-3.jpg" alt="Generic placeholder image">
                                             <div class="media-body">
                                                 <h5 class="notification-user">Roberto Cortez</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">hace 30 minutos</span>
+                                                <p class="notification-msg">Ha finalizado contrato de Coca-Cola Company</p>
+                                                <span class="notification-time">hace 56 minutos</span>
                                             </div>
                                         </div>
                                     </li>
@@ -592,7 +592,7 @@
                                 <!-- #region Disponibilidad y cotizaciones -->
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="fas fa-hand-holding-usd"></i><b>D</b></span>
+                                        <span class="pcoded-micon"><i class="fas fa-comments-dollar"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Disponibilidad y cotizaciones</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -738,6 +738,60 @@
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext">Permisos de ingreso</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!-- #endregion -->
+                                <li class="">
+                                    <a href="#">
+                                        <span class="pcoded-micon"><i class="fas fa-file-signature"></i></span>
+                                        <span class="pcoded-mtext">Contratos y O.P.s en proceso</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#">
+                                        <span class="pcoded-micon"><i class="fas fa-hand-holding-usd"></i></span>
+                                        <span class="pcoded-mtext">Gastos por sitio</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#">
+                                        <span class="pcoded-micon"><i class="fas fa-map-marked-alt"></i></span>
+                                        <span class="pcoded-mtext">Mapas e imágenes</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#">
+                                        <span class="pcoded-micon"><i class="fas fa-search"></i></span>
+                                        <span class="pcoded-mtext">Búsqueda de caras</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <!-- #region Configuraciones -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fas fa-cogs"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Configuraciones</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="#">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext">Configuración reportes PPT</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext">Tipos configuraciones reportes PPT</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
