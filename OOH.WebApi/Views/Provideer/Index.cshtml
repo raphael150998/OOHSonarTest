@@ -42,6 +42,7 @@
         });
     }
     function DrawDatatable() {
+      
         DataTableHelper.Draw("#tablaProveedor", {
             destroy:true,
             orderCellsTop: true,
@@ -58,7 +59,23 @@
                 { data: "nrc" },
                 { data: "nit" },
             ]
-        }).FilterColum();
+        }).ChildRow(function (d) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                '<td>Full name:</td>' +
+                '<td>' + d.nombre + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Extension number:</td>' +
+                '<td>' + d.nit + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Extra info:</td>' +
+                '<td>And any further details here (images etc)...</td>' +
+                '</tr>' +
+                '</table>';
+
+        });
         GetDataProvideer();
     }
 </script>
