@@ -27,17 +27,16 @@ namespace OOH.Data
             }
         }
 
-        public async Task<int> PostData(string _query, bool withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
+        public async Task<int> PostData(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
         {
             using (IDbConnection cn = new SqlConnection(StringConnection))
             {
+                //En caso de que sea un insert sera necesario devolver el id recien creado
+                _query = _query.ToUpper().Contains("INSERT INTO") ? _query + ";select cast(SCOPE_IDENTITY() as int)" : _query;
 
-                var ObjetoReturn = await cn.ExecuteAsync(_query, param: withParameters == true ? parameters : null,
+                return (await cn.QueryAsync<int>(_query, param: _withParameters == true ? parameters : null,
                     commandType: _isProcedure == true ?
-                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
-
-
-                return ObjetoReturn;
+                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false)).Single();
             }
         }
 
