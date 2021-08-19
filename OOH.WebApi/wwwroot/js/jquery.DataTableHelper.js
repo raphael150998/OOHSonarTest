@@ -29,6 +29,43 @@ var DataTableHelper = {
                 });
                 var table = $(identify).DataTable(config);
 
+            },
+            ChildRow: function (format) {
+                var table = $(identify).DataTable().destroy();
+                nConfig = {
+                    className: 'details-control',
+                    orderable: false,
+                    data: null,
+                    defaultContent: '<i class="la la-angle-down"></i>'
+                };
+                config.columns.unshift(nConfig);
+                $(identify + " thead tr").prepend("<th></th>");
+                $(identify).DataTable().clear();
+                $(identify).DataTable(config);
+
+                $(identify + ' tbody').on('click', 'td.details-control', function () {
+
+                    var tr = $(this).closest('tr');
+                    
+                    var row = table.row(tr);
+                   
+
+                    var td = $(this);
+                    td = td[0];
+                    if (row.child.isShown()) {
+                        alert("down");
+                        // This row is already open - close it
+                        row.child.hide();
+                        
+                        $(td).html('<i class="la la-angle-down"></i>');
+                    }
+                    else {
+                        console.log(row.data());
+                        // Open this row
+                        row.child(format(row.data())).show();
+                        $(td).html('<i class="la la-angle-double-up"></i>');
+                    }
+                });
             }
         }
     }
