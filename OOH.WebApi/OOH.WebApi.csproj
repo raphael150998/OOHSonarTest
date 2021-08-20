@@ -3729,6 +3729,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OOH.Data\OOH.Data.csproj" />
+    <ProjectReference Include="..\OOH.Language\OOH.Language.csproj" />
   </ItemGroup>
 
 </Project>
