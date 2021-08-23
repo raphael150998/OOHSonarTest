@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Reportes" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="FacturacionPorCara" xml:space="preserve">
+    <value>Billing per side</value>
+  </data>
+  <data name="ContratosVigentesPorClientePorMes" xml:space="preserve">
+    <value>Current dealsper customer per month</value>
+  </data>
+  <data name="VencimientoDeContratosPorCara" xml:space="preserve">
+    <value>Expiration of deals per side</value>
+  </data>
+  <data name="CarasBonificadas" xml:space="preserve">
+    <value>Bonus sides</value>
+  </data>
+  <data name="ContratosPorVendedorPorMes" xml:space="preserve">
+    <value>Deals per seller per month</value>
+  </data>
+  <data name="ControlDeInstalacionesPorProveedor" xml:space="preserve">
+    <value>Control of installations by supplier</value>
+  </data>
+  <data name="UtilidadPorInstalacion" xml:space="preserve">
+    <value>Installation profit</value>
+  </data>
+  <data name="RentabilidadPorSitios" xml:space="preserve">
+    <value>Profitability per site</value>
+  </data>
+  <data name="ContratosPorSitiosPorVencer" xml:space="preserve">
+    <value>Deals per sites to expire</value>
+  </data>
+  <data name="RentabilidadPorCarasPorZonas" xml:space="preserve">
+    <value>Profitability per face per zone</value>
+  </data>
+  <data name="Maestros" xml:space="preserve">
+    <value>Masters</value>
+  </data>
+  <data name="AcreedoresYProveedores" xml:space="preserve">
+    <value>Creditors and suppliers</value>
+  </data>
+  <data name="Clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Encuestas" xml:space="preserve">
+    <value>Surveys</value>
+  </data>
+  <data name="Productos" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="TarifasDeProveedores" xml:space="preserve">
+    <value>Supplier rates</value>
+  </data>
+  <data name="Zonas" xml:space="preserve">
+    <value>Zones</value>
+  </data>
+  <data name="Departamentos" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="Municipios" xml:space="preserve">
+    <value>Municipalities</value>
+  </data>
+  <data name="Agencias" xml:space="preserve">
+    <value>Agencies</value>
+  </data>
+  <data name="EjecutivosDeVenta" xml:space="preserve">
+    <value>Sales executives</value>
+  </data>
+  <data name="Cargos" xml:space="preserve">
+    <value>Charges</value>
+  </data>
+  <data name="Empleados" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="MarcasYRubros" xml:space="preserve">
+    <value>Brands and lines of business</value>
+  </data>
+  <data name="TiposYCatergorias" xml:space="preserve">
+    <value>Types and categories</value>
+  </data>
+  <data name="Consultas" xml:space="preserve">
+    <value>Queries</value>
+  </data>
+  <data name="DisponibilidadYCotizaciones" xml:space="preserve">
+    <value>Availability and quotations</value>
+  </data>
+  <data name="Cotizaciones" xml:space="preserve">
+    <value>Quotes</value>
+  </data>
+  <data name="DisponibilidadDeCaras" xml:space="preserve">
+    <value>Availability of sides</value>
+  </data>
+  <data name="ContratosAClientes" xml:space="preserve">
+    <value>Client deals</value>
+  </data>
+  <data name="Reservaciones" xml:space="preserve">
+    <value>Reservations</value>
+  </data>
+  <data name="Promociones" xml:space="preserve">
+    <value>Promotions</value>
+  </data>
+  <data name="Operaciones" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="AdministracionDeSitios" xml:space="preserve">
+    <value>Sites administration</value>
+  </data>
+  <data name="Caras" xml:space="preserve">
+    <value>Sides</value>
+  </data>
+  <data name="Sitios" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="ContratosPorSitio" xml:space="preserve">
+    <value>Deals per site</value>
+  </data>
+  <data name="ContratacionDeSitios" xml:space="preserve">
+    <value>Site contracting</value>
+  </data>
+  <data name="AreasDeInteres" xml:space="preserve">
+    <value>areas of interest</value>
+  </data>
+  <data name="DocumentosParaContratos" xml:space="preserve">
+    <value>Deal documents</value>
+  </data>
+  <data name="OrigenesDeInteres" xml:space="preserve">
+    <value>Sources of interest</value>
+  </data>
+  <data name="ProspectosDeSitios" xml:space="preserve">
+    <value>Site brochures</value>
+  </data>
+  <data name="MantenimientoDeSitios" xml:space="preserve">
+    <value>Site maintenance</value>
+  </data>
+  <data name="Mantenimientos" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="OrdenesDeProduccion" xml:space="preserve">
+    <value>Production orders</value>
+  </data>
+  <data name="PermisosDeIngreso" xml:space="preserve">
+    <value>Entry authorization</value>
+  </data>
+</root>

@@ -41,6 +41,7 @@ namespace OOH.WebApi
             //    options.AccessDeniedPath = "/Account/AccessDenied";
             //    options.SlidingExpiration = true;
             //});
+            services.AddHttpContextAccessor();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie();
         }

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OOH.Data\OOH.Data.csproj" />
+    <ProjectReference Include="..\OOH.Language\OOH.Language.csproj" />
     <ProjectReference Include="..\PowerPointProvider\PowerPointProvider.csproj" />
   </ItemGroup>
 

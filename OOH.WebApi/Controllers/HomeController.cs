@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
         private readonly IProveedorRepository _proveedorRepo;
 
-        public HomeController(IProveedorRepository proveedorRepo, ILogger<HomeController> logger)
+        public HomeController(IHttpContextAccessor httpContextAccessor, IProveedorRepository proveedorRepo, ILogger<HomeController> logger) : base(httpContextAccessor)
         {
             _proveedorRepo = proveedorRepo;
             _logger = logger;
