@@ -5,7 +5,6 @@
     ViewData["Title"] = "Proveedores";
 }
 
-
 <div>
     <div>
 
@@ -29,53 +28,39 @@
 
     </div>
 </div>
-<script>
-    $().ready(function ($) {
-
-        DrawDatatable();
-    });
-    function GetDataProvideer() {
-        fns.CallGetAsync("api/Provideer/Get", "", function (dataResult) {
-            $("#tablaProveedor").DataTable().clear();
-            $("#tablaProveedor").DataTable().rows.add(dataResult).draw();
-
+@section scripts{
+    <script>
+        $().ready(function ($) {
+            DrawDatatable();
         });
-    }
-    function DrawDatatable() {
-      
-        DataTableHelper.Draw("#tablaProveedor", {
-            destroy:true,
-            orderCellsTop: true,
-            fixedHeader: true,
-            data: [],
-            columns: [
-                {
-                    data: "proveedorId",
-                    render: function (data, type, full, meta) {
-                        return "<a href='index'>" + data + "</a>";
-                    }
-                },
-                { data: "nombre" },
-                { data: "nrc" },
-                { data: "nit" },
-            ]
-        }).ChildRow(function (d) {
-            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-                '<tr>' +
-                '<td>Full name:</td>' +
-                '<td>' + d.nombre + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Extension number:</td>' +
-                '<td>' + d.nit + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Extra info:</td>' +
-                '<td>And any further details here (images etc)...</td>' +
-                '</tr>' +
-                '</table>';
+        function GetDataProvideer() {
+            fns.CallGetAsync("api/Provideer/Get", "", function (dataResult) {
+                $("#tablaProveedor").DataTable().clear();
+                $("#tablaProveedor").DataTable().rows.add(dataResult).draw();
 
-        });
-        GetDataProvideer();
-    }
-</script>
+            });
+        }
+
+        function DrawDatatable() {
+
+            DataTableHelper.Draw("#tablaProveedor", {
+                destroy: true,
+                orderCellsTop: true,
+                fixedHeader: true,
+                data: [],
+                columns: [
+                    {
+                        data: "proveedorId",
+                        render: function (data, type, full, meta) {
+                            return "<a href='index'>" + data + "</a>";
+                        }
+                    },
+                    { data: "nombre" },
+                    { data: "nrc" },
+                    { data: "nit" },
+                ]
+            }).FilterColum();
+            GetDataProvideer();
+        }
+    </script>
+}

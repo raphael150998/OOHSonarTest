@@ -8,6 +8,7 @@ namespace OOH.WebApi.Controllers
 {
     public class ProvideerController : Controller
     {
+        private Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
         public IActionResult Index()
         {
             return View();

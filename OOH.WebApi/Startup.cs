@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace OOH.WebApi
 {
@@ -41,6 +42,8 @@ namespace OOH.WebApi
             //    options.SlidingExpiration = true;
             //});
             services.AddHttpContextAccessor();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,15 +64,18 @@ namespace OOH.WebApi
             
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-            //app.UseAuthentication();
+      
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
+           
         }
     }
 }

@@ -12,44 +12,72 @@ namespace OOH.Data
 {
     public class OOHContext : IOOHContext
     {
-        private static string StringConnection = "data source=192.168.10.238;initial catalog=OOH_VIVA;user id=jose;password=jr.2021;MultipleActiveResultSets=True;App=EntityFramework";
+        private const string StringConnection = "data source=192.168.10.238;initial catalog=OOH_VIVA;user id=jose;password=jr.2021;MultipleActiveResultSets=True;App=EntityFramework";
 
-        public async Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
+        public async Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null, string Connection = StringConnection)
         {
-            using (IDbConnection cn = new SqlConnection(StringConnection))
+            try
             {
-                var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,
-                    commandType: _isProcedure == true ?
-                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+                using (IDbConnection cn = new SqlConnection(StringConnection))
+                {
+                    var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,
+                        commandType: _isProcedure == true ?
+                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
-                return ObjetoReturn;
+                    return ObjetoReturn;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                return (T)Convert.ChangeType(null, typeof(T));
+
+            }
+
+        }
+
+        public async Task<int> PostData(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false, string Connection = StringConnection)
+        {
+            try
+            {
+                using (IDbConnection cn = new SqlConnection(StringConnection))
+                {
+                    //En caso de que sea un insert sera necesario devolver el id recien creado
+                    _query = _query.ToUpper().Contains("INSERT INTO") ? _query + ";select cast(SCOPE_IDENTITY() as int)" : _query;
+
+                    return (await cn.QueryAsync<int>(_query, param: _withParameters == true ? parameters : null,
+                        commandType: _isProcedure == true ?
+                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false)).Single();
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                return 0;
 
             }
         }
 
-        public async Task<int> PostData(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
+        public async Task<IEnumerable<T>> SelectData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null, string Connection = StringConnection)
         {
-            using (IDbConnection cn = new SqlConnection(StringConnection))
+            try
             {
-                //En caso de que sea un insert sera necesario devolver el id recien creado
-                _query = _query.ToUpper().Contains("INSERT INTO") ? _query + ";select cast(SCOPE_IDENTITY() as int)" : _query;
+                using (IDbConnection cn = new SqlConnection(StringConnection))
+                {
+                    var ObjetoReturn = await cn.QueryAsync<T>(_query, param: _isProcedure == true ? parameters : null,
+                        commandType: _isProcedure == true ?
+                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
-                return (await cn.QueryAsync<int>(_query, param: _withParameters == true ? parameters : null,
-                    commandType: _isProcedure == true ?
-                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false)).Single();
+
+                    return ObjetoReturn.ToList();
+                }
             }
-        }
-
-        public async Task<IEnumerable<T>> SelectData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
-        {
-            using (IDbConnection cn = new SqlConnection(StringConnection))
+            catch (Exception e)
             {
-                var ObjetoReturn = await cn.QueryAsync<T>(_query, param: _isProcedure == true ? parameters : null,
-                    commandType: _isProcedure == true ?
-                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
-
-
-                return ObjetoReturn.ToList();
+                return (List<T>)Convert.ChangeType(null, typeof(T));
             }
         }
     }
