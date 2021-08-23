@@ -6,11 +6,11 @@ namespace OOH.Data.Helpers
 {
     public class ResultClass
     {
-        public bool State { get; set; }
-        public string Message { get; set; }
-        public Object Data { get; set; }     
-        public string Condition { get; set; }
-        public Exception Exception { get; set; }
+        public bool state { get; set; }
+        public string message { get; set; }
+        public Object data { get; set; }     
+        public string condition { get; set; }
+        public Exception exception { get; set; }
 
     }
 }

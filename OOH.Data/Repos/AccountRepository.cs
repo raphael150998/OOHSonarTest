@@ -18,7 +18,7 @@ namespace OOH.Data.Repos
                 if ((Login == "" || Password == "") || (Login == null || Password == null))
                 {
 
-                    return new ResultClass() { Message = "El campo login y contraseña son requeridos", State = false };
+                    return new ResultClass() { message = "El campo login y contraseña son requeridos", state = false };
 
                 }
 
@@ -30,7 +30,7 @@ namespace OOH.Data.Repos
                 if (user.Result == null)
                 {
 
-                    return new ResultClass() { Message = "El usuario no se encuentra registrado o esta pendiente de validacion", State = false };
+                    return new ResultClass() { message = "El usuario no se encuentra registrado o esta pendiente de validacion", state = false };
                 }
 
 
@@ -39,11 +39,11 @@ namespace OOH.Data.Repos
 
                 UserPermisoDto userPermiso = new UserPermisoDto() { User = user.Result, Permisos = ListaPermisos.Result };
 
-                return new ResultClass() { Data = userPermiso, State = true };
+                return new ResultClass() { data = userPermiso, state = true };
             }
             catch (Exception ex)
             {
-                return new ResultClass() { Exception = ex, State = false, Message = "Error", Data = 0 };
+                return new ResultClass() { exception = ex, state = false, message = "Error", data = 0 };
             }
         }
 
