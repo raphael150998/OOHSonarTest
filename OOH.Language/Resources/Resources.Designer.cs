@@ -61,20 +61,425 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Hola.
+        ///   Busca una cadena traducida similar a Acreedores y proveedores.
         /// </summary>
-        public static string Hello {
+        public static string AcreedoresYProveedores {
             get {
-                return ResourceManager.GetString("Hello", resourceCulture);
+                return ResourceManager.GetString("AcreedoresYProveedores", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Mesa.
+        ///   Busca una cadena traducida similar a Administración de sitios.
         /// </summary>
-        public static string Table {
+        public static string AdministracionDeSitios {
             get {
-                return ResourceManager.GetString("Table", resourceCulture);
+                return ResourceManager.GetString("AdministracionDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agencias.
+        /// </summary>
+        public static string Agencias {
+            get {
+                return ResourceManager.GetString("Agencias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Áreas de interés.
+        /// </summary>
+        public static string AreasDeInteres {
+            get {
+                return ResourceManager.GetString("AreasDeInteres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Caras.
+        /// </summary>
+        public static string Caras {
+            get {
+                return ResourceManager.GetString("Caras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Caras bonificadas.
+        /// </summary>
+        public static string CarasBonificadas {
+            get {
+                return ResourceManager.GetString("CarasBonificadas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cargos.
+        /// </summary>
+        public static string Cargos {
+            get {
+                return ResourceManager.GetString("Cargos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Clientes.
+        /// </summary>
+        public static string Clients {
+            get {
+                return ResourceManager.GetString("Clients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Consultas.
+        /// </summary>
+        public static string Consultas {
+            get {
+                return ResourceManager.GetString("Consultas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contratación de sitios.
+        /// </summary>
+        public static string ContratacionDeSitios {
+            get {
+                return ResourceManager.GetString("ContratacionDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contratos a clientes.
+        /// </summary>
+        public static string ContratosAClientes {
+            get {
+                return ResourceManager.GetString("ContratosAClientes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contratos por sitio.
+        /// </summary>
+        public static string ContratosPorSitio {
+            get {
+                return ResourceManager.GetString("ContratosPorSitio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contratos por sitios por vencer.
+        /// </summary>
+        public static string ContratosPorSitiosPorVencer {
+            get {
+                return ResourceManager.GetString("ContratosPorSitiosPorVencer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contratos por vendedor por mes.
+        /// </summary>
+        public static string ContratosPorVendedorPorMes {
+            get {
+                return ResourceManager.GetString("ContratosPorVendedorPorMes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contratos vigentes por cliente por mes.
+        /// </summary>
+        public static string ContratosVigentesPorClientePorMes {
+            get {
+                return ResourceManager.GetString("ContratosVigentesPorClientePorMes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Control de instalaciones por proveedor.
+        /// </summary>
+        public static string ControlDeInstalacionesPorProveedor {
+            get {
+                return ResourceManager.GetString("ControlDeInstalacionesPorProveedor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cotizaciones.
+        /// </summary>
+        public static string Cotizaciones {
+            get {
+                return ResourceManager.GetString("Cotizaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Departamentos.
+        /// </summary>
+        public static string Departamentos {
+            get {
+                return ResourceManager.GetString("Departamentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Disponibilidad de caras.
+        /// </summary>
+        public static string DisponibilidadDeCaras {
+            get {
+                return ResourceManager.GetString("DisponibilidadDeCaras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Disponibilidad y cotizaciones.
+        /// </summary>
+        public static string DisponibilidadYCotizaciones {
+            get {
+                return ResourceManager.GetString("DisponibilidadYCotizaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Documentos para contratos.
+        /// </summary>
+        public static string DocumentosParaContratos {
+            get {
+                return ResourceManager.GetString("DocumentosParaContratos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ejecutivos de venta.
+        /// </summary>
+        public static string EjecutivosDeVenta {
+            get {
+                return ResourceManager.GetString("EjecutivosDeVenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Empleados.
+        /// </summary>
+        public static string Empleados {
+            get {
+                return ResourceManager.GetString("Empleados", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Encuestas.
+        /// </summary>
+        public static string Encuestas {
+            get {
+                return ResourceManager.GetString("Encuestas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Facturación por cara.
+        /// </summary>
+        public static string FacturacionPorCara {
+            get {
+                return ResourceManager.GetString("FacturacionPorCara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Maestros.
+        /// </summary>
+        public static string Maestros {
+            get {
+                return ResourceManager.GetString("Maestros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mantenimiento de sitios.
+        /// </summary>
+        public static string MantenimientoDeSitios {
+            get {
+                return ResourceManager.GetString("MantenimientoDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mantenimientos.
+        /// </summary>
+        public static string Mantenimientos {
+            get {
+                return ResourceManager.GetString("Mantenimientos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Marcas y rubros.
+        /// </summary>
+        public static string MarcasYRubros {
+            get {
+                return ResourceManager.GetString("MarcasYRubros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Municipios.
+        /// </summary>
+        public static string Municipios {
+            get {
+                return ResourceManager.GetString("Municipios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Operaciones.
+        /// </summary>
+        public static string Operaciones {
+            get {
+                return ResourceManager.GetString("Operaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Órdenes de producción.
+        /// </summary>
+        public static string OrdenesDeProduccion {
+            get {
+                return ResourceManager.GetString("OrdenesDeProduccion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Origenes de interés.
+        /// </summary>
+        public static string OrigenesDeInteres {
+            get {
+                return ResourceManager.GetString("OrigenesDeInteres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Permisos de ingreso.
+        /// </summary>
+        public static string PermisosDeIngreso {
+            get {
+                return ResourceManager.GetString("PermisosDeIngreso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Productos.
+        /// </summary>
+        public static string Productos {
+            get {
+                return ResourceManager.GetString("Productos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Promociones.
+        /// </summary>
+        public static string Promociones {
+            get {
+                return ResourceManager.GetString("Promociones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Prospectos de sitio.
+        /// </summary>
+        public static string ProspectosDeSitios {
+            get {
+                return ResourceManager.GetString("ProspectosDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rentabilidad por caras por zonas.
+        /// </summary>
+        public static string RentabilidadPorCarasPorZonas {
+            get {
+                return ResourceManager.GetString("RentabilidadPorCarasPorZonas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rentabilidad por sitios.
+        /// </summary>
+        public static string RentabilidadPorSitios {
+            get {
+                return ResourceManager.GetString("RentabilidadPorSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reportes.
+        /// </summary>
+        public static string Reportes {
+            get {
+                return ResourceManager.GetString("Reportes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reservaciones.
+        /// </summary>
+        public static string Reservaciones {
+            get {
+                return ResourceManager.GetString("Reservaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sitios.
+        /// </summary>
+        public static string Sitios {
+            get {
+                return ResourceManager.GetString("Sitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tarifas de proveedores.
+        /// </summary>
+        public static string TarifasDeProveedores {
+            get {
+                return ResourceManager.GetString("TarifasDeProveedores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos y categorías.
+        /// </summary>
+        public static string TiposYCatergorias {
+            get {
+                return ResourceManager.GetString("TiposYCatergorias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Utilidad por instalación.
+        /// </summary>
+        public static string UtilidadPorInstalacion {
+            get {
+                return ResourceManager.GetString("UtilidadPorInstalacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Vencimiento de contratos por cara.
+        /// </summary>
+        public static string VencimientoDeContratosPorCara {
+            get {
+                return ResourceManager.GetString("VencimientoDeContratosPorCara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Zonas.
+        /// </summary>
+        public static string Zonas {
+            get {
+                return ResourceManager.GetString("Zonas", resourceCulture);
             }
         }
     }

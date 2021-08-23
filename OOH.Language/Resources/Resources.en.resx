@@ -97,10 +97,145 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Hello" xml:space="preserve">
-    <value>Hi</value>
+  <data name="Reportes" xml:space="preserve">
+    <value>Reports</value>
   </data>
-  <data name="Table" xml:space="preserve">
-    <value>Table</value>
+  <data name="FacturacionPorCara" xml:space="preserve">
+    <value>Billing per side</value>
+  </data>
+  <data name="ContratosVigentesPorClientePorMes" xml:space="preserve">
+    <value>Current dealsper customer per month</value>
+  </data>
+  <data name="VencimientoDeContratosPorCara" xml:space="preserve">
+    <value>Expiration of deals per side</value>
+  </data>
+  <data name="CarasBonificadas" xml:space="preserve">
+    <value>Bonus sides</value>
+  </data>
+  <data name="ContratosPorVendedorPorMes" xml:space="preserve">
+    <value>Deals per seller per month</value>
+  </data>
+  <data name="ControlDeInstalacionesPorProveedor" xml:space="preserve">
+    <value>Control of installations by supplier</value>
+  </data>
+  <data name="UtilidadPorInstalacion" xml:space="preserve">
+    <value>Installation profit</value>
+  </data>
+  <data name="RentabilidadPorSitios" xml:space="preserve">
+    <value>Profitability per site</value>
+  </data>
+  <data name="ContratosPorSitiosPorVencer" xml:space="preserve">
+    <value>Deals per sites to expire</value>
+  </data>
+  <data name="RentabilidadPorCarasPorZonas" xml:space="preserve">
+    <value>Profitability per face per zone</value>
+  </data>
+  <data name="Maestros" xml:space="preserve">
+    <value>Masters</value>
+  </data>
+  <data name="AcreedoresYProveedores" xml:space="preserve">
+    <value>Creditors and suppliers</value>
+  </data>
+  <data name="Clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Encuestas" xml:space="preserve">
+    <value>Surveys</value>
+  </data>
+  <data name="Productos" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="TarifasDeProveedores" xml:space="preserve">
+    <value>Supplier rates</value>
+  </data>
+  <data name="Zonas" xml:space="preserve">
+    <value>Zones</value>
+  </data>
+  <data name="Departamentos" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="Municipios" xml:space="preserve">
+    <value>Municipalities</value>
+  </data>
+  <data name="Agencias" xml:space="preserve">
+    <value>Agencies</value>
+  </data>
+  <data name="EjecutivosDeVenta" xml:space="preserve">
+    <value>Sales executives</value>
+  </data>
+  <data name="Cargos" xml:space="preserve">
+    <value>Charges</value>
+  </data>
+  <data name="Empleados" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="MarcasYRubros" xml:space="preserve">
+    <value>Brands and lines of business</value>
+  </data>
+  <data name="TiposYCatergorias" xml:space="preserve">
+    <value>Types and categories</value>
+  </data>
+  <data name="Consultas" xml:space="preserve">
+    <value>Queries</value>
+  </data>
+  <data name="DisponibilidadYCotizaciones" xml:space="preserve">
+    <value>Availability and quotations</value>
+  </data>
+  <data name="Cotizaciones" xml:space="preserve">
+    <value>Quotes</value>
+  </data>
+  <data name="DisponibilidadDeCaras" xml:space="preserve">
+    <value>Availability of sides</value>
+  </data>
+  <data name="ContratosAClientes" xml:space="preserve">
+    <value>Client deals</value>
+  </data>
+  <data name="Reservaciones" xml:space="preserve">
+    <value>Reservations</value>
+  </data>
+  <data name="Promociones" xml:space="preserve">
+    <value>Promotions</value>
+  </data>
+  <data name="Operaciones" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="AdministracionDeSitios" xml:space="preserve">
+    <value>Sites administration</value>
+  </data>
+  <data name="Caras" xml:space="preserve">
+    <value>Sides</value>
+  </data>
+  <data name="Sitios" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="ContratosPorSitio" xml:space="preserve">
+    <value>Deals per site</value>
+  </data>
+  <data name="ContratacionDeSitios" xml:space="preserve">
+    <value>Site contracting</value>
+  </data>
+  <data name="AreasDeInteres" xml:space="preserve">
+    <value>areas of interest</value>
+  </data>
+  <data name="DocumentosParaContratos" xml:space="preserve">
+    <value>Deal documents</value>
+  </data>
+  <data name="OrigenesDeInteres" xml:space="preserve">
+    <value>Sources of interest</value>
+  </data>
+  <data name="ProspectosDeSitios" xml:space="preserve">
+    <value>Site brochures</value>
+  </data>
+  <data name="MantenimientoDeSitios" xml:space="preserve">
+    <value>Site maintenance</value>
+  </data>
+  <data name="Mantenimientos" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="OrdenesDeProduccion" xml:space="preserve">
+    <value>Production orders</value>
+  </data>
+  <data name="PermisosDeIngreso" xml:space="preserve">
+    <value>Entry authorization</value>
   </data>
 </root>
