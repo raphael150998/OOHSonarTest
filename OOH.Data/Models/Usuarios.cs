@@ -31,8 +31,8 @@ namespace OOH.Data.Models
         [Display(Name = "Nombre")]
         [StringLength(100)]
         public string Username { get; set; }
-        public int Perfil { get; set; }
-
+        public int PerfilId { get; set; }
+        public int EmpresaId { get; set; }
         public bool Activo { get; set; }
 
     }

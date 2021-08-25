@@ -32,12 +32,12 @@ namespace OOH.Data.Repos
 
                     return new ResultClass() { message = "El usuario no se encuentra registrado o esta pendiente de validacion", state = false };
                 }
+                Empresa empresa = db.FilterData<Empresa>("Select * from dbo.Empresa Where EmpresaId = " +user.Result.EmpresaId).Result;
 
+                string LstPermisosQuery = string.Format("SELECT * FROM UsuariosPermisos WHERE (PerfilId = {0}) AND (PlataformaId = 1) OR (PlataformaId = 2)", user.Result.PerfilId);
+                var ListaPermisos = db.SelectData<UsuariosPermisos>(LstPermisosQuery,false,null,empresa.ConnectionString);
 
-                string LstPermisosQuery = string.Format("SELECT * FROM UsuariosPermisos WHERE (PerfilId = {0}) AND (PlataformaId = 1) OR (PlataformaId = 2)", user.Result.Perfil);
-                var ListaPermisos = db.SelectData<UsuariosPermisos>(LstPermisosQuery);
-
-                UserPermisoDto userPermiso = new UserPermisoDto() { User = user.Result, Permisos = ListaPermisos.Result };
+                UserPermisoDto userPermiso = new UserPermisoDto() { User = user.Result, Permisos = ListaPermisos.Result, StringConecction = empresa.ConnectionString };
 
                 return new ResultClass() { data = userPermiso, state = true };
             }
@@ -47,5 +47,31 @@ namespace OOH.Data.Repos
             }
         }
 
+
+        public ResultClass RegistroUser(Usuarios registro)
+        {
+            if (registro.Pass.Length < 8)
+            {
+                return new ResultClass() { data = 2, message = "La contraseña debe tener mas de 8 letras", state = false };
+            }
+
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@correo", registro.Correo);
+            parameters.Add("@login", registro.Login);
+            parameters.Add("@pass", EncryptClass.EncripTar(registro.Pass.Trim()));
+            parameters.Add("@perfil", 1);
+            //parameters.Add("@perfil", registro.Perfil);
+            parameters.Add("@activo", registro.Activo);
+            parameters.Add("@empresa", 1);
+            parameters.Add("@idioma", 1);
+            parameters.Add("@username", registro.Username);
+            var success = db.PostData("SP_Register", true, parameters,true);
+            if (success.Result == 0)
+            {
+                return new ResultClass() { data = 1, state = false, message = "Su usuario no se logro guardar " };
+
+            }
+            return new ResultClass();
+        }
     }
 }
