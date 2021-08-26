@@ -238,4 +238,82 @@
   <data name="PermisosDeIngreso" xml:space="preserve">
     <value>Permisos de ingreso</value>
   </data>
+  <data name="ContratosYOpsEnProceso" xml:space="preserve">
+    <value>Contratos y O.P.s en proceso</value>
+  </data>
+  <data name="GastosPorSitio" xml:space="preserve">
+    <value>Gastos por sitio</value>
+  </data>
+  <data name="MapasEImagenes" xml:space="preserve">
+    <value>Mapas e imágenes</value>
+  </data>
+  <data name="BusquedaDeCaras" xml:space="preserve">
+    <value>Búsqueda de caras</value>
+  </data>
+  <data name="Configuraciones" xml:space="preserve">
+    <value>Configuraciones</value>
+  </data>
+  <data name="ConfiguracionesReportesPPT" xml:space="preserve">
+    <value>Configuraciones reportes PPT</value>
+  </data>
+  <data name="TiposConfiguracionesReportesPPT" xml:space="preserve">
+    <value>Tipos configuraciones reportes PPT</value>
+  </data>
+  <data name="CategoriaDeCaras" xml:space="preserve">
+    <value>Categorías de caras</value>
+  </data>
+  <data name="CategoriasDeSitios" xml:space="preserve">
+    <value>Categorías de sitios</value>
+  </data>
+  <data name="TiposDeCara" xml:space="preserve">
+    <value>Tipos de cara</value>
+  </data>
+  <data name="TiposDeEstado" xml:space="preserve">
+    <value>Tipos de estado</value>
+  </data>
+  <data name="TipoDeEstructuras" xml:space="preserve">
+    <value>Tipos de estructuras</value>
+  </data>
+  <data name="TiposDeImagenes" xml:space="preserve">
+    <value>Tipos de imágenes</value>
+  </data>
+  <data name="TiposDeMateriales" xml:space="preserve">
+    <value>Tipos de materiales</value>
+  </data>
+  <data name="TiposDePermiso" xml:space="preserve">
+    <value>Tipos de permiso</value>
+  </data>
+  <data name="TiposDePrecio" xml:space="preserve">
+    <value>Tipos de precio</value>
+  </data>
+  <data name="TiposDeProveedores" xml:space="preserve">
+    <value>Tipos de proveedores</value>
+  </data>
+  <data name="TiposDeReferenciasComerciales" xml:space="preserve">
+    <value>Tipos de referencias comerciales</value>
+  </data>
+  <data name="TiposDeRestriccionesComerciales" xml:space="preserve">
+    <value>Tipos de restricciones comerciales</value>
+  </data>
+  <data name="TiposDeSeguro" xml:space="preserve">
+    <value>Tipos de seguro</value>
+  </data>
+  <data name="TiposDeTrabajosOp" xml:space="preserve">
+    <value>Tipos de trabajos OP</value>
+  </data>
+  <data name="Notificaciones" xml:space="preserve">
+    <value>Notificaciones</value>
+  </data>
+  <data name="Ajustes" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="Perfil" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="CerrarSesion" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="Vallas" xml:space="preserve">
+    <value>Vallas</value>
+  </data>
 </root>

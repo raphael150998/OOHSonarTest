@@ -41,7 +41,7 @@ namespace OOH.WebApi.Controllers
                 //}
                 lang = LanguageHelper.GetDefaultLanguage();
             }
-            new LanguageHelper(_httpContextAccessor).SetLanguage(lang);
+            new LanguageHelper(_httpContextAccessor).SetLanguage("en");
         }
     }
 }

@@ -18,10 +18,10 @@ namespace OOH.WebApi.Controllers
 
         private readonly IProveedorRepository _proveedorRepo;
 
-        public HomeController(IHttpContextAccessor httpContextAccessor, IProveedorRepository proveedorRepo, ILogger<HomeController> logger) : base(httpContextAccessor)
+        public HomeController(IHttpContextAccessor httpContextAccessor, ILogger<HomeController> logger, IProveedorRepository proveedorRepo) : base(httpContextAccessor)
         {
-            _proveedorRepo = proveedorRepo;
             _logger = logger;
+            _proveedorRepo = proveedorRepo;
         }
 
         public IActionResult Index()
