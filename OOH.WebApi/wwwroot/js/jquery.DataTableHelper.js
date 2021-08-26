@@ -7,14 +7,15 @@ var DataTableHelper = {
             FilterColum: function () {
                 $(identify).DataTable().destroy();
                 $(identify + ' thead tr').clone(true).appendTo(identify + ' thead');
-
-                $(identify + ' thead tr:eq(1) th').each(function (i) {
+              
+                $(identify + ' thead tr:eq(1) th.filter').each(function (i) {
                     var title = $(this).text();
                     $(this).removeAttr("class");
                     $(this).removeAttr("aria-label");
                     $(this).removeAttr("aria-sort");
                     $(this).removeAttr("aria-controls");
                     $(this).removeAttr("style");
+                    $(this).removeAttr("text");
                     $(this).removeAttr("tabindex");
                     $(this).html('<input type="text" placeholder="" />');
 

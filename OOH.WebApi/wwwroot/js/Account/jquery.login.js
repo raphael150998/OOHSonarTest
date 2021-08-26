@@ -10,6 +10,8 @@
             $("#txtError").attr("hidden", false);
             $("#txtError").text(DataRequest["message"]);
           
-        }     
+        } else {
+            $(location).attr("href","/Provideer/Index")
+        }
     }); 
 });

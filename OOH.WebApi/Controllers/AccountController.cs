@@ -17,6 +17,10 @@ namespace OOH.WebApi.Controllers
             TempData[""] = 0;
             return View();
         }
+        public IActionResult Register()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> LogOut()
         {

@@ -1,0 +1,63 @@
+﻿@model OOH.Data.Models.Usuarios
+@{
+    ViewData["Title"] = "Login Register";
+    Layout = "_LayoutLogin";
+}
+<section class="login p-fixed d-flex text-center bg-primary common-img-bg" style="background-image:url('../images/background.jpg')">
+    <!-- Container-fluid starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Authentication card start -->
+                <div class="signup-card card-block auth-body mr-auto ml-auto">
+                    <form class="md-float-material">
+                        <div class="auth-box">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
+                                </div>
+                            </div>
+                            <span class="text-danger" id="txtError"></span>
+                            <hr />
+                            <div class="input-group">
+                                <input type="text" asp-for="Login" class="form-control" placeholder="Choose Login Name">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" asp-for="Correo" class="form-control" placeholder="Your Email Address">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" asp-for="Username" class="form-control" placeholder="Your User Address">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" asp-for="Pass" class="form-control" placeholder="Choose Password">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" id="PassConfirm" class="form-control" placeholder="Confirm Password">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <button type="button" id="BtnRegister" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign up now</button>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </form>
+                    <!-- end of form -->
+                </div>
+                <!-- Authentication card end -->
+            </div>
+            <!-- end of col-sm-12 -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <!-- end of container-fluid -->
+</section>
+<script src="~/js/Account/jquery.Register.js"></script>

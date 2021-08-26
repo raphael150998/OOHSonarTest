@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using OOH.Data.Models;
 using Newtonsoft.Json;
+using Dapper;
+using OOH.Data.Herlpers;
 
 namespace OOH.WebApi.ApiControllers
 {
@@ -43,6 +45,7 @@ namespace OOH.WebApi.ApiControllers
                     new Claim(ClaimTypes.Name, UserLoged.User.Login),
                     new Claim("FullName", UserLoged.User.Username),
                     new Claim("Id", UserLoged.User.UserId.ToString()),
+                    new Claim("Cs", UserLoged.StringConecction.ToString()),
                     new Claim("ListPermisos", JsonListPermisos),
                 };
 
@@ -70,6 +73,12 @@ namespace OOH.WebApi.ApiControllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
+        }
+        [HttpPost]
+        [Route("api/Account/Register")]
+        public async Task<ResultClass> Register([FromForm]Usuarios registro)
+        {
+            return _Repository.RegistroUser(registro);
         }
     }
 }

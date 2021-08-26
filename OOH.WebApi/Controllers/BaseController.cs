@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json;
+using OOH.Data.Dtos.Usuario;
 using OOH.Language;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace OOH.WebApi.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+      
         public  override void  OnActionExecuting(ActionExecutingContext context)
         {
             string lang = null;

@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
     ViewData["Title"] = "Proveedores";
 }
@@ -13,10 +11,11 @@
         <table id="tablaProveedor" class="table table-hover">
             <thead>
                 <tr>
-                    <th>Codigo</th>
-                    <th>Nombre Comercial / Nombre o Razón Social</th>
-                    <th>NRC</th>
-                    <th>NIT</th>
+                    <th>Acciones</th>
+                    <th class="filter">Codigo</th>
+                    <th class="filter">Nombre Comercial / Nombre o Razón Social</th>
+                    <th class="filter">NRC</th>
+                    <th class="filter">NIT</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +49,13 @@
                 data: [],
                 columns: [
                     {
+                        data: "nit",
+                        orderable: false,
+                        render: function (data, type, full, meta) {
+                            return `<i class="fas fa-print"></i>`;
+                        }
+                    },
+                    {
                         data: "proveedorId",
                         render: function (data, type, full, meta) {
                             return "<a href='index'>" + data + "</a>";
@@ -58,6 +64,7 @@
                     { data: "nombre" },
                     { data: "nrc" },
                     { data: "nit" },
+                  
                 ]
             }).FilterColum();
             GetDataProvideer();
