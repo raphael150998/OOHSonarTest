@@ -13,16 +13,16 @@ using System.Threading.Tasks;
 namespace OOH.WebApi.ApiControllers
 {
     [ApiController]
-    public class ClientApiController : ControllerBase
+    public class ClientApiController : BaseApiController
     {
-        BaseController Base = new BaseController();
+      
         ClientRepository _repos;
 
        [Route("api/Client/Get")]
        [HttpGet]
        public async Task<List<Clientes>> Clientes()
         {
-            _repos = new ClientRepository(Base.txtConectionString());
+            _repos = new ClientRepository(txtConectionString());
             return  _repos.Select().Result.ToList();
         }
     }
