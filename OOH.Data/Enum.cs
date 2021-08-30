@@ -1,20 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace OOH.Data
 {
-    public class Enum
+    public enum Direction
     {
-        public enum Direction
-        {
-            NorteSur = 1,
+        NorteSur = 1,
 
-            SurNorte = 2,
+        SurNorte = 2,
 
-            OrientePoniente,
+        OrientePoniente,
 
-            PonienteOriente
-        }
+        PonienteOriente
+    }
+
+    public enum ActionPermission
+    {
+        Read = 0,
+        Create = 1,
+        Delete = 2,
+        Update = 3,
+        Execute = 4,
+        NoAction = 5
+    }
+
+    public enum Languages
+    {
+        [Description("Español")]
+        es = 1,
+
+        [Description("Inglés")]
+        en = 2
     }
 }

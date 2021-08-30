@@ -10,7 +10,6 @@ namespace OOH.Language
 {
     public class LanguageHelper
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public static List<string> ImplementedLanguages = new List<string>()
         {
@@ -18,9 +17,8 @@ namespace OOH.Language
             "en"
         };
 
-        public LanguageHelper(IHttpContextAccessor httpContextAccessor)
+        public LanguageHelper()
         {
-            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -52,15 +50,14 @@ namespace OOH.Language
         {
             try
             {
-                if (!IsLanguageAvailable(lang)) lang = GetDefaultLanguage();
+                if (!IsLanguageAvailable(lang)) lang = GetDefaultLanguage() ;
                 var cultureInfo = new CultureInfo(lang);
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureInfo.Name);
-                _httpContextAccessor.HttpContext.Response.Cookies.Append("culture", lang, new CookieOptions() { Expires = DateTime.Now.AddYears(1) });
             }
             catch (Exception ex)
-            {
-            }
+            { 
+            } 
         }
     }
 }

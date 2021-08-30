@@ -196,11 +196,29 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Confirmar contraseña.
+        /// </summary>
+        public static string ConfirmarContrasena {
+            get {
+                return ResourceManager.GetString("ConfirmarContrasena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Consultas.
         /// </summary>
         public static string Consultas {
             get {
                 return ResourceManager.GetString("Consultas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña.
+        /// </summary>
+        public static string Contrasena {
+            get {
+                return ResourceManager.GetString("Contrasena", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace OOH.Language.Resources {
         public static string ControlDeInstalacionesPorProveedor {
             get {
                 return ResourceManager.GetString("ControlDeInstalacionesPorProveedor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo electrónico.
+        /// </summary>
+        public static string CorreoElectronico {
+            get {
+                return ResourceManager.GetString("CorreoElectronico", resourceCulture);
             }
         }
         
@@ -367,6 +394,15 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Iniciar sesión.
+        /// </summary>
+        public static string IniciarSesion {
+            get {
+                return ResourceManager.GetString("IniciarSesion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Maestros.
         /// </summary>
         public static string Maestros {
@@ -421,11 +457,29 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Notificaciones.
         /// </summary>
         public static string Notificaciones {
             get {
                 return ResourceManager.GetString("Notificaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a He olvidado mi contraseña.
+        /// </summary>
+        public static string OlvidasteContrasena {
+            get {
+                return ResourceManager.GetString("OlvidasteContrasena", resourceCulture);
             }
         }
         
@@ -498,6 +552,33 @@ namespace OOH.Language.Resources {
         public static string ProspectosDeSitios {
             get {
                 return ResourceManager.GetString("ProspectosDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recuerdame.
+        /// </summary>
+        public static string Recuerdame {
+            get {
+                return ResourceManager.GetString("Recuerdame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registrar.
+        /// </summary>
+        public static string Registrar {
+            get {
+                return ResourceManager.GetString("Registrar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Regístrate.
+        /// </summary>
+        public static string Registrate {
+            get {
+                return ResourceManager.GetString("Registrate", resourceCulture);
             }
         }
         
@@ -678,6 +759,15 @@ namespace OOH.Language.Resources {
         public static string TiposYCatergorias {
             get {
                 return ResourceManager.GetString("TiposYCatergorias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario.
+        /// </summary>
+        public static string Usuario {
+            get {
+                return ResourceManager.GetString("Usuario", resourceCulture);
             }
         }
         

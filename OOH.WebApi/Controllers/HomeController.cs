@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
+using OOH.WebApi.Filters.Attributes;
 using OOH.WebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,19 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
         private readonly IProveedorRepository _proveedorRepo;
 
-        public HomeController(IHttpContextAccessor httpContextAccessor, ILogger<HomeController> logger, IProveedorRepository proveedorRepo) : base(httpContextAccessor)
+        public HomeController(ILogger<HomeController> logger, IProveedorRepository proveedorRepo)
         {
             _logger = logger;
             _proveedorRepo = proveedorRepo;
         }
 
+        [OhhFilter("", Data.ActionPermission.NoAction)]
         public IActionResult Index()
         {
             //var proveedor = new Proveedores()

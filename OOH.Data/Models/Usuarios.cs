@@ -35,5 +35,7 @@ namespace OOH.Data.Models
         public int EmpresaId { get; set; }
         public bool Activo { get; set; }
 
+        public Languages Idioma { get; set; }
+
     }
 }

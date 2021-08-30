@@ -316,4 +316,34 @@
   <data name="Vallas" xml:space="preserve">
     <value>Billboards</value>
   </data>
+  <data name="IniciarSesion" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="CorreoElectronico" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="Contrasena" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Recuerdame" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="OlvidasteContrasena" xml:space="preserve">
+    <value>I've forgot password</value>
+  </data>
+  <data name="Registrate" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>Login user</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Registrar" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="ConfirmarContrasena" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
 </root>
