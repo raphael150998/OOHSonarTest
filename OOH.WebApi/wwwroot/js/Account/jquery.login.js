@@ -11,7 +11,7 @@
             $("#txtError").text(DataRequest["message"]);
           
         } else {
-            $(location).attr("href","/Provideer/Index")
+            $(location).attr("href","/Home/Index")
         }
     }); 
 });

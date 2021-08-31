@@ -45,7 +45,7 @@ namespace OOH.Data
                 {
                     //En caso de que sea un insert sera necesario devolver el id recien creado
                     //_query = _query.ToUpper().Contains("INSERT INTO") ? _query + ";select cast(SCOPE_IDENTITY() as int)" : _query;
-                    var ObjetoReturn = await cn.ExecuteAsync(_query, param: _isProcedure == true ? parameters : null,
+                    var ObjetoReturn = await cn.ExecuteAsync(_query, param: _withParameters == true ? parameters : null,
                                         commandType: _isProcedure == true ?
                                         CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 

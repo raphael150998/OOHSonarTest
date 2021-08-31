@@ -30,7 +30,7 @@ namespace OOH.WebApi.ApiControllers
         [Route("api/client/find")]
         public async Task<Clientes> Cliente(int id)
         {
-            _repos = new ClientRepository(txtConectionString());
+            _repos = new ClientRepository(txtConectionString(),IdUserLogin());
             return _repos.Find(id).Result;
 
         }

@@ -29,7 +29,7 @@
                         break;
                 }
             } else {
-                $(location).attr("href", "/Provideer/Index");
+                $(location).attr("href", "/Account/Login");
             }
 
         });
