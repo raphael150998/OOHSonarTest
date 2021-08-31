@@ -88,11 +88,29 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ajustes.
+        /// </summary>
+        public static string Ajustes {
+            get {
+                return ResourceManager.GetString("Ajustes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Áreas de interés.
         /// </summary>
         public static string AreasDeInteres {
             get {
                 return ResourceManager.GetString("AreasDeInteres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Búsqueda de caras.
+        /// </summary>
+        public static string BusquedaDeCaras {
+            get {
+                return ResourceManager.GetString("BusquedaDeCaras", resourceCulture);
             }
         }
         
@@ -124,6 +142,33 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Categorías de caras.
+        /// </summary>
+        public static string CategoriaDeCaras {
+            get {
+                return ResourceManager.GetString("CategoriaDeCaras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Categorías de sitios.
+        /// </summary>
+        public static string CategoriasDeSitios {
+            get {
+                return ResourceManager.GetString("CategoriasDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar Sesión.
+        /// </summary>
+        public static string CerrarSesion {
+            get {
+                return ResourceManager.GetString("CerrarSesion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Clientes.
         /// </summary>
         public static string Clients {
@@ -133,11 +178,47 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Configuraciones.
+        /// </summary>
+        public static string Configuraciones {
+            get {
+                return ResourceManager.GetString("Configuraciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Configuraciones reportes PPT.
+        /// </summary>
+        public static string ConfiguracionesReportesPPT {
+            get {
+                return ResourceManager.GetString("ConfiguracionesReportesPPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmar contraseña.
+        /// </summary>
+        public static string ConfirmarContrasena {
+            get {
+                return ResourceManager.GetString("ConfirmarContrasena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Consultas.
         /// </summary>
         public static string Consultas {
             get {
                 return ResourceManager.GetString("Consultas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña.
+        /// </summary>
+        public static string Contrasena {
+            get {
+                return ResourceManager.GetString("Contrasena", resourceCulture);
             }
         }
         
@@ -196,11 +277,29 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contratos y O.P.s en proceso.
+        /// </summary>
+        public static string ContratosYOpsEnProceso {
+            get {
+                return ResourceManager.GetString("ContratosYOpsEnProceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Control de instalaciones por proveedor.
         /// </summary>
         public static string ControlDeInstalacionesPorProveedor {
             get {
                 return ResourceManager.GetString("ControlDeInstalacionesPorProveedor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo electrónico.
+        /// </summary>
+        public static string CorreoElectronico {
+            get {
+                return ResourceManager.GetString("CorreoElectronico", resourceCulture);
             }
         }
         
@@ -286,6 +385,24 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Gastos por sitio.
+        /// </summary>
+        public static string GastosPorSitio {
+            get {
+                return ResourceManager.GetString("GastosPorSitio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Iniciar sesión.
+        /// </summary>
+        public static string IniciarSesion {
+            get {
+                return ResourceManager.GetString("IniciarSesion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Maestros.
         /// </summary>
         public static string Maestros {
@@ -313,6 +430,15 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Mapas e imágenes.
+        /// </summary>
+        public static string MapasEImagenes {
+            get {
+                return ResourceManager.GetString("MapasEImagenes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Marcas y rubros.
         /// </summary>
         public static string MarcasYRubros {
@@ -327,6 +453,33 @@ namespace OOH.Language.Resources {
         public static string Municipios {
             get {
                 return ResourceManager.GetString("Municipios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Notificaciones.
+        /// </summary>
+        public static string Notificaciones {
+            get {
+                return ResourceManager.GetString("Notificaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a He olvidado mi contraseña.
+        /// </summary>
+        public static string OlvidasteContrasena {
+            get {
+                return ResourceManager.GetString("OlvidasteContrasena", resourceCulture);
             }
         }
         
@@ -354,6 +507,15 @@ namespace OOH.Language.Resources {
         public static string OrigenesDeInteres {
             get {
                 return ResourceManager.GetString("OrigenesDeInteres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Perfil.
+        /// </summary>
+        public static string Perfil {
+            get {
+                return ResourceManager.GetString("Perfil", resourceCulture);
             }
         }
         
@@ -390,6 +552,33 @@ namespace OOH.Language.Resources {
         public static string ProspectosDeSitios {
             get {
                 return ResourceManager.GetString("ProspectosDeSitios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recuerdame.
+        /// </summary>
+        public static string Recuerdame {
+            get {
+                return ResourceManager.GetString("Recuerdame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registrar.
+        /// </summary>
+        public static string Registrar {
+            get {
+                return ResourceManager.GetString("Registrar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Regístrate.
+        /// </summary>
+        public static string Registrate {
+            get {
+                return ResourceManager.GetString("Registrate", resourceCulture);
             }
         }
         
@@ -448,6 +637,123 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de estructuras.
+        /// </summary>
+        public static string TipoDeEstructuras {
+            get {
+                return ResourceManager.GetString("TipoDeEstructuras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos configuraciones reportes PPT.
+        /// </summary>
+        public static string TiposConfiguracionesReportesPPT {
+            get {
+                return ResourceManager.GetString("TiposConfiguracionesReportesPPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de cara.
+        /// </summary>
+        public static string TiposDeCara {
+            get {
+                return ResourceManager.GetString("TiposDeCara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de estado.
+        /// </summary>
+        public static string TiposDeEstado {
+            get {
+                return ResourceManager.GetString("TiposDeEstado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de imágenes.
+        /// </summary>
+        public static string TiposDeImagenes {
+            get {
+                return ResourceManager.GetString("TiposDeImagenes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de materiales.
+        /// </summary>
+        public static string TiposDeMateriales {
+            get {
+                return ResourceManager.GetString("TiposDeMateriales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de permiso.
+        /// </summary>
+        public static string TiposDePermiso {
+            get {
+                return ResourceManager.GetString("TiposDePermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de precio.
+        /// </summary>
+        public static string TiposDePrecio {
+            get {
+                return ResourceManager.GetString("TiposDePrecio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de proveedores.
+        /// </summary>
+        public static string TiposDeProveedores {
+            get {
+                return ResourceManager.GetString("TiposDeProveedores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de referencias comerciales.
+        /// </summary>
+        public static string TiposDeReferenciasComerciales {
+            get {
+                return ResourceManager.GetString("TiposDeReferenciasComerciales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de restricciones comerciales.
+        /// </summary>
+        public static string TiposDeRestriccionesComerciales {
+            get {
+                return ResourceManager.GetString("TiposDeRestriccionesComerciales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de seguro.
+        /// </summary>
+        public static string TiposDeSeguro {
+            get {
+                return ResourceManager.GetString("TiposDeSeguro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipos de trabajos OP.
+        /// </summary>
+        public static string TiposDeTrabajosOp {
+            get {
+                return ResourceManager.GetString("TiposDeTrabajosOp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tipos y categorías.
         /// </summary>
         public static string TiposYCatergorias {
@@ -457,11 +763,29 @@ namespace OOH.Language.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Usuario.
+        /// </summary>
+        public static string Usuario {
+            get {
+                return ResourceManager.GetString("Usuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Utilidad por instalación.
         /// </summary>
         public static string UtilidadPorInstalacion {
             get {
                 return ResourceManager.GetString("UtilidadPorInstalacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Vallas.
+        /// </summary>
+        public static string Vallas {
+            get {
+                return ResourceManager.GetString("Vallas", resourceCulture);
             }
         }
         

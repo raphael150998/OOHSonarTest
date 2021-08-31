@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OOH.WebApi.Filters.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace OOH.WebApi.Controllers
 {
     public class ProvideerController : Controller
     {
+        [OhhFilter("ListProviders", Data.ActionPermission.Read)]
         public IActionResult Index()
         {
             return View();

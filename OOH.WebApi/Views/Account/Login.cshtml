@@ -1,4 +1,5 @@
-﻿@model OOH.Data.Dtos.Usuario.UserLoginDto
+﻿@using OOH.Language.Resources
+@model OOH.Data.Dtos.Usuario.UserLoginDto
 @{
     ViewData["Title"] = "Login Account";
     Layout = "_LayoutLogin";
@@ -16,18 +17,18 @@
                         <div class="auth-box">
                             <div class="row m-b-20">
                                 <div class="col-md-12">
-                                    <h3 class="text-left txt-primary">Sign In</h3>
+                                    <h3 class="text-left txt-primary">@Resources.IniciarSesion</h3>
                                 </div>
                             </div>
                             <span class="text-danger" id="txtError"></span>
                             <hr />
                             <div class="input-group">
                                 @*<input type="text" class="form-control" placeholder="Your Email Address">*@
-                                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your Email Address" } })
+                                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", @placeholder = Resources.Usuario } })
                             </div>
                             <div class="input-group">
                                 @*<input type="password" class="form-control" placeholder="Password">*@
-                                @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @type = "password" } })
+                                @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control", @placeholder = @Resources.Contrasena, @type = "password" } })
                             </div>
                             <div class="row m-t-25 text-left">
                                 <div class="col-12">
@@ -35,17 +36,17 @@
                                         <label>
                                             <input type="checkbox" value="">
                                             <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                            <span class="text-inverse">Remember me</span>
+                                            <span class="text-inverse">@Resources.Recuerdame</span>
                                         </label>
                                     </div>
                                     <div class="forgot-phone text-right f-right">
-                                        <a href="auth-reset-password.html" class="text-right f-w-600 text-inverse"> Forgot Password?</a>
+                                        <a href="auth-reset-password.html" class="text-right f-w-600 text-inverse"> @Resources.OlvidasteContrasena</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="row m-t-30">
                                 <div class="col-md-12">
-                                    <button type="button" id="btnLogin" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign in</button>
+                                    <button type="button" id="btnLogin" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">@Resources.IniciarSesion</button>
                                 </div>
                             </div>
                             <hr />

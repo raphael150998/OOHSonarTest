@@ -238,4 +238,112 @@
   <data name="PermisosDeIngreso" xml:space="preserve">
     <value>Entry authorization</value>
   </data>
+  <data name="ContratosYOpsEnProceso" xml:space="preserve">
+    <value>Deals and O.P.s in process</value>
+  </data>
+  <data name="GastosPorSitio" xml:space="preserve">
+    <value>Costs per site</value>
+  </data>
+  <data name="MapasEImagenes" xml:space="preserve">
+    <value>Maps and images</value>
+  </data>
+  <data name="BusquedaDeCaras" xml:space="preserve">
+    <value>Side search</value>
+  </data>
+  <data name="Configuraciones" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ConfiguracionesReportesPPT" xml:space="preserve">
+    <value>Report PPT settings</value>
+  </data>
+  <data name="TiposConfiguracionesReportesPPT" xml:space="preserve">
+    <value>Report PPT setting types</value>
+  </data>
+  <data name="CategoriaDeCaras" xml:space="preserve">
+    <value>Side categories</value>
+  </data>
+  <data name="CategoriasDeSitios" xml:space="preserve">
+    <value>Site categories</value>
+  </data>
+  <data name="TiposDeCara" xml:space="preserve">
+    <value>Side types</value>
+  </data>
+  <data name="TiposDeEstado" xml:space="preserve">
+    <value>State types</value>
+  </data>
+  <data name="TipoDeEstructuras" xml:space="preserve">
+    <value>Structure types</value>
+  </data>
+  <data name="TiposDeImagenes" xml:space="preserve">
+    <value>Image types</value>
+  </data>
+  <data name="TiposDeMateriales" xml:space="preserve">
+    <value>Material types</value>
+  </data>
+  <data name="TiposDePermiso" xml:space="preserve">
+    <value>Permission types</value>
+  </data>
+  <data name="TiposDePrecio" xml:space="preserve">
+    <value>Price types</value>
+  </data>
+  <data name="TiposDeProveedores" xml:space="preserve">
+    <value>Supplier types</value>
+  </data>
+  <data name="TiposDeReferenciasComerciales" xml:space="preserve">
+    <value>Commercial reference types</value>
+  </data>
+  <data name="TiposDeRestriccionesComerciales" xml:space="preserve">
+    <value>Commercial restriction types</value>
+  </data>
+  <data name="TiposDeSeguro" xml:space="preserve">
+    <value>Insurance types</value>
+  </data>
+  <data name="TiposDeTrabajosOp" xml:space="preserve">
+    <value>OP job types</value>
+  </data>
+  <data name="Notificaciones" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Ajustes" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Perfil" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="CerrarSesion" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Vallas" xml:space="preserve">
+    <value>Billboards</value>
+  </data>
+  <data name="IniciarSesion" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="CorreoElectronico" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="Contrasena" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Recuerdame" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="OlvidasteContrasena" xml:space="preserve">
+    <value>I've forgot password</value>
+  </data>
+  <data name="Registrate" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>Login user</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Registrar" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="ConfirmarContrasena" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
 </root>

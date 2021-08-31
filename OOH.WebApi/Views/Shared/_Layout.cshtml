@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using OOH.Language.Resources
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -116,7 +117,7 @@
                                 </a>
                                 <ul class="show-notification">
                                     <li>
-                                        <h6>Notificaciones</h6>
+                                        <h6>@Resources.Notificaciones</h6>
                                         <label class="label label-danger">3</label>
                                     </li>
                                     <li>
@@ -166,17 +167,17 @@
                                 <ul class="show-notification profile-notification">
                                     <li>
                                         <a href="#">
-                                            <i class="fas fa-cog"></i> Ajustes
+                                            <i class="fas fa-cog"></i> @Resources.Ajustes
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fas fa-user"></i> Perfil
+                                            <i class="fas fa-user"></i> @Resources.Perfil
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                                        <a href="@Url.Action("LogOut","Account")">
+                                            <i class="fas fa-sign-out-alt"></i> @Resources.CerrarSesion
                                         </a>
                                     </li>
                                 </ul>
@@ -298,83 +299,83 @@
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
-                            <div class="pcoded-navigation-label">Vallas</div>
+                            <div class="pcoded-navigation-label">@Resources.Vallas</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <!-- #region Reportes -->
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-print"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Reportes</span>
+                                        <span class="pcoded-mtext">@Resources.Reportes</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Facturación por cara</span>
+                                                <span class="pcoded-mtext">@Resources.FacturacionPorCara</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Contratos vigentes por cliente por mes</span>
+                                                <span class="pcoded-mtext">@Resources.ContratosVigentesPorClientePorMes</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Vencimiento de contratos por cara</span>
+                                                <span class="pcoded-mtext">@Resources.VencimientoDeContratosPorCara</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Caras bonificadas</span>
+                                                <span class="pcoded-mtext">@Resources.CarasBonificadas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Contratos por vendedor por mes</span>
+                                                <span class="pcoded-mtext">@Resources.ContratosPorVendedorPorMes</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Control de instalaciones por proveedor</span>
+                                                <span class="pcoded-mtext">@Resources.ControlDeInstalacionesPorProveedor</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Utilidad por instalación</span>
+                                                <span class="pcoded-mtext">@Resources.UtilidadPorInstalacion</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Rentabilidad por sitios</span>
+                                                <span class="pcoded-mtext">@Resources.RentabilidadPorSitios</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Contratos por sitios por vencer</span>
+                                                <span class="pcoded-mtext">@Resources.ContratosPorSitiosPorVencer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Rentabilidad por caras por calles</span>
+                                                <span class="pcoded-mtext">@Resources.RentabilidadPorCarasPorZonas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -386,7 +387,7 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-project-diagram"></i><b>P</b></span>
-                                        <span class="pcoded-mtext">Auxiliares</span>
+                                        <span class="pcoded-mtext">@Resources.Maestros</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
@@ -394,98 +395,98 @@
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Acreedores y proveedores</span>
+                                                <span class="pcoded-mtext">@Resources.AcreedoresYProveedores</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Clientes</span>
+                                                <span class="pcoded-mtext">@Resources.Clients</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Encuestas</span>
+                                                <span class="pcoded-mtext">@Resources.Encuestas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Productos</span>
+                                                <span class="pcoded-mtext">@Resources.Productos</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Tarifas de proveedores</span>
+                                                <span class="pcoded-mtext">@Resources.TarifasDeProveedores</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Zonas</span>
+                                                <span class="pcoded-mtext">@Resources.Zonas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Departamentos</span>
+                                                <span class="pcoded-mtext">@Resources.Departamentos</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Municipios</span>
+                                                <span class="pcoded-mtext">@Resources.Municipios</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Agencias</span>
+                                                <span class="pcoded-mtext">@Resources.Agencias</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Ejecutivos de venta</span>
+                                                <span class="pcoded-mtext">@Resources.EjecutivosDeVenta</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Cargos</span>
+                                                <span class="pcoded-mtext">@Resources.Cargos</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Empleados</span>
+                                                <span class="pcoded-mtext">@Resources.Empleados</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Marcas y rubros</span>
+                                                <span class="pcoded-mtext">@Resources.MarcasYRubros</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" pcoded-hasmenu">
                                             <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Tipos y categorías</span>
+                                                <span class="pcoded-mtext">@Resources.TiposYCatergorias</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                             <ul class="pcoded-submenu">
@@ -493,98 +494,98 @@
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Categorías de caras</span>
+                                                        <span class="pcoded-mtext">@Resources.CategoriaDeCaras</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Categorías de sitios</span>
+                                                        <span class="pcoded-mtext">@Resources.CategoriasDeSitios</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de cara</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeCara</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de estado</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeEstado</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de estructuras</span>
+                                                        <span class="pcoded-mtext">@Resources.TipoDeEstructuras</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de imágenes</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeImagenes</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de materiales</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeMateriales</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de permiso</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDePermiso</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de precio</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDePrecio</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de proveedores</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeProveedores</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de referencias comerciales</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeReferenciasComerciales</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de restricciones comerciales</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeRestriccionesComerciales</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de seguro</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeSeguro</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Tipos de trabajos OP</span>
+                                                        <span class="pcoded-mtext">@Resources.TiposDeTrabajosOp</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
@@ -597,7 +598,7 @@
                                 <li class="">
                                     <a href="#">
                                         <span class="pcoded-micon"><i class="fas fa-book"></i></span>
-                                        <span class="pcoded-mtext">Consultas</span>
+                                        <span class="pcoded-mtext">@Resources.Consultas</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -605,42 +606,42 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-comments-dollar"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Disponibilidad y cotizaciones</span>
+                                        <span class="pcoded-mtext">@Resources.DisponibilidadYCotizaciones</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Cotizaciones</span>
+                                                <span class="pcoded-mtext">@Resources.Cotizaciones</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Disponibilidad de caras</span>
+                                                <span class="pcoded-mtext">@Resources.DisponibilidadDeCaras</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Contratos a clientes</span>
+                                                <span class="pcoded-mtext">@Resources.ContratosAClientes</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Reservaciones</span>
+                                                <span class="pcoded-mtext">@Resources.Reservaciones</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Promociones</span>
+                                                <span class="pcoded-mtext">@Resources.Promociones</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -652,35 +653,35 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-user-cog"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Operaciones</span>
+                                        <span class="pcoded-mtext">@Resources.Operaciones</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" pcoded-hasmenu">
                                             <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Administración de &nbsp;&nbsp; sitios</span>
+                                                <span class="pcoded-mtext">@Resources.AdministracionDeSitios</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                             <ul class="pcoded-submenu">
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Caras</span>
+                                                        <span class="pcoded-mtext">@Resources.Caras</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Sitios</span>
+                                                        <span class="pcoded-mtext">@Resources.Sitios</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Contratos por sitio</span>
+                                                        <span class="pcoded-mtext">@Resources.ContratosPorSitio</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
@@ -689,35 +690,35 @@
                                         <li class=" pcoded-hasmenu">
                                             <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Contratación de &nbsp;&nbsp; sitios</span>
+                                                <span class="pcoded-mtext">@Resources.ContratacionDeSitios</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                             <ul class="pcoded-submenu">
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Áreas de interes</span>
+                                                        <span class="pcoded-mtext">@Resources.AreasDeInteres</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Documentos para contratos</span>
+                                                        <span class="pcoded-mtext">@Resources.DocumentosParaContratos</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Orígenes de interes</span>
+                                                        <span class="pcoded-mtext">@Resources.OrigenesDeInteres</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Prospectos de sitio</span>
+                                                        <span class="pcoded-mtext">@Resources.ProspectosDeSitios</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
@@ -726,14 +727,14 @@
                                         <li class=" pcoded-hasmenu">
                                             <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                                <span class="pcoded-mtext">Mantenimiento de &nbsp;&nbsp; sitios</span>
+                                                <span class="pcoded-mtext">@Resources.MantenimientoDeSitios</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                             <ul class="pcoded-submenu">
                                                 <li class="">
                                                     <a href="#">
                                                         <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                        <span class="pcoded-mtext">Mantenimientos</span>
+                                                        <span class="pcoded-mtext">@Resources.Mantenimientos</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
@@ -742,14 +743,14 @@
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Órdenes de producción</span>
+                                                <span class="pcoded-mtext">@Resources.OrdenesDeProduccion</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Permisos de ingreso</span>
+                                                <span class="pcoded-mtext">@Resources.PermisosDeIngreso</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -760,28 +761,28 @@
                                 <li class="">
                                     <a href="#">
                                         <span class="pcoded-micon"><i class="fas fa-file-signature"></i></span>
-                                        <span class="pcoded-mtext">Contratos y O.P.s en proceso</span>
+                                        <span class="pcoded-mtext">@Resources.ContratosYOpsEnProceso</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="#">
                                         <span class="pcoded-micon"><i class="fas fa-hand-holding-usd"></i></span>
-                                        <span class="pcoded-mtext">Gastos por sitio</span>
+                                        <span class="pcoded-mtext">@Resources.GastosPorSitio</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="#">
                                         <span class="pcoded-micon"><i class="fas fa-map-marked-alt"></i></span>
-                                        <span class="pcoded-mtext">Mapas e imágenes</span>
+                                        <span class="pcoded-mtext">@Resources.MapasEImagenes</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="#">
                                         <span class="pcoded-micon"><i class="fas fa-search"></i></span>
-                                        <span class="pcoded-mtext">Búsqueda de caras</span>
+                                        <span class="pcoded-mtext">@Resources.BusquedaDeCaras</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -789,21 +790,21 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-cogs"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Configuraciones</span>
+                                        <span class="pcoded-mtext">@Resources.Configuraciones</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Configuración reportes PPT</span>
+                                                <span class="pcoded-mtext">@Resources.ConfiguracionesReportesPPT</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="#">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Tipos configuraciones reportes PPT</span>
+                                                <span class="pcoded-mtext">@Resources.TiposConfiguracionesReportesPPT</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>

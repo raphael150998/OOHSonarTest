@@ -1,4 +1,5 @@
-﻿@model OOH.Data.Models.Usuarios
+﻿@using OOH.Language.Resources
+@model OOH.Data.Models.Usuarios
 @{
     ViewData["Title"] = "Login Register";
     Layout = "_LayoutLogin";
@@ -14,34 +15,34 @@
                         <div class="auth-box">
                             <div class="row m-b-20">
                                 <div class="col-md-12">
-                                    <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
+                                    <h3 class="text-center txt-primary">@Resources.Registrate</h3>
                                 </div>
                             </div>
                             <span class="text-danger" id="txtError"></span>
                             <hr />
                             <div class="input-group">
-                                <input type="text" asp-for="Login" class="form-control" placeholder="Choose Login Name">
+                                <input type="text" asp-for="Login" class="form-control" placeholder="@Resources.Usuario">
                                 <span class="md-line"></span>
                             </div>
                             <div class="input-group">
-                                <input type="text" asp-for="Correo" class="form-control" placeholder="Your Email Address">
+                                <input type="text" asp-for="Correo" class="form-control" placeholder="@Resources.CorreoElectronico">
                                 <span class="md-line"></span>
                             </div>
                             <div class="input-group">
-                                <input type="text" asp-for="Username" class="form-control" placeholder="Your User Address">
+                                <input type="text" asp-for="Username" class="form-control" placeholder="@Resources.Name">
                                 <span class="md-line"></span>
                             </div>
                             <div class="input-group">
-                                <input type="password" asp-for="Pass" class="form-control" placeholder="Choose Password">
+                                <input type="password" asp-for="Pass" class="form-control" placeholder="@Resources.Contrasena">
                                 <span class="md-line"></span>
                             </div>
                             <div class="input-group">
-                                <input type="password" id="PassConfirm" class="form-control" placeholder="Confirm Password">
+                                <input type="password" id="PassConfirm" class="form-control" placeholder="@Resources.ConfirmarContrasena">
                                 <span class="md-line"></span>
                             </div>
                             <div class="row m-t-30">
                                 <div class="col-md-12">
-                                    <button type="button" id="BtnRegister" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign up now</button>
+                                    <button type="button" id="BtnRegister" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">@Resources.Registrar</button>
                                 </div>
                             </div>
                             <hr />
