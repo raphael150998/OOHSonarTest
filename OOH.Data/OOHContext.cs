@@ -12,7 +12,7 @@ namespace OOH.Data
 {
     public class OOHContext : IOOHContext
     {
-        private const string StringConnection = "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=jr.2021;MultipleActiveResultSets=True;App=EntityFramework";
+        private const string StringConnection = "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=JR.2021;MultipleActiveResultSets=True;App=EntityFramework";
 
         public async Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null, string Connection = StringConnection)
         {

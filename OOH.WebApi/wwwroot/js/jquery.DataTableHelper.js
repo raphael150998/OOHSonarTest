@@ -8,8 +8,17 @@ var DataTableHelper = {
                 $(identify).DataTable().destroy();
                 $(identify + ' thead tr').clone(true).appendTo(identify + ' thead');
               
+                $(identify + ' thead tr:eq(1) th.filter-action').each(function (e) {
+                    console.log($(this));
+                    $(this).html("");
+                    $(this).removeAttr("class");
+                  
+                });
                 $(identify + ' thead tr:eq(1) th.filter').each(function (i) {
+                    i = i + 1;
+                  
                     var title = $(this).text();
+                    console.log(title);
                     $(this).removeAttr("class");
                     $(this).removeAttr("aria-label");
                     $(this).removeAttr("aria-sort");

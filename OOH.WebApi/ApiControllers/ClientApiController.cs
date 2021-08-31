@@ -18,12 +18,21 @@ namespace OOH.WebApi.ApiControllers
       
         ClientRepository _repos;
 
-       [Route("api/Client/Get")]
        [HttpGet]
+       [Route("api/Client/Get")]
        public async Task<List<Clientes>> Clientes()
         {
             _repos = new ClientRepository(txtConectionString());
             return  _repos.Select().Result.ToList();
+        }
+
+        [HttpGet]
+        [Route("api/client/find")]
+        public async Task<Clientes> Cliente(int id)
+        {
+            _repos = new ClientRepository(txtConectionString());
+            return _repos.Find(id).Result;
+
         }
     }
 }
