@@ -28,6 +28,20 @@ namespace OOH.WebApi.ApiControllers
             {
                 return null;
             }
+        } 
+        [Route("api/Arifureta/2")]
+        public String IdUserLogin()
+        {
+            string Id = User.Claims.Where(x => x.Type == "Id").FirstOrDefault().Value;
+            if (Id != "" && Id != null)
+            {
+                //UserPermisoDto JsonListPermisos = JsonConvert.DeserializeObject<UserPermisoDto>(jsPermiso);
+                return Id;
+            }
+            else
+            {
+                return null;
+            }
         }
         [Route("api/TateNoYuusha/27")]
         public UserPermisoDto Permisos()

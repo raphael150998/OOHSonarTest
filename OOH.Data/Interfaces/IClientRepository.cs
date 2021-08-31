@@ -10,8 +10,7 @@ namespace OOH.Data.Interfaces
     {
         Task<Clientes> Find(int Id);
         Task<IEnumerable<Clientes>> Select(string _Where = "");
-        Task Update(Clientes client);        
-        Task<int> Create(Clientes client);
+        Task<int> AddOrUpdate(Clientes client);
         Task Remove(int id);
 
 
