@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.Controllers
 {
-    public class ProvideerController : Controller
+    public class ProviderController : Controller
     {
         [OhhFilter("ListProviders", Data.ActionPermission.Read)]
         public IActionResult Index()

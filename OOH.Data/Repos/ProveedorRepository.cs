@@ -43,7 +43,7 @@ namespace OOH.Data.Repos
             #region sql
             string sql = "UPDATE [dbo].[Proveedores] SET [Codigo] = @Codigo ,[Nombre] = @Nombre,[NRC] = @NRC ,[NIT] = @NIT,[Giro] = @Giro,[Email] = @Email,[Direccion] = @Direccion,[Telefono] = @Telefono,[Celular] = @Celular,[PersonaJuridica] = @PersonaJuridica,[Activo] = @Activo,[CategoriaId] = @CategoriaId where ProveedorId = @ProveedorId";
             #endregion
-            var id = await PostData(sql, true, new DynamicParameters(proveedor));
+            await PostData(sql, true, new DynamicParameters(proveedor));
         }
     }
 }

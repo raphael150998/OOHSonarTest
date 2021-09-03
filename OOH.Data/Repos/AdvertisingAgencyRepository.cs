@@ -1,7 +1,9 @@
-﻿using OOH.Data.Interfaces;
+﻿using Dapper;
+using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,29 +11,42 @@ namespace OOH.Data.Repos
 {
     public class AdvertisingAgencyRepository : OOHContext, IAdvertisingAgencyRepository
     {
-        public Task<int> Create(AgenciasPublicidad agencia)
+        private readonly IWebUserHelper _userHelper;
+        private readonly string _connectionString;
+
+        public AdvertisingAgencyRepository(IWebUserHelper userHelper)
         {
-            throw new NotImplementedException();
+            _userHelper = userHelper;
+            _connectionString = _userHelper.GetUserConnectionString();
         }
 
-        public Task<AgenciasPublicidad> Find(int Id)
+        public async Task<int> Create(AgenciasPublicidad agencia)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) values (@Nombre, @Comision, @Activo)";
+            var id = await PostData(sql, true, new DynamicParameters(agencia), false, _connectionString);
+            return id;
         }
 
-        public Task Remove(int id)
+        public async Task<AgenciasPublicidad> Find(int id)
         {
-            throw new NotImplementedException();
+            return await FilterData<AgenciasPublicidad>($"SELECT * FROM AgenciasPublicidad WHERE AgenciaId = {id}", false, null, _connectionString);
         }
 
-        public Task<IEnumerable<AgenciasPublicidad>> Select(string _Where = "")
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            await PostData($"Update AgenciasPublicidad set Activo = false where AgenciaId = {id}", false, null, false, _connectionString);
         }
 
-        public Task Update(AgenciasPublicidad agencia)
+        public async Task<IEnumerable<AgenciasPublicidad>> Select(string _Where = "")
         {
-            throw new NotImplementedException();
+            return SelectData<AgenciasPublicidad>("SELECT * FROM AgenciasPublicidad " + _Where, false, null, _connectionString).Result.ToList();
+        }
+
+        public async Task Update(AgenciasPublicidad agencia)
+        {
+            string sql = "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo";
+
+            await PostData(sql, true, new DynamicParameters(agencia), false, _connectionString);
         }
     }
 }

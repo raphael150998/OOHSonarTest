@@ -17,12 +17,12 @@ namespace OOH.WebApi.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly IProveedorRepository _proveedorRepo;
+        //private readonly IProveedorRepository _proveedorRepo;
 
-        public HomeController(ILogger<HomeController> logger, IProveedorRepository proveedorRepo)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _proveedorRepo = proveedorRepo;
+            //_proveedorRepo = proveedorRepo;
         }
 
         [OhhFilter("", Data.ActionPermission.NoAction)]

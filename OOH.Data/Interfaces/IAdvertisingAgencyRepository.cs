@@ -11,9 +11,9 @@ namespace OOH.Data.Interfaces
         /// <summary>
         ///  Obtiene una agencia de publicidad por su id
         /// </summary>
-        /// <param name="Id">Id de la agencia de publicidad</param>
+        /// <param name="id">Id de la agencia de publicidad</param>
         /// <returns cref="AgenciasPublicidad"></returns>
-        Task<AgenciasPublicidad> Find(int Id);
+        Task<AgenciasPublicidad> Find(int id);
 
         /// <summary>
         /// Obtiene un listado de agencias de publicidad en base a los filtros enviados en <paramref name="_Where"/>

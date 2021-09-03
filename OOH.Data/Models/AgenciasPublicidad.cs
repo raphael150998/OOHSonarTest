@@ -9,6 +9,11 @@ namespace OOH.Data.Models
     /// </summary>
     public class AgenciasPublicidad
     {
+        public AgenciasPublicidad()
+        {
+            Activo = true;
+        }
+
         /// <summary>
         /// Id de la agencia
         /// </summary>
