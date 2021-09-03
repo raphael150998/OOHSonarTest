@@ -42,7 +42,7 @@ namespace OOH.WebApi.Filters
 
                 UsuariosPermisos permissionRequested = permissions?.FirstOrDefault(x => x.Permiso == _permission);
 
-                if (permissionRequested == null) throw new UnauthorizedAccessException("Acceso denegado");
+                if (permissionRequested == null) { context.Result = new ForbidResult(); return; }
 
                 bool isActionAllowed = false;
 
@@ -65,7 +65,8 @@ namespace OOH.WebApi.Filters
                         break;
                 }
 
-                if (!isActionAllowed) context.Result = new ForbidResult();
+                if (!isActionAllowed) { context.Result = new ForbidResult(); return; }
+
             }
             #endregion
 
