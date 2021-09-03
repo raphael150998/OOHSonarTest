@@ -2,14 +2,11 @@
 var DataTableHelper = {
     Draw: function (identify, config) {
         
-        $(identify).DataTable(config);
+       var table= $(identify).DataTable(config);
         return {
             FilterColum: function () {
-                $(identify).DataTable().destroy();
                 $(identify + ' thead tr').clone(true).appendTo(identify + ' thead');
-              
                 $(identify + ' thead tr:eq(1) th.filter-action').each(function (e) {
-                    console.log($(this));
                     $(this).html("");
                     $(this).removeAttr("class");
                   
@@ -37,7 +34,6 @@ var DataTableHelper = {
                         }
                     });
                 });
-                var table = $(identify).DataTable(config);
 
             },
             ChildRow: function (format) {

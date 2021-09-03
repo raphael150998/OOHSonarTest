@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class ClientRepository : OOHContext, IClientRepository
+    public class ClientRepository : OOHContext, IActionRepository<Clientes>
     {
         public string ConectionnString { get; set; }
         public string LogUser { get; set; }
@@ -22,8 +23,12 @@ namespace OOH.Data.Repos
             this.ConectionnString = _stringcontection;
             this.LogUser = _userLoged;
         }
-        public async Task<int> AddOrUpdate(Clientes client)
+        public async Task<ResultClass> AddOrUpdate(Clientes client)
         {
+            if (FilterData<Clientes>($"Select * from [dbo].[clientes] Where Codigo = '{client.Codigo}' ",false,null,this.ConectionnString).Result != null)
+            {
+                return new ResultClass() { state = false, message="El codigo ya existe",data=1};
+            }
             DynamicParameters param = new DynamicParameters();
             param.Add("@id", client.ClienteId);
             param.Add("@NombreC", client.NombreComercial);
@@ -37,28 +42,32 @@ namespace OOH.Data.Repos
             param.Add("@Giro", client.Giro);
             param.Add("@NIT", client.NIT);
             param.Add("@NRC", client.NRC);
-            param.Add("@Activo", client.Activo);
+            param.Add("@CategoriaId", client.CategoriaId);
+            param.Add("@Activo", true);
             if (client.ClienteId == 0)
             {
                 param.Add("@Usuario", this.LogUser);
-                return PostData(@"Insert Into [dbo].[clientes](ClienteId,NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId) Values (@id,@NombreC,@Razon,@Pjuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@Usuario)", true, param, false, ConectionnString).Result;
+                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId) Values (@NombreC,@Razon,@Pjuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@Usuario,@CategoriaId)", true, param, false, ConectionnString).Result;
+               
+                return new ResultClass() { data = post, state = post != 0 ?true:false, message = post != 0? "Exito":"No se a podido guardar" };
             }
             else
             {
                 param.Add("@Usuario", client.UsuarioId);
-                return PostData("Update [dbo].[clientes] set",true,param,false,ConectionnString).Result;
+                int post = PostData("Update [dbo].[clientes] set", true, param, false, ConectionnString).Result;
+                return new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
             }
         }
 
         public async Task<Clientes> Find(int Id)
         {
-            return FilterData<Clientes>($"Select * from [dbo].[clientes] Where ClienteId = {Id}",false,null,ConectionnString).Result;
+            return FilterData<Clientes>($"Select * from [dbo].[clientes] Where ClienteId = '{Id}'",false,null,ConectionnString).Result;
 
         }
 
-        public async Task Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            await PostData($"Update [dbo].[clientes] set Activo = false where ClienteId = {id}");
+           return PostData($"Update [dbo].[clientes] set Activo = false where ClienteId = '{id}'").Result != 0 ? true : false; 
 
         }
 
