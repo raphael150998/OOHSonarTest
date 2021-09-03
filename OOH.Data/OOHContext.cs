@@ -18,6 +18,8 @@ namespace OOH.Data
         {
             try
             {
+
+                //"Select * from [dbo].[clientes] Where Codigo = CL9798-87"
                 using (IDbConnection cn = new SqlConnection(Connection))
                 {
                     var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,

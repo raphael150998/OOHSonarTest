@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Helpers;
 using OOH.Data.Models;
 using OOH.Data.Repos;
 using OOH.WebApi.Controllers;
@@ -30,9 +31,28 @@ namespace OOH.WebApi.ApiControllers
         [Route("api/client/find")]
         public async Task<Clientes> Cliente(int id)
         {
-            _repos = new ClientRepository(txtConectionString(),IdUserLogin());
+            _repos = new ClientRepository(txtConectionString());
             return _repos.Find(id).Result;
 
         }
+        
+        [HttpPost]
+        [Route("api/client/CEdata")]
+        public async Task<ResultClass> CreateEdit([FromForm] Clientes clientes)
+        {
+            _repos = new ClientRepository(txtConectionString(), IdUserLogin());
+           
+            return _repos.AddOrUpdate(clientes).Result;
+        }
+
+        [HttpPost]
+        [Route("api/client/remove")]
+        public async Task<bool> Remove([FromForm]int id)
+        {
+            _repos = new ClientRepository(txtConectionString());
+            return _repos.Remove(id).Result;
+        }
+
+
     }
 }

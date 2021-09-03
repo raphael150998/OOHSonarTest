@@ -22,6 +22,9 @@ namespace OOH.Data.Models
         public int UsuarioId { get; set; }
         public bool Activo { get; set; }
         public int  CategoriaId { get; set; }
+        public int  Categoria { get; set; }
+        public int  MunicipioId { get; set; }
+        public int  Municipio { get; set; }
 
     }
 }

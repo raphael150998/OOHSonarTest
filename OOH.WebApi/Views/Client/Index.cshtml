@@ -1,28 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Client";
 }
+<style>
+    .btnDatatable {
+        font-size: 20px;
+        position: center;
+    }
+</style>
 <div>
-    <div>
-        <button class="btn btn-primary" onclick="edit('0')" >Agregar Cliente</button>
+    <div class="card">
+
+        <div class="card-header">
+            <button class="btn btn-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Agregar Cliente</button>
+            <button class="btn btn-primary btn-outline-primary"  onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
+        </div>
     </div>
-    <br />
-    <div>
-        <table id="tablaClient" class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="filter-action">Acciones</th>
-                    <th class="filter">Codigo</th>
-                    <th class="filter">Nombre Comercial</th>
-                    <th class="filter">Razón Social</th>
-                    <th class="filter">NIT</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
 
-        </table>
+    <div class="card">
+
+        <div class="card-block">
+            <table id="tablaClient" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="filter-action">Acciones</th>
+                        <th class="filter">Codigo</th>
+                        <th class="filter">Nombre Comercial</th>
+                        <th class="filter">Razón Social</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+
+            </table>
 
 
+        </div>
     </div>
 </div>
+
 <script src="~/js/Client/jquery.client.js"></script>

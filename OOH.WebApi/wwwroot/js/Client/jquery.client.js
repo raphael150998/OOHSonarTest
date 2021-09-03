@@ -25,7 +25,10 @@ function BuilDatatable() {
                 data: "clienteId",
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return `<i class="fa fa-pencil-square" onclick="edit('`+data+`')"></i>`;
+                    return `
+                     <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + data + `')"></i>
+                     <i class="fa fa-trash btnDatatable text-danger"></i>
+                     `;
                 }
             },
             {
@@ -36,13 +39,17 @@ function BuilDatatable() {
             },
             { data: "nombreComercial" },
             { data: "razonSocial" },
-            { data: "nit" },
 
-        ]
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }
     }).FilterColum();
     GetClient();
 }
-
+function refresh() {
+    GetClient();
+}
 function edit(id) {
     console.log(id);
     window.open("/Client/CreateUpdate/" + id, '_blank');
