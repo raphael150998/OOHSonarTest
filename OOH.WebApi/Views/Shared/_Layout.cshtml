@@ -44,15 +44,20 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @*<script src="//code.jquery.com/jquery-3.5.1.js"></script>*@
 
-
-</head>
-
-<body>
+    <!--Styles globales-->
     <style>
         i {
             cursor: pointer;
         }
+
+        .btnDatatable {
+            font-size: 20px;
+            position: center;
+        }
     </style>
+</head>
+
+<body>
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -399,7 +404,7 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="#">
+                                            <a href="@Url.Action("Index","Client")">
                                                 <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
                                                 <span class="pcoded-mtext">@Resources.Clients</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -917,6 +922,24 @@
     <!--<script  src="~/assets/pages/dashboard/custom-dashboard.min.js"></script>-->
     <script src="~/assets/pages/dashboard/custom-dashboard.js"></script>
     <script src="~/assets/js/script.js "></script>
+    <script src="~/bower_components/jquery-validation/js/jquery.validate.js"></script>
+    <script>
+        $.fn.serializeFormToJson = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 
