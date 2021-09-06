@@ -35,7 +35,7 @@ namespace OOH.Data.Repos
             else
             {
                 param.Add("@id", collection.Id);
-                return new ResultClass{data= PostData("Update [dbo].[clientes] set", true, param, false, ConectionnString).Result};
+                return new ResultClass{data= PostData(" Update [dbo].[ClientesContactos] set [ClienteId] = @Cliente , Nombres = @Nombres, Apellidos = @Apellidos , Rol = @Rol , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @id", true, param, false, ConectionnString).Result};
             }
         }
 

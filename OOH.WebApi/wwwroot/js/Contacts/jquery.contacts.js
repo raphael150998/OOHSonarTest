@@ -31,7 +31,7 @@ function BuildDatatable() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `
-                     <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + data + `')"></i>
+                     <i class="fa fa-pencil-square btnDatatable text-primary" onclick="editContact('` + data + `')"></i>
                      <i class="fa fa-trash btnDatatable text-danger"></i>
                      `;
                 }

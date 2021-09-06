@@ -32,7 +32,16 @@ namespace OOH.WebApi.ApiControllers
         }
 
 
+        [HttpGet]
+        [Route("api/contacts/contact")]
+        public async Task<ClientesContactos> FindContact(int id)
+        {
 
+            _repos = new ContactsRepository(txtConectionString());
+            return _repos.Select($"Where Id = {id}").Result.FirstOrDefault();
+
+
+        }
 
     }
 }

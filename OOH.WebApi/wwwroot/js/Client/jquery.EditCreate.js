@@ -28,7 +28,10 @@ function LLenarTextBox() {
             $("#Telefono").val(dataResult["telefono"]);
             $("#Giro").val(dataResult["giro"]);
             $("#dropdownCategoria option[value=" + dataResult["categoriaId"] + "]").attr("selected", true);
-            $("PersonaJuridica").attr("checked", dataResult["personaJuridica"]);
+            if (dataResult["personaJuridica"]) {
+
+                $('.switchery').trigger('click');
+            }
             $("#Direccion").val(dataResult["direccion"]);
             $("#Codigo").val(dataResult["codigo"]);
         });

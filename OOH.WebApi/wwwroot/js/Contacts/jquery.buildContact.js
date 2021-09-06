@@ -25,7 +25,7 @@ function SwalCreateEdit(idcontacto) {
                     ClienteId: idCliente,
                     Nombres: $("#nombre").val(),
                     Apellidos: $("#apellido").val(),
-                    Rol: "1",
+                    Rol: $("#rol").val(),
                     Email: $("#email").val(),
                     Telefono: $("#telefono").val(),
                     Celular: $("#celular").val(),
@@ -57,10 +57,31 @@ function SwalCreateEdit(idcontacto) {
     } 
 }
 
+
+function editContact(idContacto) {
+    SwalCreateEdit(idContacto);
+    fns.CallGetAsync("api/contacts/contact", { Id: idContacto }, function (dataRquest) {
+        console.log(dataRquest);
+        $("#nombre").val(dataRquest["nombres"]);
+        $("#apellido").val(dataRquest["apellidos"]);
+        $("#email").val(dataRquest["email"]);
+        $("#telefono").val(dataRquest["telefono"]);
+        $("#celular").val(dataRquest["celular"]);
+        $("#idContacto").val(dataRquest["id"]);
+        $("#rol").val(dataRquest["rol"]);
+
+    });
+   
+
+}
+
 function HtmlCuerpoModal(idcontacto) {
 
     var html = `
     <div class="container">
+
+           <input class="form-control" id="idContacto" hidden />
+            
             <div class="col-md-12">
                 <label class="label-control">Nombre</label>
                 <input class="form-control" id="nombre"/>

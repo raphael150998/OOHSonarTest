@@ -59,7 +59,7 @@ namespace OOH.Data.Repos
             else
             {
                 param.Add("@Usuario", client.UsuarioId);
-                int post = PostData("Update [dbo].[clientes] set", true, param, false, ConectionnString).Result;
+                int post = PostData("update [dbo].[Clientes] set Codigo = @Codigo ,RazonSocial = @Razon ,NombreComercial = @NombreC, NRC = @NRC ,NIT= @NIT ,Giro = @Giro ,Email = @Email,Direccion = @Direccion,Telefono = @Telefono ,Celular = @Celular ,PersonaJuridica= @Pjuridica, CategoriaId = @CategoriaId, MunicipioId = @Municipio Where ClienteId = @id ", true, param, false, ConectionnString).Result;
                 return new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
             }
         }
