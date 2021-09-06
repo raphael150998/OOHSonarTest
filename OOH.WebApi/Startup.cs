@@ -29,19 +29,12 @@ namespace OOH.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IProveedorRepository, ProveedorRepository>();
-            services.AddControllersWithViews();
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    // Cookie settings
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-            //    options.LoginPath = "/Account/Login";
-            //    options.AccessDeniedPath = "/Account/AccessDenied";
-            //    options.SlidingExpiration = true;
-            //});
             services.AddHttpContextAccessor();
+            //services.AddScoped<IProveedorRepository, ProveedorRepository>();            
+            services.AddScoped<IWebUserHelper, WebUserHelper>();
+            services.AddScoped<IAdvertisingAgencyRepository, AdvertisingAgencyRepository>();
+            services.AddControllersWithViews();
+            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie();
         }

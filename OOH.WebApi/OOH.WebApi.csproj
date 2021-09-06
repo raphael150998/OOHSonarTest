@@ -31,6 +31,8 @@
   <ItemGroup>
     
     <Folder Include="PowerpointTemplate\" />
+    
+    <Folder Include="Views\Agencies\" />
 
   </ItemGroup>
   <ItemGroup>

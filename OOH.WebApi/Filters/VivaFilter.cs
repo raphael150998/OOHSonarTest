@@ -28,7 +28,7 @@ namespace OOH.WebApi.Filters
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             #region Authentication
-            if (!context.HttpContext.User.Identity.IsAuthenticated) context.Result = new RedirectToActionResult("Login", "Account", null);
+            if (!context.HttpContext.User.Identity.IsAuthenticated) { context.Result = new RedirectToActionResult("Login", "Account", null); return; }
             #endregion
 
             ClaimsPrincipal user = context.HttpContext.User;
