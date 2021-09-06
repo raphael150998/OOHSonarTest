@@ -1,0 +1,94 @@
+﻿@model OOH.WebApi.Models.Agency.AgencyVm
+
+    <style>
+        label.error, i.error {
+            color: tomato;
+        }
+
+        input.error, input.error:focus {
+            border-color: tomato;
+        }
+
+        i.error {
+            position: absolute;
+            top: 40px;
+            right: 25px;
+        }
+    </style>
+
+    <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmAgency" method="post">
+        <div class="card">
+            <div class="card-block">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-btn-outline-primary">Nuevo</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="row">
+                    <input type="hidden" class="form-control" asp-for="Id" />
+                    <div class="col-md-6">
+                        <label>Nombre de agencia</label>
+                        <input required type="text" class="form-control" asp-for="Name" />
+                        @*<span asp-validation-for="Name"></span>*@
+                    </div>
+                    <div class="col-md-6">
+                        <label>Comisión</label>
+                        <input required type="text" class="form-control" asp-for="Rate" />
+                        @*<span asp-validation-for="Rate"></span>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @section scripts{
+
+        <script>
+            $(function () {
+                $("#frmAgency").validate({
+                    rules: {
+                        Name: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        Name: {
+                            required: "Campo requerido bro"
+                        }
+                    },
+                    errorPlacement: function (error, element) {
+                        var placement = $(element).data('error');
+                        if (placement) {
+                            $(placement).append(`<i data-toggle="tooltip" data-placement="top" data-trigger="hover" title="${error.text()}" class="fas fa-exclamation-circle error"></i>`);
+                        } else {
+                            $(element).parent().append(`<i data-toggle="tooltip" data-placement="top" data-trigger="hover" title="${error.text()}" class="fas fa-exclamation-circle error"></i>`);
+                            //error.insertAfter(element);
+                        }
+                    },
+                    submitHandler: function (form) {
+                        var dataSend = $(form).serializeFormToJson();
+                        console.log(dataSend);
+                        fns.PostDataNoAsync("agencies/CreateUpdate", dataSend, function (data) {
+                            if (dataResult.state == false) {
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: dataResult["message"]
+                                })
+                            } else {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Logrado',
+
+                                })
+                            }
+                        })
+                        return false;
+                    }
+                });
+            })
+        </script>
+
+    }
