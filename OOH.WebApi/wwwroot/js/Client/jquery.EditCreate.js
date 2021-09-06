@@ -8,9 +8,29 @@ function LLenarTextBox() {
     var idCliente = $("#ClienteId").val();
    
     console.log(idCliente);
+    if (idCliente == 0) {
+        $("#addbtn").css("cursor", "no-drop");
+    }
     if (idCliente !=0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
             console.log(dataResult);
+            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
+           
+            $("#ClienteId").val(dataResult["clienteId"]);
+            $("#NombreComercial").val(dataResult["nombreComercial"]);
+            $("#dropdownMunicipio option[value=" + dataResult["municipioId"] + "]").attr("selected", true);
+            $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
+            $("#NRC").val(dataResult["nrc"]);
+            $("#RazonSocial").val(dataResult["razonSocial"]);
+            $("#NIT").val(dataResult["nit"]);
+            $("#Celular").val(dataResult["celular"]);
+            $("#Email").val(dataResult["email"]);
+            $("#Telefono").val(dataResult["telefono"]);
+            $("#Giro").val(dataResult["giro"]);
+            $("#dropdownCategoria option[value=" + dataResult["categoriaId"] + "]").attr("selected", true);
+            $("PersonaJuridica").attr("checked", dataResult["personaJuridica"]);
+            $("#Direccion").val(dataResult["direccion"]);
+            $("#Codigo").val(dataResult["codigo"]);
         });
     }
    
@@ -79,19 +99,23 @@ function PostData() {
         Codigo: $("#Codigo").val()
     }
     fns.PostDataAsync("api/client/CEdata", ObjetSend, function (dataResult) {
+        console.log(dataResult);
         if (dataResult["state"] == false) {
-        
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: dataResult["message"]
             })
         } else {
+
+            $("#ClienteId").val(dataResult["data"]);
+            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
+            $("#addbtn").css("cursor", "pointer");
             Swal.fire({
                 icon: 'success',
                 title: 'Logrado',
-              
             })
+
         }
         console.log(dataResult);
      });

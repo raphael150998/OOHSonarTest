@@ -26,6 +26,7 @@
 
 	<ItemGroup>
 	  <Content Remove="wwwroot\js\Agency\jquery.agency.js" />
+	  <Content Remove="wwwroot\js\Contacts\jquery.buildContact.js" />
 	  <Content Remove="wwwroot\js\Contacts\jquery.contacts.js" />
 	</ItemGroup>
 	

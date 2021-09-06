@@ -21,7 +21,6 @@ namespace OOH.Data.Repos
         {
 
             DynamicParameters param = new DynamicParameters();
-            param.Add("@id", collection.Id);
             param.Add("@Cliente", collection.ClienteId);
             param.Add("@Nombres", collection.Nombres);
             param.Add("@Apellidos", collection.Apellidos);
@@ -31,10 +30,11 @@ namespace OOH.Data.Repos
             param.Add("@Celular", collection.Celular);
             if (collection.Id == 0)
             {
-                return new ResultClass { data = PostData(@"Insert [dbo].[ClientesContactos] (Id,ClienteId,Nombres,Celular,Apellidos,Rol,Telefono,Email) Values(@id,@Cliente,@Nombres,@Celular,@Apellidos,@Rol,@Telefono,@Email)", true, param, false, ConectionnString).Result };
+                return new ResultClass { data = PostData(@"Insert [dbo].[ClientesContactos] (ClienteId,Nombres,Celular,Apellidos,Rol,Telefono,Email) Values(@Cliente,@Nombres,@Celular,@Apellidos,@Rol,@Telefono,@Email)", true, param, false, this.ConectionnString).Result };
             }
             else
             {
+                param.Add("@id", collection.Id);
                 return new ResultClass{data= PostData("Update [dbo].[clientes] set", true, param, false, ConectionnString).Result};
             }
         }
@@ -52,7 +52,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<ClientesContactos>> Select(string _Where = "")
         {
-            return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos]"+ _Where).Result.ToList();
+            return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] "+ _Where,false,null,this.ConectionnString).Result.ToList();
         }
     }
 }

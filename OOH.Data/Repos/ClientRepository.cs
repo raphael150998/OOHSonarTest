@@ -25,10 +25,14 @@ namespace OOH.Data.Repos
         }
         public async Task<ResultClass> AddOrUpdate(Clientes client)
         {
-            if (FilterData<Clientes>($"Select * from [dbo].[clientes] Where Codigo = '{client.Codigo}' ",false,null,this.ConectionnString).Result != null)
+            if (client.ClienteId == 0)
             {
-                return new ResultClass() { state = false, message="El codigo ya existe",data=1};
+                if (FilterData<Clientes>($"Select * from [dbo].[clientes] Where Codigo = '{client.Codigo}' ", false, null, this.ConectionnString).Result != null)
+                {
+                    return new ResultClass() { state = false, message = "El codigo ya existe", data = 1 };
+                }
             }
+            
             DynamicParameters param = new DynamicParameters();
             param.Add("@id", client.ClienteId);
             param.Add("@NombreC", client.NombreComercial);
@@ -44,10 +48,11 @@ namespace OOH.Data.Repos
             param.Add("@NRC", client.NRC);
             param.Add("@CategoriaId", client.CategoriaId);
             param.Add("@Activo", true);
+            param.Add("@Municipio", client.MunicipioId);
             if (client.ClienteId == 0)
             {
                 param.Add("@Usuario", this.LogUser);
-                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId) Values (@NombreC,@Razon,@Pjuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@Usuario,@CategoriaId)", true, param, false, ConectionnString).Result;
+                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId,MunicipioId) Values (@NombreC,@Razon,@Pjuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@Usuario,@CategoriaId,@Municipio)", true, param, false, ConectionnString).Result;
                
                 return new ResultClass() { data = post, state = post != 0 ?true:false, message = post != 0? "Exito":"No se a podido guardar" };
             }
