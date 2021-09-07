@@ -1,88 +1,56 @@
 ﻿@model OOH.WebApi.Models.Agency.AgencyVm
 
-    <style>
-        label.error, i.error {
-            color: tomato;
-        }
-
-        input.error, input.error:focus {
-            border-color: tomato;
-        }
-
-        i.error {
-            position: absolute;
-            top: 40px;
-            right: 25px;
-        }
-    </style>
-
-    <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmAgency" method="post">
-        <div class="card">
-            <div class="card-block">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-btn-outline-primary">Nuevo</button>
-            </div>
+<form asp-controller="Agencies" asp-action="CreateUpdate" id="frmAgency" method="post">
+    <div class="card">
+        <div class="card-block">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-btn-outline-primary">Nuevo</button>
         </div>
-        <div class="card">
-            <div class="card-block">
-                <div class="row">
-                    <input type="hidden" class="form-control" asp-for="Id" />
-                    <div class="col-md-6">
-                        <label>Nombre de agencia</label>
-                        <input required type="text" class="form-control" asp-for="Name" />
-                        @*<span asp-validation-for="Name"></span>*@
-                    </div>
-                    <div class="col-md-6">
-                        <label>Comisión</label>
-                        <input required type="text" class="form-control" asp-for="Rate" />
-                        @*<span asp-validation-for="Rate"></span>*@
-                    </div>
+    </div>
+    <div class="card">
+        <div class="card-block">
+            <div class="row">
+                <input type="hidden" class="form-control" asp-for="Id" />
+                <div class="col-md-6">
+                    <label>Nombre de agencia</label>
+                    <input required type="text" class="form-control" asp-for="Name" />
+                    @*<span asp-validation-for="Name"></span>*@
+                </div>
+                <div class="col-md-6">
+                    <label>Comisión</label>
+                    <input required type="text" class="form-control" asp-for="Rate" />
+                    @*<span asp-validation-for="Rate"></span>*@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 
-    @section scripts{
+@section scripts{
 
-        <script>
-
-
-
-            $(function () {
-                Validate.Form("#frmAgency", {
-                    rules: {
-                        Name: {
-                            required: true
-                        }
+    <script>
+        $(function () {
+            var result = Validate.Form("#frmAgency", "agencies/CreateUpdate", {
+                rules: {
+                    Name: {
+                        required: true
                     },
-                    messages: {
-                        Name: {
-                            required: "Campo requerido bro"
-                        }
-                    },
-                    submitHandler: function (form) {
-                        var dataSend = $(form).serializeFormToJson();
-                        console.log(dataSend);
-                        fns.PostDataNoAsync("agencies/CreateUpdate", dataSend, function (data) {
-                            if (dataResult.state == false) {
-
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: dataResult["message"]
-                                })
-                            } else {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Logrado',
-
-                                })
-                            }
-                        })
-                        return false;
+                    Rate: {
+                        required: true
                     }
-                });
-            });
-        </script>
+                },
+                messages: {
+                    Name: {
+                        required: "Debes ingresar un nombre"
+                    },
+                    Rate: {
+                        required: "La comisión es requerida"
+                    }
+                }
+            }, function (data) {
+                $("#Id").val(data.data);
+            })
+        });
+    </script>
 
-    }
+}
