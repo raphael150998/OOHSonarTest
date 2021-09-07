@@ -47,9 +47,8 @@
                         })
                     }
                 })
-                return false;
-               
             });
+            return false;
         }
         $(identify).validate(config);
     }

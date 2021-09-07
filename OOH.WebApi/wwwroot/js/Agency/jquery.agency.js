@@ -13,7 +13,7 @@ $().ready(function ($) {
         $("#exampleModalCenter").modal("show");
     });
 
-    //var obj = { "Id": 0, "Name": "prueba data send 2", "Rate": 15 };
+    var obj = { "Id": 0, "Name": "prueba data send 3", "Rate": 15 };
 
     Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
         rules: {
@@ -35,7 +35,7 @@ $().ready(function ($) {
     }, function (data) {
         $("#exampleModalCenter").modal("hide");
         refresh();
-    });
+    }, obj);
 });
 
 //Llamada a la API de clientes para el llenado de la Dattable
