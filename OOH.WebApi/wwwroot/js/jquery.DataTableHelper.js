@@ -15,7 +15,6 @@ var DataTableHelper = {
                     i = i + 1;
                   
                     var title = $(this).text();
-                    console.log(title);
                     $(this).removeAttr("class");
                     $(this).removeAttr("aria-label");
                     $(this).removeAttr("aria-sort");
@@ -57,7 +56,6 @@ var DataTableHelper = {
 
                     //var td = $(this);
                     //td = td[0];
-                    console.log(row.data());
                     if (row.child.isShown()) {
                         // This row is already open - close it
                         row.child.hide();

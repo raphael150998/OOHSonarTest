@@ -29,7 +29,7 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost("CreateUpdate")]
-        public async Task<IActionResult> CreateUpdate([FromBody]AgencyVm model)
+        public async Task<IActionResult> CreateUpdate([FromBody] AgencyVm model)
         {
             ResultClass response = new ResultClass();
 
@@ -62,6 +62,12 @@ namespace OOH.WebApi.ApiControllers
             }
 
             return Ok(response);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<IActionResult> Get([FromQuery] int id)
+        {
+            return Ok(await _repo.Find(id));
         }
     }
 }

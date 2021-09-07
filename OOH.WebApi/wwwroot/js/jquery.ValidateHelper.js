@@ -1,6 +1,6 @@
 ﻿var Validate = {
 
-    Form: function (identify, url, config, callback) {
+    Form: function (identify, url, config, callback, dataSend = null) {
 
         var rt;
 
@@ -13,10 +13,23 @@
                 //error.insertAfter(element);
             }
         };
+
+        //config.highlight = function (element) {
+
+        //};
+
+        //config.success = function (element) {
+
+        //    console.log($(element).closest("i.error"));
+        //    //$(element).parents().find($("i.error")[0]).remove();
+        //};
+
         config.submitHandler = function (form) {
-            var dataSend = $(form).serializeFormToJson();
+
+            dataSend = (dataSend == null || dataSend == undefined) ? $(form).serializeFormToJson() : JSON.stringify(dataSend);
             console.log(dataSend);
             fns.PostDataNoAsync(url, dataSend, function (dataResult) {
+                dataSend = null;
                 if (dataResult.state == false) {
                     Swal.fire({
                         icon: 'error',

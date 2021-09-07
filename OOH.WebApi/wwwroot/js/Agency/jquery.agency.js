@@ -1,6 +1,41 @@
 ﻿//Document Ready
 $().ready(function ($) {
+
     BuildDatatable();
+
+    $("#exampleModalCenter").modal({
+        backdrop: "static",
+        keyboard: false,
+        show: false
+    });
+
+    $("#btnAdd").click(function () {
+        $("#exampleModalCenter").modal("show");
+    });
+
+    //var obj = { "Id": 0, "Name": "prueba data send 2", "Rate": 15 };
+
+    Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
+        rules: {
+            Name: {
+                required: true
+            },
+            Rate: {
+                required: true
+            }
+        },
+        messages: {
+            Name: {
+                required: "Debes ingresar un nombre"
+            },
+            Rate: {
+                required: "La comisión es requerida"
+            }
+        }
+    }, function (data) {
+        $("#exampleModalCenter").modal("hide");
+        refresh();
+    });
 });
 
 //Llamada a la API de clientes para el llenado de la Dattable
@@ -26,7 +61,7 @@ function BuildDatatable() {
                 render: function (data, type, full, meta) {
                     return `<a href="/Agencies/CreateUpdate/${data}"><i class="fa fa-pencil-square btnDatatable text-primary"></i></a>
                             <i class="fa fa-trash btnDatatable text-danger"></i>`;
-                    
+
                 }
             },
             {
