@@ -9,7 +9,6 @@ function SwalCreateEdit(idcontacto) {
         Swal.fire({
             title: "<div>Agregar Contacto</div>",
             html: HtmlCuerpoModal(idcontacto),
-            showCloseButton: true,
             showConfirmButton: true,
             allowOutsideClick: false,
             focusConfirm: false,
@@ -34,12 +33,12 @@ function SwalCreateEdit(idcontacto) {
                 fns.PostDataAsync("api/contacts/CEcontact", objetoEnviar, function (dataRequest) {
 
                     if (dataRequest["state"] != false) {
-
+                        LLenarDatatable();
                         Swal.fire(
                             'Logrado!',
                             'Se a guardado con exito',
                             'success'
-                        )
+                        );
 
                     } else {
 
