@@ -32,34 +32,20 @@ namespace OOH.Data.Repos
                     return new ResultClass() { state = false, message = "El codigo ya existe", data = 1 };
                 }
             }
+            client.UsuarioId = int.Parse(this.LogUser);
+            DynamicParameters param = new DynamicParameters(client);
             
-            DynamicParameters param = new DynamicParameters();
-            param.Add("@id", client.ClienteId);
-            param.Add("@NombreC", client.NombreComercial);
-            param.Add("@Razon", client.RazonSocial);
-            param.Add("@Pjuridica", client.PersonaJuridica);
-            param.Add("@Celular", client.Celular);
-            param.Add("@Telefono", client.Telefono);
-            param.Add("@Codigo", client.Codigo);
-            param.Add("@Direccion", client.Direccion);
-            param.Add("@Email", client.Email);
-            param.Add("@Giro", client.Giro);
-            param.Add("@NIT", client.NIT);
-            param.Add("@NRC", client.NRC);
-            param.Add("@CategoriaId", client.CategoriaId);
-            param.Add("@Activo", true);
-            param.Add("@Municipio", client.MunicipioId);
             if (client.ClienteId == 0)
             {
-                param.Add("@Usuario", this.LogUser);
-                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId,MunicipioId) Values (@NombreC,@Razon,@Pjuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@Usuario,@CategoriaId,@Municipio)", true, param, false, ConectionnString).Result;
+                
+                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId,MunicipioId) Values (@NombreComercial,@RazonSocial,@PersonaJuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@UsuarioId,@CategoriaId,@MunicipioId)", true, param, false, ConectionnString).Result;
                
                 return new ResultClass() { data = post, state = post != 0 ?true:false, message = post != 0? "Exito":"No se a podido guardar" };
             }
             else
             {
-                param.Add("@Usuario", client.UsuarioId);
-                int post = PostData("update [dbo].[Clientes] set Codigo = @Codigo ,RazonSocial = @Razon ,NombreComercial = @NombreC, NRC = @NRC ,NIT= @NIT ,Giro = @Giro ,Email = @Email,Direccion = @Direccion,Telefono = @Telefono ,Celular = @Celular ,PersonaJuridica= @Pjuridica, CategoriaId = @CategoriaId, MunicipioId = @Municipio Where ClienteId = @id ", true, param, false, ConectionnString).Result;
+               
+                int post = PostData("update [dbo].[Clientes] set Codigo = @Codigo ,RazonSocial = @RazonSocial ,NombreComercial = @NombreComercial, NRC = @NRC ,NIT= @NIT ,Giro = @Giro ,Email = @Email,Direccion = @Direccion,Telefono = @Telefono ,Celular = @Celular ,PersonaJuridica= @PersonaJuridica, CategoriaId = @CategoriaId, MunicipioId = @MunicipioId Where ClienteId = @ClienteId ", true, param, false, ConectionnString).Result;
                 return new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
             }
         }

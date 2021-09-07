@@ -2,6 +2,48 @@
     DropDownListMunicipio();
     DropDownListCategoria();
     LLenarTextBox();
+
+    Validate.Form("#formClient", {
+        rules: {
+            NombreComercial: {
+                required: true
+            }
+        },
+        messages: {
+            Name: {
+                required: "Campo requerido bro"
+            }
+        },
+        submitHandler: function (form) {
+            SweetAlert.ConfirmForm(function () {
+                var dataSend = $(form).serializeFormToJson();
+                console.log(dataSend);
+                fns.PostDataAsync("api/client/CEdata", dataSend, function (dataResult) {
+                    console.log(dataResult);
+                    if (dataResult["state"] == false) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: dataResult["message"]
+                        })
+                    } else {
+
+                        $("#ClienteId").val(dataResult["data"]);
+                        $("#addbtn").removeClass("text-secondary").addClass("text-primary");
+                        $("#addbtn").css("cursor", "pointer");
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logrado',
+                        })
+
+                    }
+                    console.log(dataResult);
+                });
+                return false;
+            });
+        
+        }
+    });
 });
 
 function LLenarTextBox() {
@@ -41,7 +83,7 @@ function LLenarTextBox() {
 function DropDownListMunicipio() {
 
     fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single" id="dropdownMunicipio">`
+        let select = `<select class="js-example-basic-single" id="dropdownMunicipio" name="MunicipioId">`
         var departamento = 0;
         dataResult.forEach(mun => {
 
@@ -67,7 +109,7 @@ function DropDownListMunicipio() {
 function DropDownListCategoria() {
 
     fns.CallGetAsync("api/category/call", null, function (dataResult) {
-        let select = `<select class="form-control" id="dropdownCategoria">`
+        let select = `<select class="form-control" id="dropdownCategoria" name="CategoriaId" >`
         
         dataResult.forEach(cat => {          
             let option = `<option value="` + cat.categoriaId + `"> ` + cat.nombre + `</option> `;
@@ -81,6 +123,7 @@ function DropDownListCategoria() {
     });
 
 }
+
 
 function PostData() {
 
@@ -101,33 +144,9 @@ function PostData() {
         Direccion: $("#Direccion").val(),
         Codigo: $("#Codigo").val()
     }
-    fns.PostDataAsync("api/client/CEdata", ObjetSend, function (dataResult) {
-        console.log(dataResult);
-        if (dataResult["state"] == false) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: dataResult["message"]
-            })
-        } else {
-
-            $("#ClienteId").val(dataResult["data"]);
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
-            $("#addbtn").css("cursor", "pointer");
-            Swal.fire({
-                icon: 'success',
-                title: 'Logrado',
-            })
-
-        }
-        console.log(dataResult);
-     });
-
-
-
 }
-$("#BtnSubmit").click(function () {
+//$("#BtnSubmit").click(function () {
+//    $("#formClient").submit();
+//    //PostData();
 
-    PostData();
-
-});
+//});
