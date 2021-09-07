@@ -14,27 +14,29 @@
             }
         };
         config.submitHandler = function (form) {
-            var dataSend = $(form).serializeFormToJson();
-            console.log(dataSend);
-            fns.PostDataNoAsync(url, dataSend, function (dataResult) {
-                if (dataResult.state == false) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: dataResult.message
-                    });
-                } else {
-                    if (callback != undefined) {
-                        callback(dataResult);
-                    }
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Logrado',
+            SweetAlert.ConfirmForm(function () {
+                var dataSend = $(form).serializeFormToJson();
+                console.log(dataSend);
+                fns.PostDataNoAsync(url, dataSend, function (dataResult) {
+                    if (dataResult.state == false) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: dataResult.message
+                        });
+                    } else {
+                        if (callback != undefined) {
+                            callback(dataResult);
+                        }
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logrado',
 
-                    })
-                }
-            })
-            return false;
+                        })
+                    }
+                })
+                return false;
+            });
         }
         $(identify).validate(config);
     }
