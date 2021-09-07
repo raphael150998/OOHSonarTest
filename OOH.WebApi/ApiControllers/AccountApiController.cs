@@ -32,7 +32,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/login/Validate")]
-        public async Task<ResultClass> Validate([FromForm]UserLoginDto user)
+        public async Task<ResultClass> Validate([FromBody]UserLoginDto user)
         {
             var Login = _Repository.ValidarLogin(user.Login, user.Pass);
             if (Login.state)

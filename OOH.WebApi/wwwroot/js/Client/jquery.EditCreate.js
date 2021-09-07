@@ -3,7 +3,7 @@
     DropDownListCategoria();
     LLenarTextBox();
 
-    Validate.Form("#formClient", {
+    Validate.Form("#formClient", "api/client/CEdata" ,{
         rules: {
             NombreComercial: {
                 required: true
@@ -13,36 +13,8 @@
             Name: {
                 required: "Campo requerido bro"
             }
-        },
-        submitHandler: function (form) {
-            SweetAlert.ConfirmForm(function () {
-                var dataSend = $(form).serializeFormToJson();
-                console.log(dataSend);
-                fns.PostDataAsync("api/client/CEdata", dataSend, function (dataResult) {
-                    console.log(dataResult);
-                    if (dataResult["state"] == false) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: dataResult["message"]
-                        })
-                    } else {
-
-                        $("#ClienteId").val(dataResult["data"]);
-                        $("#addbtn").removeClass("text-secondary").addClass("text-primary");
-                        $("#addbtn").css("cursor", "pointer");
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Logrado',
-                        })
-
-                    }
-                    console.log(dataResult);
-                });
-                return false;
-            });
-        
         }
+       
     });
 });
 

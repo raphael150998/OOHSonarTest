@@ -25,7 +25,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/contacts/CEcontact")]
-        public async Task<ResultClass> CreateEdit([FromForm] ClientesContactos contacto)
+        public async Task<ResultClass> CreateEdit([FromBody] ClientesContactos contacto)
         {
             _repos = new ContactsRepository(txtConectionString());
             return _repos.AddOrUpdate(contacto).Result;

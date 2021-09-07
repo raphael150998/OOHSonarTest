@@ -38,7 +38,7 @@ namespace OOH.WebApi.ApiControllers
         
         [HttpPost]
         [Route("api/client/CEdata")]
-        public async Task<ResultClass> CreateEdit([FromForm] Clientes clientes)
+        public async Task<ResultClass> CreateEdit([FromBody] Clientes clientes)
         {
             _repos = new ClientRepository(txtConectionString(), IdUserLogin());
            

@@ -25,29 +25,31 @@
         //};
 
         config.submitHandler = function (form) {
+            SweetAlert.ConfirmForm(function () {
+                dataSend = (dataSend == null || dataSend == undefined) ? $(form).serializeFormToJson() : JSON.stringify(dataSend);
+                console.log(dataSend);
+                fns.PostDataNoAsync(url, dataSend, function (dataResult) {
+                    dataSend = null;
+                    if (dataResult.state == false) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: dataResult.message
+                        });
+                    } else {
+                        if (callback != undefined) {
+                            callback(dataResult);
+                        }
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logrado',
 
-            dataSend = (dataSend == null || dataSend == undefined) ? $(form).serializeFormToJson() : JSON.stringify(dataSend);
-            console.log(dataSend);
-            fns.PostDataNoAsync(url, dataSend, function (dataResult) {
-                dataSend = null;
-                if (dataResult.state == false) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: dataResult.message
-                    });
-                } else {
-                    if (callback != undefined) {
-                        callback(dataResult);
+                        })
                     }
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Logrado',
-
-                    })
-                }
-            })
-            return false;
+                })
+                return false;
+               
+            });
         }
         $(identify).validate(config);
     }
