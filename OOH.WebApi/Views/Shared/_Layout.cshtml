@@ -950,7 +950,7 @@
                     }
                     rt[this.name].push(this.value || '');
                 } else {
-                    if (isNaN(this.value)) {
+                    if (isNaN(parseFloat(this.value))) {
                         rt[this.name] = this.value || '';
                     }
                     else {
