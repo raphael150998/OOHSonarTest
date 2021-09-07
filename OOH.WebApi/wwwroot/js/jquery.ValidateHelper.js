@@ -15,6 +15,7 @@
         };
         config.submitHandler = function (form) {
             var dataSend = $(form).serializeFormToJson();
+            console.log(dataSend);
             fns.PostDataNoAsync(url, dataSend, function (dataResult) {
                 if (dataResult.state == false) {
                     Swal.fire({

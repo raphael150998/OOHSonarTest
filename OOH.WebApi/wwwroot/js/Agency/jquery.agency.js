@@ -6,7 +6,7 @@ $().ready(function ($) {
 //Llamada a la API de clientes para el llenado de la Dattable
 function GetAgencies() {
 
-    fns.CallGetAsync("Agencies/GetList", null, function (dataResponse) {
+    fns.CallGetAsync("api/agency/GetList", null, function (dataResponse) {
         $("#agencyTable").DataTable().clear();
         $("#agencyTable").DataTable().rows.add(dataResponse).draw();
     });
