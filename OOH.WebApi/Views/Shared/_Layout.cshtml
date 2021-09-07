@@ -54,6 +54,20 @@
             font-size: 30px;
             position: center;
         }
+
+        label.error, i.error {
+            color: tomato;
+        }
+
+        input.error, input.error:focus {
+            border-color: tomato;
+        }
+
+        i.error {
+            position: absolute;
+            top: 40px;
+            right: 25px;
+        }
     </style>
 </head>
 
@@ -927,19 +941,25 @@
     <script src="~/js/jquery.SweetAlertHelper.js"></script>
     <script>
         $.fn.serializeFormToJson = function () {
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function () {
-                if (o[this.name]) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
+            var rt = {};
+            var formData = this.serializeArray();
+            $.each(formData, function () {
+                if (rt[this.name]) {
+                    if (!rt[this.name].push) {
+                        rt[this.name] = [rt[this.name]];
                     }
-                    o[this.name].push(this.value || '');
+                    rt[this.name].push(this.value || '');
                 } else {
-                    o[this.name] = this.value || '';
+                    if (isNaN(this.value)) {
+                        rt[this.name] = this.value || '';
+                    }
+                    else {
+                        rt[this.name] = parseFloat(this.value) || 0;
+                    }
+                    
                 }
             });
-            return o;
+            return JSON.stringify(rt);
         };
     </script>
     @RenderSection("scripts", required: false)

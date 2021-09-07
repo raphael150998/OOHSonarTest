@@ -1,6 +1,8 @@
 ﻿var Validate = {
 
-    Form: function (identify, config) {
+    Form: function (identify, url, config, callback) {
+
+        var rt;
 
         config.errorPlacement = function (error, element) {
             var placement = $(element).data('error');
@@ -11,7 +13,29 @@
                 //error.insertAfter(element);
             }
         };
-        $(identify).validate(config);
+        config.submitHandler = function (form) {
+            var dataSend = $(form).serializeFormToJson();
+            console.log(dataSend);
+            fns.PostDataNoAsync(url, dataSend, function (dataResult) {
+                if (dataResult.state == false) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: dataResult.message
+                    });
+                } else {
+                    if (callback != undefined) {
+                        callback(dataResult);
+                    }
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logrado',
 
+                    })
+                }
+            })
+            return false;
+        }
+        $(identify).validate(config);
     }
 }

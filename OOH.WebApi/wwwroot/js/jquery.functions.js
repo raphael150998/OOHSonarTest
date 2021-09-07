@@ -8,7 +8,8 @@ var fns = {
             type: "POST",
             data: data,
             async: false,
-            dataType: "json"
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
         }).done(function (data) {
             rt = data;
         }).fail(function (xhr, textStatus, errorThrown) {
@@ -27,7 +28,8 @@ var fns = {
             type: "POST",
             data: data,
             async: true,
-            dataType: "json"
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
         }).done(function (data) {
             rt = data;
             $.unblockUI();
@@ -47,7 +49,8 @@ var fns = {
             url: ruta,
             type: "POST",
             data: data,
-            dataType: "json"
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
         }).done(function (data) {
             rt = data;
             $.unblockUI();
@@ -66,7 +69,8 @@ var fns = {
             url: ruta,
             type: "GET",
             data: data,
-            async: false
+            async: false,
+            contentType: "application/json; charset=utf-8"
         }).done(function (data) {
             rt = data;
         }).fail(function (xhr, textStatus, errorThrown) {
@@ -83,7 +87,8 @@ var fns = {
             url: ruta,
             type: "GET",
             data: data,
-            async: true
+            async: true,
+            contentType: "application/json; charset=utf-8"
         }).done(function (data) {
             $.unblockUI();
             rt = data;
