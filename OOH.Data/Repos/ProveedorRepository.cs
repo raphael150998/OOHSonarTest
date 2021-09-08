@@ -14,6 +14,10 @@ namespace OOH.Data.Repos
     /// </summary>
     public class ProveedorRepository : OOHContext, IProveedorRepository
     {
+        public ProveedorRepository(IWebUserHelper userHelper) : base(userHelper)
+        {
+        }
+
         public async Task<int> Create(Proveedores proveedor)
         {
             #region sql

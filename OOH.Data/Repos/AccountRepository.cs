@@ -2,6 +2,7 @@
 using OOH.Data.Dtos.Usuario;
 using OOH.Data.Helpers;
 using OOH.Data.Herlpers;
+using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,12 @@ using System.Text;
 
 namespace OOH.Data.Repos
 {
-    public class AccountRepository
+    public class AccountRepository : OOHContext
     {
-        private static OOHContext db = new OOHContext();
+        public AccountRepository(IWebUserHelper userHelper) : base(userHelper)
+        {
+        }
+
         public ResultClass ValidarLogin(string Login, string Password) {
             try
             {
@@ -26,16 +30,16 @@ namespace OOH.Data.Repos
                 parameters.Add("@Login", Login);
                 parameters.Add("@Pass", EncryptClass.EncripTar(Password.Trim()));
 
-                var user = db.FilterData<Usuarios>("SP_Login", true, parameters);
+                var user = FilterData<Usuarios>("SP_Login", true, parameters);
                 if (user.Result == null)
                 {
 
                     return new ResultClass() { message = "El usuario no se encuentra registrado o esta pendiente de validacion", state = false };
                 }
-                Empresa empresa = db.FilterData<Empresa>("Select * from dbo.Empresa Where EmpresaId = " +user.Result.EmpresaId).Result;
+                Empresa empresa = FilterData<Empresa>("Select * from dbo.Empresa Where EmpresaId = " +user.Result.EmpresaId).Result;
 
                 string LstPermisosQuery = string.Format("SELECT * FROM UsuariosPermisos WHERE (PerfilId = {0}) AND (PlataformaId = 1) OR (PlataformaId = 2)", user.Result.PerfilId);
-                var ListaPermisos = db.SelectData<UsuariosPermisos>(LstPermisosQuery,false,null,empresa.ConnectionString);
+                var ListaPermisos = SelectData<UsuariosPermisos>(LstPermisosQuery,false,null);
 
                 UserPermisoDto userPermiso = new UserPermisoDto() { User = user.Result, Permisos = ListaPermisos.Result, StringConecction = empresa.ConnectionString };
 
@@ -65,7 +69,7 @@ namespace OOH.Data.Repos
             parameters.Add("@empresa", 1);
             parameters.Add("@idioma", 1);
             parameters.Add("@username", registro.Username);
-            var success = db.PostData("SP_Register", true, parameters,true);
+            var success = PostData("SP_Register", true, parameters,true);
             if (success.Result == 0)
             {
                 return new ResultClass() { data = 1, state = false, message = "Su usuario no se logro guardar " };

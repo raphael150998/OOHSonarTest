@@ -12,5 +12,11 @@ namespace OOH.Data.Interfaces
         /// </summary>
         /// <returns></returns>
         string GetUserConnectionString();
+
+        /// <summary>
+        /// Obtiene el id del usuario logueado en caso de que exista
+        /// </summary>
+        /// <returns></returns>
+        int GetUserId();
     }
 }

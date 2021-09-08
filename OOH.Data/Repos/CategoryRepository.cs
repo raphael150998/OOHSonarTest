@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class CategoryRepository : OOHContext, IActionRepository<ClientesCategorias>
+    public class CategoryRepository : OOHContext, IBaseRepository<ClientesCategorias>
     {
-        public string ConectionnString { get; set; }
-        public CategoryRepository(string _stringcontection)
+        public CategoryRepository(IWebUserHelper userHelper) : base(userHelper)
         {
-            this.ConectionnString = _stringcontection;
         }
+
         public Task<ResultClass> AddOrUpdate(ClientesCategorias collection)
         {
             throw new NotImplementedException();
@@ -33,7 +32,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<ClientesCategorias>> Select(string _Where = "")
         {
-            return SelectData<ClientesCategorias>("Select * from [dbo].[ClientesCategorias] "+ _Where,false,null,this.ConectionnString).Result.ToList();
+            return SelectData<ClientesCategorias>("Select * from [dbo].[ClientesCategorias] "+ _Where,false,null).Result.ToList();
         }
     }
 }

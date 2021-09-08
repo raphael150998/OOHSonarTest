@@ -23,5 +23,12 @@ namespace OOH.Data.Repos
 
             return user.Claims.Where(x => x.Type == "Cs").FirstOrDefault().Value;
         }
+
+        public int GetUserId()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+
+            return int.Parse(user.Claims.Where(x => x.Type == "Id").FirstOrDefault().Value);
+        }
     }
 }

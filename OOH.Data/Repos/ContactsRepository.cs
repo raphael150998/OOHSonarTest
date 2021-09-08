@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class ContactsRepository : OOHContext, IActionRepository<ClientesContactos>
+    public class ContactsRepository : OOHContext, IBaseRepository<ClientesContactos>
     {
         public string ConectionnString { get; set; }
         public ContactsRepository(string _stringcontection)

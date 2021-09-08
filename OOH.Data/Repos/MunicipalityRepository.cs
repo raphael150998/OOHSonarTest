@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class MunicipalityRepository : OOHContext, IActionRepository<Municipios>
+    public class MunicipalityRepository : OOHContext, IBaseRepository<Municipios>
     {
         public string ConectionnString { get; set; }
         public MunicipalityRepository(string _stringcontection)
