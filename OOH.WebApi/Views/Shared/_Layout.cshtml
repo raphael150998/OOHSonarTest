@@ -953,6 +953,13 @@
                 });
             });
             console.log(typeInfo);
+            var $radio = $('input[type=radio],input[type=checkbox]', this);
+            $.each($radio, function () {
+                if (!rt.hasOwnProperty(this.name)) {
+                    rt[this.name] = false;
+                }
+            });
+            console.log(rt);
             $.each(formData, function () {
                 if (rt[this.name]) {
                     if (!rt[this.name].push) {
