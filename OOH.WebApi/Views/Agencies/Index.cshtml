@@ -2,7 +2,7 @@
     <div class="card">
 
         <div class="card-header">
-            <a href="@Url.Action("CreateUpdate","Agencies")" class="btn btn-primary"> <i class="fa fa-pencil-square-o"></i>Agregar Agencia</a>
+            <button class="btn btn-primary" id="btnAdd"> <i class="fa fa-pencil-square-o"></i>Agregar Agencia</button>
             <button class="btn btn-primary btn-outline-primary" onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
         </div>
     </div>
@@ -26,4 +26,49 @@
     </div>
 </div>
 
-<script src="~/js/Agency/jquery.agency.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmAgency" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitle">Agregando nueva agencia</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" class="form-control number" name="Id" value="0" />
+                        <div class="col-md-6">
+                            <label>Nombre de agencia</label>
+                            <input type="text" class="form-control" name="Name" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Comisión</label>
+                            <input type="text" class="form-control number" name="Rate" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Nombre de agencia</label>
+                            <select name="select3" class="form-control number">
+                                <option value="8">sdfdsf</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Comisión</label>
+                            <textarea name="text222" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/Agency/jquery.agency.js"></script>
+}
+
+

@@ -569,7 +569,7 @@ h6 {
       Modal css start
 ==========================  **/
 .modal {
-  z-index: 99999999999;
+  z-index: 1041;
 }
 
 .bd-example .modal {

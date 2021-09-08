@@ -14,12 +14,10 @@
                 <div class="col-md-6">
                     <label>Nombre de agencia</label>
                     <input type="text" class="form-control" asp-for="Name" />
-                    @*<span asp-validation-for="Name"></span>*@
                 </div>
                 <div class="col-md-6">
                     <label>Comisión</label>
                     <input type="text" class="form-control" asp-for="Rate" />
-                    @*<span asp-validation-for="Rate"></span>*@
                 </div>
             </div>
         </div>
@@ -30,26 +28,7 @@
 
     <script>
         $(function () {
-            var result = Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
-                rules: {
-                    Name: {
-                        required: true
-                    },
-                    Rate: {
-                        required: true
-                    }
-                },
-                messages: {
-                    Name: {
-                        required: "Debes ingresar un nombre"
-                    },
-                    Rate: {
-                        required: "La comisión es requerida"
-                    }
-                }
-            }, function (data) {
-                $("#Id").val(data.data);
-            })
+            
         });
     </script>
 

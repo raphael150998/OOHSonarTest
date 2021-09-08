@@ -942,7 +942,17 @@
     <script>
         $.fn.serializeFormToJson = function () {
             var rt = {};
+            var typeInfo = [];
             var formData = this.serializeArray();
+            this.find('input,select,textarea').each((i, value) => {
+                var type = $(value).hasClass("number") ? "number" : "text";
+                var name = $(value).attr("name");
+                typeInfo.push({
+                    type: type,
+                    name: name
+                });
+            });
+            console.log(typeInfo);
             $.each(formData, function () {
                 if (rt[this.name]) {
                     if (!rt[this.name].push) {
@@ -950,13 +960,8 @@
                     }
                     rt[this.name].push(this.value || '');
                 } else {
-                    if (isNaN(parseFloat(this.value))) {
-                        rt[this.name] = this.value || '';
-                    }
-                    else {
-                        rt[this.name] = parseFloat(this.value) || 0;
-                    }
-                    
+                    if (typeInfo.some(x => x.name == this.name && x.type == "number")) rt[this.name] = parseFloat(this.value) || 0;
+                    else rt[this.name] = this.value || '';
                 }
             });
             return JSON.stringify(rt);

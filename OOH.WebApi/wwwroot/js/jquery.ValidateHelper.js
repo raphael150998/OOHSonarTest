@@ -1,6 +1,6 @@
 ﻿var Validate = {
 
-    Form: function (identify, url, config, callback) {
+    Form: function (identify, url, config, callback, dataSend = null) {
 
         var rt;
 
@@ -13,11 +13,17 @@
                 //error.insertAfter(element);
             }
         };
+
+        config.success = function (error, element) {
+            $(element).parent().find($("i.error")).remove();
+        };
+
         config.submitHandler = function (form) {
             SweetAlert.ConfirmForm(function () {
-                var dataSend = $(form).serializeFormToJson();
+                dataSend = (dataSend == null || dataSend == undefined) ? $(form).serializeFormToJson() : JSON.stringify(dataSend);
                 console.log(dataSend);
                 fns.PostDataNoAsync(url, dataSend, function (dataResult) {
+                    dataSend = null;
                     if (dataResult.state == false) {
                         Swal.fire({
                             icon: 'error',
@@ -35,8 +41,8 @@
                         })
                     }
                 })
-                return false;
-            });
+            }, false);
+            return false;
         }
         $(identify).validate(config);
     }
