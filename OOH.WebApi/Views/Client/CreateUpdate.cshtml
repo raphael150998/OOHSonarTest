@@ -24,7 +24,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="col-md-2" hidden>
-                        <input asp-for="ClienteId" class="form-control" readonly />
+                        <input asp-for="ClienteId" class="form-control number" readonly />
                     </div>
                     <div class="col-md-3">
                         <label asp-for="Codigo" class="control-label"></label>
@@ -38,7 +38,10 @@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Municipios</label>
-                        <input  asp-for="MunicipioId" hidden/>
+                        <div id="municipioRemove">
+
+                            <input asp-for="MunicipioId" hidden />
+                        </div>
                         <div id="divMunicipio"></div>
                     </div>
                     <div class="col-md-3">
@@ -78,7 +81,9 @@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Categoria</label>
-                       <input asp-for="CategoriaId" hidden />
+                        <div id="categoriaRemove">
+                            <input asp-for="CategoriaId" hidden />
+                        </div>
                         <div id="divCategoria">
 
                         </div>
@@ -120,7 +125,7 @@
 
         <!-- Row start -->
         <div class="sub-title">
-            <i class="fa fa-plus-square text-secondary" id="addbtn" onclick="SwalCreateEdit(0)" style="font-size:25px"></i>
+            <i class="fa fa-plus-square text-secondary" id="addbtn" onclick="editContact(0)" style="font-size:25px"></i>
         </div>
         <div class="row">
             <div class="col-lg-12 col-xl-12">
@@ -172,6 +177,59 @@
     </div>
 
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="formContact" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitle">Contactos</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <input class="form-control" id="idContacto" hidden />
+                        <div class="col-md-12">
+                            <label class="label-control">Nombre</label>
+                            <input class="form-control" id="nombre" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="label-control">Apellido</label>
+                            <input class="form-control" id="apellido" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="label-control">Email</label>
+                            <input class="form-control" id="email" />
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label class="label-control">Celular</label>
+                                <input class="form-control" id="celular" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label-control">Telefono</label>
+                                <input class="form-control" id="telefono" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="label-control">Rol</label>
+                                <input class="form-control" id="rol" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="~/js/Client/jquery.EditCreate.js"></script>
 <script src="~/js/Contacts/jquery.contacts.js"></script>
 <script src="~/js/Contacts/jquery.buildContact.js"></script>

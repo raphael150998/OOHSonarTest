@@ -1,8 +1,7 @@
 ﻿$().ready(function ($) {
     DropDownListMunicipio();
     DropDownListCategoria();
-    //LLenarTextBox();
-    DropDown();
+
     Validate.Form("#formClient", "api/client/CEdata" ,{
         rules: {
             NombreComercial: {
@@ -61,13 +60,6 @@
        
     });
 });
-function DropDown() {
-    let categoria = $("#CategoriaId").val();
-    console.log(categoria);
-    $("#dropdownCategoria option[value=" + categoria + "]").attr("selected", true);
-
-
-}
 
 function LLenarTextBox() {
     var idCliente = $("#ClienteId").val();
@@ -80,8 +72,7 @@ function LLenarTextBox() {
     if (idCliente !=0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
             console.log(dataResult);
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
-           
+            $("#addbtn").removeClass("text-secondary").addClass("text-primary");           
             $("#ClienteId").val(dataResult["clienteId"]);
             $("#NombreComercial").val(dataResult["nombreComercial"]);
             $("#dropdownMunicipio option[value=" + dataResult["municipioId"] + "]").attr("selected", true);
@@ -107,7 +98,7 @@ function LLenarTextBox() {
 function DropDownListMunicipio() {
 
     fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single" id="dropdownMunicipio" name="MunicipioId">`
+        let select = `<select class="js-example-basic-single number" id="dropdownMunicipio" name="MunicipioId">`
         var departamento = 0;
         dataResult.forEach(mun => {
 
@@ -127,17 +118,18 @@ function DropDownListMunicipio() {
 
         $("#divMunicipio").html(select);
         $('#dropdownMunicipio').select2();
+
         let municipio = $("#MunicipioId").val();
-        console.log(municipio);
-        $("#dropdownMunicipio option[value=" + municipio + "]").attr("selected", true);
+        //$("#dropdownMunicipio option[value=" + municipio + "]").attr("selected", true);
         $('#dropdownMunicipio ').val(municipio).trigger('change.select2');
+        $("#municipioRemove").html("");
     });
 
 }
 function DropDownListCategoria() {
 
     fns.CallGetAsync("api/category/call", null, function (dataResult) {
-        let select = `<select class="form-control" id="dropdownCategoria" name="CategoriaId" >`
+        let select = `<select class="form-control number" id="dropdownCategoria" name="CategoriaId" >`
         
         dataResult.forEach(cat => {          
             let option = `<option value="` + cat.categoriaId + `"> ` + cat.nombre + `</option> `;
@@ -147,7 +139,10 @@ function DropDownListCategoria() {
         select = select + "</select>";
 
         $("#divCategoria").html(select);
-    
+
+        let categoria = $("#CategoriaId").val();       
+        $("#dropdownCategoria option[value=" + categoria + "]").attr("selected", true);
+        $("#categoriaRemove").html("");
     });
 
 }
@@ -173,8 +168,3 @@ function PostData() {
         Codigo: $("#Codigo").val()
     }
 }
-//$("#BtnSubmit").click(function () {
-//    $("#formClient").submit();
-//    //PostData();
-
-//});
