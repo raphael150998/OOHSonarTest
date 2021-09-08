@@ -24,7 +24,7 @@ namespace OOH.WebApi.ApiControllers
         public List<ClientesCategorias> Categorias()
         {
             return _repo.Select().Result.ToList();
-            return repo.Select().Result.ToList();
+            //return repo.Select().Result.ToList();
         }
 
 
