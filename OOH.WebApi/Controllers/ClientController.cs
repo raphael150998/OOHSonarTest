@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using OOH.Data.Repos;
 using OOH.WebApi.Filters.Attributes;
@@ -12,6 +13,15 @@ namespace OOH.WebApi.Controllers
 {
     public class ClientController : BaseController
     {
+        private readonly IWebUserHelper _userHelper;
+        private readonly ClientRepository _repo;
+
+        public ClientController(IWebUserHelper userHelper, ClientRepository repo)
+        {
+            _userHelper = userHelper;
+            _repo = repo;
+        }
+
         // GET: ClientController
         [OhhFilter("Client", Data.ActionPermission.Read)]
         public ActionResult Index()

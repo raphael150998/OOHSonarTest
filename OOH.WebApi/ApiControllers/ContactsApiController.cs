@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.ApiControllers
 {
-    
+
     [ApiController]
     public class ContactsApiController : BaseApiController
     {
@@ -21,7 +21,6 @@ namespace OOH.WebApi.ApiControllers
         {
             _repo = repo;
         }
-
         [HttpGet]
         [Route("api/contacts/list")]
         public async Task<List<ClientesContactos>> Contactos(int clientId)
@@ -41,7 +40,6 @@ namespace OOH.WebApi.ApiControllers
         [Route("api/contacts/contact")]
         public async Task<ClientesContactos> FindContact(int id)
         {
-
             return _repo.Select($"Where Id = {id}").Result.FirstOrDefault();
 
 
