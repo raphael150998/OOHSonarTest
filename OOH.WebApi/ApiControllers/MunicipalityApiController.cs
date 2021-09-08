@@ -12,12 +12,11 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class MunicipalityApiController : BaseApiController
     {
-        MunicipalityRepository repos;
+        private readonly MunicipalityRepository repos;
         [HttpGet]
         [Route("api/municipio/call")]
         public List<Municipios> Municipios()
         {
-            repos = new MunicipalityRepository(txtConectionString());
             return repos.Select().Result.ToList();
         }
     }

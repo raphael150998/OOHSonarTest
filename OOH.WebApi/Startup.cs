@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using OOH.Data;
 
 namespace OOH.WebApi
 {
@@ -32,6 +33,7 @@ namespace OOH.WebApi
             services.AddHttpContextAccessor();
             //services.AddScoped<IProveedorRepository, ProveedorRepository>();            
             services.AddScoped<IWebUserHelper, WebUserHelper>();
+            services.AddScoped<OOHContext>();
             services.AddScoped<IAdvertisingAgencyRepository, AdvertisingAgencyRepository>();
             services.AddControllersWithViews();
             services.AddCors();

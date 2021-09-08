@@ -12,12 +12,21 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class CategoryApiController : BaseApiController
     {
-        CategoryRepository repo;
+        private readonly CategoryRepository repo;
+
+        public CategoryApiController(CategoryRepository repo)
+        {
+            this.repo = repo;
+        }
+
+        public CategoryApiController()
+        {
+        }
+
         [HttpGet]
         [Route("api/category/call")]
         public List<ClientesCategorias> Categorias()
         {
-            repo = new CategoryRepository(txtConectionString());
             return repo.Select().Result.ToList();
         }
 

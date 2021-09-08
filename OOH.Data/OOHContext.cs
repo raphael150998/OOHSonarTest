@@ -12,9 +12,8 @@ namespace OOH.Data
 {
     public class OOHContext : IOOHContext
     {
-        protected readonly IWebUserHelper _userHelper;
+        public readonly IWebUserHelper _userHelper;
         private readonly string _connectionString;
-
         public OOHContext(IWebUserHelper userHelper)
         {
             _userHelper = userHelper;

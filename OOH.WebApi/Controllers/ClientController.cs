@@ -25,9 +25,9 @@ namespace OOH.WebApi.Controllers
         [OhhFilter("Client", Data.ActionPermission.Create)]
         public ActionResult CreateUpdate(int id = 0)
         {
-            Clientes clientes = id != 0 ?new ClientRepository(txtConectionString()).Find(id).Result:new Clientes();
-            clientes.ClienteId = id;
-            return View(clientes);
+            //Clientes clientes = id != 0 ?new ClientRepository().Find(id).Result:new Clientes();
+            //clientes.ClienteId = id;
+            return View();
         }
 
     }
