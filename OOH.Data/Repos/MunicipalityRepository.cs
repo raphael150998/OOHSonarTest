@@ -11,11 +11,10 @@ namespace OOH.Data.Repos
 {
     public class MunicipalityRepository : OOHContext, IBaseRepository<Municipios>
     {
-        public string ConectionnString { get; set; }
-        public MunicipalityRepository(string _stringcontection)
+        public MunicipalityRepository(IWebUserHelper userHelper) : base(userHelper)
         {
-            this.ConectionnString = _stringcontection;
         }
+
         public Task<ResultClass> AddOrUpdate(Municipios collection)
         {
             throw new NotImplementedException();
@@ -33,7 +32,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<Municipios>> Select(string _Where = "")
         {
-            return SelectData<Municipios>("Select t0.MunicipioId ,t0.DepartamentoId ,t1.Nombre as Departamento,t0.Nombre from Municipios t0 inner join Departamentos t1 on t0.DepartamentoId = t1.DepartamentoId",false,null,this.ConectionnString).Result.ToList();
+            return SelectData<Municipios>("Select t0.MunicipioId ,t0.DepartamentoId ,t1.Nombre as Departamento,t0.Nombre from Municipios t0 inner join Departamentos t1 on t0.DepartamentoId = t1.DepartamentoId", false, null).Result.ToList();
         }
     }
 }

@@ -4,7 +4,7 @@
         Pass: $("#Pass").val()
     }
    
-    fns.PostDataAsync("api/login/Validate", UserLoginDto, function (DataRequest) {
+    fns.PostDataAsync("api/login/Validate", JSON.stringify(UserLoginDto), function (DataRequest) {
         if (DataRequest["state"] == false) {
             console.log(DataRequest);
             $("#txtError").attr("hidden", false);

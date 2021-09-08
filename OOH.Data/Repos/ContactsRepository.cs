@@ -12,11 +12,10 @@ namespace OOH.Data.Repos
 {
     public class ContactsRepository : OOHContext, IBaseRepository<ClientesContactos>
     {
-        public string ConectionnString { get; set; }
-        public ContactsRepository(string _stringcontection)
+        public ContactsRepository(IWebUserHelper userHelper) : base(userHelper)
         {
-            this.ConectionnString = _stringcontection;
         }
+
         public async Task<ResultClass> AddOrUpdate(ClientesContactos collection)
         {
 
@@ -30,18 +29,18 @@ namespace OOH.Data.Repos
             param.Add("@Celular", collection.Celular);
             if (collection.Id == 0)
             {
-                return new ResultClass { data = PostData(@"Insert [dbo].[ClientesContactos] (ClienteId,Nombres,Celular,Apellidos,Rol,Telefono,Email) Values(@Cliente,@Nombres,@Celular,@Apellidos,@Rol,@Telefono,@Email)", true, param, false, this.ConectionnString).Result };
+                return new ResultClass { data = PostData(@"Insert [dbo].[ClientesContactos] (ClienteId,Nombres,Celular,Apellidos,Rol,Telefono,Email) Values(@Cliente,@Nombres,@Celular,@Apellidos,@Rol,@Telefono,@Email)", true, param, false).Result };
             }
             else
             {
                 param.Add("@id", collection.Id);
-                return new ResultClass{data= PostData(" Update [dbo].[ClientesContactos] set [ClienteId] = @Cliente , Nombres = @Nombres, Apellidos = @Apellidos , Rol = @Rol , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @id", true, param, false, ConectionnString).Result};
+                return new ResultClass { data = PostData(" Update [dbo].[ClientesContactos] set [ClienteId] = @Cliente , Nombres = @Nombres, Apellidos = @Apellidos , Rol = @Rol , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @id", true, param, false).Result };
             }
         }
 
         public async Task<ClientesContactos> Find(int Id)
         {
-            return FilterData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] Where Id = {Id}", false, null, ConectionnString).Result;
+            return FilterData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] Where Id = {Id}", false, null).Result;
 
         }
 
@@ -52,7 +51,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<ClientesContactos>> Select(string _Where = "")
         {
-            return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] "+ _Where,false,null,this.ConectionnString).Result.ToList();
+            return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] " + _Where, false, null).Result.ToList();
         }
     }
 }

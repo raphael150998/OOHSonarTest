@@ -10,25 +10,28 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.ApiControllers
 {
-    
+
     [ApiController]
     public class ContactsApiController : BaseApiController
     {
-        ContactsRepository _repos;
+        private readonly ContactsRepository _repo;
+
+        public ContactsApiController(ContactsRepository repo)
+        {
+            _repo = repo;
+        }
         [HttpGet]
         [Route("api/contacts/list")]
         public async Task<List<ClientesContactos>> Contactos(int clientId)
         {
-            _repos = new ContactsRepository(txtConectionString());
-            return _repos.Select($"Where ClienteId = {clientId}").Result.ToList();
+            return _repo.Select($"Where ClienteId = {clientId}").Result.ToList();
         }
 
         [HttpPost]
         [Route("api/contacts/CEcontact")]
         public async Task<ResultClass> CreateEdit([FromBody] ClientesContactos contacto)
         {
-            _repos = new ContactsRepository(txtConectionString());
-            return _repos.AddOrUpdate(contacto).Result;
+            return _repo.AddOrUpdate(contacto).Result;
         }
 
 
@@ -36,9 +39,7 @@ namespace OOH.WebApi.ApiControllers
         [Route("api/contacts/contact")]
         public async Task<ClientesContactos> FindContact(int id)
         {
-
-            _repos = new ContactsRepository(txtConectionString());
-            return _repos.Select($"Where Id = {id}").Result.FirstOrDefault();
+            return _repo.Select($"Where Id = {id}").Result.FirstOrDefault();
 
 
         }

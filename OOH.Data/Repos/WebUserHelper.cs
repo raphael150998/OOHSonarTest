@@ -21,7 +21,7 @@ namespace OOH.Data.Repos
         {
             var user = _httpContextAccessor.HttpContext.User;
 
-            return user.Claims.Where(x => x.Type == "Cs").FirstOrDefault().Value;
+            return user.Claims.Where(x => x.Type == "Cs").FirstOrDefault()?.Value;
         }
 
         public int GetUserId()

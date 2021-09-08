@@ -22,19 +22,20 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class AccountApiController : ControllerBase
     {
-        private static AccountRepository _Repository = new AccountRepository();
+        private readonly AccountRepository _repo;
         private readonly ILogger _logger;
 
-        public AccountApiController(ILogger<AccountApiController> logger)
+        public AccountApiController(ILogger<AccountApiController> logger, AccountRepository repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
         [HttpPost]
         [Route("api/login/Validate")]
         public async Task<ResultClass> Validate([FromBody]UserLoginDto user)
         {
-            var Login = _Repository.ValidarLogin(user.Login, user.Pass);
+            var Login = _repo.ValidarLogin(user.Login, user.Pass);
             if (Login.state)
             {
                 UserPermisoDto UserLoged = (UserPermisoDto)Login.data;
@@ -79,7 +80,7 @@ namespace OOH.WebApi.ApiControllers
         [Route("api/Account/Register")]
         public async Task<ResultClass> Register([FromForm]Usuarios registro)
         {
-            return _Repository.RegistroUser(registro);
+            return _repo.RegistroUser(registro);
         }
     }
 }
