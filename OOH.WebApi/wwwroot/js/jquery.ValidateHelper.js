@@ -14,15 +14,9 @@
             }
         };
 
-        //config.highlight = function (element) {
-
-        //};
-
-        //config.success = function (element) {
-
-        //    console.log($(element).closest("i.error"));
-        //    //$(element).parents().find($("i.error")[0]).remove();
-        //};
+        config.success = function (error, element) {
+            $(element).parent().find($("i.error")).remove();
+        };
 
         config.submitHandler = function (form) {
             SweetAlert.ConfirmForm(function () {
@@ -47,7 +41,7 @@
                         })
                     }
                 })
-            });
+            }, false);
             return false;
         }
         $(identify).validate(config);

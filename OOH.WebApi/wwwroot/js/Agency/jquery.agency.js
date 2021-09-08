@@ -13,7 +13,7 @@ $().ready(function ($) {
         $("#exampleModalCenter").modal("show");
     });
 
-    var obj = { "Id": 0, "Name": "prueba data send 3", "Rate": 15 };
+    //var obj = { "Id": 0, "Name": "prueba data send 3", "Rate": 15 };
 
     Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
         rules: {
@@ -21,7 +21,8 @@ $().ready(function ($) {
                 required: true
             },
             Rate: {
-                required: true
+                required: true,
+                number: true
             }
         },
         messages: {
@@ -29,13 +30,15 @@ $().ready(function ($) {
                 required: "Debes ingresar un nombre"
             },
             Rate: {
-                required: "La comisión es requerida"
+                required: "La comisión es requerida",
+                number: "Solo se permiten números"
             }
         }
     }, function (data) {
+        $('#frmAgency').trigger("reset");
         $("#exampleModalCenter").modal("hide");
         refresh();
-    }, obj);
+    });
 });
 
 //Llamada a la API de clientes para el llenado de la Dattable

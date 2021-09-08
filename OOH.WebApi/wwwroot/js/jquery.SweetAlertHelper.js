@@ -1,6 +1,6 @@
 ﻿var SweetAlert = {
 
-    ConfirmForm : function (callback){
+    ConfirmForm : function (callback, showConfirm = true){
         Swal.fire({
             title: 'Confirmar?',
             text: "La informacion sera enviada!",
@@ -11,10 +11,12 @@
             confirmButtonText: 'Confirmar!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Logrado',
-                });
+                if (showConfirm) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logrado',
+                    });
+                }
                 callback(result);
             } 
         })
