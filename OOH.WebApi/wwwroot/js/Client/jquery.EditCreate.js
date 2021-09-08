@@ -1,26 +1,78 @@
 ﻿$().ready(function ($) {
     DropDownListMunicipio();
     DropDownListCategoria();
-    LLenarTextBox();
-
+    //LLenarTextBox();
+    DropDown();
     Validate.Form("#formClient", "api/client/CEdata" ,{
         rules: {
             NombreComercial: {
                 required: true
-            }
+            },
+            Codigo: {
+                required:true
+            },
+            RazonSocial: {
+                required:true
+            },
+            NRC: {
+                required: true
+            },
+            NIT: {
+                required:true
+            },
+            Direccion: {
+                required: true
+            },
+            Telefono: {
+                required:true
+            }            
         },
         messages: {
-            Name: {
+            
+            NombreComercial: {
                 required: "Campo requerido bro"
+
+            },
+            Codigo: {
+                required: "Campo requerido bro"
+
+            },
+            RazonSocial: {
+                required: "Campo requerido bro"
+
+            },
+            NRC: {
+                required: "Campo requerido bro"
+
+            },
+            NIT: {
+                required: "Campo requerido bro"
+
+            },
+            Direccion: {
+                required: "Campo requerido bro"
+
+            },
+            Telefono: {
+                required: "Campo requerido bro"
+
             }
         }
        
     });
 });
+function DropDown() {
+    let categoria = $("#CategoriaId").val();
+    console.log(categoria);
+    $("#dropdownCategoria option[value=" + categoria + "]").attr("selected", true);
+
+
+}
 
 function LLenarTextBox() {
     var idCliente = $("#ClienteId").val();
    
+
     console.log(idCliente);
     if (idCliente == 0) {
         $("#addbtn").css("cursor", "no-drop");
@@ -64,7 +116,7 @@ function DropDownListMunicipio() {
                 departamento = mun.departamentoId;
                 optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
             }
-            let option = optionGrp +`<option value="` + mun.municipioId + `"> ` + mun.nombre + `</option> `;
+            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
 
             if (mun.departamentoId != departamento) {
                 option = option + "  </optgroup>";
@@ -75,6 +127,10 @@ function DropDownListMunicipio() {
 
         $("#divMunicipio").html(select);
         $('#dropdownMunicipio').select2();
+        let municipio = $("#MunicipioId").val();
+        console.log(municipio);
+        $("#dropdownMunicipio option[value=" + municipio + "]").attr("selected", true);
+        $('#dropdownMunicipio ').val(municipio).trigger('change.select2');
     });
 
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Models;
+using OOH.Data.Repos;
 using OOH.WebApi.Filters.Attributes;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.Controllers
 {
-    public class ClientController : Controller
+    public class ClientController : BaseController
     {
         // GET: ClientController
         [OhhFilter("Client", Data.ActionPermission.Read)]
@@ -24,7 +25,7 @@ namespace OOH.WebApi.Controllers
         [OhhFilter("Client", Data.ActionPermission.Create)]
         public ActionResult CreateUpdate(int id = 0)
         {
-            Clientes clientes = new Clientes();
+            Clientes clientes = id != 0 ?new ClientRepository(txtConectionString()).Find(id).Result:new Clientes();
             clientes.ClienteId = id;
             return View(clientes);
         }
