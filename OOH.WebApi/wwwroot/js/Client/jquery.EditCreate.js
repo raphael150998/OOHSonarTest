@@ -1,17 +1,60 @@
 ﻿$().ready(function ($) {
     DropDownListMunicipio();
     DropDownListCategoria();
-    LLenarTextBox();
 
     Validate.Form("#formClient", "api/client/CEdata" ,{
         rules: {
             NombreComercial: {
                 required: true
-            }
+            },
+            Codigo: {
+                required:true
+            },
+            RazonSocial: {
+                required:true
+            },
+            NRC: {
+                required: true
+            },
+            NIT: {
+                required:true
+            },
+            Direccion: {
+                required: true
+            },
+            Telefono: {
+                required:true
+            }            
         },
         messages: {
-            Name: {
+            
+            NombreComercial: {
                 required: "Campo requerido bro"
+
+            },
+            Codigo: {
+                required: "Campo requerido bro"
+
+            },
+            RazonSocial: {
+                required: "Campo requerido bro"
+
+            },
+            NRC: {
+                required: "Campo requerido bro"
+
+            },
+            NIT: {
+                required: "Campo requerido bro"
+
+            },
+            Direccion: {
+                required: "Campo requerido bro"
+
+            },
+            Telefono: {
+                required: "Campo requerido bro"
+
             }
         }
        
@@ -21,6 +64,7 @@
 function LLenarTextBox() {
     var idCliente = $("#ClienteId").val();
    
+
     console.log(idCliente);
     if (idCliente == 0) {
         $("#addbtn").css("cursor", "no-drop");
@@ -28,8 +72,7 @@ function LLenarTextBox() {
     if (idCliente !=0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
             console.log(dataResult);
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
-           
+            $("#addbtn").removeClass("text-secondary").addClass("text-primary");           
             $("#ClienteId").val(dataResult["clienteId"]);
             $("#NombreComercial").val(dataResult["nombreComercial"]);
             $("#dropdownMunicipio option[value=" + dataResult["municipioId"] + "]").attr("selected", true);
@@ -55,7 +98,7 @@ function LLenarTextBox() {
 function DropDownListMunicipio() {
 
     fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single" id="dropdownMunicipio" name="MunicipioId">`
+        let select = `<select class="js-example-basic-single number" id="dropdownMunicipio" name="MunicipioId">`
         var departamento = 0;
         dataResult.forEach(mun => {
 
@@ -64,7 +107,7 @@ function DropDownListMunicipio() {
                 departamento = mun.departamentoId;
                 optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
             }
-            let option = optionGrp +`<option value="` + mun.municipioId + `"> ` + mun.nombre + `</option> `;
+            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
 
             if (mun.departamentoId != departamento) {
                 option = option + "  </optgroup>";
@@ -75,13 +118,18 @@ function DropDownListMunicipio() {
 
         $("#divMunicipio").html(select);
         $('#dropdownMunicipio').select2();
+
+        let municipio = $("#MunicipioId").val();
+        //$("#dropdownMunicipio option[value=" + municipio + "]").attr("selected", true);
+        $('#dropdownMunicipio ').val(municipio).trigger('change.select2');
+        $("#municipioRemove").html("");
     });
 
 }
 function DropDownListCategoria() {
 
     fns.CallGetAsync("api/category/call", null, function (dataResult) {
-        let select = `<select class="form-control" id="dropdownCategoria" name="CategoriaId" >`
+        let select = `<select class="form-control number" id="dropdownCategoria" name="CategoriaId" >`
         
         dataResult.forEach(cat => {          
             let option = `<option value="` + cat.categoriaId + `"> ` + cat.nombre + `</option> `;
@@ -91,7 +139,10 @@ function DropDownListCategoria() {
         select = select + "</select>";
 
         $("#divCategoria").html(select);
-    
+
+        let categoria = $("#CategoriaId").val();       
+        $("#dropdownCategoria option[value=" + categoria + "]").attr("selected", true);
+        $("#categoriaRemove").html("");
     });
 
 }
@@ -117,8 +168,3 @@ function PostData() {
         Codigo: $("#Codigo").val()
     }
 }
-//$("#BtnSubmit").click(function () {
-//    $("#formClient").submit();
-//    //PostData();
-
-//});
