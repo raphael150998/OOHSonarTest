@@ -1,19 +1,12 @@
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OOH.Data.Repos;
 using OOH.Data.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using OOH.Data;
 
 namespace OOH.WebApi
 {
@@ -35,6 +28,7 @@ namespace OOH.WebApi
             services.AddScoped<IWebUserHelper, WebUserHelper>();
             services.AddScoped<OOHContext>();
             services.AddScoped<IAdvertisingAgencyRepository, AdvertisingAgencyRepository>();
+            services.AddScoped<AccountRepository>();
             services.AddScoped<ClientRepository>();
             services.AddScoped<MunicipalityRepository>();
             services.AddScoped<CategoryRepository>();
@@ -60,12 +54,12 @@ namespace OOH.WebApi
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-      
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -74,7 +68,7 @@ namespace OOH.WebApi
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
-           
+
         }
     }
 }
