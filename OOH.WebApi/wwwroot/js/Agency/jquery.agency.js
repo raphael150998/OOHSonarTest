@@ -3,17 +3,15 @@ $().ready(function ($) {
 
     BuildDatatable();
 
-    $("#exampleModalCenter").modal({
+    $("#modalAgency").modal({
         backdrop: "static",
         keyboard: false,
         show: false
     });
 
     $("#btnAdd").click(function () {
-        $("#exampleModalCenter").modal("show");
+        $("#modalAgency").modal("show");
     });
-
-    //var obj = { "Id": 0, "Name": "prueba data send 3", "Rate": 15 };
 
     Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
         rules: {
@@ -35,8 +33,9 @@ $().ready(function ($) {
             }
         }
     }, function (data) {
+        $("#PersonaJuridica").changeSwitch(false);
         $('#frmAgency').trigger("reset");
-        $("#exampleModalCenter").modal("hide");
+        $("#modalAgency").modal("hide");
         refresh();
     });
 });

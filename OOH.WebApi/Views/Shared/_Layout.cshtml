@@ -939,41 +939,7 @@
     <script src="~/bower_components/jquery-validation/js/jquery.validate.js"></script>
     <script src="~/js/jquery.ValidateHelper.js"></script>
     <script src="~/js/jquery.SweetAlertHelper.js"></script>
-    <script>
-        $.fn.serializeFormToJson = function () {
-            var rt = {};
-            var typeInfo = [];
-            var formData = this.serializeArray();
-            this.find('input,select,textarea').each((i, value) => {
-                var type = $(value).hasClass("number") ? "number" : "text";
-                var name = $(value).attr("name");
-                typeInfo.push({
-                    type: type,
-                    name: name
-                });
-            });
-            console.log(typeInfo);
-            var $radio = $('input[type=radio],input[type=checkbox]', this);
-            $.each($radio, function () {
-                if (!rt.hasOwnProperty(this.name)) {
-                    rt[this.name] = false;
-                }
-            });
-            console.log(rt);
-            $.each(formData, function () {
-                if (rt[this.name]) {
-                    if (!rt[this.name].push) {
-                        rt[this.name] = [rt[this.name]];
-                    }
-                    rt[this.name].push(this.value || '');
-                } else {
-                    if (typeInfo.some(x => x.name == this.name && x.type == "number")) rt[this.name] = parseFloat(this.value) || 0;
-                    else rt[this.name] = this.value || '';
-                }
-            });
-            return JSON.stringify(rt);
-        };
-    </script>
+    <script src="~/js/jquery.fnHelpers.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 
