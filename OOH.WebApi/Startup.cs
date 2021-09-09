@@ -28,6 +28,10 @@ namespace OOH.WebApi
             services.AddScoped<IWebUserHelper, WebUserHelper>();
             services.AddScoped<IAdvertisingAgencyRepository, AdvertisingAgencyRepository>();
             services.AddScoped<AccountRepository>();
+            services.AddScoped<ClientRepository>();
+            services.AddScoped<MunicipalityRepository>();
+            services.AddScoped<CategoryRepository>();
+            services.AddScoped<ContactsRepository>();
             services.AddControllersWithViews();
             services.AddCors();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

@@ -11,33 +11,33 @@ using System.Threading.Tasks;
 
 namespace OOH.WebApi.Controllers
 {
-    public class ClientController : BaseController
+    public class ClientController : Controller
     {
-        private readonly IWebUserHelper _userHelper;
-        private readonly ClientRepository _repo;
+        //private readonly IWebUserHelper _userHelper;
+        //private readonly ClientRepository _repo;
 
-        public ClientController(IWebUserHelper userHelper, ClientRepository repo)
-        {
-            _userHelper = userHelper;
-            _repo = repo;
-        }
+        //public ClientController(IWebUserHelper userHelper, ClientRepository repo)
+        //{
+        //    _userHelper = userHelper;
+        //    _repo = repo;
+        
 
         // GET: ClientController
         [OhhFilter("Client", Data.ActionPermission.Read)]
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+        return View();
         }
 
 
         // GET: ClientController/Create
         [HttpGet]
         [OhhFilter("Client", Data.ActionPermission.Create)]
-        public ActionResult CreateUpdate(int id = 0)
+        public IActionResult CreateUpdate(int id = 0)
         {
-            //Clientes clientes = id != 0 ?new ClientRepository().Find(id).Result:new Clientes();
-            //clientes.ClienteId = id;
-            return View();
+            Clientes clientes = new Clientes();
+            clientes.ClienteId = id;
+            return View(clientes);
         }
 
     }

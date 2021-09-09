@@ -1,7 +1,8 @@
 ﻿$().ready(function ($) {
     DropDownListMunicipio();
     DropDownListCategoria();
-
+    llenar();
+    //LLenarTextBox();
     Validate.Form("#formClient", "api/client/CEdata" ,{
         rules: {
             NombreComercial: {
@@ -60,7 +61,24 @@
        
     });
 });
+function llenar() {
 
+    var idCliente = $("#ClienteId").val();
+
+
+    console.log(idCliente);
+    if (idCliente == 0) {
+        $("#addbtn").css("cursor", "no-drop");
+    }
+    if (idCliente != 0) {
+        fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
+            console.log(JSON.stringify(dataResult));
+         
+            $("#formClient").deserialize(dataResult);
+
+        });
+    }
+}
 function LLenarTextBox() {
     var idCliente = $("#ClienteId").val();
    
