@@ -13,6 +13,7 @@ namespace OOH.Data.Repos
     {
         public MunicipalityRepository(IWebUserHelper userHelper) : base(userHelper)
         {
+
         }
 
         public Task<ResultClass> AddOrUpdate(Municipios collection)
@@ -32,7 +33,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<Municipios>> Select(string _Where = "")
         {
-            return SelectData<Municipios>("Select t0.MunicipioId ,t0.DepartamentoId ,t1.Nombre as Departamento,t0.Nombre from Municipios t0 inner join Departamentos t1 on t0.DepartamentoId = t1.DepartamentoId", false, null).Result.ToList();
+            return SelectData<Municipios>("Select t0.MunicipioId ,t0.DepartamentoId ,t1.Nombre as Departamento,t0.Nombre from Municipios t0 inner join Departamentos t1 on t0.DepartamentoId = t1.DepartamentoId",false,null).Result.ToList();
         }
     }
 }

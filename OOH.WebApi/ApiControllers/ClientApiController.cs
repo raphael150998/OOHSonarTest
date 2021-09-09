@@ -18,15 +18,12 @@ namespace OOH.WebApi.ApiControllers
     public class ClientApiController : BaseApiController
     {
 
-        IWebUserHelper _userHelper;
         private readonly ClientRepository _repo;
 
-        public ClientApiController(IWebUserHelper userHelper)
+        public ClientApiController(ClientRepository repo)
         {
-            _userHelper = userHelper;
-            _repo = new ClientRepository(userHelper);
+            _repo = repo;
         }
-        
 
         [HttpGet]
        [Route("api/Client/Get")]

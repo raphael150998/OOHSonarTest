@@ -16,6 +16,7 @@ namespace OOH.Data.Repos
         {
         }
 
+      
         public async Task<ResultClass> AddOrUpdate(ClientesContactos collection)
         {
 
@@ -34,7 +35,7 @@ namespace OOH.Data.Repos
             else
             {
                 param.Add("@id", collection.Id);
-                return new ResultClass { data = PostData(" Update [dbo].[ClientesContactos] set [ClienteId] = @Cliente , Nombres = @Nombres, Apellidos = @Apellidos , Rol = @Rol , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @id", true, param, false).Result };
+                return new ResultClass{data= PostData(" Update [dbo].[ClientesContactos] set [ClienteId] = @Cliente , Nombres = @Nombres, Apellidos = @Apellidos , Rol = @Rol , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @id", true, param, false).Result};
             }
         }
 
@@ -51,7 +52,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<ClientesContactos>> Select(string _Where = "")
         {
-            return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] " + _Where, false, null).Result.ToList();
+            return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] "+ _Where,false,null).Result.ToList();
         }
     }
 }
