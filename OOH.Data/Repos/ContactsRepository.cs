@@ -45,9 +45,9 @@ namespace OOH.Data.Repos
 
         }
 
-        public Task<bool> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            throw new NotImplementedException();
+            return RemoveData($"delete from [dbo].[ClientesContactos] Where Id = {id}",false).Result == 1 ? true : false;
         }
 
         public async Task<IEnumerable<ClientesContactos>> Select(string _Where = "")

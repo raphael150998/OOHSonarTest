@@ -7,6 +7,7 @@ using OOH.Data.Repos;
 using OOH.Data.Interfaces;
 using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using OOH.Data;
 
 namespace OOH.WebApi
 {

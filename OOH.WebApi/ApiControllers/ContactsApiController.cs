@@ -42,7 +42,14 @@ namespace OOH.WebApi.ApiControllers
         {
             return _repo.Select($"Where Id = {id}").Result.FirstOrDefault();
 
+        }
 
+        [HttpPost]
+        [Route("api/contacts/remove")]
+        public async Task<bool> Eliminar(int Id) {
+
+            return _repo.Remove(Id).Result;
+        
         }
 
     }

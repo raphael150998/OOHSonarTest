@@ -45,7 +45,30 @@ namespace OOH.Data
 
         }
 
-        public async Task<int> PostData(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
+        public async Task<int> RemoveData(string _query, bool _withParameters = false, DynamicParameters parameters = null, bool _isProcedure = false)
+        {
+            try
+            {
+                using (IDbConnection cn = new SqlConnection(_connectionString))
+                {
+                    var ObjetoReturn = await cn.ExecuteAsync(_query, param: _withParameters == true ? parameters : null,
+                                        commandType: _isProcedure == true ?
+                                        CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+
+
+                    return ObjetoReturn;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                return 0;
+
+            }
+        }
+           public async Task<int> PostData(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
         {
             try
             {

@@ -32,7 +32,7 @@ function BuildDatatable() {
                 render: function (data, type, full, meta) {
                     return `
                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="editContact('` + data + `')"></i>
-                     <i class="fa fa-trash btnDatatable text-danger"></i>
+                     <i class="fa fa-trash btnDatatable text-danger" onclick="removeContact('`+data+`')"></i>
                      `;
                 }
             },
@@ -52,4 +52,23 @@ function BuildDatatable() {
     });
 
     LLenarDatatable();
+}
+
+function removeContact(idContact) {
+    SweetAlert.RemoveAlert("api/contacts/remove", { Id: idContact }, function (response) {
+
+        if (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Logrado',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'A ocurrido un error',
+            });
+        }
+
+
+    });
 }
