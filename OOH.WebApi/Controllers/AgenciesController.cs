@@ -27,13 +27,6 @@ namespace OOH.WebApi.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CreateUpdate(int id = 0)
-        {
-            AgencyVm agency = id == 0 ? new AgencyVm() : _mapper.Map<AgencyVm>(await _repo.Find(id));
-            return View(agency);
-        }
-
         #region private methods and functions
 
         #endregion
