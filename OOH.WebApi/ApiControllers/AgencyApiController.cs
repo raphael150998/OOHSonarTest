@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
@@ -16,13 +17,15 @@ namespace OOH.WebApi.ApiControllers
     public class AgencyApiController : ControllerBase
     {
         private readonly IAdvertisingAgencyRepository _repo;
+        private readonly IMapper _mapper;
 
-        public AgencyApiController(IAdvertisingAgencyRepository repo)
+        public AgencyApiController(IAdvertisingAgencyRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        [HttpGet("GetList")]
+        [HttpGet("Select")]
         public async Task<IActionResult> GetList()
         {
             return Ok(await _repo.Select());
@@ -64,10 +67,14 @@ namespace OOH.WebApi.ApiControllers
             return Ok(response);
         }
 
-        [HttpGet("GetById")]
-        public async Task<IActionResult> Get([FromQuery] int id)
+
+        [HttpGet("Find")]
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok(await _repo.Find(id));
+            var algo = Request;
+            return Ok(_mapper.Map<AgencyVm>(await _repo.Find(id)));
         }
+
+
     }
 }

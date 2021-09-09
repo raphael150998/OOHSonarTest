@@ -34,6 +34,76 @@ $.fn.serializeFormToJson = function () {
     return JSON.stringify(rt);
 };
 
+$.fn.hasAttr = function (name) {
+    return this.attr(name) !== undefined;
+};
+
+$.fn.tagType = function () {
+
+    let type = this.prop("tagName");
+
+    switch (this.prop("type")) {
+        case "checkbox":
+            type = "checkbox";
+            break;
+        case "radio":
+            type = "radio";
+            break;
+    }
+    return type;
+};
+
+//Asigna el valor del objeto json correspondiente al controlador del formulario especificado a traves
+//de la coincidencia de los nombres del json con los nombres del controlador
+$.fn.assignJsonToForm = function (json) {
+
+    this.trigger("reset");
+
+    var typeInfo = [];
+
+    this.find('input,select,textarea').each((i, control) => {
+        var tagType = $(control).tagType();
+        var type = $(control).hasClass("number") ? "number" : $(control).hasClass("bool") ? "bool" : "text";
+        var name = $(control).attr("name");
+        if (tagType == "checkbox" && $(control).hasClass("js-single")) {
+            if ($(control).hasAttr("checked") && $(control).prop("checked")) {
+                $(control).changeSwitch(true);
+            }
+            else {
+                $(control).changeSwitch(false);
+            }
+        }
+        typeInfo.push({
+            type: type,
+            name: name,
+            tagType: tagType
+        });
+    });
+
+    var jsonKeys = Object.keys(json);
+
+    $.each(typeInfo, (i, controlInfo) => {
+        var jKey = jsonKeys.find(x => x.toLowerCase() == controlInfo.name.toLowerCase());
+        if (jKey != undefined) {
+            jValue = json[jKey];
+            let targetControl = $(`[name="${controlInfo.name}"]`)[0];
+            switch (controlInfo.tagType) {
+                case "checkbox":
+                    if ($(targetControl).hasClass("js-single")) {
+                        $(targetControl).changeSwitch(jValue);
+                    }
+                    break;
+                case "select":
+                    $(targetControl).val(jValue).change();
+                    break;
+                default:
+                    $(targetControl).val(jValue);
+                    break;
+            }
+        }
+    })
+};
+
 //Cambia el switch que contenga la clase css js-single al valor especificado
 $.fn.changeSwitch = function (value) {
     if (this.hasClass("js-single")) {

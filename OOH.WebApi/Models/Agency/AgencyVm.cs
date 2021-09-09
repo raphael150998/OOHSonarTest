@@ -25,7 +25,6 @@ namespace OOH.WebApi.Models.Agency
         /// </summary>
         public string Name { get; set; }
 
-
         /// <summary>
         /// Comision
         /// </summary>

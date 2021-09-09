@@ -10,6 +10,8 @@ $().ready(function ($) {
     });
 
     $("#btnAdd").click(function () {
+        $("#Active").changeSwitch(false);
+        $('#frmAgency').trigger("reset");
         $("#modalAgency").modal("show");
     });
 
@@ -33,7 +35,7 @@ $().ready(function ($) {
             }
         }
     }, function (data) {
-        $("#PersonaJuridica").changeSwitch(false);
+        $("#Active").changeSwitch(false);
         $('#frmAgency').trigger("reset");
         $("#modalAgency").modal("hide");
         refresh();
@@ -43,10 +45,17 @@ $().ready(function ($) {
 //Llamada a la API de clientes para el llenado de la Dattable
 function GetAgencies() {
 
-    fns.CallGetAsync("api/agency/GetList", null, function (dataResponse) {
+    fns.CallGetAsync("api/agency/Select", null, function (dataResponse) {
         $("#agencyTable").DataTable().clear();
         $("#agencyTable").DataTable().rows.add(dataResponse).draw();
     });
+}
+
+function UpdateAgency(id) {
+    fns.CallGetAsync(`api/agency/Find`, { id: id }, function (response) {
+        $("#frmAgency").assignJsonToForm(response);
+    })
+    $("#modalAgency").modal("show");
 }
 
 //Metodo para crear el Datatable de clientes
@@ -61,7 +70,7 @@ function BuildDatatable() {
                 data: "agenciaId",
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return `<a href="/Agencies/CreateUpdate/${data}"><i class="fa fa-pencil-square btnDatatable text-primary"></i></a>
+                    return `<i onclick="UpdateAgency(${data})" class="fa fa-pencil-square btnDatatable text-primary"></i>
                             <i class="fa fa-trash btnDatatable text-danger"></i>`;
 
                 }
