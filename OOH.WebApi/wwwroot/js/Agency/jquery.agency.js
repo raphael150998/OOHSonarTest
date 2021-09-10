@@ -22,7 +22,9 @@ $().ready(function ($) {
             },
             Rate: {
                 required: true,
-                number: true
+                number: true,
+                min: 0,
+                max: 100
             }
         },
         messages: {
@@ -31,7 +33,9 @@ $().ready(function ($) {
             },
             Rate: {
                 required: "La comisión es requerida",
-                number: "Solo se permiten números"
+                number: "Solo se permiten números",
+                min: "La comisión debe ser mayor o igual a cero",
+                max: "La comisión debe ser menor o igual a cien"
             }
         }
     }, function (data) {
@@ -58,6 +62,23 @@ function UpdateAgency(id) {
     $("#modalAgency").modal("show");
 }
 
+function RemoveAgency(id) {
+    SweetAlert.RemoveAlert("api/agency/remove", { Id: parseInt(id) }, function (response) {
+        GetAgencies();
+        if (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Logrado',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'A ocurrido un error',
+            });
+        }
+    });
+}
+
 //Metodo para crear el Datatable de clientes
 function BuildDatatable() {
     DataTableHelper.Draw("#agencyTable", {
@@ -71,7 +92,7 @@ function BuildDatatable() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `<i onclick="UpdateAgency(${data})" class="fa fa-pencil-square btnDatatable text-primary"></i>
-                            <i class="fa fa-trash btnDatatable text-danger"></i>`;
+                            <i onclick="RemoveAgency(${data})" class="fa fa-trash btnDatatable text-danger"></i>`;
 
                 }
             },
