@@ -8,8 +8,9 @@ namespace OOH.Data.Interfaces
     public interface IWebUserHelper
     {
         /// <summary>
-        /// Obtiene la cadena de conexión hacia la base del usuario logueado
+        ///  Obtiene la cadena de conexión hacia la base del usuario logueado
         /// </summary>
+        /// <param name="connectionString">Si este parametro no va vacio entonces se devuelve el parametro enviado</param>
         /// <returns></returns>
         string GetUserConnectionString();
 
