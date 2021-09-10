@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
@@ -9,39 +10,47 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class AdvertisingAgencyRepository : OOHContext, IAdvertisingAgencyRepository
+    public class AdvertisingAgencyRepository : OOHContext, IBaseRepository<AgenciasPublicidad>
     {
         public AdvertisingAgencyRepository(IWebUserHelper userHelper) : base(userHelper)
         {
         }
 
-        public async Task<int> Create(AgenciasPublicidad agencia)
+        public async Task<ResultClass> AddOrUpdate(AgenciasPublicidad agencia)
         {
-            string sql = "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)";
-            var id = await PostData(sql, true, new DynamicParameters(agencia), false);
-            return id;
+            string sql = "";
+            int resultData = 0;
+            ResultClass result = new ResultClass();
+            if (agencia.AgenciaId == 0)
+            {
+                sql = "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)";
+            }
+            else
+            {
+                sql = "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
+            }
+
+            resultData = await PostData(sql, true, new DynamicParameters(agencia));
+
+            result.data = resultData;
+            result.state = resultData > 0;
+
+            return result;
         }
 
         public async Task<AgenciasPublicidad> Find(int id)
         {
-            return await FilterData<AgenciasPublicidad>($"SELECT * FROM AgenciasPublicidad WHERE AgenciaId = {id}", false, null);
+            return await FilterData<AgenciasPublicidad>($"SELECT * FROM AgenciasPublicidad WHERE AgenciaId = {id}");
         }
 
-        public async Task Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            await PostData($"UPDATE AgenciasPublicidad SET Activo = false WHERE AgenciaId = {id}", false, null, false);
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<AgenciasPublicidad>> Select(string _Where = "")
         {
-            return SelectData<AgenciasPublicidad>("SELECT * FROM AgenciasPublicidad " + _Where, false, null).Result.ToList();
-        }
-
-        public async Task Update(AgenciasPublicidad agencia)
-        {
-            string sql = "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
-
-            await PostData(sql, true, new DynamicParameters(agencia), false);
+            return await SelectData<AgenciasPublicidad>("SELECT * FROM AgenciasPublicidad " + _Where);
         }
     }
 }

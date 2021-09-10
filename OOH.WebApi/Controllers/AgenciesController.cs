@@ -13,15 +13,6 @@ namespace OOH.WebApi.Controllers
 {
     public class AgenciesController : Controller
     {
-        private readonly IAdvertisingAgencyRepository _repo;
-        private readonly IMapper _mapper;
-
-        public AgenciesController(IAdvertisingAgencyRepository repo, IMapper mapper)
-        {
-            _repo = repo;
-            _mapper = mapper;
-        }
-
         public async Task<IActionResult> Index()
         {
             return View();

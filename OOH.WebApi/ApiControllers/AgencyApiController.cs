@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Helpers;
-using OOH.Data.Interfaces;
 using OOH.Data.Models;
+using OOH.Data.Repos;
 using OOH.WebApi.Models.Agency;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,10 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class AgencyApiController : ControllerBase
     {
-        private readonly IAdvertisingAgencyRepository _repo;
+        private readonly AdvertisingAgencyRepository _repo;
         private readonly IMapper _mapper;
 
-        public AgencyApiController(IAdvertisingAgencyRepository repo, IMapper mapper)
+        public AgencyApiController(AdvertisingAgencyRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -46,17 +46,7 @@ namespace OOH.WebApi.ApiControllers
                 agency.Nombre = model.Name;
                 agency.Comision = model.Rate;
 
-                int id = 0;
-
-                if (agency.AgenciaId == 0)
-                {
-                    id = await _repo.Create(agency);
-                    response.data = id;
-                }
-                else
-                {
-                    await _repo.Update(agency);
-                }
+                response = await _repo.AddOrUpdate(agency);
             }
             catch (Exception ex)
             {

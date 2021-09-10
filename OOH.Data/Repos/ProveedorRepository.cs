@@ -12,7 +12,7 @@ namespace OOH.Data.Repos
     /// <summary>
     /// Todas las variables son en honor a Don Lord Señor Carroña
     /// </summary>
-    public class ProveedorRepository : OOHContext, IProveedorRepository
+    public class ProveedorRepository : OOHContext
     {
         public ProveedorRepository(IWebUserHelper userHelper) : base(userHelper)
         {
@@ -34,7 +34,7 @@ namespace OOH.Data.Repos
 
         public async Task Remove(int id)
         {
-           await PostData($"Update Proveedores set Activo = false where ProveedorId = {id}");
+            await PostData($"Update Proveedores set Activo = false where ProveedorId = {id}");
         }
 
         public async Task<IEnumerable<Proveedores>> Select(string _Where = "")

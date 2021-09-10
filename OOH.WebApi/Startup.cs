@@ -29,6 +29,7 @@ namespace OOH.WebApi
             services.AddScoped<IWebUserHelper, WebUserHelper>();
             services.AddScoped<IAdvertisingAgencyRepository, AdvertisingAgencyRepository>();
             services.AddScoped<AccountRepository>();
+            services.AddScoped<OOHContext>();
             services.AddScoped<ClientRepository>();
             services.AddScoped<MunicipalityRepository>();
             services.AddScoped<CategoryRepository>();
