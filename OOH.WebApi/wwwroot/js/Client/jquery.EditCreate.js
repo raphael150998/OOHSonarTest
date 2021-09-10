@@ -65,54 +65,18 @@ function llenar() {
 
     var idCliente = $("#ClienteId").val();
 
-
-    console.log(idCliente);
     if (idCliente == 0) {
         $("#addbtn").css("cursor", "no-drop");
     }
     if (idCliente != 0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
-            console.log(JSON.stringify(dataResult));
-         
+            //console.log(JSON.stringify(dataResult));
+            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
             $("#formClient").assignJsonToForm(dataResult);
-
-
-        });
-    }
-}
-function LLenarTextBox() {
-    var idCliente = $("#ClienteId").val();
-   
-
-    console.log(idCliente);
-    if (idCliente == 0) {
-        $("#addbtn").css("cursor", "no-drop");
-    }
-    if (idCliente !=0) {
-        fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
-            console.log(dataResult);
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");           
-            $("#ClienteId").val(dataResult["clienteId"]);
-            $("#NombreComercial").val(dataResult["nombreComercial"]);
-            $("#dropdownMunicipio option[value=" + dataResult["municipioId"] + "]").attr("selected", true);
             $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
-            $("#NRC").val(dataResult["nrc"]);
-            $("#RazonSocial").val(dataResult["razonSocial"]);
-            $("#NIT").val(dataResult["nit"]);
-            $("#Celular").val(dataResult["celular"]);
-            $("#Email").val(dataResult["email"]);
-            $("#Telefono").val(dataResult["telefono"]);
-            $("#Giro").val(dataResult["giro"]);
-            $("#dropdownCategoria option[value=" + dataResult["categoriaId"] + "]").attr("selected", true);
-            if (dataResult["personaJuridica"]) {
 
-                $('.switchery').trigger('click');
-            }
-            $("#Direccion").val(dataResult["direccion"]);
-            $("#Codigo").val(dataResult["codigo"]);
         });
     }
-   
 }
 function DropDownListMunicipio() {
 
@@ -138,10 +102,6 @@ function DropDownListMunicipio() {
         $("#divMunicipio").html(select);
         $('#dropdownMunicipio').select2();
 
-        let municipio = $("#MunicipioId").val();
-        //$("#dropdownMunicipio option[value=" + municipio + "]").attr("selected", true);
-        $('#dropdownMunicipio ').val(municipio).trigger('change.select2');
-        $("#municipioRemove").html("");
     });
 
 }
@@ -159,9 +119,6 @@ function DropDownListCategoria() {
 
         $("#divCategoria").html(select);
 
-        let categoria = $("#CategoriaId").val();       
-        $("#dropdownCategoria option[value=" + categoria + "]").attr("selected", true);
-        $("#categoriaRemove").html("");
     });
 
 }
@@ -187,3 +144,38 @@ function PostData() {
         Codigo: $("#Codigo").val()
     }
 }
+
+//function LLenarTextBox() {
+//    var idCliente = $("#ClienteId").val();
+
+
+//    console.log(idCliente);
+//    if (idCliente == 0) {
+//        $("#addbtn").css("cursor", "no-drop");
+//    }
+//    if (idCliente != 0) {
+//        fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
+//            console.log(dataResult);
+//            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
+//            $("#ClienteId").val(dataResult["clienteId"]);
+//            $("#NombreComercial").val(dataResult["nombreComercial"]);
+//            $("#dropdownMunicipio option[value=" + dataResult["municipioId"] + "]").attr("selected", true);
+//            $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
+//            $("#NRC").val(dataResult["nrc"]);
+//            $("#RazonSocial").val(dataResult["razonSocial"]);
+//            $("#NIT").val(dataResult["nit"]);
+//            $("#Celular").val(dataResult["celular"]);
+//            $("#Email").val(dataResult["email"]);
+//            $("#Telefono").val(dataResult["telefono"]);
+//            $("#Giro").val(dataResult["giro"]);
+//            $("#dropdownCategoria option[value=" + dataResult["categoriaId"] + "]").attr("selected", true);
+//            if (dataResult["personaJuridica"]) {
+
+//                $('.switchery').trigger('click');
+//            }
+//            $("#Direccion").val(dataResult["direccion"]);
+//            $("#Codigo").val(dataResult["codigo"]);
+//        });
+//    }
+
+//}

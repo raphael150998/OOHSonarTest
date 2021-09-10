@@ -26,20 +26,30 @@
 });
 
 function editContact(idContacto) {
-    $("#ModalContact").modal({
-        show: true
-    });
-    fns.CallGetAsync("api/contacts/contact", { Id: idContacto }, function (dataRquest) {
-        console.log(dataRquest);
-        $("#nombre").val(dataRquest["nombres"]);
-        $("#apellido").val(dataRquest["apellidos"]);
-        $("#email").val(dataRquest["email"]);
-        $("#telefono").val(dataRquest["telefono"]);
-        $("#celular").val(dataRquest["celular"]);
-        $("#idContacto").val(dataRquest["id"]);
-        $("#rol").val(dataRquest["rol"]);
+    var idCliente = $("#ClienteId").val();
+    $("#ClinId").val(idCliente);
 
-    });
+   
+    if (idContacto != 0) {
+
+        fns.CallGetAsync("api/contacts/contact", { Id: idContacto }, function (dataRquest) {
+            console.log(dataRquest);
+            $("#formContact").assignJsonToForm(dataRquest);
+            $("#ModalContact").modal("show");
+            //$("#nombre").val(dataRquest["nombres"]);
+            //$("#apellido").val(dataRquest["apellidos"]);
+            //$("#email").val(dataRquest["email"]);
+            //$("#telefono").val(dataRquest["telefono"]);
+            //$("#celular").val(dataRquest["celular"]);
+            //$("#idContacto").val(dataRquest["id"]);
+            //$("#rol").val(dataRquest["rol"]);
+
+        });
+
+    }
+    if (idCliente != 0) {
+        $("#ModalContact").modal("show");
+    }
    
 
 }

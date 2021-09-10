@@ -66,6 +66,8 @@ $.fn.tagType = function () {
 //de la coincidencia de los nombres del json con los nombres del controlador
 $.fn.assignJsonToForm = function (json) {
 
+    var form = this;
+
     this.trigger("reset");
 
     var typeInfo = [];
@@ -74,21 +76,21 @@ $.fn.assignJsonToForm = function (json) {
         var tagType = $(control).tagType();
         if (tagType != 'submit' && tagType != 'button' && tagType != 'reset') {
 
-        var type = $(control).hasClass("number") ? "number" : $(control).hasClass("bool") ? "bool" : "text";
-        var name = $(control).attr("name");
-        if (tagType == "checkbox" && $(control).hasClass("js-single")) {
-            if ($(control).hasAttr("checked") && $(control).prop("checked")) {
-                $(control).changeSwitch(true);
+            var type = $(control).hasClass("number") ? "number" : $(control).hasClass("bool") ? "bool" : "text";
+            var name = $(control).attr("name");
+            if (tagType == "checkbox" && $(control).hasClass("js-single")) {
+                if ($(control).hasAttr("checked") && $(control).prop("checked")) {
+                    $(control).changeSwitch(true);
+                }
+                else {
+                    $(control).changeSwitch(false);
+                }
             }
-            else {
-                $(control).changeSwitch(false);
-            }
-        }
-        typeInfo.push({
-            type: type,
-            name: name,
-            tagType: tagType
-        });
+            typeInfo.push({
+                type: type,
+                name: name,
+                tagType: tagType
+            });
         }
     });
 
@@ -98,7 +100,9 @@ $.fn.assignJsonToForm = function (json) {
         var jKey = jsonKeys.find(x => x.toLowerCase() == controlInfo.name.toLowerCase());
         if (jKey != undefined) {
             jValue = json[jKey];
-            let targetControl = $(`[name="${controlInfo.name}"]`)[0];
+
+            let targetControl = $(form).find(`[name="${controlInfo.name}"]`);
+            
             switch (controlInfo.tagType) {
                 case "checkbox":
                     if ($(targetControl).hasClass("js-single")) {
