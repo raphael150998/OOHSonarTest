@@ -64,6 +64,7 @@ function removeContact(idContact) {
                 icon: 'success',
                 title: 'Logrado',
             });
+            LLenarDatatable();
         } else {
             Swal.fire({
                 icon: 'error',
