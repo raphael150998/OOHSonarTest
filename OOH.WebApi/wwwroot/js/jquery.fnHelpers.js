@@ -49,6 +49,15 @@ $.fn.tagType = function () {
         case "radio":
             type = "radio";
             break;
+        case "submit":
+            type = "submit";
+            break;
+        case "reset":
+            type = "reset";
+            break;
+        case "button":
+            type = "button";
+            break;
     }
     return type;
 };
@@ -63,6 +72,8 @@ $.fn.assignJsonToForm = function (json) {
 
     this.find('input,select,textarea').each((i, control) => {
         var tagType = $(control).tagType();
+        if (tagType != 'submit' && tagType != 'button' && tagType != 'reset') {
+
         var type = $(control).hasClass("number") ? "number" : $(control).hasClass("bool") ? "bool" : "text";
         var name = $(control).attr("name");
         if (tagType == "checkbox" && $(control).hasClass("js-single")) {
@@ -78,6 +89,7 @@ $.fn.assignJsonToForm = function (json) {
             name: name,
             tagType: tagType
         });
+        }
     });
 
     var jsonKeys = Object.keys(json);
