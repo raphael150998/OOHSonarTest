@@ -74,7 +74,8 @@ function llenar() {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
             console.log(JSON.stringify(dataResult));
          
-            $("#formClient").deserialize(dataResult);
+            $("#formClient").assignJsonToForm(dataResult);
+
 
         });
     }

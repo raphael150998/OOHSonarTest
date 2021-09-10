@@ -12858,7 +12858,8 @@ body.menu-bottom #collapse-menu {
 }
 .select2-container--default .select2-selection--single {
   color: #fff;
-  height: auto;
+
+  height: 35px;
 }
 /*Fondo Select2*/
 .select2-container--default .select2-selection--single .select2-selection__rendered {

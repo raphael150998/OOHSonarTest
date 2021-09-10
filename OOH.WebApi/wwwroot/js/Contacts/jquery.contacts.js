@@ -55,7 +55,9 @@ function BuildDatatable() {
 }
 
 function removeContact(idContact) {
-    SweetAlert.RemoveAlert("api/contacts/remove", { Id: idContact }, function (response) {
+    console.log(idContact);
+
+    SweetAlert.RemoveAlert("api/contacts/remove", { Id: parseInt(idContact) }, function(response) {
 
         if (response) {
             Swal.fire({
