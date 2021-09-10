@@ -55,6 +55,7 @@ function BuildDatatable() {
 }
 
 function removeContact(idContact) {
+    console.log(idContact);
     SweetAlert.RemoveAlert("api/contacts/remove", { Id: idContact }, function (response) {
 
         if (response) {

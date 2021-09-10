@@ -72,9 +72,9 @@ function llenar() {
     }
     if (idCliente != 0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
-            console.log(JSON.stringify(dataResult));
+            //console.log(JSON.stringify(dataResult));
          
-            $("#formClient").deserialize(dataResult);
+            //$("#formClient").deserialize(dataResult);
 
         });
     }

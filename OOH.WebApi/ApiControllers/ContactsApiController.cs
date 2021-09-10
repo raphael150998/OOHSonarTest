@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -46,9 +47,9 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/contacts/remove")]
-        public async Task<bool> Eliminar(int Id) {
+        public async Task<bool> Eliminar([FromBody]Identify<int> obj) {
 
-            return _repo.Remove(Id).Result;
+            return _repo.Remove(obj.Id).Result;
         
         }
 

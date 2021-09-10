@@ -22,7 +22,6 @@
         })
     },
     RemoveAlert: function (url, data, callback) {
-       
         Swal.fire({
             title: 'Desea Eliminar?',
             text: "La informacion sera eliminada Permanentemente!",
