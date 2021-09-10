@@ -11,6 +11,7 @@ namespace OOH.Data.Repos
     public class WebUserHelper : IWebUserHelper
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private string connectionString { get; set; } = "";
 
         public WebUserHelper(IHttpContextAccessor httpContextAccessor)
         {
@@ -19,6 +20,8 @@ namespace OOH.Data.Repos
 
         public string GetUserConnectionString()
         {
+            if (!string.IsNullOrEmpty(connectionString)) return connectionString;
+
             var user = _httpContextAccessor.HttpContext.User;
 
             return user.Claims.Where(x => x.Type == "Cs").FirstOrDefault()?.Value;

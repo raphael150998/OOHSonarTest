@@ -72,5 +72,30 @@ namespace OOH.Data
                 return ObjetoReturn.ToList();
             }
         }
+
+        public async Task<IEnumerable<T>> SelectData<T>(string _query, string connection, bool _isProcedure = false, DynamicParameters parameters = null)
+        {
+            using (IDbConnection cn = new SqlConnection(string.IsNullOrEmpty(connection) ? _connectionString : connection))
+            {
+                var ObjetoReturn = await cn.QueryAsync<T>(_query, param: _isProcedure == true ? parameters : null,
+                    commandType: _isProcedure == true ?
+                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+
+
+                return ObjetoReturn.ToList();
+            }
+        }
+
+        public async Task<int> UpdateData(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false)
+        {
+            using (IDbConnection cn = new SqlConnection(_connectionString))
+            {
+                int ObjetoReturn = await cn.ExecuteAsync(_query, param: _withParameters == true ? parameters : null,
+                                    commandType: _isProcedure == true ?
+                                    CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
+
+                return ObjetoReturn;
+            }
+        }
     }
 }

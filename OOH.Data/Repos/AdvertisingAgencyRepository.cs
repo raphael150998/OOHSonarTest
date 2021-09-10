@@ -18,22 +18,14 @@ namespace OOH.Data.Repos
 
         public async Task<ResultClass> AddOrUpdate(AgenciasPublicidad agencia)
         {
-            string sql = "";
-            int resultData = 0;
+
             ResultClass result = new ResultClass();
-            if (agencia.AgenciaId == 0)
-            {
-                sql = "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)";
-            }
-            else
-            {
-                sql = "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
-            }
 
-            resultData = await PostData(sql, true, new DynamicParameters(agencia));
+            string sql = agencia.AgenciaId == 0 ? "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)" : "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
 
-            result.data = resultData;
-            result.state = resultData > 0;
+            result.data = agencia.AgenciaId == 0 ? await PostData(sql, true, new DynamicParameters(agencia)) : await UpdateData(sql, true, new DynamicParameters(agencia));
+
+            result.state = (int)result.data > 0;
 
             return result;
         }
