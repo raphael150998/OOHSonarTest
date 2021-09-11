@@ -545,7 +545,8 @@ $.extend( $.validator, {
 			this.resetElements( elements );
 		},
 
-		resetElements: function( elements ) {
+		resetElements: function (elements) {
+			console.log(elements);
 			var i;
 
 			if ( this.settings.unhighlight ) {
@@ -553,11 +554,13 @@ $.extend( $.validator, {
 					this.settings.unhighlight.call( this, elements[ i ],
 						this.settings.errorClass, "" );
 					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
+					this.findByName(elements[i].name).parent().find($("i.error")).remove();
 				}
 			} else {
 				elements
 					.removeClass( this.settings.errorClass )
-					.removeClass( this.settings.validClass );
+					.removeClass(this.settings.validClass);
+				elements.parent().find($("i.error")).remove();
 			}
 		},
 

@@ -10,12 +10,12 @@ $().ready(function ($) {
     });
 
     $("#btnAdd").click(function () {
-        $("#Active").changeSwitch(false);
+        $("#modalTitle").html("Agregando nueva agencia");
         $('#frmAgency').trigger("reset");
         $("#modalAgency").modal("show");
     });
 
-    Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
+    var validator = Validate.Form("#frmAgency", "api/agency/CreateUpdate", {
         rules: {
             Name: {
                 required: true
@@ -39,10 +39,14 @@ $().ready(function ($) {
             }
         }
     }, function (data) {
-        $("#Active").changeSwitch(false);
         $('#frmAgency').trigger("reset");
         $("#modalAgency").modal("hide");
         refresh();
+    });
+
+    $("#btnClose").click(function myfunction() {
+        validator.resetForm();
+        $("#modalAgency").modal("hide");
     });
 });
 
@@ -59,6 +63,7 @@ function UpdateAgency(id) {
     fns.CallGetAsync(`api/agency/Find`, { id: id }, function (response) {
         $("#frmAgency").assignJsonToForm(response);
     })
+    $("#modalTitle").html("Modificando agencia");
     $("#modalAgency").modal("show");
 }
 

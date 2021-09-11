@@ -9,7 +9,13 @@
             if (placement) {
                 $(placement).append(`<i data-toggle="tooltip" data-placement="top" data-trigger="hover" title="${error.text()}" class="fas fa-exclamation-circle error"></i>`);
             } else {
-                $(element).parent().append(`<i data-toggle="tooltip" data-placement="top" data-trigger="hover" title="${error.text()}" class="fas fa-exclamation-circle error"></i>`);
+                if ($(element).parent().hasClass("input-group")) {
+                    $(element).parent().append(`<i data-toggle="tooltip" data-placement="top" data-trigger="hover" title="${error.text()}" class="fas fa-exclamation-circle error error-group"></i>`);
+                }
+                else {
+                    $(element).parent().append(`<i data-toggle="tooltip" data-placement="top" data-trigger="hover" title="${error.text()}" class="fas fa-exclamation-circle error"></i>`);
+                }
+
                 //error.insertAfter(element);
             }
         };
@@ -44,6 +50,6 @@
             }, false);
             return false;
         }
-        $(identify).validate(config);
+        return $(identify).validate(config);
     }
 }

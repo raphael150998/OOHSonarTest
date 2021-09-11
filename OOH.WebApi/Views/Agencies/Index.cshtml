@@ -33,7 +33,7 @@
         <div class="modal-content">
             <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmAgency" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center w-100" id="modalTitle">Agregando nueva agencia</h5>
+                    <h5 class="modal-title text-center w-100" id="modalTitle"></h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -44,17 +44,17 @@
                         </div>
                         <div class="col-md-6">
                             <label>Comisión</label>
-                            <input type="number" class="form-control number" name="Rate" />
-                            @*<div class="input-group">
-                                    <span class="input-group-addon">%</span>
-                                    <input type="number" class="form-control number" name="Rate" />
-                                </div>*@
+                            @*<input type="number" class="form-control number" name="Rate" />*@
+                            <div class="input-group input-group-default">
+                                <span class="input-group-addon text-dark">%</span>
+                                <input type="number" class="form-control number" name="Rate" />
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnClose">Cancelar</button>
                 </div>
             </form>
         </div>
