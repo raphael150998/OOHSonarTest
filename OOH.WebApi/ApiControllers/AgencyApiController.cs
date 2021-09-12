@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Models;
 using OOH.Data.Repos;
@@ -65,6 +66,10 @@ namespace OOH.WebApi.ApiControllers
             return Ok(_mapper.Map<AgencyVm>(await _repo.Find(id)));
         }
 
-
+        [HttpPost("Remove")]
+        public async Task<IActionResult> Remove([FromBody] Identify<int> obj)
+        {
+            return Ok(await _repo.Remove(obj.Id));
+        }
     }
 }

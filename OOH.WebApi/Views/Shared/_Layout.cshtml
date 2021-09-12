@@ -60,13 +60,23 @@
         }
 
         input.error, input.error:focus {
-            border-color: tomato;
+            border-color: tomato !important;
         }
 
         i.error {
             position: absolute;
             top: 40px;
             right: 25px;
+        }
+
+        i.error-group {
+            top: 13px;
+            right: 10px;
+            z-index: 3
+        }
+
+        .input-group-addon {
+            padding: 0rem 0.75rem !important;
         }
     </style>
 </head>

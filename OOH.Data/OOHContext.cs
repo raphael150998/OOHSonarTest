@@ -24,7 +24,7 @@ namespace OOH.Data
         {
             using (IDbConnection cn = new SqlConnection(_connectionString))
             {
-                var ObjetoReturn = await cn.QuerySingleAsync<T>(_query, param: _isProcedure == true ? parameters : null,
+                var ObjetoReturn = await cn.QueryFirstOrDefaultAsync<T>(_query, param: _isProcedure == true ? parameters : null,
                     commandType: _isProcedure == true ?
                     CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 

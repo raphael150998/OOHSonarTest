@@ -37,7 +37,7 @@ namespace OOH.Data.Repos
 
         public async Task<bool> Remove(int id)
         {
-            throw new NotImplementedException();
+            return RemoveData($"DELETE FROM AgenciasPublicidad WHERE AgenciaId = {id}").Result > 0;
         }
 
         public async Task<IEnumerable<AgenciasPublicidad>> Select(string _Where = "")

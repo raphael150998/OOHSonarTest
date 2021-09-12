@@ -33,7 +33,7 @@
         <div class="modal-content">
             <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmAgency" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center w-100" id="modalTitle">Agregando nueva agencia</h5>
+                    <h5 class="modal-title text-center w-100" id="modalTitle"></h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -44,30 +44,17 @@
                         </div>
                         <div class="col-md-6">
                             <label>Comisión</label>
-                            <input type="text" class="form-control number" name="Rate" />
-                        </div>
-                        <div class="col-md-6">
-                            <label>Nombre de agencia</label>
-                            <select name="City" class="form-control number">
-                                <option value="1">Armenia</option>
-                                <option value="2">Sonsonate</option>
-                                <option value="3">Acajutla</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Comisión</label>
-                            <textarea name="Comment" class="form-control"></textarea>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="control-label" name="PersonaJuridica"></label>
-                            <br />
-                            <input type="checkbox" class="bool js-single" id="Active" name="Active" data-switchery="true" />
+                            @*<input type="number" class="form-control number" name="Rate" />*@
+                            <div class="input-group input-group-default">
+                                <span class="input-group-addon text-dark">%</span>
+                                <input type="number" class="form-control number" name="Rate" />
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnClose">Cancelar</button>
                 </div>
             </form>
         </div>
