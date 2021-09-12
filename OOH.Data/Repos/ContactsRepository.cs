@@ -20,22 +20,25 @@ namespace OOH.Data.Repos
         public async Task<ResultClass> AddOrUpdate(ClientesContactos collection)
         {
 
-            DynamicParameters param = new DynamicParameters();
-            param.Add("@Cliente", collection.ClienteId);
-            param.Add("@Nombres", collection.Nombres);
-            param.Add("@Apellidos", collection.Apellidos);
-            param.Add("@Rol", collection.Rol);
-            param.Add("@Email", collection.Email);
-            param.Add("@Telefono", collection.Telefono);
-            param.Add("@Celular", collection.Celular);
+            DynamicParameters param = new DynamicParameters(collection);
+         
             if (collection.Id == 0)
             {
-                return new ResultClass { data = PostData(@"Insert [dbo].[ClientesContactos] (ClienteId,Nombres,Celular,Apellidos,Rol,Telefono,Email) Values(@Cliente,@Nombres,@Celular,@Apellidos,@Rol,@Telefono,@Email)", true, param, false).Result };
+                try
+                {
+
+                    return new ResultClass { data = PostData(@"Insert into [dbo].[ClientesContactos] (ClienteId,Nombres,Celular,Apellidos,RolId,Telefono,Email) Values(@ClienteId,@Nombres,@Celular,@Apellidos,@RolId,@Telefono,@Email)", true, param, false).Result };
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
             }
             else
             {
-                param.Add("@id", collection.Id);
-                return new ResultClass{data= PostData(" Update [dbo].[ClientesContactos] set [ClienteId] = @Cliente , Nombres = @Nombres, Apellidos = @Apellidos , Rol = @Rol , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @id", true, param, false).Result};
+               
+                return new ResultClass{data= UpdateData(" Update [dbo].[ClientesContactos] set [ClienteId] = @ClienteId , Nombres = @Nombres, Apellidos = @Apellidos , RolId = @RolId , Email = @Email, Telefono = @Telefono ,Celular = @Celular Where Id = @Id", true, param, false).Result};
             }
         }
 
@@ -54,5 +57,11 @@ namespace OOH.Data.Repos
         {
             return SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos] "+ _Where,false,null).Result.ToList();
         }
+        public async Task<IEnumerable<ClientesContactosRoles>> Roles(string _Where = "")
+        {
+            return SelectData<ClientesContactosRoles>($"Select * from [dbo].[ClientesContactosRoles] " + _Where,false,null).Result.ToList();
+        }
+
+
     }
 }

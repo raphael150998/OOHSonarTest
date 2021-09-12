@@ -28,6 +28,12 @@ namespace OOH.WebApi.ApiControllers
         {
             return _repo.Select($"Where ClienteId = {clientId}").Result.ToList();
         }
+        [HttpGet]
+        [Route("api/Roles/call")]
+        public async Task<List<ClientesContactosRoles>> Roles()
+        {
+            return _repo.Roles().Result.ToList();
+        }
 
         [HttpPost]
         [Route("api/contacts/CEcontact")]
