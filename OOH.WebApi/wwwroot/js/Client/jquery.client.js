@@ -27,7 +27,7 @@ function BuilDatatable() {
                 render: function (data, type, full, meta) {
                     return `
                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + data + `')"></i>
-                     <i class="fa fa-trash btnDatatable text-danger"></i>
+                     <i class="fa fa-trash btnDatatable text-danger" onclick="removeClient('` + data + `')"></i>
                      `;
                 }
             },
@@ -53,4 +53,34 @@ function refresh() {
 function edit(id) {
     console.log(id);
     window.open("/Client/CreateUpdate/" + id, '_blank');
+}
+
+function removeClient(idClient) {
+
+    SweetAlert.RemoveAlert("api/client/remove", { Id: parseInt(idClient) }, function (response) {
+
+        if (response["state"]) {
+         
+            Swal.fire({
+                icon: 'success',
+                title: 'Logrado',
+            });
+            LLenarDatatable();
+        } else {
+            if (response["condition"] == "error") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'El cliente posee mas de una relacion.',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'A ocurrido un error',
+                });
+            }
+          
+        }
+
+
+    });
 }

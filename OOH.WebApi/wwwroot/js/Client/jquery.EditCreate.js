@@ -59,6 +59,8 @@
             }
         }
        
+    }, function (data) {
+        $("#ClienteId").val(data["data"]);
     });
 });
 function llenar() {
