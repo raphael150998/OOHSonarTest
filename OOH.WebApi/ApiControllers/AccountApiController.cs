@@ -18,7 +18,7 @@ using OOH.Data.Herlpers;
 
 namespace OOH.WebApi.ApiControllers
 {
-  
+
     [ApiController]
     public class AccountApiController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/login/Validate")]
-        public async Task<ResultClass> Validate([FromBody]UserLoginDto user)
+        public async Task<ResultClass> Validate([FromBody] UserLoginDto user)
         {
             var Login = _repo.ValidarLogin(user.Login, user.Pass);
             if (Login.state)
@@ -67,7 +67,6 @@ namespace OOH.WebApi.ApiControllers
 
 
             return Login;
-
         }
         [HttpPost]
         [Route("api/login/Logout")]
@@ -78,7 +77,7 @@ namespace OOH.WebApi.ApiControllers
         }
         [HttpPost]
         [Route("api/Account/Register")]
-        public async Task<ResultClass> Register([FromForm]Usuarios registro)
+        public async Task<ResultClass> Register([FromForm] Usuarios registro)
         {
             return _repo.RegistroUser(registro);
         }

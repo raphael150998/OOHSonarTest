@@ -46,7 +46,8 @@ namespace OOH.WebApi
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithReExecute("/StatusCode", "?code={0}");
             }
             else
             {
