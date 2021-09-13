@@ -5,6 +5,7 @@ using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Models;
 using OOH.Data.Repos;
+using OOH.WebApi.Filters.Attributes;
 using OOH.WebApi.Models.Agency;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,15 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpGet("Select")]
+        [OhhFilter("ListAgencies", Data.ActionPermission.Read)]
         public async Task<IActionResult> GetList()
         {
             return Ok(await _repo.Select());
         }
 
         [HttpPost("CreateUpdate")]
+        [OhhFilter("Agencies", Data.ActionPermission.Create)]
+        [OhhFilter("Agencies", Data.ActionPermission.Update)]
         public async Task<IActionResult> CreateUpdate([FromBody] AgencyVm model)
         {
             ResultClass response = new ResultClass();
@@ -60,6 +64,7 @@ namespace OOH.WebApi.ApiControllers
 
 
         [HttpGet("Find")]
+        [OhhFilter("Agencies", Data.ActionPermission.Read)]
         public async Task<IActionResult> Get(int id)
         {
             var algo = Request;
@@ -67,6 +72,7 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost("Remove")]
+        [OhhFilter("Agencies", Data.ActionPermission.Delete)]
         public async Task<IActionResult> Remove([FromBody] Identify<int> obj)
         {
             return Ok(await _repo.Remove(obj.Id));

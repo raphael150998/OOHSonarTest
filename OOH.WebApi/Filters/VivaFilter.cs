@@ -42,7 +42,7 @@ namespace OOH.WebApi.Filters
 
                 UsuariosPermisos permissionRequested = permissions?.FirstOrDefault(x => x.Permiso == _permission);
 
-                if (permissionRequested == null) { context.Result = new ForbidResult(); return; }
+                if (permissionRequested == null) { context.Result = new StatusCodeResult(StatusCodes.Status403Forbidden); return; }
 
                 bool isActionAllowed = false;
 
@@ -65,7 +65,7 @@ namespace OOH.WebApi.Filters
                         break;
                 }
 
-                if (!isActionAllowed) { context.Result = new ForbidResult(); return; }
+                if (!isActionAllowed) { context.Result = new StatusCodeResult(StatusCodes.Status403Forbidden); return; }
 
             }
             #endregion

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
+using OOH.WebApi.Filters.Attributes;
 using OOH.WebApi.Models.Agency;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace OOH.WebApi.Controllers
 {
     public class AgenciesController : Controller
     {
+        [OhhFilter("ListAgencies", Data.ActionPermission.Read)]
         public async Task<IActionResult> Index()
         {
             return View();
