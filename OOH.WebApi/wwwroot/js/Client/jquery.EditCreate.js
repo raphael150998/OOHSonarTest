@@ -60,8 +60,17 @@
         }
        
     }, function (data) {
-        console.log(data)
-        $("#ClienteId").val(data["data"]);
+        if (data["state"] == false) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: dataResult["message"]
+            })
+        } else {
+            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
+            $("#addbtn").css("cursor", "pointer");
+            $("#ClienteId").val(data["data"]);
+        }
     });
 });
 function llenar() {

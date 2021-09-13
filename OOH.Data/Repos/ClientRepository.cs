@@ -18,13 +18,15 @@ namespace OOH.Data.Repos
 
         public async Task<ResultClass> AddOrUpdate(Clientes client)
         {
-            if (client.ClienteId == 0)
+            Clientes validart = FilterData<Clientes>($"Select * from [dbo].[clientes] Where Codigo = '{client.Codigo}'", false, null).Result;
+            if (validart != null)
             {
-                if (FilterData<Clientes>($"Select * from [dbo].[clientes] Where Codigo = '{client.Codigo}' ", false, null).Result != null)
+                if (validart.ClienteId != client.ClienteId)
                 {
                     return new ResultClass() { state = false, message = "El codigo ya existe", data = 1 };
                 }
             }
+            
             client.UsuarioId = _userHelper.GetUserId();
             DynamicParameters param = new DynamicParameters(client);
             try
