@@ -19,6 +19,11 @@
         messages: {
             required: "Campo requerido bro"
         }
+    }, function (data) {
+        if (data["state"]) {
+            $("#ModalContact").modal("hide");
+            LLenarDatatable();
+        }
     });
 
 
@@ -26,6 +31,7 @@
 });
 
 function editContact(idContacto) {
+    $("#formContact").trigger("reset");
     var idCliente = $("#ClienteId").val();
     $("#ClinId").val(idCliente);
 
@@ -49,8 +55,27 @@ function editContact(idContacto) {
     }
     if (idCliente != 0) {
         $("#ModalContact").modal("show");
+        DropDown();
     }
    
+
+}
+
+function DropDown() {
+
+    fns.CallGetAsync("api/Roles/call", null, function (dataResult) {
+        let select = `<select class="form-control number" id="dropdownRoles" name="RolId" >`
+
+        dataResult.forEach(rl => {
+            let option = `<option value="` + rl.rolId + `"> ` + rl.nombre + `</option> `;
+
+            select = select + option;
+        });
+        select = select + "</select>";
+
+        $("#divRoles").html(select);
+
+    });
 
 }
 
