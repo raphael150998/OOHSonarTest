@@ -41,6 +41,30 @@ var fns = {
         });
         return rt;
     },
+    NPostDataAsync: function (ruta, data, callBack) {
+        var ruta = path + ruta;
+        var rt;
+        $.blockUI({ message: "Procesando, favor espere." });
+        $.ajax({
+            url: ruta,
+            type: "POST",
+            data: data,
+            async: true,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (data) {
+            rt = data;
+            $.unblockUI();
+            callBack(data);
+        }).fail(function (xhr, textStatus, errorThrown) {
+            Swal.fire({
+                icon: 'error',
+                title: 'A ocurrido un error',
+            });
+            $.unblockUI();
+        });
+        return rt;
+    },
     PostDataNoAsync: function (ruta, data, callBack) {
         var ruta = path + ruta;
         var rt;

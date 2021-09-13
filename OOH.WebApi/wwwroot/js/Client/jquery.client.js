@@ -67,10 +67,10 @@ function removeClient(idClient) {
             });
             LLenarDatatable();
         } else {
-            if (response["condition"] == "error") {
+            if (response["condition"] == "fk") {
                 Swal.fire({
                     icon: 'error',
-                    title: 'El cliente posee mas de una relacion.',
+                    title: response["message"],
                 });
             } else {
                 Swal.fire({

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -51,9 +52,41 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/client/remove")]
-        public async Task<bool> Remove([FromForm]int id)
+        public async Task<IActionResult> Remove([FromBody] Identify<int> objeto)
         {
-            return _repo.Remove(id).Result;
+            try
+            {
+                return Ok(new ResultClass() { data = _repo.Remove(objeto.Id).Result });
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233088)
+                {
+                    return Ok( new ResultClass()
+                    {
+
+                        data = null,
+                        state = false,
+                        condition = "fk",
+                        exception = ex,
+                        message = "El Cliente posee una relacion"
+                    });
+                }
+                else
+                {
+
+                    return Ok( new ResultClass()
+                    {
+                        data = null,
+                        state = false,
+                        condition = "error",
+                        exception = ex,
+                        message = "No se a logrado guardar"
+                    });
+                }
+
+            }
         }
 
 

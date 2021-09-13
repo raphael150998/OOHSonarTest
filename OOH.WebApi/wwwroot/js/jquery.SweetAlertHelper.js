@@ -34,7 +34,7 @@
             confirmButtonText: 'Confirmar!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fns.PostDataAsync(url, data, function (response) {
+                fns.NPostDataAsync(url, data, function (response) {
                     callback(response);       
                 });
             }

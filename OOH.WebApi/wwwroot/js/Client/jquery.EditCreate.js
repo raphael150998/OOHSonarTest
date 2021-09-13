@@ -60,6 +60,7 @@
         }
        
     }, function (data) {
+        console.log(data)
         $("#ClienteId").val(data["data"]);
     });
 });

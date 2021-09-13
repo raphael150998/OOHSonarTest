@@ -59,7 +59,7 @@ namespace OOH.Data.Repos
 
         public async Task<bool> Remove(int id)
         {
-            return PostData($"Update [dbo].[clientes] set Activo = false where ClienteId = '{id}'").Result != 0 ? true : false;
+            return RemoveData($"delete from  [dbo].[clientes] Where ClienteId = {id}", false).Result == 1 ? true : false;
 
         }
 
