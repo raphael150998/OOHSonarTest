@@ -69,7 +69,7 @@ namespace OOH.WebApi.ApiControllers
                         data = null,
                         state = false,
                         condition = "fk",
-                        exception = ex,
+                        //exception = ex,
                         message = "El Cliente posee una relacion"
                     });
                 }
@@ -81,7 +81,7 @@ namespace OOH.WebApi.ApiControllers
                         data = null,
                         state = false,
                         condition = "error",
-                        exception = ex,
+                        //exception = ex,
                         message = "No se a logrado guardar"
                     });
                 }
