@@ -45,7 +45,14 @@ namespace OOH.WebApi.Controllers
             //};
             //_proveedorRepo.Create(proveedor);
 
+            var infoBaby = new
+            {
+                mensaje = "el mero masizo chepin cristales",
+                hora = DateTime.Now,
+                userId = User.Identity.Name
+            };
 
+            _logger.LogInformation("se ha guardo en log en mogndb papu {@infoBaby}", infoBaby);
 
             return View();
         }
