@@ -4,10 +4,11 @@ using System.Text;
 
 namespace OOH.Data.Models
 {
-    public class Empresa
+    public class ProveedoresArchivos
     {
-        public int EmpresaId { get; set; }
-        public string ConnectionString { get; set; }
+        public int Id { get; set; }
+        public Int64 ProveedorId { get; set; }
         public string Descripcion { get; set; }
+        public string Url { get; set; }
     }
 }
