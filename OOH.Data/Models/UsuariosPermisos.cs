@@ -13,7 +13,7 @@ namespace OOH.Data.Models
         public int Id { get; set; }
         public int PerfilId { get; set; } 
         public int ModuloId { get; set; }
-        public Plataformas PlataformaId { get; set; }
+        public Platform PlataformaId { get; set; }
     
         [Required]
         [StringLength(50)]
@@ -24,12 +24,5 @@ namespace OOH.Data.Models
         public bool Modificar { get; set; }
         public bool Eliminar { get; set; }
 
-    }
-
-    public enum Plataformas
-    {
-        MultiPlataforma = 1,
-        Web = 2,
-        Movil = 3
     }
 }

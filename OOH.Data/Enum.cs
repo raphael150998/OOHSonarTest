@@ -34,4 +34,11 @@ namespace OOH.Data
         [Description("Inglés")]
         en = 2
     }
+
+    public enum Platform
+    {
+        MultiPlataforma = 1,
+        Web = 2,
+        Movil = 3
+    }
 }

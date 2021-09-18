@@ -48,7 +48,8 @@ namespace OOH.WebApi.ApiControllers
                     new Claim("Id", UserLoged.User.UserId.ToString()),
                     new Claim("Cs", UserLoged.StringConecction.ToString()),
                     new Claim("ListPermisos", JsonListPermisos),
-                    new Claim("Language", UserLoged.User.Idioma.ToString())
+                    new Claim("Language", UserLoged.User.Idioma.ToString()),
+                    new Claim("Empresa", UserLoged.User.EmpresaId.ToString())
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
