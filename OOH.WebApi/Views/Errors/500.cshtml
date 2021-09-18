@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "403";
+    Layout = "_LayoutLogin";
+}
+
+<style>
+    .title-1 {
+        padding: 5vw;
+        font-size: 5vh !important;
+        color: rgb(0 148 255);
+    }
+</style>
+
+<section class="login p-fixed d-flex text-center bg-primary common-img-bg" style="background-image:url('../images/background.jpg')">
+    <!-- Container-fluid starts -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-block">
+                        <h1 class="title-1">Ha ocurrido un error inesperado</h1>
+                        <a href="javascript:history.back()" class="btn btn-primary">Volver</a>
+                        <a href="@Url.Action("LogOut","Account")" class="btn btn-info">Volver a iniciar de sesión</a>
+                    </div>
+                </div>
+            </div>
+            <!-- end of col-sm-12 -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <!-- end of container-fluid -->
+</section>

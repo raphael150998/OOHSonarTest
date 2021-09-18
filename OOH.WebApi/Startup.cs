@@ -8,6 +8,8 @@ using OOH.Data.Interfaces;
 using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using OOH.Data;
+using Microsoft.Extensions.Logging;
+using OOH.WebApi.Extensions;
 
 namespace OOH.WebApi
 {
@@ -25,7 +27,6 @@ namespace OOH.WebApi
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHttpContextAccessor();
-            //services.AddScoped<IProveedorRepository, ProveedorRepository>();            
             services.AddScoped<IWebUserHelper, WebUserHelper>();
             services.AddScoped<AdvertisingAgencyRepository>();
             services.AddScoped<OOHContext>();
@@ -42,7 +43,7 @@ namespace OOH.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -55,6 +56,11 @@ namespace OOH.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //app.ConfigureExceptionHandler(logger);
+
+            app.ConfigureCustomExceptionMiddleware();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

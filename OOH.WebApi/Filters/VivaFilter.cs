@@ -75,7 +75,7 @@ namespace OOH.WebApi.Filters
 
             string userLang = !string.IsNullOrEmpty(user.Claims.Where(x => x.Type == "Language").FirstOrDefault()?.Value) ? (EnumHelper.Parse<Languages>(user.Claims.Where(x => x.Type == "Language").FirstOrDefault().Value)).GetValueString() : Languages.es.GetValueString();
 
-            if (userLang == null)
+            if (userLang != null)
             {
                 lang = userLang;
             }
@@ -92,6 +92,10 @@ namespace OOH.WebApi.Filters
             #endregion
 
             #region Log
+            if(_action == ActionPermission.NoAction && string.IsNullOrEmpty(_permission))
+            {
+
+            }
             #endregion
         }
     }
