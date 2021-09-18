@@ -25,7 +25,7 @@ namespace OOH.Language
         /// Get all languages supported that can be implemented
         /// </summary>
         /// <returns></returns>
-        public static List<LanguageDto> GetAllLanguage() => CultureInfo.GetCultures(CultureTypes.AllCultures & ~CultureTypes.NeutralCultures).Select(x => new LanguageDto() { CultureName = x.Name, FullName = x.DisplayName }).ToList();
+        public static List<LanguageDto> GetAllLanguage() => CultureInfo.GetCultures(CultureTypes.NeutralCultures).Select(x => new LanguageDto() { CultureName = x.Name, FullName = x.DisplayName }).ToList();
 
         /// <summary>
         /// Get a list of the languages which are implemented
