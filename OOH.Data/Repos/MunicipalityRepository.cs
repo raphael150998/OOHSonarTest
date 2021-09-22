@@ -11,9 +11,11 @@ namespace OOH.Data.Repos
 {
     public class MunicipalityRepository : OOHContext, IBaseRepository<Municipios>
     {
-        public MunicipalityRepository(IWebUserHelper userHelper) : base(userHelper)
-        {
+        private readonly ILogHelper _log;
 
+        public MunicipalityRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        {
+            _log = log;
         }
 
         public Task<ResultClass> AddOrUpdate(Municipios collection)

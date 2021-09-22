@@ -28,10 +28,10 @@ namespace OOH.WebApi
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHttpContextAccessor();
             services.AddScoped<IWebUserHelper, WebUserHelper>();
+            services.AddScoped<ILogHelper, LogHelper>();
             services.AddScoped<AdvertisingAgencyRepository>();
             services.AddScoped<OOHContext>();
             services.AddScoped<AccountRepository>();
-            services.AddScoped<OOHContext>();
             services.AddScoped<ClientRepository>();
             services.AddScoped<MunicipalityRepository>();
             services.AddScoped<CategoryRepository>();
@@ -47,8 +47,8 @@ namespace OOH.WebApi
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                app.UseStatusCodePagesWithReExecute("/StatusCode", "?code={0}");
+                app.UseDeveloperExceptionPage();
+                //app.UseStatusCodePagesWithReExecute("/StatusCode", "?code={0}");
             }
             else
             {

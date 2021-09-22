@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -12,12 +13,16 @@ namespace OOH.Data.Repos
 {
     public class ClientRepository : OOHContext, IBaseRepository<Clientes>
     {
-        public ClientRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+        public ClientRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public async Task<ResultClass> AddOrUpdate(Clientes client)
         {
+            ResultClass result = new ResultClass();
+
             Clientes validart = FilterData<Clientes>($"Select * from [dbo].[clientes] Where Codigo = '{client.Codigo}'", false, null).Result;
             if (validart != null)
             {
@@ -26,31 +31,33 @@ namespace OOH.Data.Repos
                     return new ResultClass() { state = false, message = "El codigo ya existe", data = 1 };
                 }
             }
-            
+
             client.UsuarioId = _userHelper.GetUserId();
+
             DynamicParameters param = new DynamicParameters(client);
-            try
-            {
-                if (client.ClienteId == 0)
-                {
 
-                    int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId,MunicipioId) Values (@NombreComercial,@RazonSocial,@PersonaJuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@UsuarioId,@CategoriaId,@MunicipioId)", true, param, false).Result;
-
-                    return new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
-                }
-                else
-                {
-
-                    int post = UpdateData("update [dbo].[Clientes] set Codigo = @Codigo ,RazonSocial = @RazonSocial ,NombreComercial = @NombreComercial, NRC = @NRC ,NIT= @NIT ,Giro = @Giro ,Email = @Email,Direccion = @Direccion,Telefono = @Telefono ,Celular = @Celular ,PersonaJuridica= @PersonaJuridica, CategoriaId = @CategoriaId, MunicipioId = @MunicipioId Where ClienteId = @ClienteId ", true, param, false).Result;
-                    return new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
-                }
-            }
-            catch (Exception ex)
+            if (client.ClienteId == 0)
             {
 
-                throw;
+                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId,MunicipioId) Values (@NombreComercial,@RazonSocial,@PersonaJuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@UsuarioId,@CategoriaId,@MunicipioId)", true, param, false).Result;
+
+                result = new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
             }
-        
+            else
+            {
+
+                int post = UpdateData("update [dbo].[Clientes] set Codigo = @Codigo ,RazonSocial = @RazonSocial ,NombreComercial = @NombreComercial, NRC = @NRC ,NIT= @NIT ,Giro = @Giro ,Email = @Email,Direccion = @Direccion,Telefono = @Telefono ,Celular = @Celular ,PersonaJuridica= @PersonaJuridica, CategoriaId = @CategoriaId, MunicipioId = @MunicipioId Where ClienteId = @ClienteId ", true, param, false).Result;
+                result = new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
+            }
+
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = client.ClienteId == 0 ? "Creación" : "Actualización",
+                Entidad = nameof(Clientes),
+                EntidadId = client.ClienteId == 0 ? (int)result.data : client.ClienteId,
+            });
+
+            return result;
         }
 
         public async Task<Clientes> Find(int Id)
@@ -61,6 +68,13 @@ namespace OOH.Data.Repos
 
         public async Task<bool> Remove(int id)
         {
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = "Eliminación",
+                Entidad = nameof(Clientes),
+                EntidadId = id
+            });
+
             return RemoveData($"delete from  [dbo].[clientes] Where ClienteId = {id}", false).Result == 1 ? true : false;
 
         }

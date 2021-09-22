@@ -9,7 +9,7 @@ namespace OOH.WebApi.Controllers
 {
     public class ProviderController : Controller
     {
-        [OhhFilter("ListProviders", Data.ActionPermission.Read)]
+        [OhhFilterAttribute("ListProviders", Data.ActionPermission.Read)]
         public IActionResult Index()
         {
             return View();

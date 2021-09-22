@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,20 @@ namespace OOH.Data.Repos
             var user = _httpContextAccessor.HttpContext.User;
 
             return int.Parse(user.Claims.Where(x => x.Type == "Id").FirstOrDefault().Value);
+        }
+
+        public Platform GetUserPlatform()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+
+            return EnumHelper.Parse<Platform>(user.Claims.Where(x => x.Type == "Platform").FirstOrDefault().Value);
+        }
+
+        public string GetVersion()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+
+            return user.Claims.Where(x => x.Type == "Version").FirstOrDefault().Value ?? "1";
         }
     }
 }

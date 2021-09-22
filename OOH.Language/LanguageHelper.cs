@@ -49,7 +49,7 @@ namespace OOH.Language
         public void SetLanguage(string lang)
         {
             try
-            {
+            { 
                 if (!IsLanguageAvailable(lang)) lang = GetDefaultLanguage() ;
                 var cultureInfo = new CultureInfo(lang);
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;

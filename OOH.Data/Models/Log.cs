@@ -32,7 +32,7 @@ namespace OOH.Data.Models
         /// <summary>
         /// Fecha en que se realizo la accion
         /// </summary>
-        public DateTime Fecha { get; set; }
+        public DateTimeOffset Fecha { get; set; }
 
         /// <summary>
         /// Id de la entidad con la que se interactua

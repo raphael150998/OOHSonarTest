@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -12,8 +13,11 @@ namespace OOH.Data.Repos
 {
     public class AdvertisingAgencyRepository : OOHContext, IBaseRepository<AgenciasPublicidad>
     {
-        public AdvertisingAgencyRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+
+        public AdvertisingAgencyRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public async Task<ResultClass> AddOrUpdate(AgenciasPublicidad agencia)
@@ -27,6 +31,13 @@ namespace OOH.Data.Repos
 
             result.state = (int)result.data > 0;
 
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = agencia.AgenciaId == 0 ? "Creación" : "Actualización",
+                Entidad = nameof(AgenciasPublicidad),
+                EntidadId = agencia.AgenciaId == 0 ? (int)result.data : agencia.AgenciaId,
+            });
+
             return result;
         }
 
@@ -37,6 +48,13 @@ namespace OOH.Data.Repos
 
         public async Task<bool> Remove(int id)
         {
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = "Eliminación",
+                Entidad = nameof(AgenciasPublicidad),
+                EntidadId = id
+            });
+
             return RemoveData($"DELETE FROM AgenciasPublicidad WHERE AgenciaId = {id}").Result > 0;
         }
 

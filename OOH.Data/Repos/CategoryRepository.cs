@@ -11,8 +11,10 @@ namespace OOH.Data.Repos
 {
     public class CategoryRepository : OOHContext, IBaseRepository<ClientesCategorias>
     {
-        public CategoryRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+        public CategoryRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public Task<ResultClass> AddOrUpdate(ClientesCategorias collection)

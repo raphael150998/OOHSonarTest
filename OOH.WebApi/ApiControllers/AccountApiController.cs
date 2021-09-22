@@ -15,6 +15,7 @@ using OOH.Data.Models;
 using Newtonsoft.Json;
 using Dapper;
 using OOH.Data.Herlpers;
+using OOH.Data;
 
 namespace OOH.WebApi.ApiControllers
 {
@@ -40,6 +41,7 @@ namespace OOH.WebApi.ApiControllers
             {
                 UserPermisoDto UserLoged = (UserPermisoDto)Login.data;
                 string JsonListPermisos = JsonConvert.SerializeObject(UserLoged.Permisos);
+
                 //Claim que tiene los datos de las cookies
                 var claims = new List<Claim>
                 {
@@ -49,7 +51,9 @@ namespace OOH.WebApi.ApiControllers
                     new Claim("Cs", UserLoged.StringConecction.ToString()),
                     new Claim("ListPermisos", JsonListPermisos),
                     new Claim("Language", UserLoged.User.Idioma.ToString()),
-                    new Claim("Empresa", UserLoged.User.EmpresaId.ToString())
+                    new Claim("Empresa", UserLoged.User.EmpresaId.ToString()),
+                    new Claim("Version", "0.1"),//la version esta hardcode de momento, posteriormente se implementara versionamiento desde el appsettings o desde la url de los controllers
+                    new Claim("Platform", Platform.Web.GetValueString())//la plataforma se encuentra de momento por default en web ya que falta implementar la parametrizacion de esta en los endpoints
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
