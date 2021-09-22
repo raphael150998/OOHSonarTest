@@ -65,7 +65,7 @@ function removeClient(idClient) {
                 icon: 'success',
                 title: 'Logrado',
             });
-            LLenarDatatable();
+            GetClient();
         } else {
             if (response["condition"] == "fk") {
                 Swal.fire({

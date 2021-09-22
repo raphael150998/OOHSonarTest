@@ -4,10 +4,9 @@ using System.Text;
 
 namespace OOH.Data.Models
 {
-    public class Empresa
+    public class CotizacionesEstados
     {
-        public int EmpresaId { get; set; }
-        public string ConnectionString { get; set; }
+        public int EstadoId { get; set; }
         public string Descripcion { get; set; }
     }
 }
