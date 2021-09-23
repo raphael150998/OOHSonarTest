@@ -46,6 +46,13 @@ namespace OOH.Data.Repos
             return await FilterData<AgenciasPublicidad>($"SELECT * FROM AgenciasPublicidad WHERE AgenciaId = {id}");
         }
 
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        {
+
+
+            throw new NotImplementedException();
+        }
+         
         public async Task<bool> Remove(int id)
         {
             await _log.AddLog(new LogDto()

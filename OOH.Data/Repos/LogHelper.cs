@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,10 +17,12 @@ namespace OOH.Data.Repos
     {
         private readonly IWebUserHelper _userHelper;
         private readonly string _connectionString;
+        private readonly string _userDbConnection;
 
         public LogHelper(IWebUserHelper userHelper)
         {
             _userHelper = userHelper;
+            _userDbConnection = "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=JR.2021;MultipleActiveResultSets=True;App=EntityFramework";
             _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=JR.2021;MultipleActiveResultSets=True;App=EntityFramework";
         }
 
@@ -31,12 +34,48 @@ namespace OOH.Data.Repos
             }
         }
 
-        public async Task<IEnumerable<Log>> Select(string where = "")
+        public async Task<IEnumerable<LogOutputDto>> GetLogs(LogInputDto request)
         {
+            List<Usuarios> users = new List<Usuarios>();
+
+            List<Log> logs = new List<Log>();
+
+            List<LogOutputDto> modelReturn = new();
+
+
             using (IDbConnection cn = new SqlConnection(_connectionString))
             {
-                return await cn.QueryAsync<Log>($"SELECT * FROM Log {where}");
+                logs = (await cn.QueryAsync<Log>($"SELECT * FROM Log WHERE EntidadId = {request.Id} AND Entidad = '{request.Entidad}'")).ToList();
             }
+
+            List<int> userIds = logs.Select(x => x.UserId).Distinct().ToList();
+
+            if (userIds.Count > 0)
+            {
+                using (IDbConnection cn = new SqlConnection(_userDbConnection))
+                {
+                    string sqlUser = $"SELECT UserId, Login, Username FROM Usuarios WHERE UserId in ({string.Join(',', userIds)})";
+                    users = (await cn.QueryAsync<Usuarios>(sqlUser)).ToList();
+                }
+
+                if (users.Count > 0)
+                {
+                    foreach (var log in logs)
+                    {
+                        modelReturn.Add(new()
+                        {
+                            ActionDate = log.Fecha,
+                            Description = log.Descripcion,
+                            Login = users.FirstOrDefault(x => x.UserId == log.UserId)?.Login ?? "Sin datos",
+                            NameUser = users.FirstOrDefault(x => x.UserId == log.UserId)?.Username ?? "Sin datos",
+                            Platform = log.PlataformaId,
+                            Version = log.Version
+                        });
+                    }
+                }
+            }
+
+            return modelReturn;
         }
 
         public async Task AddLog(LogDto log)

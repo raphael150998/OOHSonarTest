@@ -77,5 +77,12 @@ namespace OOH.WebApi.ApiControllers
         {
             return Ok(await _repo.Remove(obj.Id));
         }
+
+        public async Task<IActionResult> GetLog(int id)
+        {
+
+
+            return Ok();
+        }
     }
 }

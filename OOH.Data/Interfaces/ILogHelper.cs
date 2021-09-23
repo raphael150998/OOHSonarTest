@@ -18,11 +18,11 @@ namespace OOH.Data.Interfaces
         Task<Log> Find(int id);
 
         /// <summary>
-        /// Obtiene un listado de logs que pueden ser filtrados con el parametro where
+        /// Obtiene un listado de logs por medio de los parametros enviados en request
         /// </summary>
-        /// <param name="where"></param>
+        /// <param name="request">Filtros para los logs que se quieren recuperar</param>
         /// <returns></returns>
-        Task<IEnumerable<Log>> Select(string where = "");
+        Task<IEnumerable<LogOutputDto>> GetLogs(LogInputDto request);
 
         /// <summary>
         /// Agrega un nuevo log
