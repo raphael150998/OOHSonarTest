@@ -15,6 +15,12 @@ namespace OOH.Data.Interfaces
         Task<ResultClass> AddOrUpdate(T collection);
         Task<bool> Remove(int id);
         //Task<ResultClass> Remove(int id, string condition = "");
+        /// <summary>
+        /// Obtiene los registros de actividad de un registro en la base dado su id y la entidad de interaccion
+        /// </summary>
+        /// <param name="id">Id de la entidad que se desea obtener los registros de actividad</param>
+        /// <returns></returns>
+        Task<IEnumerable<LogOutputDto>> GetLogs(int id);
 
     }
 }

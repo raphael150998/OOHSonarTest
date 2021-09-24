@@ -68,7 +68,7 @@ namespace OOH.Data.Repos
                             Description = log.Descripcion,
                             Login = users.FirstOrDefault(x => x.UserId == log.UserId)?.Login ?? "Sin datos",
                             NameUser = users.FirstOrDefault(x => x.UserId == log.UserId)?.Username ?? "Sin datos",
-                            Platform = log.PlataformaId,
+                            Platform = log.PlataformaId.GetValueString(),
                             Version = log.Version
                         });
                     }

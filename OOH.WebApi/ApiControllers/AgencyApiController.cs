@@ -67,8 +67,14 @@ namespace OOH.WebApi.ApiControllers
         [OhhFilterAttribute("Agencies", Data.ActionPermission.Read)]
         public async Task<IActionResult> Get(int id)
         {
-            var algo = Request;
             return Ok(_mapper.Map<AgencyVm>(await _repo.Find(id)));
+        }
+
+        [HttpGet("Log")]
+        [OhhFilterAttribute("Agencies", Data.ActionPermission.Execute)]
+        public async Task<IActionResult> GetLogs(int id)
+        {
+            return Ok(await _repo.GetLogs(id));
         }
 
         [HttpPost("Remove")]

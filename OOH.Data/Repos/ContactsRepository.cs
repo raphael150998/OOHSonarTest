@@ -75,6 +75,9 @@ namespace OOH.Data.Repos
             return SelectData<ClientesContactosRoles>($"Select * from [dbo].[ClientesContactosRoles] " + _Where, false, null).Result.ToList();
         }
 
-
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

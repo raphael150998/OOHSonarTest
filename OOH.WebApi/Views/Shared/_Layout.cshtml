@@ -78,6 +78,15 @@
         .input-group-addon {
             padding: 0rem 0.75rem !important;
         }
+
+        .modal-viva-lg {
+            max-width: 80vw !important;
+            min-width: 80vw !important;
+        }
+
+        table#logTable {
+            width: inherit !important;
+        }
     </style>
 </head>
 
@@ -865,6 +874,38 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalLogs" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-viva-lg h-100 w-100 d-flex flex-column justify-content-center my-0" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitleLogs"></h5>
+                </div>
+                <div class="modal-body">
+                    <table id="logTable" class="table table-hover table-lg" style="width: inherit !important">
+                        <thead>
+                            <tr>
+                                <th class="filter">Login</th>
+                                <th class="filter">Nombre de usuario</th>
+                                <th class="filter">Descripción</th>
+                                <th class="filter">Fecha de creación</th>
+                                <th class="filter">Plataforma</th>
+                                <th class="filter">Versión</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnCloseLog">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!--[if lt IE 10]><![endif]-->
@@ -953,7 +994,65 @@
     <script src="~/js/jquery.ValidateHelper.js"></script>
     <script src="~/js/jquery.SweetAlertHelper.js"></script>
     <script src="~/js/jquery.fnHelpers.js"></script>
+    <script src="~/bower_components/moment/js/moment.js"></script>
+    <script>
+        $(function () {
+
+            console.log(moment.now());
+
+            BuildLogDatatable();
+            $("#btnCloseLog").click(function () {
+                $("#logTable").DataTable().clear();
+                $("#modalLogs").modal("hide");
+            });
+        });
+
+        function GetLogs(entidad, url, id) {
+
+            fns.CallGetAsync(url, { id: id }, function (dataResponse) {
+                $("#logTable").DataTable().clear();
+                $("#logTable").DataTable().rows.add(dataResponse).draw();
+            });
+
+            $("#modalTitleLogs").html(`Registro de actividad de ${entidad} con identificador ${id}`);
+            $("#modalLogs").modal("show");
+        }
+
+        //Metodo para crear el Datatable de clientes
+        function BuildLogDatatable() {
+            DataTableHelper.Draw("#logTable", {
+                destroy: true,
+                orderCellsTop: true,
+                fixedHeader: true,
+                data: [],
+                columns: [
+                    //{
+                    //    data: "agenciaId",
+                    //    render: function (data, type, full, meta) {
+                    //        return "<a href='index'>" + data + "</a>";
+                    //    }
+                    //},
+                    { data: "login" },
+                    { data: "nameUser" },
+                    { data: "description" },
+                    {
+                        data: "actionDate",
+                        render: function (data, type, full, meta) {
+                            return moment(data).format("DD-MM-YYYY HH:mm:ss")
+                        }
+                    },
+                    { data: "platform" },
+                    { data: "version" },
+
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+        }
+    </script>
     @RenderSection("scripts", required: false)
+
 </body>
 
 </html>

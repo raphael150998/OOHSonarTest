@@ -34,7 +34,7 @@ namespace OOH.Data.Dtos
         /// <summary>
         /// Plataforma desde la cual se acciono el evento
         /// </summary>
-        public Platform Platform { get; set; }
+        public string Platform { get; set; }
 
         /// <summary>
         /// Version del software al momento de ejecutar la accion registrada

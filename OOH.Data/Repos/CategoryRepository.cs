@@ -1,4 +1,5 @@
-﻿using OOH.Data.Helpers;
+﻿using OOH.Data.Dtos;
+using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
@@ -23,6 +24,11 @@ namespace OOH.Data.Repos
         }
 
         public Task<ClientesCategorias> Find(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
         {
             throw new NotImplementedException();
         }
