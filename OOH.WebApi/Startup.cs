@@ -36,6 +36,7 @@ namespace OOH.WebApi
             services.AddScoped<MunicipalityRepository>();
             services.AddScoped<CategoryRepository>();
             services.AddScoped<ContactsRepository>();
+            services.AddScoped<SitioRepository>();
             services.AddControllersWithViews();
             services.AddCors();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

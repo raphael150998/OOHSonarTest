@@ -25,7 +25,9 @@ namespace OOH.Data.Repos
 
             ResultClass result = new ResultClass();
 
-            string sql = agencia.AgenciaId == 0 ? "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)" : "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
+            string sql = agencia.AgenciaId == 0 ? 
+                            "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)" : 
+                            "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
 
             result.data = agencia.AgenciaId == 0 ? await PostData(sql, true, new DynamicParameters(agencia)) : await UpdateData(sql, true, new DynamicParameters(agencia));
 
@@ -60,7 +62,7 @@ namespace OOH.Data.Repos
                 EntidadId = id
             });
 
-            return RemoveData($"DELETE FROM AgenciasPublicidad WHERE AgenciaId = {id}").Result > 0;
+            return await (RemoveData($"DELETE FROM AgenciasPublicidad WHERE AgenciaId = {id}")) > 0;
         }
 
         public async Task<IEnumerable<AgenciasPublicidad>> Select(string _Where = "")
