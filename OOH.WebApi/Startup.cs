@@ -35,6 +35,8 @@ namespace OOH.WebApi
             services.AddScoped<ClientRepository>();
             services.AddScoped<MunicipalityRepository>();
             services.AddScoped<CategoryRepository>();
+            services.AddScoped<QuotationRepository>();
+            services.AddScoped<FaceRepository>();
             services.AddScoped<ContactsRepository>();
             services.AddControllersWithViews();
             services.AddCors();
@@ -47,8 +49,8 @@ namespace OOH.WebApi
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                app.UseStatusCodePagesWithReExecute("/StatusCode", "?code={0}");
+                app.UseDeveloperExceptionPage();
+                //app.UseStatusCodePagesWithReExecute("/StatusCode", "?code={0}");
             }
             else
             {
