@@ -19,5 +19,17 @@ namespace OOH.Data.Interfaces
         /// </summary>
         /// <returns></returns>
         int GetUserId();
+
+        /// <summary>
+        /// Obtiene la plataforma en la que el usuario se encuentra logueado
+        /// </summary>
+        /// <returns></returns>
+        Platform GetUserPlatform();
+
+        /// <summary>
+        /// Obtiene la version de la plataforma que se esta utlizando
+        /// </summary>
+        /// <returns></returns>
+        string GetVersion();
     }
 }

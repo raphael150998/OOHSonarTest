@@ -1,4 +1,5 @@
-﻿using OOH.Data.Helpers;
+﻿using OOH.Data.Dtos;
+using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
@@ -11,9 +12,11 @@ namespace OOH.Data.Repos
 {
     public class MunicipalityRepository : OOHContext, IBaseRepository<Municipios>
     {
-        public MunicipalityRepository(IWebUserHelper userHelper) : base(userHelper)
-        {
+        private readonly ILogHelper _log;
 
+        public MunicipalityRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        {
+            _log = log;
         }
 
         public Task<ResultClass> AddOrUpdate(Municipios collection)
@@ -22,6 +25,11 @@ namespace OOH.Data.Repos
         }
 
         public Task<Municipios> Find(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
         {
             throw new NotImplementedException();
         }

@@ -97,7 +97,8 @@ function BuildDatatable() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `<i onclick="UpdateAgency(${data})" class="fa fa-pencil-square btnDatatable text-primary"></i>
-                            <i onclick="RemoveAgency(${data})" class="fa fa-trash btnDatatable text-danger"></i>`;
+                            <i onclick="RemoveAgency(${data})" class="fa fa-trash btnDatatable text-danger"></i>
+                            <i onclick="GetLogs('Agencia', 'api/agency/log', ${data})" class="fa fa-history btnDatatable text-dark"></i>`;
 
                 }
             },

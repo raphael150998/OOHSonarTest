@@ -28,16 +28,17 @@ namespace OOH.WebApi
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHttpContextAccessor();
             services.AddScoped<IWebUserHelper, WebUserHelper>();
+            services.AddScoped<ILogHelper, LogHelper>();
             services.AddScoped<AdvertisingAgencyRepository>();
             services.AddScoped<OOHContext>();
             services.AddScoped<AccountRepository>();
-            services.AddScoped<OOHContext>();
             services.AddScoped<ClientRepository>();
             services.AddScoped<MunicipalityRepository>();
             services.AddScoped<CategoryRepository>();
             services.AddScoped<QuotationRepository>();
             services.AddScoped<FaceRepository>();
             services.AddScoped<ContactsRepository>();
+            services.AddScoped<SitioRepository>();
             services.AddControllersWithViews();
             services.AddCors();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

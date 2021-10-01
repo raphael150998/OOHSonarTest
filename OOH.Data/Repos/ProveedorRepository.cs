@@ -14,8 +14,11 @@ namespace OOH.Data.Repos
     /// </summary>
     public class ProveedorRepository : OOHContext
     {
-        public ProveedorRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+
+        public ProveedorRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public async Task<int> Create(Proveedores proveedor)

@@ -34,23 +34,11 @@ namespace OOH.WebApi.Controllers
         [OhhFilter("", Data.ActionPermission.NoAction)]
         public IActionResult Index()
         {
-            //var proveedor = new Proveedores()
-            //{
-            //    Activo = true,
-            //    CategoriaId = 1,
-            //    Celular = "gjhjghj",
-            //    Codigo = "0dd01",
-            //    Direccion = "asdfdssdfsdf",
-            //    Email = "email@test.com",
-            //    Giro = "sadfsdf",
-            //    NIT = "sdfsdfdfnbbasdf",
-            //    Nombre = "Rabbbbfael",
-            //    NRC = "sadfavbvbvbsdfd",
-            //    PersonaJuridica = true,
-            //    Telefono = "fasddfgfgbbbblkjhkhfsdf"
-            //};
-            //_proveedorRepo.Create(proveedor);
+            return View();
+        }
 
+        public IActionResult Privacy()
+        {
             var infoBaby = new
             {
                 mensaje = "el mero masizo chepin cristales",
@@ -60,32 +48,7 @@ namespace OOH.WebApi.Controllers
 
             infoBaby = null;
 
-            //_logger.LogInformation("se ha guardo en log en mogndb papu {@infoBaby}", infoBaby);
-
-            //_logger.LogError("error bro");
-            //_logger.LogCritical("faltal bro");
-            //_logger.LogWarning("warning bro");
-            //_logger.LogDebug("debug bro");
-            //_logger.LogInformation("Information bro");
-
-            //using (LogContext.PushProperty("Empresa", 1))
-            //{
-            //    _logger.LogInformation("Empresa 1 man");
-            //}
-
-            //using (LogContext.PushProperty("Empresa", 2))
-            //{
-            //    _logger.LogInformation("Empresa 2 karnal man");
-            //}
-
-            //SettingsHelper.AddOrUpdateAppSetting("hola", _webHost);
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(infoBaby.mensaje);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -27,7 +27,6 @@
         config.submitHandler = function (form) {
             SweetAlert.ConfirmForm(function () {
                 dataSend = (dataSend == null || dataSend == undefined) ? $(form).serializeFormToJson() : JSON.stringify(dataSend);
-                console.log(dataSend);
                 fns.PostDataNoAsync(url, dataSend, function (dataResult) {
                     dataSend = null;
                     if (dataResult.state == false) {

@@ -14,7 +14,7 @@ namespace OOH.WebApi.Controllers
 {
     public class AgenciesController : Controller
     {
-        [OhhFilter("ListAgencies", Data.ActionPermission.Read)]
+        [OhhFilterAttribute("ListAgencies", Data.ActionPermission.Read)]
         public async Task<IActionResult> Index()
         {
             return View();
