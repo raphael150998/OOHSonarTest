@@ -67,7 +67,11 @@ namespace OOH.WebApi.ApiControllers
         [OhhFilterAttribute("Agencies", Data.ActionPermission.Read)]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(_mapper.Map<AgencyVm>(await _repo.Find(id)));
+            var agency = await _repo.Find(id);
+
+            if (agency == null) return NotFound();
+
+            return Ok(_mapper.Map<AgencyVm>(agency));
         }
 
         [HttpGet("Log")]
@@ -82,13 +86,6 @@ namespace OOH.WebApi.ApiControllers
         public async Task<IActionResult> Remove([FromBody] Identify<int> obj)
         {
             return Ok(await _repo.Remove(obj.Id));
-        }
-
-        public async Task<IActionResult> GetLog(int id)
-        {
-
-
-            return Ok();
         }
     }
 }

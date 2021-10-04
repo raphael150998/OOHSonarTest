@@ -73,6 +73,7 @@
         }
     });
 });
+
 function llenar() {
 
     var idCliente = $("#ClienteId").val();
@@ -90,6 +91,7 @@ function llenar() {
         });
     }
 }
+
 function DropDownListMunicipio() {
 
     fns.CallGetAsync("api/municipio/call", null, function (dataResult) {

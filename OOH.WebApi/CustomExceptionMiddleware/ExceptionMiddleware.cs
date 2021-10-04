@@ -53,6 +53,8 @@ namespace OOH.WebApi.CustomExceptionMiddleware
                 }
 
                 httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                await httpContext.Response.WriteAsync(ex.ToString());
+
             }
         }
     }

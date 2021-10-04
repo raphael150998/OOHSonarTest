@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using OOH.Data.Dtos;
+using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -24,8 +25,8 @@ namespace OOH.Data.Repos
             ResultClass result = new ResultClass();
 
             string sql = sitio.SitioId == 0 ?
-                            "INSERT INTO Sitios (ProveedorId, Direccion, Referencia, Latitud, Longitud, MunicipioId, ZonaId, RequierePermiso, Activo, RegistroCatastral, Altura, Observaciones) VALUES (@ProveedorId, @Direccion, @Referencia, @Latitud, @Longitud, @MunicipioId, @ZonaId, @RequierePermiso, @Activo, @RegistroCatastral, @Altura, @Observaciones)" :
-                            "UPDATE Sitios SET ProveedorId = @ProveedorId, Direccion = @Direccion, Referencia = @Referencia, Latitud = @Latitud, Longitud = @Longitud, MunicipioId = @MunicipioId, ZonaId = @ZonaId, RequierePermiso = @RequierePermiso, Activo = @Activo, RegistroCatastral = @RegistroCatastral, Altura = @Altura, Observaciones = @Observaciones WHERE SitioId = @SitioId";
+                            "INSERT INTO Sitios (Codigo, ProveedorId, Direccion, Referencia, Latitud, Longitud, MunicipioId, ZonaId, RequierePermiso, Activo, RegistroCatastral, Altura, Observaciones) VALUES (@Codigo, @ProveedorId, @Direccion, @Referencia, @Latitud, @Longitud, @MunicipioId, @ZonaId, @RequierePermiso, @Activo, @RegistroCatastral, @Altura, @Observaciones)" :
+                            "UPDATE Sitios SET Codigo = @Codigo, ProveedorId = @ProveedorId, Direccion = @Direccion, Referencia = @Referencia, Latitud = @Latitud, Longitud = @Longitud, MunicipioId = @MunicipioId, ZonaId = @ZonaId, RequierePermiso = @RequierePermiso, Activo = @Activo, RegistroCatastral = @RegistroCatastral, Altura = @Altura, Observaciones = @Observaciones WHERE SitioId = @SitioId";
 
             result.data = sitio.SitioId == 0 ? await PostData(sql, true, new DynamicParameters(sitio)) : await UpdateData(sql, true, new DynamicParameters(sitio));
 
@@ -66,6 +67,19 @@ namespace OOH.Data.Repos
         public async Task<IEnumerable<Sitios>> Select(string _Where = "")
         {
             return await SelectData<Sitios>("SELECT * FROM Sitios " + _Where);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<SiteListDto>> GetList()
+        {
+            #region sql
+            string sql = "select s.*, (select p.Nombre from Proveedores p where p.ProveedorId= s.ProveedorId) as NombreProveedor, (select m.Nombre from Municipios m where m.MunicipioId = s.MunicipioId) as NombreMunicipio, 'Ninguna' as NombreZona  from Sitios s";
+            #endregion
+
+            return await SelectData<SiteListDto>(sql);
         }
     }
 }
