@@ -1,4 +1,5 @@
-﻿using OOH.Data.Dtos.Cotizacion;
+﻿using OOH.Data.Dtos;
+using OOH.Data.Dtos.Cotizacion;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -22,6 +23,11 @@ namespace OOH.Data.Repos
         }
 
         public async Task<Caras> Find(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
         {
             throw new NotImplementedException();
         }
