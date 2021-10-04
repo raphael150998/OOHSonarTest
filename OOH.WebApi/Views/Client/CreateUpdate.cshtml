@@ -8,18 +8,28 @@
 
     <div class="card">
         <div class="card-block row">
-            <div class="col-md-1">
-                <input type="submit" value="Save" id="BtnSubmit" class="btn btn-primary" />
+            <div class="col-md-2">
+                <button type="submit" id="BtnSubmit" class="btn btn-primary"><i class="far fa-save"></i>Guardar</button>
             </div>
             <div class="col-md-1">
-                <button class="btn btn-btn-outline-primary">Nuevo</button>
-            </div>
-          
-            
-            <div id="divBtnNuevo">
 
+                <label class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</label>
             </div>
-    
+            
+
+            <div class="col-md-3 container">
+           
+            </div>
+
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label class="control-label" asp-for="Activo"></label>:
+               
+                <input type="checkbox" class="js-switch bool"  id="Activo" name="Activo" />
+            </div>
+
+
         </div>
     </div>
     <div class="card">
@@ -45,38 +55,43 @@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Municipios</label>
-                    
+
                         <div id="divMunicipio"></div>
                     </div>
                     <div class="col-md-3">
-                        <label asp-for="NRC" class="control-label"></label>
-                        <input asp-for="NRC" class="form-control" />
-                        <span asp-validation-for="NRC" class="text-danger"></span>
+                        <label asp-for="NIT" class="control-label"></label>
+                        <input asp-for="NIT" class="form-control" data-mask="NIT" />
+                        <span asp-validation-for="NIT" class="text-danger"></span>
                     </div>
+
                     <div class="col-md-6">
                         <label class="control-label">Razon Social</label>
                         <input asp-for="RazonSocial" class="form-control" />
                         <span asp-validation-for="RazonSocial" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
-                        <label asp-for="NIT" class="control-label"></label>
-                        <input asp-for="NIT" class="form-control" />
-                        <span asp-validation-for="NIT" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
                         <label asp-for="Celular" class="control-label"></label>
                         <input asp-for="Celular" class="form-control" />
                         <span asp-validation-for="Celular" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
                         <label asp-for="Telefono" class="control-label"></label>
                         <input asp-for="Telefono" class="form-control" />
                         <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Categoria</label>
+
+                        <div id="divCategoria">
+
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label asp-for="Giro" class="control-label"></label>
@@ -84,18 +99,16 @@
                         <span asp-validation-for="Giro" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label">Categoria</label>
-                      
-                        <div id="divCategoria">
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
                         <label class="control-label" asp-for="PersonaJuridica"></label>
                         <br />
                         <input type="checkbox" class="js-single bool" id="PersonaJuridica" name="PersonaJuridica" />
 
+                    </div>
+
+                    <div class="col-md-3">
+                        <label asp-for="NRC" class="control-label"></label>
+                        <input asp-for="NRC" class="form-control" />
+                        <span asp-validation-for="NRC" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-12">

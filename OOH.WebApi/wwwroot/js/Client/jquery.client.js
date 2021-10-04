@@ -14,9 +14,21 @@ function GetClient() {
 }
 
 //Metodo para crear el Datatable de clientes
+var ButtonExcel = [{
+    extend: 'excelHtml5',
+    text: 'Archivo Excel',
+    titleAttr: 'Exportar a Excel',
+    className: 'btn btn-success',
+    exportOptions: {
+        columns: [1, 2, 3]
+    }
+},];
+
 function BuilDatatable() {
+    
     DataTableHelper.Draw("#tablaClient", {
         destroy: true,
+        dom: "Bfrltip",        
         orderCellsTop: true,
         fixedHeader: true,
         data: [],
@@ -41,6 +53,7 @@ function BuilDatatable() {
             { data: "razonSocial" },
 
         ],
+        buttons: ButtonExcel,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
         }

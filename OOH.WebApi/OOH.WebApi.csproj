@@ -35,6 +35,8 @@
 	  <Content Remove="wwwroot\js\Contacts\jquery.buildContact.js" />
 	  <Content Remove="wwwroot\js\Contacts\jquery.contacts.js" />
 	  <Content Remove="wwwroot\js\jquery.fnHelpers.js" />
+	  <Content Remove="wwwroot\js\jquery.inputmask.js" />
+	  <Content Remove="wwwroot\js\jquery.InputMaskHelper.js" />
 	  <Content Remove="wwwroot\js\jquery.SweetAlertHelper.js" />
 	  <Content Remove="wwwroot\js\jquery.ValidateHelper.js" />
 	  <Content Remove="wwwroot\js\Site\jquery.EditCreate.js" />

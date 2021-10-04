@@ -86,6 +86,14 @@ $.fn.assignJsonToForm = function (json) {
                     $(control).changeSwitch(false);
                 }
             }
+            if (tagType == "checkbox" && $(control).hasClass("js-switch")) {
+                if ($(control).hasAttr("checked") && $(control).prop("checked")) {
+                    $(control).changeSwitch(true);
+                }
+                else {
+                    $(control).changeSwitch(false);
+                }
+            }
             typeInfo.push({
                 type: type,
                 name: name,
@@ -105,7 +113,7 @@ $.fn.assignJsonToForm = function (json) {
             
             switch (controlInfo.tagType) {
                 case "checkbox":
-                    if ($(targetControl).hasClass("js-single")) {
+                    if ($(targetControl).hasClass("js-single") || $(targetControl).hasClass("js-switch")) {
                         $(targetControl).changeSwitch(jValue);
                     }
                     break;
@@ -122,7 +130,7 @@ $.fn.assignJsonToForm = function (json) {
 
 //Cambia el switch que contenga la clase css js-single al valor especificado
 $.fn.changeSwitch = function (value) {
-    if (this.hasClass("js-single")) {
+    if (this.hasClass("js-single") || this.hasClass("js-switch")) {
         if (value == this.prop("checked")) {
             this.trigger("click");
             this.trigger("click");

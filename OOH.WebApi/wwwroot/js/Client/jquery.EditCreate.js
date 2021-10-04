@@ -2,33 +2,35 @@
     DropDownListMunicipio();
     DropDownListCategoria();
     llenar();
-    //LLenarTextBox();
-    Validate.Form("#formClient", "api/client/CEdata" ,{
+    Validate.Form("#formClient", "api/client/CEdata", {
+
         rules: {
             NombreComercial: {
                 required: true
             },
             Codigo: {
-                required:true
-            },
-            RazonSocial: {
-                required:true
-            },
-            NRC: {
                 required: true
             },
+            RazonSocial: {
+                required: true
+            },
+            NRC: {
+                required: function (element) {
+                    return $("#PersonaJuridica").is(':checked')
+                }
+            },
             NIT: {
-                required:true
+                required: true
             },
             Direccion: {
                 required: true
             },
             Telefono: {
-                required:true
-            }            
+                required: true
+            }
         },
         messages: {
-            
+
             NombreComercial: {
                 required: "Campo requerido bro"
 
@@ -58,7 +60,7 @@
 
             }
         }
-       
+
     }, function (data) {
         if (data["state"] == false) {
             Swal.fire({
@@ -72,7 +74,13 @@
             $("#ClienteId").val(data["data"]);
         }
     });
+    //LLenarTextBox();
 });
+
+function edit(id) {
+    console.log(id);
+    window.open("/Client/CreateUpdate/" + id, '_blank');
+}
 
 function llenar() {
 
@@ -91,7 +99,6 @@ function llenar() {
         });
     }
 }
-
 function DropDownListMunicipio() {
 
     fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
@@ -158,38 +165,3 @@ function PostData() {
         Codigo: $("#Codigo").val()
     }
 }
-
-//function LLenarTextBox() {
-//    var idCliente = $("#ClienteId").val();
-
-
-//    console.log(idCliente);
-//    if (idCliente == 0) {
-//        $("#addbtn").css("cursor", "no-drop");
-//    }
-//    if (idCliente != 0) {
-//        fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
-//            console.log(dataResult);
-//            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
-//            $("#ClienteId").val(dataResult["clienteId"]);
-//            $("#NombreComercial").val(dataResult["nombreComercial"]);
-//            $("#dropdownMunicipio option[value=" + dataResult["municipioId"] + "]").attr("selected", true);
-//            $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
-//            $("#NRC").val(dataResult["nrc"]);
-//            $("#RazonSocial").val(dataResult["razonSocial"]);
-//            $("#NIT").val(dataResult["nit"]);
-//            $("#Celular").val(dataResult["celular"]);
-//            $("#Email").val(dataResult["email"]);
-//            $("#Telefono").val(dataResult["telefono"]);
-//            $("#Giro").val(dataResult["giro"]);
-//            $("#dropdownCategoria option[value=" + dataResult["categoriaId"] + "]").attr("selected", true);
-//            if (dataResult["personaJuridica"]) {
-
-//                $('.switchery').trigger('click');
-//            }
-//            $("#Direccion").val(dataResult["direccion"]);
-//            $("#Codigo").val(dataResult["codigo"]);
-//        });
-//    }
-
-//}
