@@ -33,11 +33,6 @@ namespace OOH.Data.Repos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> Remove(int id)
         {
             throw new NotImplementedException();

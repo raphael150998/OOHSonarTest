@@ -65,21 +65,16 @@ namespace OOH.Data.Repos
 
             return await RemoveData($"delete from  [dbo].[clientes] Where ClienteId = {id}", false) == 1 ? true : false;
         }
-
-        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Remove(int id)
-        {
-            return await SelectData<Cotizaciones>("SELECT * FROM [dbo].[Cotizaciones] " + _Where,false);
-        }
-
         public async Task<ResultClass> AddQuotationDetail(CotizacionesDetalle detalle)
         {
             string sql = "INSERT INTO CotizacionesDetalle(CotizacionId,CaraId,CostoArrendamiento,CostoImpresion,CostoInstalacion,CostoSaliente,FechaDesde,FechaHasta) VALUES (CotizacionId=@CotizacionId,CaraId=@CaraId,CostoArrendamiento=@CostoArrendamiento,CostoImpresion=@CostoImpresion,CostoInstalacion=@CostoInstalacion,CostoSaliente=@CostoSaliente,FechaDesde=@FechaDesde,FechaHasta=@FechaHasta)";
             return( new ResultClass() { data = await PostData(sql,true,new DynamicParameters(detalle)) });
+        }
+
+        public async Task<IEnumerable<Cotizaciones>> Select(string _Where = "")
+        {
+            return await SelectData<Cotizaciones>("SELECT * FROM [dbo].[Cotizaciones] " + _Where, false);
+
         }
     }
 }
