@@ -1,0 +1,42 @@
+﻿<div>
+    <div class="card">
+
+        <div class="card-header">
+            <a class="btn btn-primary" href="@Url.Action("CreateUpdate","Sites")" target="_blank"> <i class="fa fa-pencil-square-o"></i>Agregar sitio</a>
+            <button class="btn btn-primary btn-outline-primary" onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="card-block">
+            <table id="siteTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="filter-action">Acciones</th>
+                        <th class="filter">Código</th>
+                        <th class="filter">Proveedor</th>
+                        <th class="filter">Dirección</th>
+                        <th class="filter">Referencia</th>
+                        <th class="filter">Latitud</th>
+                        <th class="filter">Longitud</th>
+                        <th class="filter">Municipio</th>
+                        <th class="filter">Zona</th>
+                        <th class="filter">Requiere Permiso</th>
+                        <th class="filter">Activo</th>
+                        <th class="filter">Registro Catastral</th>
+                        <th class="filter">Altura</th>
+                        <th class="filter">Observaciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/Site/jquery.site.js"></script>
+}

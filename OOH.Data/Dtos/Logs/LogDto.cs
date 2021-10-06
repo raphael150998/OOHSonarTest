@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOH.Data.Dtos
+namespace OOH.Data.Dtos.Logs
 {
     /// <summary>
     /// Objeto de transferencia de datos de log para cuando se requiere pasar mensajes personalizados

@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using OOH.Data.Dtos.Logs;
 
 namespace OOH.Data.Repos
 {
@@ -25,17 +27,24 @@ namespace OOH.Data.Repos
 
             ResultClass result = new ResultClass();
 
-            string sql = agencia.AgenciaId == 0 ? 
-                            "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)" : 
+            string sql = agencia.AgenciaId == 0 ?
+                            "INSERT INTO AgenciasPublicidad(Nombre, Comision, Activo) VALUES (@Nombre, @Comision, @Activo)" :
                             "UPDATE AgenciasPublicidad SET Nombre = @Nombre, Comision = @Comision, Activo = @Activo WHERE AgenciaId = @AgenciaId";
 
             result.data = agencia.AgenciaId == 0 ? await PostData(sql, true, new DynamicParameters(agencia)) : await UpdateData(sql, true, new DynamicParameters(agencia));
 
             result.state = (int)result.data > 0;
 
+            AgenciasPublicidad oldVwersion = new();
+
+            if (agencia.AgenciaId > 0)
+            {
+                oldVwersion = await Find(agencia.AgenciaId);
+            }
+
             await _log.AddLog(new LogDto()
             {
-                Descripcion = agencia.AgenciaId == 0 ? "Creación" : "Actualización",
+                Descripcion = agencia.AgenciaId == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
                 Entidad = nameof(AgenciasPublicidad),
                 EntidadId = agencia.AgenciaId == 0 ? (int)result.data : agencia.AgenciaId,
             });

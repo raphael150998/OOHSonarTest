@@ -1,4 +1,6 @@
-﻿using Dapper;
+﻿using OOH.Data.Dtos;
+using OOH.Data.Dtos.Logs;
+using Dapper;
 using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
@@ -64,7 +66,12 @@ namespace OOH.Data.Repos
             return await RemoveData($"delete from  [dbo].[clientes] Where ClienteId = {id}", false) == 1 ? true : false;
         }
 
-        public async Task<IEnumerable<Cotizaciones>> Select(string _Where = "")
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Remove(int id)
         {
             return await SelectData<Cotizaciones>("SELECT * FROM [dbo].[Cotizaciones] " + _Where,false);
         }

@@ -1,6 +1,9 @@
 ﻿using Moq;
 using OOH.Data;
+using OOH.Data.Dtos;
+using OOH.Data.Dtos.Logs;
 using OOH.Data.Interfaces;
+using OOH.Data.Models;
 using OOH.Test.DTOs;
 using System;
 using System.Collections.Generic;
@@ -32,6 +35,22 @@ namespace OOH.Test
 
             helper.Setup(x => x.GetVersion()).Returns(input.Version);
 
+
+            return helper.Object;
+        }
+
+        public static ILogHelper GetLogHelper(IEnumerable<LogOutputDto> getLogs, Log find)
+        {
+            Mock<ILogHelper> helper = new Mock<ILogHelper>();
+
+            helper.Setup(x => x.GetLogs(It.IsAny<LogInputDto>()))
+                .Returns(Task.FromResult(getLogs));
+
+            helper.Setup(x => x.Find(It.IsAny<int>()))
+                .Returns(Task.FromResult(find));
+
+            helper.Setup(x => x.AddLog(It.IsAny<LogDto>()))
+                .Returns(Task.CompletedTask);
 
             return helper.Object;
         }

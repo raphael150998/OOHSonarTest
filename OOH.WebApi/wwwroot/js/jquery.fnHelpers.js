@@ -110,7 +110,7 @@ $.fn.assignJsonToForm = function (json) {
             jValue = json[jKey];
 
             let targetControl = $(form).find(`[name="${controlInfo.name}"]`);
-            
+
             switch (controlInfo.tagType) {
                 case "checkbox":
                     if ($(targetControl).hasClass("js-single") || $(targetControl).hasClass("js-switch")) {
@@ -143,4 +143,30 @@ $.fn.changeSwitch = function (value) {
         console.error("La función changeSwitch solo puede ser usada con checkbox que contengan la clase js-single");
         //console.error("%cLa función changeSwitch solo puede ser usada con checkbox que contengan la clase js-single", 'background: #fff; color: tomato');
     }
+}
+
+$.fn.select2Paged = function (url) {
+    if (url == "" || url == '' || url == `` || url == null || url == undefined) {
+        console.error("URL must be given");
+    }
+    else {
+        this.select2({
+            ajax: {
+                dataType: 'json',
+                type: "POST",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: function (params) {
+                    return JSON.stringify(params);
+                },
+                processResults: function (data) {
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: data.results,
+                        pagination: data.pagination
+                    };
+                }
+            }
+        });
+    }    
 }

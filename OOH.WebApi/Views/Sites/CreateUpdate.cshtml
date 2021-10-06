@@ -1,0 +1,103 @@
+﻿@model OOH.Data.Models.Sitios
+
+<form id="frmSitio">
+    <div class="card">
+        <div class="card-block row">
+            <div class="col-md-1">
+                <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-primary" />
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-btn-outline-primary">Nuevo</button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-block">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2" hidden>
+                        <input asp-for="SitioId" class="form-control number" readonly />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Código</label>
+                        <input asp-for="Codigo" class="form-control" />
+                        <span asp-validation-for="Codigo" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Proveedor</label>
+                        <select asp-for="ProveedorId">
+                        </select>
+                        <span asp-validation-for="ProveedorId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Municipios</label>
+
+                        <div id="divMunicipio"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Direccion" class="control-label"></label>
+                        <textarea asp-for="Direccion" class="form-control"></textarea>
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Referencia" class="control-label"></label>
+                        <textarea asp-for="Referencia" class="form-control"></textarea>
+                        <span asp-validation-for="Referencia" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Latitud" class="control-label"></label>
+                        <input asp-for="Latitud" class="form-control" />
+                        <span asp-validation-for="Latitud" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Longitud</label>
+                        <input asp-for="Longitud" class="form-control" />
+                        <span asp-validation-for="Longitud" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="ZonaId" class="control-label"></label>
+                        <input asp-for="ZonaId" class="form-control" />
+                        <span asp-validation-for="ZonaId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Requiere permiso</label>
+                        <br />
+                        <input type="checkbox" class="js-single bool" id="PersonaJuridica" name="PersonaJuridica" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Activo</label>
+                        <br />
+                        <input type="checkbox" class="js-single bool" id="PersonaJuridica" name="PersonaJuridica" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="RegistroCatastral" class="control-label"></label>
+                        <input asp-for="RegistroCatastral" class="form-control" />
+                        <span asp-validation-for="RegistroCatastral" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Altura" class="control-label"></label>
+                        <input asp-for="Altura" class="form-control" />
+                        <span asp-validation-for="Altura" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label asp-for="Observaciones" class="control-label"></label>
+                        <textarea asp-for="Observaciones" class="form-control"></textarea>
+                        <span asp-validation-for="Observaciones" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">sitios</label>
+                        <select class="form-control" id="siteSelect">
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/js/Site/jquery.EditCreate.js"></script>
+}

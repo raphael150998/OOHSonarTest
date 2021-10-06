@@ -102,12 +102,7 @@ function BuildDatatable() {
 
                 }
             },
-            {
-                data: "agenciaId",
-                render: function (data, type, full, meta) {
-                    return "<a href='index'>" + data + "</a>";
-                }
-            },
+            { data: "agenciaId" },
             { data: "nombre" },
             { data: "comision" },
 

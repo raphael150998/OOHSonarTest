@@ -1,4 +1,4 @@
-﻿using OOH.Data.Dtos;
+﻿using OOH.Data.Dtos.Logs;
 using OOH.Data.Helpers;
 using OOH.Data.Models;
 using System;
