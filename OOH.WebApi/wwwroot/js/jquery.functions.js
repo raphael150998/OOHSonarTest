@@ -125,3 +125,20 @@ var fns = {
         return rt;
     }
 }
+
+//Metodo Remove de lista
+function Remove(Lista, Campo, Dato) {
+
+    var ListaTemporal = [];
+    $.each(Lista, function (index, item) {
+        if (item[Campo] != Dato) {
+
+            ListaTemporal.push(item);
+
+        } else {
+            //Nada
+        }
+    });
+    return ListaTemporal;
+}
+

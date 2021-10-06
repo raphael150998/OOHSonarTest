@@ -72,14 +72,14 @@
                 <table class="table" style="width:100%" id="CarasTable">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Codigo</th>
                             <th>Referencia</th>
                             <th>Dirección</th>
                             <th>Precio</th>
                             <th>Departamento</th>
                             <th>Iluminada</th>
-                            <th>Fin Contrato</th>
-                            <th>Prox. Contrato</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -90,64 +90,129 @@
     </div>
 </div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="ModalCaras" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+    <div class="modal-dialog modal-viva-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
         <div class="modal-content">
             
-                <div class="modal-header">
-                    <h5 class="modal-title text-center w-100" id="modalTitle">Añadir Caras</h5>
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="modalTitle">Añadir Caras</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
                 <div class="modal-body">
                     <div class="container">
-                    
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Sitio</label>
-                            <select class="form-control">
-                                <option>AE</option>
-                                <option>CO</option>
-                            </select>
 
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Sitio</label>
+                                <select class="form-control" id="dropdownSitio">
+                                    <option>AE</option>
+                                    <option>CO</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label>Categoria</label>
+                                <select class="form-control" id="dropdownCategoria">
+                                    <option>Pasarela</option>
+                                    <option>Pantalla</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label>Tipo</label>
+                                <select class="js-example-basic-single" id="dropdownTipo">
+                                    <option>Mini</option>
+                                    <option>Big</option>
+
+                                </select>
+
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
                         </div>
-                        <div class="col-md-4">
-                            <label>Categoria</label>
-                            <select class="form-control">
-                                <option>Pasarela</option>
-                                <option>Pantalla</option>
-                            </select>
-
-                        </div>
-                        <div class="col-md-4">
-                            <label>Tipo</label>
-                            <select class="form-control">
-                                <option>Mini</option>
-                                <option>Big</option>
-
-                            </select>
-
-                        </div>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
                     </div>
+                    <div>
+                        <table class="table" id="addCarasTable" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="filter-action"></th>
+                                    <th class="filter">Cara</th>
+                                    <th class="filter">Categoria</th>
+                                    <th class="filter">ReferenciaComercial</th>
+                                    <th class="filter">Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
-                   <div>
-                       <table class="table" id="addCarasTable" style="width:100%">
-                           <thead>
-                               <tr>
-                                   <th class="filter-action"></th>
-                                   <th class="filter">Cara</th>
-                                   <th class="filter">Categoria</th>
-                                   <th class="filter">ReferenciaComercial</th>
-                                   <th class="filter">Tipo</th>
-                               </tr>
-                           </thead>
-                           <tbody></tbody>
-                       </table>
-                   </div>
+                    <!-- Modal CaraDetalle -->
+                    <div class="modal fade" id="ModalCarasDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                        <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center w-100" id="modalTitle">Cosot de Caras</h5>
+                                    <button type="button" class="close" id="btnDetalleCaraClose" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <input id="idCaraAdd" hidden />
+                                            <div class="col-md-4">
+                                                <label class="control-label">CostoArrendamiento</label>
+                                                <input type="text" class="form-control" id="CostoArrendamiento" placeholder="TextBox" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">CostoImpresion</label>
+                                                <input type="text" class="form-control" id="CostoImpresion" placeholder="TextBox" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">CostoInstalacion</label>
+                                                <input type="text" class="form-control" id="CostoInstalacion" placeholder="TextBox" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">CostoSaliente</label>
+                                                <input type="text" class="form-control" id="CostoSaliente" placeholder="TextBox" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">FechaDesde</label>
+                                                <input type="text" class="form-control" id="FechaDesde" placeholder="TextBox" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">FechaHasta</label>
+                                                <input type="text" class="form-control" id="FechaHasta" placeholder="TextBox" />
+                                            </div>
+                                            
+
+                                        </div>
+
+                                        <br />
+                                        <br />
+                                     
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="col-md-4" style="float:right">
+                                            <label></label>
+                                            <button class="btn btn-success form-control" onclick="AddArray()">Agregar</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

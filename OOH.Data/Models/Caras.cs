@@ -10,7 +10,7 @@ namespace OOH.Data.Models
     {
         public Int64 CaraId { get; set; }
         public Int64 SitioId { get; set; }
-        public string Codigo { get; set; }
+        public string Codigo { get; set; } //
         public int TipoId { get; set; }
         public int CategoriaId { get; set; }
         public decimal Alto { get; set; }
@@ -20,7 +20,7 @@ namespace OOH.Data.Models
         public string MetodoInstalacion { get; set; }
         public string Observaciones { get; set; }
         public bool Activo { get; set; }
-        public string ReferenciaComercial { get; set; }
+        public string ReferenciaComercial { get; set; } //
         public int NumSpotDigital { get; set; }
 
     }

@@ -28,9 +28,9 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
        [Route("api/Client/Get")]
-       public async Task<List<Clientes>> Clientes()
+       public async Task<IActionResult> Clientes()
         {
-            return  _repo.Select().Result.ToList();
+            return  Ok(_repo.Select().Result.ToList());
         }
 
         [HttpGet]
@@ -87,6 +87,11 @@ namespace OOH.WebApi.ApiControllers
                 }
 
             }
+        }
+        [Route("api/client/log")]
+        public async Task<IActionResult> GetLogs(int id)
+        {
+            return Ok(await _repo.GetLogs(id));
         }
 
 
