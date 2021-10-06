@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using OOH.Data.Dtos;
+using OOH.Data.Dtos.Logs;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;

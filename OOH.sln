@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPointProvider", "Power
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOH.Language", "OOH.Language\OOH.Language.csproj", "{E43710CA-2D57-418B-BDF7-8D7C6532282A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOH.Test", "OOH.Test\OOH.Test.csproj", "{EC524924-81C9-4E4E-AF5D-DA0CA8D292BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{E43710CA-2D57-418B-BDF7-8D7C6532282A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E43710CA-2D57-418B-BDF7-8D7C6532282A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E43710CA-2D57-418B-BDF7-8D7C6532282A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC524924-81C9-4E4E-AF5D-DA0CA8D292BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC524924-81C9-4E4E-AF5D-DA0CA8D292BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC524924-81C9-4E4E-AF5D-DA0CA8D292BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC524924-81C9-4E4E-AF5D-DA0CA8D292BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,7 +50,7 @@ Global
 		{E43710CA-2D57-418B-BDF7-8D7C6532282A} = {56C44B50-566E-42F8-983F-E9D2C2B6F55F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5E849A3C-CB66-459B-8070-A346D2C0F2DD}
 		RESX_NeutralResourcesLanguage = es-SV
+		SolutionGuid = {5E849A3C-CB66-459B-8070-A346D2C0F2DD}
 	EndGlobalSection
 EndGlobal

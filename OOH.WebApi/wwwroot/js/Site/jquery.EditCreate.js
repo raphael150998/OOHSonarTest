@@ -1,4 +1,7 @@
 ﻿$(function () {
+
+    $("#siteSelect").select2Paged("/api/site/select2");
+
     DropDownListProviders();
 })
 

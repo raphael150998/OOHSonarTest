@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Dtos.Site;
 using OOH.Data.Models;
 using OOH.Data.Repos;
+using OOH.WebApi.Models.Site;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +45,17 @@ namespace OOH.WebApi.ApiControllers
             if (site == null) return NotFound();
 
             return Ok(site);
+        }
+
+        [HttpPost("select2")]
+        public async Task<IActionResult> GetListAsSelect2([FromBody] SiteSelect2InputDto model)
+        {
+            List<string> keys = string.IsNullOrEmpty(model.term) ? new() : model.term.Split(' ').ToList();
+            return Ok(await _repo.GetListForSelect2(new Select2PagingInputDto()
+            {
+                Search = keys,
+                CurrentPage = model.page
+            }));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Moq;
 using OOH.Data;
 using OOH.Data.Dtos;
+using OOH.Data.Dtos.Logs;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using OOH.Test.DTOs;

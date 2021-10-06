@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OOH.Data.Dtos.Logs;
 
 namespace OOH.Data.Repos
 {
