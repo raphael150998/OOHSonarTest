@@ -1,18 +1,9 @@
 ﻿var lstCaraDetalle = [];
+let IdCotizacion = $("#CotizacionId").val();
 $().ready(function ($) {
     DropDownListClientes();
     DropDownListAgencias();
-    DetalleDT();
-    Validate.Form("#formQuotation", "api/Quotation/CEdata", {
-
-        rules: {
-
-        },
-        messages: {
-
-        }
-
-    });
+    llenarData();
 });
 function DropDownListClientes() {
 
@@ -52,160 +43,60 @@ function DropDownListAgencias() {
 
 }
 
-function addCara(idCara) {
-    $("#ModalCaras").modal({
-        show: true,
-        backdrop: 'static',
-        keyboard: false
-    });
-    DatatableAdd();
-}
 
-function DropSitio() {
-    fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single number" id="dropdownMunicipio" name="MunicipioId">`
-        var departamento = 0;
-        dataResult.forEach(mun => {
 
-            let optionGrp = "";
-            if (mun.departamentoId != departamento) {
-                departamento = mun.departamentoId;
-                optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
+function llenarData() {
+    if (IdCotizacion != 0) {
+        fns.CallGetAsync("api/quotation/detail/find", { Idcotizacion: IdCotizacion }, function (dataResponse) {
+            console.log(dataResponse);
+            $("#dropdownClient").val(dataResponse["clienteId"]).trigger('change.select2');
+            $("#dropdownAgencia").val(dataResponse["agenciaId"]).trigger('change.select2');
+            $("#txtAtencionA").val(dataResponse["atencionA"]);
+            $("#txtAreaComentarios").val(dataResponse["comentarios"]);
+            $("#readOnlyFecha").val(dataResponse["fecha"]);
+            if (dataResponse["consolidaCostos"]) {
+                $("#ConsolidaCosto").trigger("click");
             }
-            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
+            else {
 
-            if (mun.departamentoId != departamento) {
-                option = option + "  </optgroup>";
             }
-            select = select + option;
+            $.each(dataResponse["lstCaras"], function (index, value) {
+
+                var DetalleCara = {
+                    id: value.id,
+                    caraId: value.caraId,//
+                    cotizacionId: 0,//
+                    codigo: value.codigo,
+                    referencia: value.referencia,
+                    direccion: value.direccion,
+                    precio: value.costoArrendamiento,
+                    departamento: "",
+                    iluminada: true,
+                    costoArrendamiento: value.costoArrendamiento,    //
+                    costoImpresion: value.costoImpresion,        //
+                    costoInstalacion: value.costoInstalacion,      //
+                    costoSaliente: value.costoSaliente,         //
+                    fechaDesde: value.fechaDesde,//
+                    fechaHasta: value.fechaHasta //
+                };
+                lstCaraDetalle.push(DetalleCara);
+                console.log(index);
+                console.log(lstCaraDetalle);
+            });
+            DetalleDT();
+
+
+
+
         });
-        select = select + "</select>";
+    } else {
+        DetalleDT();
 
-        $("#divMunicipio").html(select);
-        $('#dropdownMunicipio').select2();
-
-    });
-}
-
-function DropCategoria() {
-    fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single number" id="dropdownMunicipio" name="MunicipioId">`
-        var departamento = 0;
-        dataResult.forEach(mun => {
-
-            let optionGrp = "";
-            if (mun.departamentoId != departamento) {
-                departamento = mun.departamentoId;
-                optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
-            }
-            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
-
-            if (mun.departamentoId != departamento) {
-                option = option + "  </optgroup>";
-            }
-            select = select + option;
-        });
-        select = select + "</select>";
-
-        $("#divMunicipio").html(select);
-        $('#dropdownMunicipio').select2();
-
-    });
-}
-
-function DropTipo() {
-    fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single number" id="dropdownMunicipio" name="MunicipioId">`
-        var departamento = 0;
-        dataResult.forEach(mun => {
-
-            let optionGrp = "";
-            if (mun.departamentoId != departamento) {
-                departamento = mun.departamentoId;
-                optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
-            }
-            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
-
-            if (mun.departamentoId != departamento) {
-                option = option + "  </optgroup>";
-            }
-            select = select + option;
-        });
-        select = select + "</select>";
-
-        $("#divMunicipio").html(select);
-        $('#dropdownMunicipio').select2();
-
-    });
-}
-
-function GetCarasCotizacion() {
-
-    fns.CallGetAsync("api/facequotation/get", null, function (request) {
-        console.log(request);
-        $("#addCarasTable").DataTable().clear();
-        
-        lstCaraDetalle.forEach(x => {
-            request = Remove(request, "caraId", x.caraId);
-        });
-        $("#addCarasTable").DataTable().rows.add(request).draw();
-
-    });
-
-}
-function DatatableAdd() {
-
-    DataTableHelper.Draw("#addCarasTable", {
-        destroy: true,
-        dom: "frltip",
-        orderCellsTop: true,
-        fixedHeader: true,
-        data: [],
-        columns: [
-            {
-                data: "caraId ",
-                render: function (data, type, full, meta) {
-                    return `<button class="btn btn-primary btn-sm" onclick='addMdetalle("` + full.caraId+`")'>agregar</button>`;
-                }
-            },
-            {
-                data:"codigo"
-            },
-            {
-                data:"categoria"
-            },
-            {
-                data:"referenciaComercial"
-            },
-            {
-                data:"tipo"
-            }
-            
-        ],
-        "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
     }
-    });
-    GetCarasCotizacion();
 }
-function addMdetalle(IdCara) {
-   
-    $("#idCaraAdd").val(IdCara);
-    $("#ModalCarasDetalle").modal({
-        show: true,
-        backdrop: 'static',
-        keyboard: false
-    });
-}
-
-$("#btnDetalleCaraClose").click(function () {
-    $("#ModalCarasDetalle").modal("hide");
-
-});
-
 
 function DetalleDT() {
-
+    console.log(0);
     DataTableHelper.Draw("#CarasTable", {
         destroy: true,
         dom: "frltip",
@@ -217,8 +108,7 @@ function DetalleDT() {
             {
                 data: "id",
                 render: function (data, type, full, meta) {
-                    console.log(full);
-                    return `<button class="btn btn-danger btn-sm" onclick="RemoveDetalle('` + full.caraId +`')"><i class="fa fa-trash"></i></button>`;
+                    return `<button class="btn btn-danger btn-sm" onclick="RemoveDetalle('` + full.caraId + `','` + full.id + `')"><i class="fa fa-trash"></i></button>`;
                 }
             },
             {
@@ -257,7 +147,7 @@ function AddArray() {
     var send = JSON.stringify({ Id: $("#idCaraAdd").val() });
     
     var DetalleCara = {
-        id:"A"+lstCaraDetalle.length,
+        id:0,
         caraId: $("#idCaraAdd").val(),
         cotizacionId: 0,
         codigo: "ABC",
@@ -266,24 +156,23 @@ function AddArray() {
         precio: "20.00",
         departamento: "SONSONATE",
         iluminada: true,
-        costoArrendamient: "",
-        costoImporesion: "",
-        costoInstalacion: "",
-        costoSaliente: "",
-        fechaDesde: "",
-        fechaHasta: ""
+        costoArrendamiento: $("#CostoArrendamiento").val(),
+        costoImpresion: $("#CostoImpresion").val(),
+        costoInstalacion: $("#CostoInstalacion").val(),
+        costoSaliente: $("#CostoSaliente").val(),
+        fechaDesde: $("#FechaDesde").val(),
+        fechaHasta: $("#FechaHasta").val()
     }
+    $("#formularioCostos").trigger("reset");
     fns.PostDataAsync("api/caras/get", send, function (caraRequest) {
 
-        console.log(caraRequest);
         DetalleCara.codigo = caraRequest.codigo;
         DetalleCara.referencia = caraRequest.referenciaComercial;
         DetalleCara.direccion = caraRequest.direccion;
-        DetalleCara.precio = caraRequest.precio;
+        DetalleCara.precio = DetalleCara.costoArrendamiento;
         DetalleCara.departamento = "";
         DetalleCara.iluminada = caraRequest.iluminada;
 
-        console.log(DetalleCara);
         lstCaraDetalle.push(DetalleCara);
         $("#ModalCarasDetalle").modal("hide");
         GetCarasCotizacion();
@@ -292,11 +181,63 @@ function AddArray() {
     });
    
 }
-
-function RemoveDetalle(Id) {
-    
-
-    lstCaraDetalle = Remove(lstCaraDetalle, "caraId", Id);
+//Quitar de las caras seleccionadas
+function RemoveDetalle(IdCara, Iddetalle) {
+    console.log(Iddetalle);
+    if (Iddetalle != 0) {
+        eliminarDetalle(Iddetalle);
+    }
+    lstCaraDetalle = Remove(lstCaraDetalle, "caraId", IdCara);
 
     GetDetailCaras();
+}
+
+//Post Maestro Detalle
+function PostMaestroDetalle() {
+
+    var MD = {
+        CotizacionId:0,
+        EstadoId:0,
+        Fecha:"",
+        ClienteId: $("#dropdownClient option:selected").val(),
+        AgenciaId: $("#dropdownAgencia option:selected").val(),
+        AtencionA: $("#txtAtencionA").val(),
+        Comentarios: $("#txtAreaComentarios").val(),
+        ConsolidaCostos: $("#PersonaJuridica").is(':checked') ,
+        LstCaras: lstCaraDetalle
+    };
+    console.log(JSON.stringify(MD));
+    console.log(MD);
+
+    SweetAlert.ConfirmForm(function () {
+        fns.PostDataAsync("api/Quotation/SaveMD", JSON.stringify(MD), function (dataRequest) {
+
+
+            if (dataRequest["state"]) {
+                $("#CotizacionId").val(dataRequest["data"]);
+            }
+
+        });
+
+    }, false);
+  
+
+
+}
+
+
+$("#btnDetalleCaraClose").click(function () {
+
+    $("#formularioCostos").trigger("reset");
+
+});
+
+function eliminarDetalle(iddetalle) {
+
+    SweetAlert.RemoveAlert("api/quotation/detail/remove", { Id: iddetalle }, "El detalle sera removido", function (response) {
+
+        console.log(response);
+    });
+
+
 }

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OOH.Data.Dtos;
 using OOH.Data.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace OOH.Data
         public OOHContext(IWebUserHelper userHelper)
         {
             _userHelper = userHelper;
-            _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=JR.2021;MultipleActiveResultSets=True;App=EntityFramework";
+            _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Cesar1983****;MultipleActiveResultSets=True;App=EntityFramework";
         }
 
         public async Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
@@ -95,6 +96,39 @@ namespace OOH.Data
                                     CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
                 return ObjetoReturn;
+            }
+        }
+
+        public async Task<int> TransactionData<T,T2>(string _queryMaestro, string _queryDetalle, T Maestro , List<T2> Detalle)
+        {
+            using (var cn = new SqlConnection(_connectionString))
+            {
+                cn.Open();
+
+                using (var transaction = cn.BeginTransaction())
+                {
+                    try
+                    {
+                        DynamicParameters parametersMaestro = new DynamicParameters(Maestro);
+                        _queryMaestro = _queryMaestro.ToUpper().Contains("INSERT INTO") ? _queryMaestro + ";select cast(SCOPE_IDENTITY() as int)" : _queryMaestro;
+                        var id = await  cn.QuerySingleAsync<int>(_queryMaestro, parametersMaestro, transaction: transaction, commandType: CommandType.Text).ConfigureAwait(false);
+                        foreach (var item in Detalle)
+                        {
+                            DynamicParameters parametersDetalle = new DynamicParameters(item);
+                            parametersDetalle.Add("@idMaestro",id);
+                           int s= await cn.ExecuteAsync(_queryDetalle,parametersDetalle, transaction: transaction,commandType:CommandType.Text).ConfigureAwait(false);
+                        }
+                        transaction.Commit();
+                        return id;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        return 0;
+
+                    }
+
+                }
             }
         }
     }

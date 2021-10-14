@@ -10,7 +10,7 @@ namespace OOH.Data.Dtos.Cotizacion
     public class QuotationDto: Cotizaciones
     {
 
-        public List<Caras> LstCaras { get; set; }
+        public List<QuotationDetailDto> LstCaras { get; set; }
 
     }
 }

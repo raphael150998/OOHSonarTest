@@ -40,6 +40,7 @@ namespace OOH.WebApi
             services.AddScoped<ContactsRepository>();
             services.AddScoped<SitioRepository>();
             services.AddScoped<ProveedorRepository>();
+            services.AddScoped<TypesRepository>();
             services.AddControllersWithViews();
             services.AddCors();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

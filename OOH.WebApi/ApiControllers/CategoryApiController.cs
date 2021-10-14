@@ -20,13 +20,19 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpGet]
-        [Route("api/category/call")]
-        public List<ClientesCategorias> Categorias()
+        [Route("api/client/category/call")]
+        public async Task<IEnumerable<ClientesCategorias>> Categorias()
         {
-            return _repo.Select().Result.ToList();
+            return await _repo.SelectClientCategory();
             //return repo.Select().Result.ToList();
         }
 
+        [HttpGet]
+        [Route("api/face/category/get")]
+        public async Task<IEnumerable<CarasCategorias>> CarasCategorias()
+        {
 
+            return await _repo.SelectFaceCategory();
+        }
     }
 }

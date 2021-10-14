@@ -1,7 +1,7 @@
 ﻿$().ready(function ($) {
 
     BuildDatatable();
-
+    BuildDatatableA();
 });
 
 function LLenarDatatable() {
@@ -74,4 +74,53 @@ function removeContact(idContact) {
 
 
     });
+}
+
+
+
+
+
+
+function LLenarDatatableA() {
+    console.log("wntro");
+    var idCliente = $("#ClienteId").val();
+    if (idCliente != 0) {
+
+        fns.CallGetAsync("api/agency/Select", null, function (dataResponse) {
+            $("#table1").DataTable().clear();
+            $("#table1").DataTable().rows.add(dataResponse).draw();
+        });
+    }
+
+}
+
+function BuildDatatableA() {
+
+    DataTableHelper.Draw("#table1", {
+        destroy: true,
+        orderCellsTop: true,
+        fixedHeader: true,
+        data: [],
+        columns: [
+            {
+                data: "agenciaId",
+                orderable: false,
+                render: function (data, type, full, meta) {
+                    return `<i onclick="UpdateAgency(${data})" class="fa fa-pencil-square btnDatatable text-primary"></i>
+                            <i onclick="RemoveAgency(${data})" class="fa fa-trash btnDatatable text-danger"></i>
+                            <i onclick="GetLogs('Agencia', 'api/agency/log', ${data})" class="fa fa-history btnDatatable text-dark"></i>`;
+
+                }
+            },
+            { data: "agenciaId" },
+            { data: "nombre" },
+            { data: "comision" },
+
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }
+    });
+
+    LLenarDatatableA();
 }

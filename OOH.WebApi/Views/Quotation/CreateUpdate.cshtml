@@ -1,13 +1,14 @@
-﻿
+﻿@model OOH.Data.Models.Cotizaciones;
 @{
     ViewData["Title"] = "CreateUpdate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<input asp-for="CotizacionId" hidden /> 
 <div class="card">
     <div class="card-block row">
         <div class="col-md-3 container">
-            <button type="submit" id="BtnSubmit" class="btn btn-primary"><i class="far fa-save"></i>Guardar</button>
+            <button type="submit" id="BtnSubmit" class="btn btn-primary" onclick="PostMaestroDetalle()"><i class="far fa-save"></i>Guardar</button>
             <strong class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</strong>
         </div>
 
@@ -39,11 +40,11 @@
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Atencion A</label>
-                    <input class="form-control" />
-                </div>
+                    <input class="form-control" id="txtAtencionA" />
+                </div>  
                 <div class="col-md-3">
                     <label class="control-label">Fecha</label>
-                    <input class="form-control" readonly id="fecha" />
+                    <input class="form-control" readonly id="readOnlyFecha" />
                 </div>
                 <div class="col-md-3">
                     <label class="control-label">Agencia</label>
@@ -51,12 +52,12 @@
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Comentarios</label>
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" id="txtAreaComentarios"></textarea>
                 </div>
                 <div class="col-md-3">
                     <label class="control-label">Costo</label>
                     <br />
-                    <input type="checkbox" class="js-single bool" id="PersonaJuridica" name="PersonaJuridica" />
+                    <input type="checkbox" class="js-single bool" id="ConsolidaCosto" name="ConsolidaCosto" />
 
                 </div>
 
@@ -109,28 +110,25 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Sitio</label>
-                                <select class="form-control" id="dropdownSitio">
-                                    <option>AE</option>
-                                    <option>CO</option>
+                                <select id="dropdownSitio">
+                                  
                                 </select>
 
                             </div>
                             <div class="col-md-4">
                                 <label>Categoria</label>
-                                <select class="form-control" id="dropdownCategoria">
-                                    <option>Pasarela</option>
-                                    <option>Pantalla</option>
-                                </select>
+                               
+                                <div id="divDropCategoria">
+
+                                </div>
 
                             </div>
                             <div class="col-md-4">
                                 <label>Tipo</label>
-                                <select class="js-example-basic-single" id="dropdownTipo">
-                                    <option>Mini</option>
-                                    <option>Big</option>
+                              
+                                <div id="divDropTipo">
 
-                                </select>
-
+                                </div>
                             </div>
                             <br />
                             <br />
@@ -166,35 +164,38 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <div class="row">
-                                            <input id="idCaraAdd" hidden />
-                                            <div class="col-md-4">
-                                                <label class="control-label">CostoArrendamiento</label>
-                                                <input type="text" class="form-control" id="CostoArrendamiento" placeholder="TextBox" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">CostoImpresion</label>
-                                                <input type="text" class="form-control" id="CostoImpresion" placeholder="TextBox" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">CostoInstalacion</label>
-                                                <input type="text" class="form-control" id="CostoInstalacion" placeholder="TextBox" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">CostoSaliente</label>
-                                                <input type="text" class="form-control" id="CostoSaliente" placeholder="TextBox" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">FechaDesde</label>
-                                                <input type="text" class="form-control" id="FechaDesde" placeholder="TextBox" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">FechaHasta</label>
-                                                <input type="text" class="form-control" id="FechaHasta" placeholder="TextBox" />
-                                            </div>
-                                            
+                                        <form id="formularioCostos">
+                                            <div class="row">
+                                                <input id="idCaraAdd" hidden />
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Costo de arrendamiento</label>
+                                                    <input type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Costo de impresion</label>
+                                                    <input type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Costo de instalacion</label>
+                                                    <input type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Costo saliente</label>
+                                                    <input type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Fecha Desde</label>
+                                                    <input type="date" class="form-control" id="FechaDesde" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Fecha Hasta</label>
+                                                    <input type="date" class="form-control" id="FechaHasta" />
+                                                </div>
 
-                                        </div>
+
+                                            </div>
+
+                                        </form>
 
                                         <br />
                                         <br />
@@ -221,3 +222,4 @@
     </div>
 </div>
 <script src="~/js/Quotation/jquery.EditCreate.js" type="text/javascript"></script>
+<script src="~/js/Quotation/modal/jquery.AddCarasModal.js" type="text/javascript"></script>

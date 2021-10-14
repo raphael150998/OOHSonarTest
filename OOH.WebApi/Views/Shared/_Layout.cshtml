@@ -953,6 +953,7 @@
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
+   
     <script src="~/js/jquery.functions.js"></script>
     <script src="~/js/jquery.blockUI.js"></script>
     @*<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -1004,15 +1005,19 @@
     <script src="~/js/jquery.SweetAlertHelper.js"></script>
     <script src="~/js/jquery.fnHelpers.js"></script>
     <script src="~/bower_components/moment/js/moment.js"></script>
+
     <script>
         $(function () {
-
-            console.log(moment.now());
-
             BuildLogDatatable();
             $("#btnCloseLog").click(function () {
                 $("#logTable").DataTable().clear();
                 $("#modalLogs").modal("hide");
+            });
+
+            $('.nav li a').click(function () {
+                var tab_id = $(this).attr('href');
+                $('#tabs-container').find('div.active').removeClass('active');
+                $(tab_id).addClass('active');
             });
         });
 

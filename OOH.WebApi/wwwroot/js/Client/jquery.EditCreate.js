@@ -32,31 +32,31 @@
         messages: {
 
             NombreComercial: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             },
             Codigo: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             },
             RazonSocial: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             },
             NRC: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             },
             NIT: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             },
             Direccion: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             },
             Telefono: {
-                required: "Campo requerido bro"
+                required: "Campo requerido"
 
             }
         }
@@ -128,7 +128,7 @@ function DropDownListMunicipio() {
 }
 function DropDownListCategoria() {
 
-    fns.CallGetAsync("api/category/call", null, function (dataResult) {
+    fns.CallGetAsync("api/client/category/call", null, function (dataResult) {
         let select = `<select class="form-control number" id="dropdownCategoria" name="CategoriaId" >`
         
         dataResult.forEach(cat => {          
