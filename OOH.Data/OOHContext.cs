@@ -99,7 +99,7 @@ namespace OOH.Data
             }
         }
 
-        public async Task<int> TransactionData<T,T2>(string _queryMaestro, string _queryDetalle, T Maestro , List<T2> Detalle)
+        public async Task<long> TransactionData<T,T2>(string _queryMaestro, string _queryDetalle, T Maestro , List<T2> Detalle,long idMaestro = 0 )
         {
             using (var cn = new SqlConnection(_connectionString))
             {
@@ -111,7 +111,9 @@ namespace OOH.Data
                     {
                         DynamicParameters parametersMaestro = new DynamicParameters(Maestro);
                         _queryMaestro = _queryMaestro.ToUpper().Contains("INSERT INTO") ? _queryMaestro + ";select cast(SCOPE_IDENTITY() as int)" : _queryMaestro;
-                        var id = await  cn.QuerySingleAsync<int>(_queryMaestro, parametersMaestro, transaction: transaction, commandType: CommandType.Text).ConfigureAwait(false);
+                        long id = idMaestro == 0 ? await  cn.QuerySingleAsync<int>(_queryMaestro, parametersMaestro, transaction: transaction, commandType: CommandType.Text).ConfigureAwait(false) :
+                            await cn.ExecuteAsync(_queryMaestro, parametersMaestro, transaction: transaction, commandType: CommandType.Text).ConfigureAwait(false);
+                        id = idMaestro == 0 ? id : idMaestro;
                         foreach (var item in Detalle)
                         {
                             DynamicParameters parametersDetalle = new DynamicParameters(item);

@@ -88,7 +88,7 @@ namespace OOH.Data.Repos
         } 
         public async Task<IEnumerable<Cotizaciones>> Select(string _Where = "")
         {
-            return await SelectData<Cotizaciones>("SELECT t1.CotizacionId, (select t2.NombreComercial from[dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.Fecha,(select * from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, (select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado, t1.AtencionA , t1.ConsolidaCostos,  t1. as referencia FROM [dbo].[Cotizaciones] t1 " + _Where, false);
+            return await SelectData<Cotizaciones>("SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, (select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado, t1.AtencionA , t1.ConsolidaCostos, t1.EstadoId FROM [dbo].[Cotizaciones] t1 " + _Where, false);
 
         }
 
@@ -134,7 +134,7 @@ namespace OOH.Data.Repos
                     detalle.CostoSaliente = item.CostoSaliente;
                     detalle.FechaDesde = item.FechaDesde;
                     detalle.FechaHasta = item.FechaHasta;
-                    if (!ExisteDetalle(item.CotizacionId, item.CaraId).Result)
+                    if (!ExisteDetalle(collection.CotizacionId, item.CaraId).Result)
                     {
 
                         LstDetalle.Add(detalle);
@@ -146,7 +146,7 @@ namespace OOH.Data.Repos
                                 "UPDATE Cotizaciones SET Fecha=@Fecha,EstadoId=@EstadoId,ClienteId=@ClienteId, AgenciaId=@AgenciaId,AtencionA=@AtencionA,Comentarios=@Comentarios,ConsolidaCostos=@ConsolidaCostos WHERE CotizacionId = @CotizacionId";
                  
                 string sqlDetalle = "INSERT INTO CotizacionesDetalle(CotizacionId,CaraId,CostoArrendamiento,CostoImpresion,CostoInstalacion,CostoSaliente,FechaDesde,FechaHasta) VALUES (@idMaestro,@CaraId,@CostoArrendamiento,@CostoImpresion,@CostoInstalacion,@CostoSaliente,@FechaDesde,@FechaHasta)";
-                int result = await TransactionData<Cotizaciones, CotizacionesDetalle>(sqlMaestro, sqlDetalle, cotizacion, LstDetalle);
+                long result = await TransactionData<Cotizaciones, CotizacionesDetalle>(sqlMaestro, sqlDetalle, cotizacion, LstDetalle, cotizacion.CotizacionId);
                 await _log.AddLog(new LogDto()
                 {
                     Descripcion = collection.CotizacionId == 0 ? "Creación" : "Actualización",

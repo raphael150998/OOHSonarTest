@@ -5,9 +5,9 @@
 
 function LLenarDataTable() {
     fns.CallGetAsync("api/quotation/get", null, function (dataResult) {
-
-        $("#tablaQuotation").Datatable().DataTable().clear();
-        $("#tablaQuotation").Datatable().DataTable().rows.add(dataResult).draw();
+        console.log(dataResult);
+        $("#tablaQuotation").DataTable().clear();
+        $("#tablaQuotation").DataTable().rows.add(dataResult).draw();
 
     });
 }
@@ -30,6 +30,18 @@ function quotationDataTable() {
                      <i onclick="GetLogs('Cliente', 'api/client/log', ${data})" class="fa fa-history btnDatatable text-warning"></i>
                      `;
                 }
+            },
+            {
+                data:"cliente"
+            },
+            {
+                data:"fecha"
+            },
+            {
+                data:"agencia"
+            },
+            {
+                data:"estado"
             }
         ],
         "language": {
@@ -37,4 +49,8 @@ function quotationDataTable() {
         }
     });
     LLenarDataTable();
+}
+
+function edit() {
+
 }

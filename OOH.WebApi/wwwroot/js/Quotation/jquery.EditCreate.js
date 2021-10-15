@@ -46,6 +46,7 @@ function DropDownListAgencias() {
 
 
 function llenarData() {
+    $("#EstadoId").val(0);
     if (IdCotizacion != 0) {
         fns.CallGetAsync("api/quotation/detail/find", { Idcotizacion: IdCotizacion }, function (dataResponse) {
             console.log(dataResponse);
@@ -54,6 +55,7 @@ function llenarData() {
             $("#txtAtencionA").val(dataResponse["atencionA"]);
             $("#txtAreaComentarios").val(dataResponse["comentarios"]);
             $("#readOnlyFecha").val(dataResponse["fecha"]);
+            $("#EstadoId").val(dataResponse["estadoId"]);
             if (dataResponse["consolidaCostos"]) {
                 $("#ConsolidaCosto").trigger("click");
             }
@@ -65,7 +67,7 @@ function llenarData() {
                 var DetalleCara = {
                     id: value.id,
                     caraId: value.caraId,//
-                    cotizacionId: 0,//
+                    cotizacionId: IdCotizacion,//
                     codigo: value.codigo,
                     referencia: value.referencia,
                     direccion: value.direccion,
@@ -196,9 +198,9 @@ function RemoveDetalle(IdCara, Iddetalle) {
 function PostMaestroDetalle() {
 
     var MD = {
-        CotizacionId:0,
-        EstadoId:0,
-        Fecha:"",
+        CotizacionId: IdCotizacion,
+        EstadoId: $("#EstadoId").val(),
+        Fecha: IdCotizacion == 0 ? "" : $("#readOnlyFecha").val(),
         ClienteId: $("#dropdownClient option:selected").val(),
         AgenciaId: $("#dropdownAgencia option:selected").val(),
         AtencionA: $("#txtAtencionA").val(),
