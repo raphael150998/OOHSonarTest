@@ -21,13 +21,13 @@ function quotationDataTable() {
         data: [],
         columns: [
             {
-                data: "clienteId",
+                data: "cotizacionId",
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `
                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + data + `')"></i>
-                     <i class="fa fa-trash btnDatatable text-danger" onclick="removeClient('` + data + `')"></i>
-                     <i onclick="GetLogs('Cliente', 'api/client/log', ${data})" class="fa fa-history btnDatatable text-warning"></i>
+                     <i class="fa fa-trash btnDatatable text-danger" onclick="removeQuotation('` + data + `')"></i>
+                     <i onclick="GetLogs('Cotizaciones', 'api/quotation/log', ${full.cotizacionId})" class="fa fa-history btnDatatable text-warning"></i>
                      `;
                 }
             },
@@ -51,6 +51,17 @@ function quotationDataTable() {
     LLenarDataTable();
 }
 
-function edit() {
+function edit(id) {
 
+    console.log(id);
+    window.open("/Quotation/CreateUpdate/" + id, '_blank');
+
+}
+
+function removeQuotation(idQutotaion) {
+    SweetAlert.RemoveAlert("api/quotation/remove", { Id: idQutotaion }, "La cotización sera removido", function (response) {
+        console.log(response);
+        LLenarDataTable();
+    });
+   
 }

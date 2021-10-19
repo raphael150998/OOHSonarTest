@@ -1,10 +1,12 @@
 ﻿var lstCaraDetalle = [];
 let IdCotizacion = $("#CotizacionId").val();
+
 $().ready(function ($) {
     DropDownListClientes();
     DropDownListAgencias();
     llenarData();
 });
+
 function DropDownListClientes() {
 
     fns.CallGetAsync("api/Client/Get", null, function (dataResult) {
@@ -42,8 +44,6 @@ function DropDownListAgencias() {
     });
 
 }
-
-
 
 function llenarData() {
     $("#EstadoId").val(0);
@@ -144,6 +144,7 @@ function GetDetailCaras() {
     $("#CarasTable").DataTable().clear();
     $("#CarasTable").DataTable().rows.add(lstCaraDetalle).draw();
 }
+
 function AddArray() {
     
     var send = JSON.stringify({ Id: $("#idCaraAdd").val() });
@@ -240,6 +241,5 @@ function eliminarDetalle(iddetalle) {
 
         console.log(response);
     });
-
 
 }

@@ -96,7 +96,18 @@ namespace OOH.WebApi.ApiControllers
             return await _repo.RemoveDetail(data.Id);
         }
 
+        [HttpPost]
+        [Route("api/quotation/remove")]
+        public async Task<IActionResult> removeQuotation([FromBody] Identify<int> data)
+        {
+            return Ok(new ResultClass() { data = _repo.Remove(data.Id).Result });
+        }
 
+        [Route("api/quotation/log")]
+        public async Task<IActionResult> GetLogs(int id)
+        {
+            return Ok(await _repo.GetLogs(id));
+        }
 
     }
 }

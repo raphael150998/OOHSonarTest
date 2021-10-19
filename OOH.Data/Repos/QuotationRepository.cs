@@ -1,7 +1,6 @@
 ﻿using OOH.Data.Dtos;
 using OOH.Data.Dtos.Logs;
 using Dapper;
-using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -57,14 +56,22 @@ namespace OOH.Data.Repos
 
         public async Task<bool> Remove(int id)
         {
-            await _log.AddLog(new LogDto()
+            try
             {
-                Descripcion = "Eliminación",
-                Entidad = nameof(Clientes),
-                EntidadId = id
-            });
+                await _log.AddLog(new LogDto()
+                {
+                    Descripcion = "Eliminación",
+                    Entidad = nameof(Cotizaciones),
+                    EntidadId = id
+                });
 
-            return await RemoveData($"delete from  [dbo].[clientes] Where ClienteId = {id}", false) == 1 ? true : false;
+                return await RemoveData($"delete from [dbo].[CotizacionesDetalle] where CotizacionId = {id} ; delete from  [dbo].[Cotizaciones] Where CotizacionId = {id}", false) == 1 ? true : false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
         public async Task<ResultClass> AddQuotationDetail(CotizacionesDetalle detalle)
         {
