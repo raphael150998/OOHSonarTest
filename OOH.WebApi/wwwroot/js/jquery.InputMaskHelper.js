@@ -159,12 +159,16 @@ function AplicarMask(inputs) {
                 $("#" + val.id).prop("disabled", true);
             }
             else if (attr == "Decimal") {
+               
                 $("#" + val.id).inputmask("", {
                     placeholder: '',
                     insertMode: false,
                     showMaskOnHover: false
                 });
 
+                $("#" + val.id).on('input', function () {
+                    this.value = this.value.replace(/[^0-9.]/g, '');
+                });
                 $("#" + val.id).addClass('decimales');
 
                 $('decimales').on('input', function () {

@@ -6,6 +6,7 @@ using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
 using OOH.Data.Models;
 using OOH.Data.Repos;
+using OOH.WebApi.Filters.Attributes;
 using OOH.WebApi.Models.Site;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [Route("api/quotation/get")]
+        [OhhFilter("ListQuotation", Data.ActionPermission.Execute)]
         public async Task<IEnumerable<Cotizaciones>> GetCotizaciones()
         {
             return await _repo.Select();
@@ -37,6 +39,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/Quotation/CEdata")]
+        [OhhFilter("Quotation", Data.ActionPermission.Create)]
         public async Task<ResultClass> CreateEdit([FromBody] Cotizaciones collection)
         {
             return _repo.AddOrUpdate(collection).Result;
@@ -60,6 +63,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/Quotation/SaveMD")]
+        [OhhFilter("Quotation", Data.ActionPermission.Create)]
         public async Task<ResultClass> SaveMaestroDetalle([FromBody]QuotationDto collection)
         {
 
@@ -68,6 +72,7 @@ namespace OOH.WebApi.ApiControllers
         }
         [HttpGet]
         [Route("api/quotation/detail/find")]
+        [OhhFilter("Quotation", Data.ActionPermission.Read)]
         public async Task<QuotationDto> Find(int Idcotizacion)
         {
             QuotationDto modelo = new QuotationDto();
@@ -91,6 +96,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/quotation/detail/remove")]
+        [OhhFilter("Quotation", Data.ActionPermission.Delete)]
         public async Task<bool> removeDetail([FromBody]Identify<int> data)
         {
             return await _repo.RemoveDetail(data.Id);
@@ -98,6 +104,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpPost]
         [Route("api/quotation/remove")]
+        [OhhFilter("Quotation", Data.ActionPermission.Delete)]
         public async Task<IActionResult> removeQuotation([FromBody] Identify<int> data)
         {
             return Ok(new ResultClass() { data = _repo.Remove(data.Id).Result });

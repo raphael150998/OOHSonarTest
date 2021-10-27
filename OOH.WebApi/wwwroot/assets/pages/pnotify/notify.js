@@ -21,6 +21,7 @@ $(function() {
 
     // Default style
     $('#pnotify-default').on('click', function () {
+      
         new PNotify({
             title: 'Primary notice',
             text: 'Check me out! I\'m a notice.',

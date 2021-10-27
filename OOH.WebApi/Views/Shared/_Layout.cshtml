@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="~/assets/pages/chart/radial/css/radial.css" type="text/css" media="all">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+    
+    <link rel="stylesheet" type="text/css" href="~/assets/pages/pnotify/notify.css">
 
     <!--FontAwesome-->
     <link href="~/css/fontawesome/all.css" rel="stylesheet" />
@@ -87,6 +89,8 @@
         table#logTable {
             width: inherit !important;
         }
+
+        
     </style>
 </head>
 
@@ -651,7 +655,7 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
-                                            <a href="#">
+                                            <a href="@Url.Action("Index","Quotation")">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext">@Resources.Cotizaciones</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -953,7 +957,7 @@
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-   
+
     <script src="~/js/jquery.functions.js"></script>
     <script src="~/js/jquery.blockUI.js"></script>
     @*<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -1005,6 +1009,17 @@
     <script src="~/js/jquery.SweetAlertHelper.js"></script>
     <script src="~/js/jquery.fnHelpers.js"></script>
     <script src="~/bower_components/moment/js/moment.js"></script>
+    <!-- pnotify js -->
+    <script src="~/bower_components/pnotify/js/pnotify.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.desktop.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.buttons.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.confirm.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.callbacks.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.animate.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.history.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.mobile.js"></script>
+    <script src="~/bower_components/pnotify/js/pnotify.nonblock.js"></script>
+    <script src="~/assets/pages/pnotify/notify.js"></script>
 
     <script>
         $(function () {
@@ -1066,7 +1081,6 @@
         }
     </script>
     @RenderSection("scripts", required: false)
-
 </body>
 
 </html>

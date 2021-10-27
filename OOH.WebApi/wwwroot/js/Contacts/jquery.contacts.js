@@ -23,6 +23,15 @@ function BuildDatatable() {
     DataTableHelper.Draw("#tablaContact", {
         destroy: true,
         orderCellsTop: true,
+        dom: "Bfrltip",
+        buttons: [
+            {
+                text: '<i class="fa fa-plus" id="addbtn" ></i>',
+                action: function (e, dt, node, config) {
+                    editContact(0);
+                }
+            }
+        ],
         fixedHeader: true,
         data: [],
         columns: [
@@ -55,8 +64,7 @@ function BuildDatatable() {
 }
 
 function removeContact(idContact) {
-    console.log(idContact);
-
+    
     SweetAlert.RemoveAlert("api/contacts/remove", { Id: parseInt(idContact) }, function(response) {
 
         if (response) {

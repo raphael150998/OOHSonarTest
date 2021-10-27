@@ -98,10 +98,18 @@ function llenarData() {
 }
 
 function DetalleDT() {
-    console.log(0);
+ 
     DataTableHelper.Draw("#CarasTable", {
         destroy: true,
-        dom: "frltip",
+        dom: "Bfrltip",
+        buttons: [
+            {
+                text: '<i class="fa fa-plus"></i>',
+                action: function (e, dt, node, config) {
+                    addCara(0);
+                }
+            }
+        ],
         orderCellsTop: true,
         fixedHeader: true,
         data: [],
@@ -140,7 +148,7 @@ function DetalleDT() {
 }
 
 function GetDetailCaras() {
-    console.log(lstCaraDetalle);
+ 
     $("#CarasTable").DataTable().clear();
     $("#CarasTable").DataTable().rows.add(lstCaraDetalle).draw();
 }
@@ -188,11 +196,13 @@ function AddArray() {
 function RemoveDetalle(IdCara, Iddetalle) {
     console.log(Iddetalle);
     if (Iddetalle != 0) {
-        eliminarDetalle(Iddetalle);
+        eliminarDetalle(Iddetalle, IdCara);
+    } else {
+       
+        lstCaraDetalle = Remove(lstCaraDetalle, "caraId", IdCara);
+        GetDetailCaras();
     }
-    lstCaraDetalle = Remove(lstCaraDetalle, "caraId", IdCara);
-
-    GetDetailCaras();
+   
 }
 
 //Post Maestro Detalle
@@ -215,9 +225,20 @@ function PostMaestroDetalle() {
     SweetAlert.ConfirmForm(function () {
         fns.PostDataAsync("api/Quotation/SaveMD", JSON.stringify(MD), function (dataRequest) {
 
-
+            console.log(dataRequest);
             if (dataRequest["state"]) {
                 $("#CotizacionId").val(dataRequest["data"]);
+                Swal.fire(
+                    'Guardado',
+                    'Se guardo correctamente',
+                    'success'
+                );
+            } else {
+                Swal.fire(
+                    'Error',
+                    'Ocurrio un error',
+                    'error'
+                );
             }
 
         });
@@ -235,11 +256,23 @@ $("#btnDetalleCaraClose").click(function () {
 
 });
 
-function eliminarDetalle(iddetalle) {
+function eliminarDetalle(iddetalle, IdCara) {
 
     SweetAlert.RemoveAlert("api/quotation/detail/remove", { Id: iddetalle }, "El detalle sera removido", function (response) {
+        if (response) {
+            lstCaraDetalle = Remove(lstCaraDetalle, "caraId", IdCara);
 
-        console.log(response);
+            GetDetailCaras();
+        } else {
+            //
+        }
     });
+
+}
+
+function edit(id) {
+
+    console.log(id);
+    window.open("/Quotation/CreateUpdate/" + id, '_blank');
 
 }

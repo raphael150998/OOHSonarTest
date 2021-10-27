@@ -1,4 +1,5 @@
-﻿using OOH.Data.Dtos;
+﻿using Dapper;
+using OOH.Data.Dtos;
 using OOH.Data.Dtos.Cotizacion;
 using OOH.Data.Dtos.Logs;
 using OOH.Data.Helpers;
@@ -14,13 +15,51 @@ namespace OOH.Data.Repos
 {
     public class FaceRepository :OOHContext, IBaseRepository<Caras>
     {
-        public FaceRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+        public FaceRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public async Task<ResultClass> AddOrUpdate(Caras collection)
         {
-            throw new NotImplementedException();
+            ResultClass result = new ResultClass();
+
+            Caras validart = FilterData<Caras>($"Select * from [dbo].[clientes] Where Codigo = '{collection.Codigo}'", false, null).Result;
+            if (validart != null)
+            {
+                if (validart.CaraId != collection.CaraId)
+                {
+                    return new ResultClass() { state = false, message = "El codigo ya existe", data = 1 };
+                }
+            }
+
+
+
+            DynamicParameters param = new DynamicParameters(collection);
+
+            if (collection.CaraId == 0)
+            {
+
+                int post = PostData(@"Insert Into [dbo].[clientes](NombreComercial,RazonSocial,PersonaJuridica,Celular,Telefono,Codigo,Direccion,Email,Giro,NIT,NRC,Activo,UsuarioId,CategoriaId,MunicipioId) Values (@NombreComercial,@RazonSocial,@PersonaJuridica,@Celular,@Telefono,@Codigo,@Direccion,@Email,@Giro,@NIT,@NRC,@Activo,@UsuarioId,@CategoriaId,@MunicipioId)", true, param, false).Result;
+
+                result = new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
+            }
+            else
+            {
+
+                int post = UpdateData("update [dbo].[Clientes] set Codigo = @Codigo ,RazonSocial = @RazonSocial ,NombreComercial = @NombreComercial, NRC = @NRC ,NIT= @NIT ,Giro = @Giro ,Email = @Email,Direccion = @Direccion,Telefono = @Telefono ,Celular = @Celular ,PersonaJuridica= @PersonaJuridica, CategoriaId = @CategoriaId, MunicipioId = @MunicipioId Where ClienteId = @ClienteId ", true, param, false).Result;
+                result = new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
+            }
+
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = collection.CaraId == 0 ? "Creación" : "Actualización",
+                Entidad = nameof(Clientes),
+                EntidadId = collection.CaraId == 0 ? (int)result.data : collection.CaraId,
+            });
+
+            return result;
         }
 
         public async Task<Caras> Find(int Id)
@@ -40,7 +79,7 @@ namespace OOH.Data.Repos
 
         public async Task<IEnumerable<Caras>> Select(string _Where = "")
         {
-            throw new NotImplementedException();
+            return await SelectData<Caras>("SELECT t1.CaraId, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion ,t1.Codigo , from [dbo].[Caras] t1");
         }
         public async Task<IEnumerable<FaceQuotationDto>> SelectFace(string _Where = "")
         {

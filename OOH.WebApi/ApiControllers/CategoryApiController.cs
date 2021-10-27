@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Models;
 using OOH.Data.Repos;
+using OOH.WebApi.Filters.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/client/category/call")]
+        [OhhFilter("ListClient", Data.ActionPermission.Execute)]
         public async Task<IEnumerable<ClientesCategorias>> Categorias()
         {
             return await _repo.SelectClientCategory();
@@ -29,6 +31,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/face/category/get")]
+        [OhhFilter("ListFaceCategory", Data.ActionPermission.Execute)]
         public async Task<IEnumerable<CarasCategorias>> CarasCategorias()
         {
 

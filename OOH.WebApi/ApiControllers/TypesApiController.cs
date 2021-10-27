@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Models;
 using OOH.Data.Repos;
+using OOH.WebApi.Filters.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/face/type/get")]
+        [OhhFilter("ListFaceTypes", Data.ActionPermission.Execute)]
         public async Task<IEnumerable<CarasTipos>> CarasTipos()
         {
             return await _repo.SelectCaraTipos();

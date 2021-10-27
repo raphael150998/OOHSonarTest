@@ -69,8 +69,8 @@
                 text: dataResult["message"]
             })
         } else {
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
-            $("#addbtn").css("cursor", "pointer");
+            $(".id").removeClass("btn-add-dissable").addClass("btn-add-success");
+            $(".id").css("cursor", "pointer");
             $("#ClienteId").val(data["data"]);
         }
     });
@@ -87,12 +87,11 @@ function llenar() {
     var idCliente = $("#ClienteId").val();
 
     if (idCliente == 0) {
-        $("#addbtn").css("cursor", "no-drop");
+        $(".dt-button.id").css("cursor", "no-drop");
     }
     if (idCliente != 0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
-            //console.log(JSON.stringify(dataResult));
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
+           
             $("#formClient").assignJsonToForm(dataResult);
             $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
 

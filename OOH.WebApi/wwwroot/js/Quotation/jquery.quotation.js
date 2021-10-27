@@ -32,6 +32,14 @@ function quotationDataTable() {
                 }
             },
             {
+                data: "cotizacionId",
+                render: function (data, type, full, meta) {
+                    console.log(data);
+                    console.log(full);
+                    return `COT` + AddCeros(data,6);
+                }
+            },
+            {
                 data:"cliente"
             },
             {
@@ -46,7 +54,15 @@ function quotationDataTable() {
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-        }
+        },
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fa fa-file-excel-o"></i> <b>Excel</b>',
+                titleAttr: 'Excel'
+            }
+        ]
+       
     });
     LLenarDataTable();
 }
@@ -61,7 +77,44 @@ function edit(id) {
 function removeQuotation(idQutotaion) {
     SweetAlert.RemoveAlert("api/quotation/remove", { Id: idQutotaion }, "La cotización sera removido", function (response) {
         console.log(response);
+        if (response["data"]) {
+            Swal.fire(
+                'Removido',
+                'Se removio correctamente',
+                'success'
+            );
+        } else {
+            Swal.fire(
+                'Error',
+                'Ocurrio un error',
+                'error'
+            );
+        }
         LLenarDataTable();
     });
    
+}
+
+function refresh() {
+    LLenarDataTable();
+}
+
+function AddCeros(parametro, cantidad) {
+
+    console.log(parametro.toString());
+    console.log(cantidad);
+    var BaseContatenar = parametro.length;
+    console.log(BaseContatenar);
+    var Contador = parseInt(BaseContatenar) - parseInt(cantidad);
+    console.log(Contador);
+    var DataConcatenada = "";
+
+    for (var i = 0; i < Contador; i++) {
+
+        DataConcatenada = DataConcatenada + "0";
+        console.log(DataConcatenada);
+    }
+    DataConcatenada = DataConcatenada + parametro;
+    console.log(DataConcatenada);
+
 }
