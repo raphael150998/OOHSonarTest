@@ -165,10 +165,9 @@ function AplicarMask(inputs) {
                     showMaskOnHover: false
                 });
 
-                if ($("#" + val.id).attr("td") == "Decimal") {
+                $("#" + val.id).addClass('decimales');
 
-
-                    $('.decimales').on('input', function () {
+                $('decimales').on('input', function () {
                         this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
                     });
 
@@ -200,7 +199,7 @@ function AplicarMask(inputs) {
                             yaesta = false;
                         }
                     });
-                }
+                
             }
             else {
                 $("#" + val.id).inputmask(attr);

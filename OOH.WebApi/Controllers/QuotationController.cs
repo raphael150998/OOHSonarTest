@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,11 @@ namespace OOH.WebApi.Controllers
         {
             return View();
         }  
-        public IActionResult CreateUpdate(int id = 0)
+        public IActionResult CreateUpdate(long id = 0)
         {
-            return View();
+            Cotizaciones model = new Cotizaciones();
+            model.CotizacionId = id;
+            return View(model);
         }
 
     }

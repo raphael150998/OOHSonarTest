@@ -133,3 +133,39 @@ var fns = {
         return rt;
     }
 }
+
+//Metodo Remove de lista
+function Remove(Lista, Campo, Dato) {
+
+    var ListaTemporal = [];
+    $.each(Lista, function (index, item) {
+        if (item[Campo] != Dato) {
+
+            ListaTemporal.push(item);
+
+        } else {
+            //Nada
+        }
+    });
+    return ListaTemporal;
+}
+
+//Metodo Where para las listas([]) 
+function Where(Lista, Campo, Dato) {
+
+    var entradas = 0;
+    var obWhere = null;
+    $.each(Lista, function (index, item) {
+        if (item[Campo] == Dato) {
+            if (entradas < 1) {
+                entradas++;
+                obWhere = item;
+
+            }
+
+        } else {
+            //Nada
+        }
+    });
+    return obWhere;
+}

@@ -47,6 +47,7 @@ namespace OOH.WebApi
             services.AddScoped<ZoneRepository>();
             services.AddScoped<IMapGenerator, MapGenerator>();
             services.AddScoped<IPowerpointProvider, PowerpointProvider>();
+            services.AddScoped<TypesRepository>();
             services.AddControllersWithViews();
             services.AddCors();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Client";
+}
+<div>
+    <div class="card">
+
+        <div class="card-header">
+            <button class="btn btn-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Agregar Cotiazión</button>
+            <button class="btn btn-primary btn-outline-primary"  onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="card-block">
+            <table id="tablaQuotation" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="filter-action">Id</th>
+                        <th class="filter">Cliente</th>
+                        <th class="filter">Fecha</th>
+                        <th class="filter">Agencia</th>
+                        <th class="filter">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Quotation/jquery.quotation.js"></script>

@@ -40,6 +40,7 @@ function BuilDatatable() {
                     return `
                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + data + `')"></i>
                      <i class="fa fa-trash btnDatatable text-danger" onclick="removeClient('` + data + `')"></i>
+                     <i onclick="GetLogs('Cliente', 'api/client/log', ${data})" class="fa fa-history btnDatatable text-warning"></i>
                      `;
                 }
             },

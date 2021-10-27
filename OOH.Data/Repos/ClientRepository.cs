@@ -67,9 +67,9 @@ namespace OOH.Data.Repos
 
         }
 
-        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        public async Task<IEnumerable<LogOutputDto>> GetLogs(int id)
         {
-            throw new NotImplementedException();
+            return await _log.GetLogs(new LogInputDto(id, nameof(Clientes)));
         }
 
         public async Task<bool> Remove(int id)

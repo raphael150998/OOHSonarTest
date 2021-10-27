@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OOH.Data.Dtos;
 using OOH.Data.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -95,6 +96,41 @@ namespace OOH.Data
                                     CommandType.StoredProcedure : CommandType.Text).ConfigureAwait(false);
 
                 return ObjetoReturn;
+            }
+        }
+
+        public async Task<long> TransactionData<T,T2>(string _queryMaestro, string _queryDetalle, T Maestro , List<T2> Detalle,long idMaestro = 0 )
+        {
+            using (var cn = new SqlConnection(_connectionString))
+            {
+                cn.Open();
+
+                using (var transaction = cn.BeginTransaction())
+                {
+                    try
+                    {
+                        DynamicParameters parametersMaestro = new DynamicParameters(Maestro);
+                        _queryMaestro = _queryMaestro.ToUpper().Contains("INSERT INTO") ? _queryMaestro + ";select cast(SCOPE_IDENTITY() as int)" : _queryMaestro;
+                        long id = idMaestro == 0 ? await  cn.QuerySingleAsync<int>(_queryMaestro, parametersMaestro, transaction: transaction, commandType: CommandType.Text).ConfigureAwait(false) :
+                            await cn.ExecuteAsync(_queryMaestro, parametersMaestro, transaction: transaction, commandType: CommandType.Text).ConfigureAwait(false);
+                        id = idMaestro == 0 ? id : idMaestro;
+                        foreach (var item in Detalle)
+                        {
+                            DynamicParameters parametersDetalle = new DynamicParameters(item);
+                            parametersDetalle.Add("@idMaestro",id);
+                           int s= await cn.ExecuteAsync(_queryDetalle,parametersDetalle, transaction: transaction,commandType:CommandType.Text).ConfigureAwait(false);
+                        }
+                        transaction.Commit();
+                        return id;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        return 0;
+
+                    }
+
+                }
             }
         }
     }

@@ -21,12 +21,12 @@
             } 
         })
     },
-    RemoveAlert: function (url, data, callback) {
+    RemoveAlert: function (url, data, subtitle ,callback) {
         data = JSON.stringify(data);
         console.log(data);
         Swal.fire({
             title: 'Desea Eliminar?',
-            text: "La informacion sera eliminada Permanentemente!",
+            text: subtitle == "" ? "La informacion sera eliminada Permanentemente!" : subtitle,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

@@ -11,37 +11,22 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class CategoryRepository : OOHContext, IBaseRepository<ClientesCategorias>
+    public class CategoryRepository : OOHContext
     {
         private readonly ILogHelper _log;
         public CategoryRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
+        }     
+
+        public async Task<IEnumerable<ClientesCategorias>> SelectClientCategory(string _Where = "")
+        {
+            return await SelectData<ClientesCategorias>("Select * from [dbo].[ClientesCategorias] "+ _Where);
         }
 
-        public Task<ResultClass> AddOrUpdate(ClientesCategorias collection)
+        public async Task<IEnumerable<CarasCategorias>> SelectFaceCategory(string _Where = "")
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<ClientesCategorias> Find(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<ClientesCategorias>> Select(string _Where = "")
-        {
-            return SelectData<ClientesCategorias>("Select * from [dbo].[ClientesCategorias] "+ _Where,false,null).Result.ToList();
+            return await SelectData<CarasCategorias>("Select * from [dbo].[CarasCategorias]"+_Where,false);
         }
     }
 }
