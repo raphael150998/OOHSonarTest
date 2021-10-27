@@ -1,9 +1,100 @@
 ﻿$(function () {
 
-    $("#siteSelect").select2Paged("/api/site/select2");
-
     DropDownListProviders();
+    DropDownListMunicipio();
+    DropDownListZones();
+
+    $.validator.addMethod('greaterThan', function (value, element, param) {
+        return this.optional(element) || parseFloat(value) > parseFloat(param);
+    }, jQuery.validator.format("Number must be greater than {0}"));
+
+    var validator = Validate.Form("#frmSitio", "api/site/CreateUpdate", {
+        rules: {
+            Codigo: {
+                required: true
+            },
+            ProveedorId: {
+                required: true
+            },
+            ZonaId: {
+                required: true
+            },
+            Latitud: {
+                required: true,
+                number: true
+            },
+            Longitud: {
+                required: true,
+                number: true
+            },
+            Altura: {
+                number: true,
+                greaterThan: 0
+            },
+            Direccion: {
+                required: true
+            }
+        },
+        messages: {
+            Codigo: {
+                required: "El código es requerido"
+            },
+            ProveedorId: {
+                required: "Seleccione un proveedor"
+            },
+            ZonaId: {
+                required: "Seleccione una zona"
+            },
+            Latitud: {
+                required: "Latitud requerida",
+                number: "Solo se permiten números"
+            },
+            Longitud: {
+                required: "Longitud requerida",
+                number: "Solo se permiten números"
+            },
+            Altura: {
+                number: "Solo se permiten números",
+                greaterThan: "El número debe ser mayo a cero"
+            },
+            Direccion: {
+                required: "Direccion requerida"
+            }
+        }
+    }, function (data) {
+        if (data.state) {
+            $("#SitioId").val(data.data);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message
+            });
+        }
+    });
+
+    llenar();
 })
+
+function loadMap() {
+
+    var lat = parseFloat($("#Latitud").val());
+    var long = parseFloat($("#Longitud").val());
+
+    var mapOptions = {
+        center: new google.maps.LatLng(lat, long),
+        zoom: 15
+    }
+
+    var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, long),
+        map: map,
+    });
+
+    marker.setMap(map);
+}
 
 function llenar() {
 
@@ -14,10 +105,12 @@ function llenar() {
     }
     else {
         fns.CallGetAsync("api/site/find", { id: id }, function (dataResult) {
-            $("#addbtn").removeClass("text-secondary").addClass("text-primary");
             $("#frmSitio").assignJsonToForm(dataResult);
-            $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
-
+            $('#dropdownMunicipio').val(dataResult.municipioId).trigger('change.select2');
+            $("#ProveedorId").val(dataResult.proveedorId).trigger('change.select2');
+            $("#ZonaId").val(dataResult.zonaId).trigger('change.select2');
+            $("#Codigo").attr("readonly", true);
+            loadMap();
         });
     }
 }
@@ -60,7 +153,23 @@ function DropDownListProviders() {
         });
 
         selectTarget.html(html);
-        selectTarget.select2();
+        selectTarget.select2Validation();
     })
 }
 
+
+function DropDownListZones() {
+    fns.CallGetAsync("api/zone/dropdown", null, function (zones) {
+
+        var selectTarget = $("#ZonaId");
+
+        var html = "<option disabled selected>Seleccione zona</option>";
+
+        zones.forEach(x => {
+            html += `<option value="${x.id}">${x.name}</option>`;
+        });
+
+        selectTarget.html(html);
+        selectTarget.select2Validation();
+    })
+}

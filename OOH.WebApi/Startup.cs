@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using OOH.Data;
 using Microsoft.Extensions.Logging;
 using OOH.WebApi.Extensions;
+using GoogleMapGenerator.Inteface;
+using GoogleMapGenerator.Provider;
+using PowerPointProvider.Provider;
+using PowerPointProvider.Interface;
 
 namespace OOH.WebApi
 {
@@ -40,6 +44,9 @@ namespace OOH.WebApi
             services.AddScoped<ContactsRepository>();
             services.AddScoped<SitioRepository>();
             services.AddScoped<ProveedorRepository>();
+            services.AddScoped<ZoneRepository>();
+            services.AddScoped<IMapGenerator, MapGenerator>();
+            services.AddScoped<IPowerpointProvider, PowerpointProvider>();
             services.AddScoped<TypesRepository>();
             services.AddControllersWithViews();
             services.AddCors();

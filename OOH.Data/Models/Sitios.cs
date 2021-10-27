@@ -6,6 +6,11 @@ namespace OOH.Data.Models
 {
     public class Sitios
     {
+        public Sitios()
+        {
+            Activo = true;
+        }
+
         public Int64 SitioId { get; set; }
         public string Codigo { get; set; }
         public Int64 ProveedorId { get; set; }

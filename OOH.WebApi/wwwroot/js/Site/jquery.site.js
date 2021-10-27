@@ -21,8 +21,8 @@ function BuildDatatable() {
                 data: "sitioId", 
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return `<i onclick="UpdateAgency(${data})" class="fa fa-pencil-square btnDatatable text-primary"></i>
-                            <i onclick="RemoveAgency(${data})" class="fa fa-trash btnDatatable text-danger"></i>
+                    return `<a href="Sites/CreateUpdate/${data}" target="_blank"><i class="fa fa-pencil-square btnDatatable text-primary"></i></a>
+                            <i onclick="RemoveSite(${data})" class="fa fa-trash btnDatatable text-danger"></i>
                             <i onclick="GetLogs('Sitio', 'api/site/log', ${data})" class="fa fa-history btnDatatable text-dark"></i>`;
 
                 }
@@ -46,5 +46,26 @@ function BuildDatatable() {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
         }
     }).FilterColum();
+    GetSites();
+}
+
+function RemoveSite(id) {
+    SweetAlert.RemoveAlert("api/site/remove", { Id: parseInt(id) }, function (response) {
+        GetSites();
+        if (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Logrado',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'A ocurrido un error',
+            });
+        }
+    });
+}
+
+function refresh() {
     GetSites();
 }

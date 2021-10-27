@@ -269,6 +269,11 @@
         {
             presentationDocument.Save();
         }
+
+        public void SaveAs(string pathString)
+        {
+            presentationDocument.SaveAs(pathString);
+        }
     }
 }
 
