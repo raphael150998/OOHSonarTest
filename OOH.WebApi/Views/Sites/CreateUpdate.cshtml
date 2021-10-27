@@ -80,12 +80,12 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label class="control-label">Latitud</label>
-                        <input asp-for="Latitud" class="form-control number" />
+                        <input asp-for="Latitud" readonly class="form-control number" />
                         <span asp-validation-for="Latitud" class="text-danger"></span>
                     </div>
                     <div class="col-md-4">
                         <label class="control-label">Longitud</label>
-                        <input asp-for="Longitud" class="form-control number" />
+                        <input asp-for="Longitud" readonly class="form-control number" />
                         <span asp-validation-for="Longitud" class="text-danger"></span>
                     </div>
                     <div class="col-md-4">
@@ -104,7 +104,7 @@
                         <label class="control-label">Referencia</label>
                         <textarea rows="4" asp-for="Referencia" class="form-control"></textarea>
                         <span asp-validation-for="Referencia" class="text-danger"></span>
-                    </div>                   
+                    </div>
                 </div>
 
             </div>
@@ -131,10 +131,10 @@
                             <div id="sample" style="width:100%; height:400px;"></div>
                         </div>
                         <div class="tab-pane" id="faces" role="tabpanel">
-                            <h1>Caras</h1>
+                            @*<h1>Caras</h1>*@
                         </div>
                         <div class="tab-pane" id="transactions" role="tabpanel">
-                            <h1>Transacciones</h1>
+                            @*<h1>Transacciones</h1>*@
                         </div>
                     </div>
                 </div>
