@@ -1,6 +1,7 @@
 ﻿
 namespace PowerPointProvider.Base
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -195,7 +196,7 @@ namespace PowerPointProvider.Base
         /// <see href="http://stackoverflow.com/questions/7137144/how-can-i-retrieve-some-image-data-and-format-using-ms-open-xml-sdk">How can I retrieve some image data and format using MS Open XML SDK?</see>
         /// <see href="http://msdn.microsoft.com/en-us/library/office/bb497430.aspx">How to: Insert a Picture into a Word Processing Document</see>
         /// </remarks>
-        public void ReplacePicture(string tag, byte[] newPicture, string contentType)
+        public void ReplacePicture(string tag, byte[] newPicture, string contentType, string link = "")
         {
             if (string.IsNullOrEmpty(tag))
             {
@@ -211,7 +212,9 @@ namespace PowerPointProvider.Base
 
             foreach (Picture pic in this.slidePart.Slide.Descendants<Picture>())
             {
-                var cNvPr = pic.NonVisualPictureProperties.NonVisualDrawingProperties;
+                NonVisualDrawingProperties cNvPr = pic.NonVisualPictureProperties.NonVisualDrawingProperties;
+                A.NonVisualDrawingPropertiesExtensionList nonVisualDrawingPropertiesExtensionList = cNvPr.NonVisualDrawingPropertiesExtensionList;
+
                 if (cNvPr.Description != null)
                 {
                     string description = cNvPr.Description.Value;
@@ -221,6 +224,18 @@ namespace PowerPointProvider.Base
                         string rId = this.slidePart.GetIdOfPart(imagePart);
 
                         pic.BlipFill.Blip.Embed.Value = rId;
+
+                        if (!string.IsNullOrEmpty(link))
+                        {
+                            string relationshipId = "rId" + cNvPr.Count();
+
+                            A.HyperlinkOnClick hyperlinkOnClick = new A.HyperlinkOnClick { Id = relationshipId };
+
+                            cNvPr.InsertBefore(hyperlinkOnClick, nonVisualDrawingPropertiesExtensionList);
+
+                            this.slidePart.AddHyperlinkRelationship(new Uri(link, UriKind.Absolute), true, relationshipId);
+                        }
+
                     }
                 }
                 else

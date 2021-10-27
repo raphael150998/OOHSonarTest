@@ -112,14 +112,22 @@ var fns = {
             type: "GET",
             data: data,
             async: true,
-            contentType: "application/json; charset=utf-8"
+            contentType: "application/json; charset=utf-8",
+            statusCode: {
+                403: function() {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Usuario sin acceso a esta sección',
+                    });
+                }
+            }
         }).done(function (data) {
             $.unblockUI();
             rt = data;
             callBack(data);
         }).fail(function (xhr, textStatus, errorThrown) {
-            alert(xhr.responseText);
-            alert(textStatus);
+            //alert(xhr.responseText);
+            //alert(textStatus);
             $.unblockUI();
         });
         return rt;

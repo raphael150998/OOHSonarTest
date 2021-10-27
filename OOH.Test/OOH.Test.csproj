@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GoogleMapGenerator\GoogleMapGenerator.csproj" />
     <ProjectReference Include="..\OOH.Data\OOH.Data.csproj" />
     <ProjectReference Include="..\PowerPointProvider\PowerPointProvider.csproj" />
   </ItemGroup>

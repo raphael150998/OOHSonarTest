@@ -42,15 +42,22 @@
 	  <Content Remove="wwwroot\js\Site\jquery.EditCreate.js" />
 	  <Content Remove="wwwroot\js\Site\jquery.site.js" />
 	</ItemGroup>
-	
-  <ItemGroup>
-    
-    <Folder Include="PowerpointTemplate\" />
 
-  </ItemGroup>
+	<ItemGroup>
+	  <None Remove="PowerpointTemplate\ReplacePictures.pptx" />
+	  <None Remove="PowerpointTemplate\template.pptx" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="PowerpointTemplate\template.pptx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GoogleMapGenerator\GoogleMapGenerator.csproj" />
     <ProjectReference Include="..\OOH.Data\OOH.Data.csproj" />
     <ProjectReference Include="..\OOH.Language\OOH.Language.csproj" />
+    <ProjectReference Include="..\PowerPointProvider\PowerPointProvider.csproj" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 

@@ -1,99 +1,144 @@
 ﻿@model OOH.Data.Models.Sitios
 
+<style>
+    .btn {
+        min-width: 7vw;
+    }
+
+    .btn-viva-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .action-card-header-viva {
+        justify-content: space-between;
+    }
+
+    .hidden-map {
+        display: none;
+    }
+</style>
+
 <form id="frmSitio">
+    <div class="col-md-2" hidden>
+        <input asp-for="SitioId" class="form-control number" readonly />
+    </div>
     <div class="card">
-        <div class="card-block row">
-            <div class="col-md-1">
+        <div class="card-block row action-card-header-viva">
+            <div class="col-md-3 btn-viva-flex">
                 <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-primary" />
+                <a class="btn btn-outline-primary" href="@Url.Action("CreateUpdate","Sites", new { id = 0 })" target="_blank">Nuevo</a>
             </div>
-            <div class="col-md-1">
-                <button class="btn btn-btn-outline-primary">Nuevo</button>
+            <div class="col-md-4">
+                <label class="control-label">Requiere permiso</label>
+                <input type="checkbox" class="js-switch bool" id="RequierePermiso" name="RequierePermiso" />
+                <label class="control-label">Activo</label>
+                <input type="checkbox" class="js-single bool" id="Activo" name="Activo" />
             </div>
         </div>
     </div>
     <div class="card">
         <div class="card-block">
-
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2" hidden>
-                        <input asp-for="SitioId" class="form-control number" readonly />
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Código</label>
                         <input asp-for="Codigo" class="form-control" />
                         <span asp-validation-for="Codigo" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <label class="control-label">Proveedor</label>
-                        <select asp-for="ProveedorId">
-                        </select>
-                        <span asp-validation-for="ProveedorId" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Municipios</label>
+                    <div class="col-md-4">
+                        <label class="control-label">Municipio</label>
 
                         <div id="divMunicipio"></div>
                     </div>
-                    <div class="col-md-6">
-                        <label asp-for="Direccion" class="control-label"></label>
-                        <textarea asp-for="Direccion" class="form-control"></textarea>
-                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    <div class="col-md-4">
+                        <label class="control-label">Proveedor</label>
+                        <select asp-for="ProveedorId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="ProveedorId" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <label asp-for="Referencia" class="control-label"></label>
-                        <textarea asp-for="Referencia" class="form-control"></textarea>
-                        <span asp-validation-for="Referencia" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <label asp-for="Latitud" class="control-label"></label>
-                        <input asp-for="Latitud" class="form-control" />
-                        <span asp-validation-for="Latitud" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="control-label">Longitud</label>
-                        <input asp-for="Longitud" class="form-control" />
-                        <span asp-validation-for="Longitud" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <label asp-for="ZonaId" class="control-label"></label>
-                        <input asp-for="ZonaId" class="form-control" />
-                        <span asp-validation-for="ZonaId" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Requiere permiso</label>
-                        <br />
-                        <input type="checkbox" class="js-single bool" id="PersonaJuridica" name="PersonaJuridica" />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Activo</label>
-                        <br />
-                        <input type="checkbox" class="js-single bool" id="PersonaJuridica" name="PersonaJuridica" />
-                    </div>
-                    <div class="col-md-3">
-                        <label asp-for="RegistroCatastral" class="control-label"></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label">Registro catastral</label>
                         <input asp-for="RegistroCatastral" class="form-control" />
                         <span asp-validation-for="RegistroCatastral" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <label asp-for="Altura" class="control-label"></label>
-                        <input asp-for="Altura" class="form-control" />
+                    <div class="col-md-4">
+                        <label class="control-label">Zona</label>
+                        <select asp-for="ZonaId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="ZonaId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">Altura</label>
+                        <input asp-for="Altura" class="form-control number" />
                         <span asp-validation-for="Altura" class="text-danger"></span>
                     </div>
-                    <div class="col-md-12">
-                        <label asp-for="Observaciones" class="control-label"></label>
-                        <textarea asp-for="Observaciones" class="form-control"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label">Latitud</label>
+                        <input asp-for="Latitud" class="form-control number" />
+                        <span asp-validation-for="Latitud" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">Longitud</label>
+                        <input asp-for="Longitud" class="form-control number" />
+                        <span asp-validation-for="Longitud" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">Observaciones</label>
+                        <textarea rows="1" asp-for="Observaciones" class="form-control"></textarea>
                         <span asp-validation-for="Observaciones" class="text-danger"></span>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
-                        <label class="control-label">sitios</label>
-                        <select class="form-control" id="siteSelect">
-                        </select>
+                        <label class="control-label">Dirección</label>
+                        <textarea rows="4" asp-for="Direccion" class="form-control"></textarea>
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Referencia</label>
+                        <textarea rows="4" asp-for="Referencia" class="form-control"></textarea>
+                        <span asp-validation-for="Referencia" class="text-danger"></span>
+                    </div>                   
                 </div>
 
             </div>
 
+        </div>
+    </div>
+    <div class="card" id="containerMap">
+        <div class="card-block">
+            <div class="row">
+                <div class="col-lg-12 col-xl-12">
+                    <ul class="nav nav-tabs tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#map" role="tab">Mapa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#faces" role="tab">Caras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#transactions" role="tab">Transacciones</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content tabs card-block">
+                        <div class="tab-pane active" id="map" role="tabpanel">
+                            <div id="sample" style="width:100%; height:400px;"></div>
+                        </div>
+                        <div class="tab-pane" id="faces" role="tabpanel">
+                            <h1>Caras</h1>
+                        </div>
+                        <div class="tab-pane" id="transactions" role="tabpanel">
+                            <h1>Transacciones</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

@@ -78,15 +78,7 @@ $.fn.assignJsonToForm = function (json) {
 
             var type = $(control).hasClass("number") ? "number" : $(control).hasClass("bool") ? "bool" : "text";
             var name = $(control).attr("name");
-            if (tagType == "checkbox" && $(control).hasClass("js-single")) {
-                if ($(control).hasAttr("checked") && $(control).prop("checked")) {
-                    $(control).changeSwitch(true);
-                }
-                else {
-                    $(control).changeSwitch(false);
-                }
-            }
-            if (tagType == "checkbox" && $(control).hasClass("js-switch")) {
+            if (tagType == "checkbox" && ($(control).hasClass("js-single") || $(control).hasClass("js-switch"))) {
                 if ($(control).hasAttr("checked") && $(control).prop("checked")) {
                     $(control).changeSwitch(true);
                 }
@@ -168,5 +160,13 @@ $.fn.select2Paged = function (url) {
                 }
             }
         });
-    }    
+    }
+}
+
+$.fn.select2Validation = function () {
+    var id = this.closest("form").attr("id");
+
+    this.select2().on('change', function (e) {
+        $(`#${id}`).valid();
+    });
 }

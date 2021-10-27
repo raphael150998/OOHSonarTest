@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using OOH.Data.Dtos;
 using OOH.Data.Dtos.Logs;
+using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -74,5 +75,55 @@ namespace OOH.Data.Repos
 
             return await (RemoveData($"DELETE FROM Proveedores WHERE ProveedorId = {id}")) > 0;
         }
+
+
+        public async Task<Select2PagingOutputDto> GetListForSelect2(Select2PagingInputDto request)
+        {
+            Select2PagingOutputDto modelReturn = new();
+
+            #region sqlCount
+            string sqlCount = $"SELECT COUNT(T0.Id) FROM (SELECT ProveedorId [Id], Nombre [Text], ~Activo [Disabled] FROM Proveedores) T0";
+            #endregion
+
+            string whereClause = "";
+
+            if (request.Search.Count() > 0)
+                whereClause = $" WHERE {string.Join(" OR ", request.Search.Select(x => $"Text like '%{x.ToUpper()}%'"))}";
+
+            sqlCount += whereClause;
+
+            int total = await FilterData<int>(sqlCount);
+
+            int itemsToSkip = request.ItemsPerPage * (request.CurrentPage - 1);
+
+            #region sql
+            string sql = $"SELECT T0.* FROM (SELECT ProveedorId [Id], Nombre [Text], ~Activo [Disabled] FROM Proveedores) T0 {whereClause} ORDER BY Id OFFSET({itemsToSkip}) ROWS FETCH NEXT({request.ItemsPerPage}) ROWS ONLY ";
+
+            string sqlSelected = $"SELECT TOP(1) T0.* FROM (SELECT ProveedorId [Id], Nombre [Text], ~Activo [Disabled] FROM Proveedores) T0 WHERE Id = {request.Id}";
+
+            string sqlEdit = $"{sqlSelected} UNION ALL SELECT * FROM ({sql} T1)";
+            #endregion
+
+            modelReturn.Results = (await SelectData<Select2OutputDto>(request.Id == 0 ? sql : sqlEdit)).ToList();
+
+            //if (!string.IsNullOrEmpty(request.Id))
+            //{
+            //    #region sqlSelected              
+
+            //    #endregion
+
+            //    Select2OutputDto selectedOption = await FilterData<Select2OutputDto>(sqlSelected);
+
+            //    selectedOption.Selected = true;
+
+            //    modelReturn.Results.Add(selectedOption);
+            //    modelReturn.Results = modelReturn.Results.OrderBy(x => x.Id).ToList();
+            //}
+
+            modelReturn.Pagination.More = (request.CurrentPage * request.ItemsPerPage) < total;
+
+            return modelReturn;
+        }
+
     }
 }

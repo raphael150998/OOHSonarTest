@@ -4,6 +4,24 @@
 
         var rt;
 
+        config.highlight = function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-hidden-accessible")) {
+                $("#select2-" + elem.attr("id") + "-container").parent().addClass(errorClass);
+            } else {
+                elem.addClass(errorClass);
+            }
+        };
+
+        config.unhighlight = function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-hidden-accessible")) {
+                $("#select2-" + elem.attr("id") + "-container").parent().removeClass(errorClass);
+            } else {
+                elem.removeClass(errorClass);
+            }
+        };
+
         config.errorPlacement = function (error, element) {
             var placement = $(element).data('error');
             if (placement) {
@@ -22,6 +40,9 @@
 
         config.success = function (error, element) {
             $(element).parent().find($("i.error")).remove();
+            if ($(element).hasClass("select2-hidden-accessible")) {
+                $("#select2-" + $(element).attr("id") + "-container").parent().removeClass("error");
+            }
         };
 
         config.submitHandler = function (form) {
