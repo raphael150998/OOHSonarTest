@@ -1,5 +1,9 @@
 ﻿$(function () {
 
+    $("#Latitud").val('');
+    $("#Longitud").val('');
+    $("#Altura").val('');
+
     DropDownListProviders();
     DropDownListMunicipio();
     DropDownListZones();
@@ -46,11 +50,11 @@
                 required: "Seleccione una zona"
             },
             Latitud: {
-                required: "Latitud requerida",
+                required: "Latitud requerida, seleccione punto en mapa",
                 number: "Solo se permiten números"
             },
             Longitud: {
-                required: "Longitud requerida",
+                required: "Longitud requerida, seleccione punto en mapa",
                 number: "Solo se permiten números"
             },
             Altura: {
@@ -63,7 +67,13 @@
         }
     }, function (data) {
         if (data.state) {
-            $("#SitioId").val(data.data);
+
+            var id = $("#SitioId").val();
+
+            if (id == 0) {
+                id = data.data;
+                location.href = `/Sites/CreateUpdate/${id}`;
+            }
         } else {
             Swal.fire({
                 icon: 'error',
@@ -74,12 +84,17 @@
     });
 
     llenar();
+
+    loadMap();
 })
 
 function loadMap() {
 
     var lat = parseFloat($("#Latitud").val());
     var long = parseFloat($("#Longitud").val());
+
+    lat = !isNaN(lat) ? lat : 13.794185;
+    long = !isNaN(long) ? long : -88.89653;
 
     var mapOptions = {
         center: new google.maps.LatLng(lat, long),
@@ -91,9 +106,37 @@ function loadMap() {
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, long),
         map: map,
+        draggable: true,
     });
 
     marker.setMap(map);
+
+    google.maps.event.addListener(marker, 'click', function (event) {
+        latPosition = marker.getPosition().lat();
+        longPosition = marker.getPosition().lng();
+
+        $("#Latitud").val(latPosition);
+        $("#Longitud").val(longPosition);
+
+        $("#frmSitio").valid();
+    });
+
+    google.maps.event.addListener(marker, 'dragend', function (event) {
+        latPosition = marker.getPosition().lat();
+        longPosition = marker.getPosition().lng();
+
+        $("#Latitud").val(latPosition);
+        $("#Longitud").val(longPosition);
+
+        $("#frmSitio").valid();
+    });
+
+
+    //map.addListener("click", (mapsMouseEvent) => {
+    //    var latLong = mapsMouseEvent.latLng.toJSON();
+    //    $("#Latitud").val(latLong.lat);
+    //    $("#Longitud").val(latLong.lng);
+    //});
 }
 
 function llenar() {
@@ -110,6 +153,13 @@ function llenar() {
             $("#ProveedorId").val(dataResult.proveedorId).trigger('change.select2');
             $("#ZonaId").val(dataResult.zonaId).trigger('change.select2');
             $("#Codigo").attr("readonly", true);
+            var altura = $("#Altura").val();
+
+            console.log(altura);
+
+            if (altura == 0)
+                $("#Altura").val('');
+
             loadMap();
         });
     }

@@ -107,7 +107,7 @@ function llenarData() {
 }
 
 function DetalleDT() {
- 
+
     DataTableHelper.Draw("#CarasTable", {
         destroy: true,
         dom: "Bfrltip",
@@ -123,7 +123,7 @@ function DetalleDT() {
         fixedHeader: true,
         data: [],
         columns: [
-         
+
             {
                 data: "id",
                 render: function (data, type, full, meta) {
@@ -157,17 +157,17 @@ function DetalleDT() {
 }
 
 function GetDetailCaras() {
- 
+
     $("#CarasTable").DataTable().clear();
     $("#CarasTable").DataTable().rows.add(lstCaraDetalle).draw();
 }
 
 function AddArray() {
-    
+
     var send = JSON.stringify({ Id: $("#idCaraAdd").val() });
-    
+
     var DetalleCara = {
-        id:0,
+        id: 0,
         caraId: $("#idCaraAdd").val(),
         cotizacionId: 0,
         codigo: "ABC",
@@ -199,7 +199,7 @@ function AddArray() {
         DetalleDT();
 
     });
-   
+
 }
 //Quitar de las caras seleccionadas
 function RemoveDetalle(IdCara, Iddetalle) {
@@ -207,11 +207,11 @@ function RemoveDetalle(IdCara, Iddetalle) {
     if (Iddetalle != 0) {
         eliminarDetalle(Iddetalle, IdCara);
     } else {
-       
+
         lstCaraDetalle = Remove(lstCaraDetalle, "caraId", IdCara);
         GetDetailCaras();
     }
-   
+
 }
 
 //Post Maestro Detalle
@@ -225,7 +225,7 @@ function PostMaestroDetalle() {
         AgenciaId: $("#dropdownAgencia option:selected").val(),
         AtencionA: $("#txtAtencionA").val(),
         Comentarios: $("#txtAreaComentarios").val(),
-        ConsolidaCostos: $("#PersonaJuridica").is(':checked') ,
+        ConsolidaCostos: $("#PersonaJuridica").is(':checked'),
         LstCaras: lstCaraDetalle
     };
     console.log(JSON.stringify(MD));
@@ -255,7 +255,7 @@ function PostMaestroDetalle() {
         });
 
     }, false);
-  
+
 
 
 }
@@ -286,6 +286,23 @@ function edit(id) {
     console.log(id);
     window.open("/Quotation/CreateUpdate/" + id, '_blank');
 
+}
+
+$("#btnPowerPoint").click(function () {
+    $.blockUI({
+        message: 'Descargando archivo. Esta tarea puede tardar algunos minutos segun la cantidad de caras requeridas<div class="loading-container"><div class="loader-viva"></div></div>', css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .8,
+            color: '#fff'
+        }
+    });
+    download("/Home/Map", `Cortizacion_Codigo_${IdCotizacion}`);
+    //testDownload();
+});
 }
 
 

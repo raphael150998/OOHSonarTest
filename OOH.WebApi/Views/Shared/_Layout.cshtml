@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="~/assets/pages/chart/radial/css/radial.css" type="text/css" media="all">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
-    
+
     <link rel="stylesheet" type="text/css" href="~/assets/pages/pnotify/notify.css">
 
     <!--FontAwesome-->
@@ -90,7 +90,31 @@
             width: inherit !important;
         }
 
-        
+        .loading-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 1vw;
+        }
+
+        .loader-viva {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -1021,66 +1045,7 @@
     <script src="~/bower_components/pnotify/js/pnotify.mobile.js"></script>
     <script src="~/bower_components/pnotify/js/pnotify.nonblock.js"></script>
     <script src="~/assets/pages/pnotify/notify.js"></script>
-
-    <script>
-        $(function () {
-            BuildLogDatatable();
-            $("#btnCloseLog").click(function () {
-                $("#logTable").DataTable().clear();
-                $("#modalLogs").modal("hide");
-            });
-
-            $('.nav li a').click(function () {
-                var tab_id = $(this).attr('href');
-                $('#tabs-container').find('div.active').removeClass('active');
-                $(tab_id).addClass('active');
-            });
-        });
-
-        function GetLogs(entidad, url, id) {
-
-            fns.CallGetAsync(url, { id: id }, function (dataResponse) {
-                $("#logTable").DataTable().clear();
-                $("#logTable").DataTable().rows.add(dataResponse).draw();
-            });
-
-            $("#modalTitleLogs").html(`Registro de actividad de ${entidad} con identificador ${id}`);
-            $("#modalLogs").modal("show");
-        }
-
-        //Metodo para crear el Datatable de clientes
-        function BuildLogDatatable() {
-            DataTableHelper.Draw("#logTable", {
-                destroy: true,
-                orderCellsTop: true,
-                fixedHeader: true,
-                data: [],
-                columns: [
-                    //{
-                    //    data: "agenciaId",
-                    //    render: function (data, type, full, meta) {
-                    //        return "<a href='index'>" + data + "</a>";
-                    //    }
-                    //},
-                    { data: "login" },
-                    { data: "nameUser" },
-                    { data: "description" },
-                    {
-                        data: "actionDate",
-                        render: function (data, type, full, meta) {
-                            return moment(data).format("DD-MM-YYYY HH:mm:ss")
-                        }
-                    },
-                    { data: "platform" },
-                    { data: "version" },
-
-                ],
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-                }
-            });
-        }
-    </script>
+    <script src="~/js/main.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 

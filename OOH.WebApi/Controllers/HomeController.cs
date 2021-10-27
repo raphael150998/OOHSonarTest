@@ -76,7 +76,7 @@ namespace OOH.WebApi.Controllers
 
             List<SlideFaceInputDto> faces = new List<SlideFaceInputDto>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 faces.Add(new SlideFaceInputDto()
                 {
