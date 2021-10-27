@@ -4,6 +4,10 @@ let IdCotizacion = $("#CotizacionId").val();
 $().ready(function ($) {
     DropDownListClientes();
     DropDownListAgencias();
+    //Validate.Form("#form-cotizacion", "api/Quotation/SaveMD", {}, function () {
+
+
+    //},);
     llenarData();
 });
 
@@ -11,7 +15,7 @@ function DropDownListClientes() {
 
     fns.CallGetAsync("api/Client/Get", null, function (dataResult) {
         let select = `<select class="js-example-basic-single" id="dropdownClient" name="ClientId" >`
-
+        select = select + `<option value="N/A"></option>`;
         dataResult.forEach(cli => {
             let option = `<option value="` + cli.clienteId + `"> ` + cli.nombreComercial + `</option> `;
 
@@ -30,7 +34,7 @@ function DropDownListAgencias() {
 
     fns.CallGetAsync("api/agency/Select", null, function (dataResult) {
         let select = `<select class="js-example-basic-single" id="dropdownAgencia" name="AgenciaId" >`
-
+        select = select + `<option value="N/A"></option>`;
         dataResult.forEach(agn => {
             let option = `<option value="` + agn.agenciaId + `"> ` + agn.nombre + `</option> `;
 
@@ -55,7 +59,11 @@ function llenarData() {
             $("#txtAtencionA").val(dataResponse["atencionA"]);
             $("#txtAreaComentarios").val(dataResponse["comentarios"]);
             $("#readOnlyFecha").val(dataResponse["fecha"]);
+            $("#ESTADO").val(dataResponse["estado"]);
             $("#EstadoId").val(dataResponse["estadoId"]);
+
+            var yy = CutString(CutString(dataResponse["fecha"], 0, " "), 2, "/").substring(2, 4);
+            $("#CodigoCotizacion").val(`COT` + AddCeros(IdCotizacion, 6) + "/" + yy);
             if (dataResponse["consolidaCostos"]) {
                 $("#ConsolidaCosto").trigger("click");
             }
@@ -81,6 +89,7 @@ function llenarData() {
                     fechaDesde: value.fechaDesde,//
                     fechaHasta: value.fechaHasta //
                 };
+                lstCaraDetalle.clear();
                 lstCaraDetalle.push(DetalleCara);
                 console.log(index);
                 console.log(lstCaraDetalle);
@@ -228,6 +237,8 @@ function PostMaestroDetalle() {
             console.log(dataRequest);
             if (dataRequest["state"]) {
                 $("#CotizacionId").val(dataRequest["data"]);
+                IdCotizacion = dataRequest["data"];
+                llenarData();
                 Swal.fire(
                     'Guardado',
                     'Se guardo correctamente',
@@ -276,3 +287,20 @@ function edit(id) {
     window.open("/Quotation/CreateUpdate/" + id, '_blank');
 
 }
+
+
+function AddCeros(parametro, cantidad) {
+
+
+    var BaseContatenar = parametro.toString().length;
+    var Contador = parseInt(cantidad) - parseInt(BaseContatenar);
+    var DataConcatenada = "";
+
+    for (var i = 0; i < Contador; i++) {
+
+        DataConcatenada = DataConcatenada + "0";
+    }
+    DataConcatenada = DataConcatenada + parametro;
+    return DataConcatenada;
+}
+

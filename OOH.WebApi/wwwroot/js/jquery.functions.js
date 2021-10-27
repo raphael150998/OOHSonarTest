@@ -169,3 +169,16 @@ function Where(Lista, Campo, Dato) {
     });
     return obWhere;
 }
+
+//Cortar Texto con split
+function CutString(Cadena, IndiceReturn, ParametroCorte) {
+    let TextoACortar = Cadena.split(ParametroCorte);
+    return TextoACortar[IndiceReturn];
+}
+
+//Pasar a mayusculas
+function toUpper(control) {
+    if (/[a-z]/.test(control.value)) {
+        control.value = control.value.toUpperCase();
+    }
+}

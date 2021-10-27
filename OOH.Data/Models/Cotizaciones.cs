@@ -9,6 +9,8 @@ namespace OOH.Data.Models
         public Int64 CotizacionId { get; set; }
         public string Estado { get; set; }
         public int EstadoId { get; set; }
+        public Int64 UserId { get; set; }
+        public string User { get; set; }
         public string Fecha { get; set; }
         public string Cliente { get; set; }
         public Int64 ClienteId { get; set; }

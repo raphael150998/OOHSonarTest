@@ -15,6 +15,7 @@ function LLenarDataTable() {
 function quotationDataTable() {
     DataTableHelper.Draw("#tablaQuotation", {
         destroy: true,
+        "scrollX": true,
         dom: "Bfrltip",
         orderCellsTop: true,
         fixedHeader: true,
@@ -34,16 +35,20 @@ function quotationDataTable() {
             {
                 data: "cotizacionId",
                 render: function (data, type, full, meta) {
-                    console.log(data);
-                    console.log(full);
-                    return `COT` + AddCeros(data,6);
+
+                    var yy = CutString(CutString(full.fecha, 0, " "), 2, "/").substring(2,4);
+                   
+                    return `COT` + AddCeros(data, 6) + "/" + yy;
                 }
             },
             {
                 data:"cliente"
             },
             {
-                data:"fecha"
+                data: "fecha",
+                render: function (data, type, full, meta) {
+                    return CutString(data, 0, " ");
+                }
             },
             {
                 data:"agencia"
@@ -63,7 +68,7 @@ function quotationDataTable() {
             }
         ]
        
-    });
+    }).FilterColum();
     LLenarDataTable();
 }
 
@@ -101,20 +106,16 @@ function refresh() {
 
 function AddCeros(parametro, cantidad) {
 
-    console.log(parametro.toString());
-    console.log(cantidad);
-    var BaseContatenar = parametro.length;
-    console.log(BaseContatenar);
-    var Contador = parseInt(BaseContatenar) - parseInt(cantidad);
-    console.log(Contador);
+  
+    var BaseContatenar = parametro.toString().length;
+    var Contador = parseInt(cantidad) - parseInt(BaseContatenar);
     var DataConcatenada = "";
 
     for (var i = 0; i < Contador; i++) {
 
         DataConcatenada = DataConcatenada + "0";
-        console.log(DataConcatenada);
     }
     DataConcatenada = DataConcatenada + parametro;
-    console.log(DataConcatenada);
-
+    return DataConcatenada;
 }
+

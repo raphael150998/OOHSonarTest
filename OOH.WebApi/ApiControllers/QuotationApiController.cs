@@ -76,7 +76,7 @@ namespace OOH.WebApi.ApiControllers
         public async Task<QuotationDto> Find(int Idcotizacion)
         {
             QuotationDto modelo = new QuotationDto();
-            modelo = _repo.FindCotizacion(Idcotizacion).Result.FirstOrDefault();
+            modelo = await _repo.FindCotizacion(Idcotizacion);
             modelo.LstCaras= _repo.GetCotizacionesDetalles(Idcotizacion).Result.ToList();
             return modelo;
 

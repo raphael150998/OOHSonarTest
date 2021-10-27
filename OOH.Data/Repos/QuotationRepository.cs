@@ -16,6 +16,7 @@ namespace OOH.Data.Repos
     public class QuotationRepository : OOHContext, IBaseRepository<Cotizaciones>
     {
         private readonly ILogHelper _log;
+       
         public QuotationRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
@@ -79,12 +80,14 @@ namespace OOH.Data.Repos
             return( new ResultClass() { data = await PostData(sql,true,new DynamicParameters(detalle)) });
         }
 
-        public async Task<IEnumerable<QuotationDto>> FindCotizacion(int Idcotizacion)
+        public async Task<QuotationDto> FindCotizacion(int Idcotizacion)
         {
             try
             {
-
-            return await SelectData<QuotationDto>($"SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.ClienteId ,t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, t1.AgenciaId,(select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado , t1.EstadoId, t1.AtencionA , t1.ConsolidaCostos  ,t1.Comentarios FROM [dbo].[Cotizaciones] t1 WHERE CotizacionId = {Idcotizacion} ");
+                QuotationDto dto = new QuotationDto();
+                dto = await FilterData<QuotationDto>($"SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.ClienteId ,t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, t1.AgenciaId,(select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado , t1.EstadoId, t1.AtencionA , t1.ConsolidaCostos , t1.UserId ,t1.Comentarios FROM [dbo].[Cotizaciones] t1 WHERE CotizacionId = {Idcotizacion} ");
+                //dto.User =  SelectData<QuotationDto>($"SELECT [Username] as [User] FROM [dbo].[Usuarios] Where UserId ={dto.UserId}", "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Cesar1983****;MultipleActiveResultSets=True;App=EntityFramework").Result.FirstOrDefault().User;
+                return dto;
             }
             catch (Exception ex)
             {
@@ -148,8 +151,10 @@ namespace OOH.Data.Repos
                     }
                 }
 
+                Int64 IdUser = collection.CotizacionId == 0 ? _userHelper.GetUserId() : cotizacion.UserId;
+
                 string sqlMaestro = collection.CotizacionId == 0 ?
-                                "INSERT INTO Cotizaciones(Fecha, EstadoId, ClienteId, AgenciaId, AtencionA, Comentarios, ConsolidaCostos) VALUES(@Fecha, @EstadoId, @ClienteId, @AgenciaId, @AtencionA, @Comentarios, @ConsolidaCostos)" :
+                                "INSERT INTO Cotizaciones(Fecha,UserId, EstadoId, ClienteId, AgenciaId, AtencionA, Comentarios, ConsolidaCostos) VALUES(@Fecha,@UserId, @EstadoId, @ClienteId, @AgenciaId, @AtencionA, @Comentarios, @ConsolidaCostos)" :
                                 "UPDATE Cotizaciones SET Fecha=@Fecha,EstadoId=@EstadoId,ClienteId=@ClienteId, AgenciaId=@AgenciaId,AtencionA=@AtencionA,Comentarios=@Comentarios,ConsolidaCostos=@ConsolidaCostos WHERE CotizacionId = @CotizacionId";
                  
                 string sqlDetalle = "INSERT INTO CotizacionesDetalle(CotizacionId,CaraId,CostoArrendamiento,CostoImpresion,CostoInstalacion,CostoSaliente,FechaDesde,FechaHasta) VALUES (@idMaestro,@CaraId,@CostoArrendamiento,@CostoImpresion,@CostoInstalacion,@CostoSaliente,@FechaDesde,@FechaHasta)";
@@ -161,7 +166,7 @@ namespace OOH.Data.Repos
                     EntidadId = collection.CotizacionId == 0 ? (int)result : collection.CotizacionId,
                 });
 
-                return new ResultClass() { data = result, state = true };
+                return new ResultClass() { data = result, condition = cotizacion.Fecha, state = true };
             }
             catch (Exception ex)
             {
