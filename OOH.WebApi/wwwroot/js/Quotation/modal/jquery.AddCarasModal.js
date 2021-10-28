@@ -71,7 +71,7 @@ function DatatableAdd() {
 
     DataTableHelper.Draw("#addCarasTable", {
         destroy: true,
-        dom: "frltip",
+        dom: "rltip",
         orderCellsTop: true,
         fixedHeader: true,
         data: [],

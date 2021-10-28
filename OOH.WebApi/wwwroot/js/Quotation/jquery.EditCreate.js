@@ -70,6 +70,8 @@ function llenarData() {
             else {
 
             }
+            lstCaraDetalle = [];
+            
             $.each(dataResponse["lstCaras"], function (index, value) {
 
                 var DetalleCara = {
@@ -89,7 +91,6 @@ function llenarData() {
                     fechaDesde: value.fechaDesde,//
                     fechaHasta: value.fechaHasta //
                 };
-                lstCaraDetalle.clear();
                 lstCaraDetalle.push(DetalleCara);
                 console.log(index);
                 console.log(lstCaraDetalle);
@@ -127,7 +128,7 @@ function DetalleDT() {
             {
                 data: "id",
                 render: function (data, type, full, meta) {
-                    return `<button class="btn btn-danger btn-sm" onclick="RemoveDetalle('` + full.caraId + `','` + full.id + `')"><i class="fa fa-trash"></i></button>`;
+                    return `<i class="fa fa-trash  btnDatatable text-danger""  onclick="RemoveDetalle('` + full.caraId + `','` + full.id + `')"></i>`;
                 }
             },
             {
@@ -303,7 +304,7 @@ $("#btnPowerPoint").click(function () {
     download("/Home/Map", `Cortizacion_Codigo_${IdCotizacion}`);
     //testDownload();
 });
-}
+
 
 
 function AddCeros(parametro, cantidad) {
