@@ -21,8 +21,8 @@ namespace OOH.WebApi.ApiControllers
 
         private readonly QuotationRepository _repo;
         private readonly FaceRepository _repoFace;
-        private readonly SitioRepository _repoSite;
-        public QuotationApiController(QuotationRepository repo, FaceRepository repoFace, SitioRepository repoSite)
+        private readonly SiteRepository _repoSite;
+        public QuotationApiController(QuotationRepository repo, FaceRepository repoFace, SiteRepository repoSite)
         {
             _repo = repo;
             _repoFace = repoFace;

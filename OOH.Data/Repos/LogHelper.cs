@@ -70,7 +70,8 @@ namespace OOH.Data.Repos
                             Login = users.FirstOrDefault(x => x.UserId == log.UserId)?.Login ?? "Sin datos",
                             NameUser = users.FirstOrDefault(x => x.UserId == log.UserId)?.Username ?? "Sin datos",
                             Platform = log.PlataformaId.GetValueString(),
-                            Version = log.Version
+                            Version = log.Version,
+                            OldVersionJson = log.OldVersionJson
                         });
                     }
                 }
@@ -90,10 +91,11 @@ namespace OOH.Data.Repos
                 Fecha = DateTimeOffset.Now,
                 PlataformaId = _userHelper.GetUserPlatform(),
                 UserId = _userHelper.GetUserId(),
-                Version = log.Version ?? _userHelper.GetVersion()
+                Version = log.Version ?? _userHelper.GetVersion(),
+                OldVersionJson = log.OldVersionJson
             };
 
-            string sql = "INSERT INTO Log (UserId, Entidad, Descripcion, Fecha, EntidadId, PlataformaId, Version) VALUES (@UserId, @Entidad, @Descripcion, @Fecha, @EntidadId, @PlataformaId, @Version);";
+            string sql = "INSERT INTO Log (UserId, Entidad, Descripcion, Fecha, EntidadId, PlataformaId, Version, OldVersionJson) VALUES (@UserId, @Entidad, @Descripcion, @Fecha, @EntidadId, @PlataformaId, @Version, @OldVersionJson);";
 
             using (IDbConnection cn = new SqlConnection(_connectionString))
             {

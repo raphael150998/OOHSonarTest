@@ -42,8 +42,8 @@ namespace OOH.WebApi
             services.AddScoped<QuotationRepository>();
             services.AddScoped<FaceRepository>();
             services.AddScoped<ContactsRepository>();
-            services.AddScoped<SitioRepository>();
-            services.AddScoped<ProveedorRepository>();
+            services.AddScoped<SiteRepository>();
+            services.AddScoped<ProviderRepository>();
             services.AddScoped<ZoneRepository>();
             services.AddScoped<IMapGenerator, MapGenerator>();
             services.AddScoped<IPowerpointProvider, PowerpointProvider>();

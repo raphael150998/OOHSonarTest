@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Newtonsoft.Json;
 using OOH.Data.Dtos.Logs;
 using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class SitioRepository : OOHContext, IBaseRepository<Sitios>
+    public class SiteRepository : OOHContext, IBaseRepository<Sitios>
     {
         private readonly ILogHelper _log;
-        public SitioRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        public SiteRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
         }

@@ -11,25 +11,25 @@ namespace OOH.Data.Interfaces
     interface IBaseRepository<T> where T : class
     {
         /// <summary>
-        /// Obtiene un registro de tipo <typeparamref name="T"/> de la base de datos dado los parametros <paramref name="Id"/> y <typeparamref name="T"/>
+        /// Obtiene un registro de tipo <typeparamref name="T"/> de la base de datos dado los parametros <paramref name="id"/> y <typeparamref name="T"/>
         /// </summary>
-        /// <param name="Id">Identificador de la entidad</param>
+        /// <param name="id">Identificador de la entidad</param>
         /// <returns></returns>
-        Task<T> Find(int Id);
+        Task<T> Find(int id);
 
         /// <summary>
-        /// Obtiene un listado de registros de tipo <typeparamref name="T"/> de la base de datos que puede ser filtrados en ejecucion por medio del parametro <paramref name="_Where"/>
+        /// Obtiene un listado de registros de tipo <typeparamref name="T"/> de la base de datos que puede ser filtrados en ejecucion por medio del parametro <paramref name="where"/>
         /// </summary>
-        /// <param name="_Where">Filtros</param>
+        /// <param name="where">Filtros</param>
         /// <returns></returns>
-        Task<IEnumerable<T>> Select(string _Where = "");
+        Task<IEnumerable<T>> Select(string where = "");
 
         /// <summary>
-        /// Inserta o actualiza un registro de tipo <typeparamref name="T"/> en la base de datos basado en el valor del identificador dado en el parametro <paramref name="collection"/>
+        /// Inserta o actualiza un registro de tipo <typeparamref name="T"/> en la base de datos basado en el valor del identificador dado en el parametro <paramref name="model"/>
         /// </summary>
-        /// <param name="collection"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        Task<ResultClass> AddOrUpdate(T collection);
+        Task<ResultClass> AddOrUpdate(T model);
 
         /// <summary>
         /// Remueve un registro de tipo <typeparamref name="T"/> de la base de datos basado en el parametro <paramref name="id"/>

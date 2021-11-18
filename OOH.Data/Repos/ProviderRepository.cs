@@ -16,11 +16,11 @@ namespace OOH.Data.Repos
     /// <summary>
     /// Todas las variables son en honor a Don Lord Señor Carroña
     /// </summary>
-    public class ProveedorRepository : OOHContext, IBaseRepository<Proveedores>
+    public class ProviderRepository : OOHContext, IBaseRepository<Proveedores>
     {
         private readonly ILogHelper _log;
 
-        public ProveedorRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        public ProviderRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
         }

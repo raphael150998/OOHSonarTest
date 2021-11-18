@@ -44,7 +44,8 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = agencia.AgenciaId == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = agencia.AgenciaId == 0 ? "Creación" : $"Actualización",
+                OldVersionJson = agencia.AgenciaId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
                 Entidad = nameof(AgenciasPublicidad),
                 EntidadId = agencia.AgenciaId == 0 ? (int)result.data : agencia.AgenciaId,
             });

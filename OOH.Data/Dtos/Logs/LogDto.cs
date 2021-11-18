@@ -23,5 +23,7 @@ namespace OOH.Data.Dtos.Logs
         public long EntidadId { get; set; }
 
         public string Version { get; set; }
+
+        public string OldVersionJson { get; set; }
     }
 }

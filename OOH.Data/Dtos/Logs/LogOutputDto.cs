@@ -40,5 +40,10 @@ namespace OOH.Data.Dtos.Logs
         /// Version del software al momento de ejecutar la accion registrada
         /// </summary>
         public string Version { get; set; }
+
+        /// <summary>
+        /// Version anterior en formato json
+        /// </summary>
+        public string OldVersionJson { get; set; }
     }
 }

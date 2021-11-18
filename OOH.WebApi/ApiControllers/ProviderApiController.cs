@@ -13,9 +13,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class ProviderApiController : ControllerBase
     {
-        private readonly ProveedorRepository _repo;
+        private readonly ProviderRepository _repo;
 
-        public ProviderApiController(ProveedorRepository repo)
+        public ProviderApiController(ProviderRepository repo)
         {
             _repo = repo;
         }
