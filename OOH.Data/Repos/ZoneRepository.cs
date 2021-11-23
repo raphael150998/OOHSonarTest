@@ -36,9 +36,9 @@ namespace OOH.Data.Repos
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Zonas>> Select(string _Where = "")
+        public async Task<IEnumerable<Zonas>> Select()
         {
-            return await SelectData<Zonas>("SELECT * FROM Zonas " + _Where);
+            return await SelectData<Zonas>("SELECT * FROM Zonas");
         }
     }
 }

@@ -77,10 +77,6 @@ namespace OOH.Data.Repos
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Caras>> Select(string _Where = "")
-        {
-            return await SelectData<Caras>("SELECT t1.CaraId, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion ,t1.Codigo , from [dbo].[Caras] t1");
-        }
         public async Task<IEnumerable<FaceQuotationDto>> SelectFace(string _Where = "")
         {
             return SelectData<FaceQuotationDto>("select t1.CaraId,t1.Codigo,t1.ReferenciaComercial,t1.TipoId,(select t2.Nombre from CarasTipos t2 where  t2.TipoId =  t1.TipoId) as tipo,t1.CategoriaId,(select t3.Nombre from CarasCategorias t3 where t3.CategoriaId = t1.CategoriaId ) as categoria from [dbo].[Caras] t1  " + _Where).Result.ToList();   
@@ -88,6 +84,11 @@ namespace OOH.Data.Repos
         public async Task<FaceQuotationDto> FindFace(int Id)
         {
             return await FilterData<FaceQuotationDto>($"SELECT  t1.ReferenciaComercial as ReferenciaComercial,   t1.Codigo as Codigo, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion FROM [dbo].[Caras] t1  WHERE t1.CaraId =  {Id}");
+        }
+
+        public async Task<IEnumerable<Caras>> Select()
+        {
+            return await SelectData<Caras>("SELECT t1.CaraId, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion ,t1.Codigo , from [dbo].[Caras] t1");
         }
     }
 }

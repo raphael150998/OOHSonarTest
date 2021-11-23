@@ -45,6 +45,18 @@ namespace OOH.WebApi
             services.AddScoped<SiteRepository>();
             services.AddScoped<ProviderRepository>();
             services.AddScoped<ZoneRepository>();
+            services.AddScoped<CommercialReferencesRepository>();
+            services.AddScoped<CommercialRestrictionsRepository>();
+            services.AddScoped<InsuranceTypesRepository>();
+            services.AddScoped<InsuranceSiteRepository>();
+            services.AddScoped<PermissionSiteRepository>();
+            services.AddScoped<PermissionTypesRepository>();
+            services.AddScoped<ProviderSiteRepository>();
+            services.AddScoped<ReferenceSiteRepository>();
+            services.AddScoped<RestrictionSiteRepository>();
+            services.AddScoped<SiteCategoryRepository>();
+            services.AddScoped<StateTypesRepository>();
+            services.AddScoped<StructureTypesRepository>();
             services.AddScoped<IMapGenerator, MapGenerator>();
             services.AddScoped<IPowerpointProvider, PowerpointProvider>();
             services.AddScoped<TypesRepository>();

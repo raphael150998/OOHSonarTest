@@ -205,5 +205,10 @@ namespace OOH.Data.Repos
         {
             return await RemoveData($"Delete From [dbo].[CotizacionesDetalle] Where Id ={IdDetail}") == 1 ? true : false;
         }
+
+        public Task<IEnumerable<Cotizaciones>> Select()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

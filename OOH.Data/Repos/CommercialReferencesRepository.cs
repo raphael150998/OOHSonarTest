@@ -71,9 +71,9 @@ namespace OOH.Data.Repos
             return await (RemoveData($"DELETE FROM ReferenciasComercialesTipos WHERE ReferenciaId = {id}")) > 0;
         }
 
-        public async Task<IEnumerable<ReferenciasComercialesTipos>> Select(string where = "")
+        public async Task<IEnumerable<ReferenciasComercialesTipos>> Select()
         {
-            return await SelectData<ReferenciasComercialesTipos>("SELECT * FROM ReferenciasComercialesTipos " + where);
+            return await SelectData<ReferenciasComercialesTipos>("SELECT * FROM ReferenciasComercialesTipos");
         }
     }
 }

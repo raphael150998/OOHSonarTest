@@ -20,9 +20,8 @@ namespace OOH.Data.Interfaces
         /// <summary>
         /// Obtiene un listado de registros de tipo <typeparamref name="T"/> de la base de datos que puede ser filtrados en ejecucion por medio del parametro <paramref name="where"/>
         /// </summary>
-        /// <param name="where">Filtros</param>
         /// <returns></returns>
-        Task<IEnumerable<T>> Select(string where = "");
+        Task<IEnumerable<T>> Select();
 
         /// <summary>
         /// Inserta o actualiza un registro de tipo <typeparamref name="T"/> en la base de datos basado en el valor del identificador dado en el parametro <paramref name="model"/>

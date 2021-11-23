@@ -25,7 +25,6 @@ $.fn.serializeFormToJson = function () {
         } else {
             if (typeInfo.some(x => x.name == this.name && x.type == "number")) rt[this.name] = parseFloat(this.value) || 0;
             else if (typeInfo.some(x => x.name == this.name && x.type == "bool")) {
-                console.log(this);
                 rt[this.name] = this.value == "on" ? true : false
             }
             else rt[this.name] = this.value || '';
@@ -169,4 +168,8 @@ $.fn.select2Validation = function () {
     this.select2().on('change', function (e) {
         $(`#${id}`).valid();
     });
+}
+
+$.fn.switch = function () {
+    return new Switchery(this);
 }

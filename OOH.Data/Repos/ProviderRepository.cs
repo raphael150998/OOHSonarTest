@@ -59,11 +59,6 @@ namespace OOH.Data.Repos
             return await _log.GetLogs(new LogInputDto(id, nameof(Proveedores)));
         }
 
-        public async Task<IEnumerable<Proveedores>> Select(string _Where = "")
-        {
-            return (await SelectData<Proveedores>("Select * from Proveedores " + _Where)).ToList();
-        }
-
         public async Task<bool> Remove(int id)
         {
             await _log.AddLog(new LogDto()
@@ -125,5 +120,9 @@ namespace OOH.Data.Repos
             return modelReturn;
         }
 
+        public async Task<IEnumerable<Proveedores>> Select()
+        {
+            return await SelectData<Proveedores>("Select * from Proveedores");
+        }
     }
 }

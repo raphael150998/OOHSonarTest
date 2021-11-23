@@ -70,9 +70,9 @@ namespace OOH.Data.Repos
             return await (RemoveData($"DELETE FROM PermisosMunicipalesTipos WHERE PermisoId = {id}")) > 0;
         }
 
-        public async Task<IEnumerable<PermisosMunicipalesTipos>> Select(string where = "")
+        public async Task<IEnumerable<PermisosMunicipalesTipos>> Select()
         {
-            return await SelectData<PermisosMunicipalesTipos>("SELECT * FROM PermisosMunicipalesTipos " + where);
+            return await SelectData<PermisosMunicipalesTipos>("SELECT * FROM PermisosMunicipalesTipos");
         }
     }
 }

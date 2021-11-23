@@ -63,11 +63,6 @@ namespace OOH.Data.Repos
             return (await RemoveData($"DELETE FROM Sitios WHERE SitioId = {id}")) > 0;
         }
 
-        public async Task<IEnumerable<Sitios>> Select(string _Where = "")
-        {
-            return await SelectData<Sitios>("SELECT * FROM Sitios " + _Where);
-        }
-
         /// <summary>
         ///  Listado de sitios
         /// </summary>
@@ -127,6 +122,11 @@ namespace OOH.Data.Repos
             modelReturn.Pagination.More = (request.CurrentPage * request.ItemsPerPage) < total;
 
             return modelReturn;
+        }
+
+        public async Task<IEnumerable<Sitios>> Select()
+        {
+            return await SelectData<Sitios>("SELECT * FROM Sitios");
         }
     }
 }

@@ -90,6 +90,9 @@ namespace OOH.Data.Repos
             return SelectData<Clientes>("select * from [dbo].[clientes] " + _Where, false, null).Result.ToList();
         }
 
-
+        public async Task<IEnumerable<Clientes>> Select()
+        {
+            return await SelectData<Clientes>("select * from [dbo].[clientes]");
+        }
     }
 }
