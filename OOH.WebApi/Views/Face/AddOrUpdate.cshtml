@@ -1,0 +1,291 @@
+﻿@model OOH.Data.Models.Caras
+@{
+    ViewData["Title"] = "CreateUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .grid-denied{
+        cursor:not-allowed;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 10px;
+    }
+    .item-selected {
+        background-color: #8FBC8B!important;
+    }
+
+    .grid-item {
+        background-color: #F08080;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        box-shadow: 5px 10px 28px #888888;
+        padding: 20px;
+        margin: 5px;
+        font-size: 30px;
+        text-align: center;
+    }
+    .grid-item-external {
+        background-color: #F08080;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        box-shadow: 5px 5px 18px #888888;
+        padding: 20px,15px;
+        margin: 5px;
+        font-size: 30px;
+        text-align: center;
+    }
+</style>
+<form id="formFaces">
+
+    <div class="card">
+        <div class="card-block row">
+            <div class="col-md-2">
+                <button type="submit" id="BtnSubmit" class="btn btn-primary"><i class="far fa-save"></i>Guardar</button>
+            </div>
+            <div class="col-md-1">
+
+                <label class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</label>
+            </div>
+
+
+            <div class="col-md-3 container">
+
+            </div>
+
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <label class="control-label" asp-for="Activo"></label>:
+
+                <input type="checkbox" class="js-switch bool" id="Activo" name="Activo" />
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-block">
+
+            <div class="container">
+                <div class="row">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="col-md-2" hidden>
+                        <input asp-for="CaraId" class="form-control number" readonly />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Codigo" class="control-label"></label>
+                        <input asp-for="Codigo" class="form-control" readonly />
+                        <span asp-validation-for="Codigo" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Referencia</label>
+                        <input asp-for="ReferenciaComercial" class="form-control" />
+                        <span asp-validation-for="ReferenciaComercial" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Sitio</label>
+                        <select id="dropdownSitio" name="SitioId">
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Metodo de Inst.</label>
+                        <input asp-for="MetodoInstalacion" class="form-control" />
+                        <span asp-validation-for="MetodoInstalacion" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label class="control-label">Observaciones</label>
+                        <input asp-for="Observaciones" class="form-control" />
+                        <span asp-validation-for="Observaciones" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Categoria</label>
+
+                        <div id="divCategoria">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Tipo</label>
+
+                        <div id="divTipo">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Notas</label>
+                        <input asp-for="NotaInstalacion" class="form-control" />
+                        <span asp-validation-for="NotaInstalacion" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <label asp-for="Sentido" class="control-label"></label>
+                        <input asp-for="Sentido" class="form-control" />
+                        <span asp-validation-for="Sentido" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="AlturaPiso" class="control-label"></label>
+                        <input asp-for="AlturaPiso" class="form-control" />
+                        <span asp-validation-for="AlturaPiso" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Ancho" class="control-label"></label>
+                        <input asp-for="Ancho" class="form-control" />
+                        <span asp-validation-for="Ancho" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label asp-for="Alto" class="control-label"></label>
+                        <input asp-for="Alto" class="form-control" />
+                        <span asp-validation-for="Alto" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <label asp-for="NumSpotDigital" class="control-label"></label>
+                        <input asp-for="NumSpotDigital" class="form-control" />
+                        <span asp-validation-for="NumSpotDigital" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<div class="card">
+    <div class="card-block">
+
+        <!-- Row start -->
+        <!--<div class="sub-title">
+            <i class="fa fa-plus-square text-secondary" id="addbtn" onclick="editContact(0)" style="font-size:25px"></i>
+        </div>-->
+        <div class="row">
+            <div class="col-lg-12 col-xl-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs  tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#salientes" role="tab">Salientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#material" role="tab">Materiales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#price" role="tab">Precios</a>
+                    </li>
+                    @*
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#settings1" role="tab">Settings</a>
+                        </li>*@
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content tabs card-block" id="tabs-container">
+                    <div class="tab-pane active" id="salientes" role="tabpanel">
+                      
+
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3">
+
+                                <div class="grid-container">
+                                    <div class="grid grid-item-external" idgrid="1" idsql="0" selected="false">1</div>
+                                    <div class="grid grid-item-external" idgrid="2" idsql="0"  selected="false">2</div>
+                                    <div class="grid grid-item-external" idgrid="3" idsql="0"  selected="false">3</div>
+                                    <div class="grid grid-item" idgrid="4" idsql="0"  selected="false" >4</div>
+                                    <div class="grid-item" style="background-color:#fff!important">Valla</div>
+                                    <div class="grid grid-item" idgrid="5" idsql="0"  selected="false" >6</div>
+                                    <div class="grid grid-item-external" idgrid="6" idsql="0" selected="false">7</div>
+                                    <div class="grid grid-item-external" idgrid="7" idsql="0" selected="false">8</div>
+                                    <div class="grid grid-item-external" idgrid="8" idsql="0" selected="false">9</div>
+                                </div>
+                                
+                            </div>
+
+                    </div>
+                    <div class="tab-pane" id="material" role="tabpanel">
+                        <table id="tablaContact" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Acciones</th>
+                                    <th>Nombres</th>
+                                    <th>Costo</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="price" role="tabpanel">
+                        <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                    </div>
+                    
+                        @*<div class="tab-pane" id="settings1" role="tabpanel">
+                            <p class="m-0">4.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+        <!-- Row end -->
+
+    </div>
+
+</div>
+<script>
+
+    $().ready(function ($) {
+        $(".grid").hover(function () {
+            var DIV = this;
+            var CaraId = $("#CaraId").val();
+            if (CaraId == 0) {
+                $(DIV).addClass('grid-denied');
+            } else {
+                $(DIV).removeClass('grid-denied');
+            }
+        });
+
+        $(".grid").click(function () {
+            var DIV = this;
+            var Cara = $("#CaraId").val();
+            var obj = {
+                Id: DIV.idsql,
+                CaraId: Cara,
+                SalienteId: DIV.idgrid
+            };
+            if (Cara == 0) {
+                //N0 HACE NADA
+            } else {
+                if (DIV.selected == true) {
+
+                    fns.PostDataAsync("api/salientes/clickRemove", obj, function (dataResult) {
+                        if (dataResult) {
+                            $(DIV).removeClass('item-selected');
+                            $(DIV).prop('selected', false);
+                        }
+                    });
+
+                } else {
+
+                    fns.PostDataAsync("api/salientes/clickAdd", obj, function (dataResult) {
+                        if (dataResult != 0) {
+                            $(DIV).addClass('item-selected');
+                            $(DIV).prop('selected', true);
+
+                            DIV.idsql = dataResult;
+                            $(DIV).prop("idsql", dataResult);
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+</script>
+<script src="~/js/Face/jquery.AddOrUpdate.js"></script>

@@ -1,13 +1,11 @@
-﻿
-@{
-    ViewData["Title"] = "Proveedores";
+﻿@{
+    ViewData["Title"] = "Face";
 }
-
 <div>
     <div class="card">
 
         <div class="card-header">
-            <button class="btn btn-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Agregar Proveedor</button>
+            <button class="btn btn-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Agregar Cara</button>
             <button class="btn btn-primary btn-outline-primary" onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
         </div>
     </div>
@@ -15,14 +13,16 @@
     <div class="card">
 
         <div class="card-block">
-            <table id="tablaProveedor" class="table table-hover">
+            <table id="CarasTable" class="table table-hover">
                 <thead>
                     <tr>
                         <th class="filter-action">Acciones</th>
                         <th class="filter">Codigo</th>
-                        <th class="filter">Nombre Comercial / Nombre o Razón Social</th>
-                        <th class="filter">NRC</th>
-                        <th class="filter">NIT</th>
+                        <th class="filter">Sitio</th>
+                        <th class="filter">Tipo</th>
+                        <th class="filter">Referencia</th>
+                        <th class="filter">Municipio</th>
+                        <th class="filter">Iluminada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,7 @@
 
 
         </div>
-        </div>
     </div>
-    @section scripts{
-        <script src="~/js/Provider/jquery.provider.js" type="text/javascript"></script>
-    }
+</div>
+
+<script src="~/js/Face/jquery.face.js"></script>

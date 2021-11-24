@@ -27,6 +27,9 @@ namespace OOH.Data.Models
         public bool PersonaJuridica { get; set; }
         public bool Activo { get; set; }
         public int CategoriaId { get; set; }
+        public string RazonSocial { get; set; }
+        public int MunicipioId { get; set; }
+
 
     }
 }

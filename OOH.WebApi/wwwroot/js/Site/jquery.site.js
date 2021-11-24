@@ -50,7 +50,7 @@ function BuildDatatable() {
 }
 
 function RemoveSite(id) {
-    SweetAlert.RemoveAlert("api/site/remove", { Id: parseInt(id) }, function (response) {
+    SweetAlert.RemoveAlert("api/site/remove", { Id: parseInt(id) }, "",function (response) {
         GetSites();
         if (response) {
             Swal.fire({

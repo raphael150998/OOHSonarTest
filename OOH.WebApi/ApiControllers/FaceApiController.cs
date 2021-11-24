@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Dtos;
+using OOH.Data.Dtos.Caras;
 using OOH.Data.Models;
 using OOH.Data.Repos;
 using System;
@@ -20,35 +21,69 @@ namespace OOH.WebApi.ApiControllers
             _repo = repo;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/caras/getLst")]
-        public async Task<List<Caras>> getCarasLst()
+        public async Task<IActionResult> getCarasLst()
         {
             try
             {
-                return (new List<Caras>());
+                return Ok(await _repo.SelectCaras());
 
             }
             catch (Exception ex)
             {
 
-                return (new List<Caras>());
+                return Ok(new List<FaceDto>());
             }
         }
         [HttpPost]
+        [Route("api/caras/CEdata")]
+        public async Task<IActionResult> AddOrUpdate([FromBody] Caras Face)
+        {
+            return Ok(await _repo.AddOrUpdate(Face));
+        }
+        [HttpPost]
         [Route("api/caras/get")]
-        public async Task<Caras> getCaras([FromBody] Identify<int> data)
+        public async Task<IActionResult> getCaras([FromBody] Identify<int> data)
         {
             try
             {
-                return await _repo.FindFace(data.Id);
+                return Ok( await _repo.FilterFace(data.Id));
 
             }
             catch (Exception ex)
             {
 
-                return (new Caras());
+                return Ok(new Caras());
             }
+        }
+
+        [HttpPost]
+        [Route("api/face/remove")]
+        public async Task<IActionResult> remove([FromBody]Identify<int> data)
+        {
+            return Ok(await _repo.Remove(data.Id));
+        }
+
+        [HttpPost]
+        [Route("api/salientes/clickAdd")]
+        public async Task<int> AddSaliente([FromBody] CaraSalientes collection)
+        {
+            return await _repo.AddSaliente(collection);
+        }
+
+        [HttpGet]
+        [Route("api/face/salientes/get")]
+        public async Task<IActionResult> GetSalientes([FromBody] CaraSalientes collection)
+        {
+            return Ok(await _repo.FindSaliente(collection));
+        }
+
+        [HttpPost]
+        [Route("api/salientes/clickRemove")]
+        public async Task<bool> RemoveSaliente([FromBody]CaraSalientes collection)
+        {
+              return await _repo.RemoveSaliente(collection.Id);              
         }
     }
 }

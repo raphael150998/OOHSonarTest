@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Dtos;
+using OOH.Data.Helpers;
 using OOH.Data.Models;
 using OOH.Data.Repos;
 using System;
@@ -25,6 +27,12 @@ namespace OOH.WebApi.ApiControllers
         {
             return Ok(await _repo.Select());
         }
+        [HttpGet("find")]
+        public async Task<IActionResult> Get(int id)
+        {
+            if (id == 0) return NotFound();
+            return Ok(await _repo.Find(id));
+        }
 
         [HttpGet("dropdown")]
         public async Task<IActionResult> GetListForDropdown()
@@ -41,8 +49,54 @@ namespace OOH.WebApi.ApiControllers
         {
             List<Proveedores> providers = (await _repo.Select()).ToList();
 
-            return Ok();
+            return Ok(providers);
+        }  
+        [HttpGet("category")]
+        public async Task<IActionResult> GetListCategory()
+        {
+            List<ProveedoresCategorias> providers = (await _repo.Category()).ToList();
+
+            return Ok(providers);
+        }
+        [HttpPost("CEdata")]
+        public async Task<IActionResult> AddOrUpdate([FromBody] Proveedores Provider)
+        {
+            return Ok(await _repo.AddOrUpdate(Provider));
         }
 
+        [HttpPost("remove")]
+        public async Task<IActionResult> Remove([FromBody] Identify<int> objeto) {
+            try
+            {
+                return Ok(new ResultClass() { data = await _repo.Remove(objeto.Id)});
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233088)
+                {
+                    return Ok(new ResultClass()
+                    {
+                        data = null,
+                        state = false,
+                        condition = "fk",
+                        //exception = ex,
+                        message = "El proveedor posee una relacion"
+                    });
+                }
+                else
+                {
+                    return Ok(new ResultClass()
+                    {
+                        data = null,
+                        state = false,
+                        condition = "error",
+                        //exception = ex,
+                        message = "No se a logrado guardar"
+                    });
+                }
+
+            }
+        }
     }
 }

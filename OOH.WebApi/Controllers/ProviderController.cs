@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OOH.Data.Models;
 using OOH.WebApi.Filters.Attributes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,15 @@ namespace OOH.WebApi.Controllers
         {
             return View();
         }
+        [OhhFilterAttribute("ListProviders", Data.ActionPermission.Read)]
+        public IActionResult AddOrUpdate(int id=0)
+        {
+            Proveedores provider = new Proveedores();
+            provider.ProveedorId = id;
+            return View(provider);
+        }
+
+
     }
 }
  

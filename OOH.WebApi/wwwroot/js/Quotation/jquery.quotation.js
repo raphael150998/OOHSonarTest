@@ -11,11 +11,19 @@ function LLenarDataTable() {
 
     });
 }
-
+//Metodo para crear el Datatable de clientes
+var ButtonExcel = [{
+    extend: 'excelHtml5',
+    text: 'Archivo Excel',
+    titleAttr: 'Exportar a Excel',
+    className: 'btn btn-success',
+    exportOptions: {
+        columns: [1, 2, 3]
+    }
+},];
 function quotationDataTable() {
     DataTableHelper.Draw("#tablaQuotation", {
         destroy: true,
-        "scrollX": true,
         dom: "Bfrltip",
         orderCellsTop: true,
         fixedHeader: true,
@@ -50,9 +58,9 @@ function quotationDataTable() {
                     return CutString(data, 0, " ");
                 }
             },
-            {
-                data:"agencia"
-            },
+            //{
+            //    data:"agencia"
+            //},
             {
                 data:"estado"
             }
@@ -60,13 +68,7 @@ function quotationDataTable() {
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
         },
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                text: '<i class="fa fa-file-excel-o"></i> <b>Excel</b>',
-                titleAttr: 'Excel'
-            }
-        ]
+        buttons: ButtonExcel
        
     }).FilterColum();
     LLenarDataTable();
@@ -80,7 +82,7 @@ function edit(id) {
 }
 
 function removeQuotation(idQutotaion) {
-    SweetAlert.RemoveAlert("api/quotation/remove", { Id: idQutotaion }, "La cotización sera removido", function (response) {
+    SweetAlert.RemoveAlert("api/quotation/remove", { Id: idQutotaion }, "La cotización sera removida", function (response) {
         console.log(response);
         if (response["data"]) {
             Swal.fire(

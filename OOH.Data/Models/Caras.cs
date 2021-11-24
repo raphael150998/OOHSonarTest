@@ -22,6 +22,8 @@ namespace OOH.Data.Models
         public bool Activo { get; set; }
         public string ReferenciaComercial { get; set; } //
         public int NumSpotDigital { get; set; }
+        public bool CaraIluminada { get; set; }
+        public string NotaInstalacion { get; set; }
 
     }
 }

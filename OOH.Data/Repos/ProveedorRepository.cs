@@ -31,11 +31,11 @@ namespace OOH.Data.Repos
 
             #region sql
             string sql = proveedor.ProveedorId == 0 ?
-                            "INSERT INTO [dbo].[Proveedores] ([Codigo] ,[Nombre] ,[NRC] ,[NIT] ,[Giro] ,[Email] ,[Direccion] ,[Telefono] ,[Celular] ,[PersonaJuridica] ,[Activo] ,[CategoriaId]) VALUES (@Codigo, @Nombre, @NRC, @NIT, @Giro, @Email, @Direccion, @Telefono, @Celular, @PersonaJuridica, @Activo, @CategoriaId)"
-                            : "UPDATE [dbo].[Proveedores] SET [Codigo] = @Codigo ,[Nombre] = @Nombre,[NRC] = @NRC ,[NIT] = @NIT,[Giro] = @Giro,[Email] = @Email,[Direccion] = @Direccion,[Telefono] = @Telefono,[Celular] = @Celular,[PersonaJuridica] = @PersonaJuridica,[Activo] = @Activo,[CategoriaId] = @CategoriaId where ProveedorId = @ProveedorId";
+                            "INSERT INTO [dbo].[Proveedores] ([Codigo],[RazonSocial],[MunicipioId] ,[Nombre] ,[NRC] ,[NIT] ,[Giro] ,[Email] ,[Direccion] ,[Telefono] ,[Celular] ,[PersonaJuridica] ,[Activo] ,[CategoriaId]) VALUES (@Codigo, @RazonSocial,@MunicipioId ,@Nombre, @NRC, @NIT, @Giro, @Email, @Direccion, @Telefono, @Celular, @PersonaJuridica, @Activo, @CategoriaId)"
+                            : "UPDATE [dbo].[Proveedores] SET [Codigo] = @Codigo,[RazonSocial] = @RazonSocial, [MunicipioId] = @MunicipioId ,[Nombre] = @Nombre,[NRC] = @NRC ,[NIT] = @NIT,[Giro] = @Giro,[Email] = @Email,[Direccion] = @Direccion,[Telefono] = @Telefono,[Celular] = @Celular,[PersonaJuridica] = @PersonaJuridica,[Activo] = @Activo,[CategoriaId] = @CategoriaId where ProveedorId = @ProveedorId";
             #endregion
 
-            result.data = proveedor.ProveedorId == 0 ? await PostData(sql, true, new(proveedor)) : UpdateData(sql, true, new(proveedor));
+            result.data = proveedor.ProveedorId == 0 ? await PostData(sql, true, new(proveedor)) :await UpdateData(sql, true, new(proveedor));
 
             result.state = (int)result.data > 0;
 
@@ -62,6 +62,10 @@ namespace OOH.Data.Repos
         public async Task<IEnumerable<Proveedores>> Select(string _Where = "")
         {
             return (await SelectData<Proveedores>("Select * from Proveedores " + _Where)).ToList();
+        }
+        public async Task<IEnumerable<ProveedoresCategorias>> Category(string _Where = "")
+        {
+            return (await SelectData<ProveedoresCategorias>("Select * from ProveedoresCategorias " + _Where)).ToList();
         }
 
         public async Task<bool> Remove(int id)

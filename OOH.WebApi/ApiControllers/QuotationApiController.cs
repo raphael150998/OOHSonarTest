@@ -80,17 +80,6 @@ namespace OOH.WebApi.ApiControllers
             modelo.LstCaras= _repo.GetCotizacionesDetalles(Idcotizacion).Result.ToList();
             return modelo;
 
-            //Cotizaciones cotizacion = new Cotizaciones();
-            //cotizacion = _repo.FindCotizacion(Idcotizacion).Result.FirstOrDefault();
-            //modelo.CotizacionId = cotizacion.CotizacionId;
-            //modelo.ConsolidaCostos = cotizacion.ConsolidaCostos;
-            //modelo.ClienteId = cotizacion.ClienteId;
-            //modelo.Comentarios = cotizacion.Comentarios;
-            //modelo.EstadoId = cotizacion.EstadoId;
-            //modelo.Estado = cotizacion.Estado;
-            //modelo.Fecha = cotizacion.Fecha;
-            //modelo.AgenciaId = cotizacion.AgenciaId;
-            //modelo.AtencionA = cotizacion.AtencionA;
         }
 
 

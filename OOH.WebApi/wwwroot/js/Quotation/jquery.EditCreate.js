@@ -60,16 +60,14 @@ function llenarData() {
             $("#txtAreaComentarios").val(dataResponse["comentarios"]);
             $("#readOnlyFecha").val(dataResponse["fecha"]);
             $("#ESTADO").val(dataResponse["estado"]);
+            $("#Ejecutivo").val(dataResponse["user"]);
             $("#EstadoId").val(dataResponse["estadoId"]);
 
             var yy = CutString(CutString(dataResponse["fecha"], 0, " "), 2, "/").substring(2, 4);
             $("#CodigoCotizacion").val(`COT` + AddCeros(IdCotizacion, 6) + "/" + yy);
-            if (dataResponse["consolidaCostos"]) {
-                $("#ConsolidaCosto").trigger("click");
-            }
-            else {
-
-            }
+            
+            $("#ConsolidaCosto").changeSwitch(dataResponse["consolidaCostos"]);
+          
             lstCaraDetalle = [];
             
             $.each(dataResponse["lstCaras"], function (index, value) {
@@ -226,7 +224,7 @@ function PostMaestroDetalle() {
         AgenciaId: $("#dropdownAgencia option:selected").val(),
         AtencionA: $("#txtAtencionA").val(),
         Comentarios: $("#txtAreaComentarios").val(),
-        ConsolidaCostos: $("#PersonaJuridica").is(':checked'),
+        ConsolidaCostos: $("#ConsolidaCosto").is(':checked'),
         LstCaras: lstCaraDetalle
     };
     console.log(JSON.stringify(MD));

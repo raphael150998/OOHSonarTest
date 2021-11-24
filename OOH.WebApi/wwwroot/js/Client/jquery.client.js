@@ -71,7 +71,7 @@ function edit(id) {
 
 function removeClient(idClient) {
 
-    SweetAlert.RemoveAlert("api/client/remove", { Id: parseInt(idClient) }, function (response) {
+    SweetAlert.RemoveAlert("api/client/remove", { Id: parseInt(idClient) }, "",function (response) {
 
         if (response["state"]) {
          

@@ -68,7 +68,7 @@ function UpdateAgency(id) {
 }
 
 function RemoveAgency(id) {
-    SweetAlert.RemoveAlert("api/agency/remove", { Id: parseInt(id) }, function (response) {
+    SweetAlert.RemoveAlert("api/agency/remove", { Id: parseInt(id) }, "",function (response) {
         GetAgencies();
         if (response) {
             Swal.fire({
