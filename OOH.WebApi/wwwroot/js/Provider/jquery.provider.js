@@ -35,7 +35,6 @@ function DrawDatatable() {
                 }
             },
             { data: "nombre" },
-            { data: "nrc" },
             { data: "nit" },
 
         ]
@@ -75,4 +74,8 @@ function removeProvider(idprovider) {
 
 
     });
+}
+
+function refresh() {
+    GetDataProvideer();
 }

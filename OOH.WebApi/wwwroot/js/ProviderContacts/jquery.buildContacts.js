@@ -57,11 +57,11 @@ function editContact(idContacto) {
     $("#formContact").trigger("reset");
     var idProveedor = $("#ProveedorId").val();
     $("#ProvId").val(idProveedor);
+    if (idContacto != 0) {
     console.log(idProveedor);
     console.log($("#ProvId").val());
     console.log($("#ProveedorId").val());
     //$("#ClinId").val(idCliente);
-    if ($("#ProveedorId").val() != 0) {
 
         $("#ModalContact").modal("show");
         fns.CallGetAsync("api/provider/contacts/find", { Id: idContacto }, function (dataRquest) {
@@ -71,5 +71,8 @@ function editContact(idContacto) {
            
         });
 
+    }
+    if (idProveedor != 0) {
+        $("#ModalContact").modal("show");
     }
 }

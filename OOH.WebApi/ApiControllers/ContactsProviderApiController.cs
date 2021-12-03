@@ -22,9 +22,9 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/provider/contacts/get")]
-        public async Task<IActionResult> get(int Id)
+        public async Task<IActionResult> get(long Id)
         {
-            return Ok(await _repo.Select(Id.ToString()));
+            return Ok(await _repo.SelectByProvider(Id));
 
         }
         [HttpGet]

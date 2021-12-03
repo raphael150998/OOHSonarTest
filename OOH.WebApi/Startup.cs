@@ -38,6 +38,8 @@ namespace OOH.WebApi
             services.AddScoped<AccountRepository>();
             services.AddScoped<ClientRepository>();
             services.AddScoped<MunicipalityRepository>();
+            services.AddScoped<MaterialRepository>();
+            services.AddScoped<CaraMaterialRepository>();
             services.AddScoped<CategoryRepository>();
             services.AddScoped<QuotationRepository>();
             services.AddScoped<FaceRepository>();

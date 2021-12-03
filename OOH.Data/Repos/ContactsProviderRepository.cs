@@ -67,9 +67,14 @@ namespace OOH.Data.Repos
             return RemoveData($"delete from [dbo].[ProveedoresContactos] Where id = {id}", false).Result == 1 ? true : false;
         }
 
-        public async Task<IEnumerable<ProveedoresContactos>> Select(string _Where = "")
+        public async Task<IEnumerable<ProveedoresContactos>> Select()
         {
-            return await SelectData<ProveedoresContactos>($"select * from ProveedoresContactos where ProveedorId = {_Where}");
+            return await SelectData<ProveedoresContactos>($"select * from ProveedoresContactos");
+
+        }
+        public async Task<IEnumerable<ProveedoresContactos>> SelectByProvider(long provider)
+        {
+            return await SelectData<ProveedoresContactos>($"select * from ProveedoresContactos where ProveedorId = {provider}");
 
         }
     }

@@ -13,7 +13,7 @@ namespace OOH.WebApi.Controllers
         {
             return View();
         }
-
+        [HttpGet("Face/AddOrUpdate/{id}")]
         public IActionResult AddOrUpdate(int id=0)
         {
             Caras face = new Caras();

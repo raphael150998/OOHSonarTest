@@ -26,7 +26,7 @@ namespace OOH.Data.Repos
         {
             try
             {
-                return await PostData("insert into CaraSaliente(CaraId,SalienteId) values(@CaraId,@SalienteId)",true,new(saliente));
+                return await PostData("insert into CaraSalientes(CaraId,SalienteId) values(@CaraId,@SalienteId)",true,new(saliente));
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace OOH.Data.Repos
         {
             try
             {
-                await RemoveData($"Remove From CaraSalientes Where Id ={saliente}");
+                await RemoveData($"delete from CaraSalientes Where Id = {saliente}");
                 return true;
             }
             catch (Exception ex)
@@ -48,11 +48,11 @@ namespace OOH.Data.Repos
             }
         }
 
-        public async Task<IEnumerable<CaraSalientes>> FindSaliente(CaraSalientes saliente)
+        public async Task<IEnumerable<CaraSalientes>> FindSaliente(long id)
         {
             try
             {
-                return await SelectData<CaraSalientes>("select * From CaraSalientes Where CaraId = @CaraId", true, new(saliente));
+                return await SelectData<CaraSalientes>($"Select * From CaraSalientes Where CaraId = {id}");
             }
             catch (Exception ex)
             {
@@ -66,24 +66,46 @@ namespace OOH.Data.Repos
         {
             ResultClass result = new ResultClass();
             DynamicParameters param = new DynamicParameters(collection);
+     
+            string sitio = await FilterData<string>($"Select Codigo from Sitios where SitioId = {collection.SitioId}");
+            string tipo = await FilterData<string>($"Select Codigo from CarasTipos where TipoId = {collection.TipoId}");
 
-            if (collection.CaraId == 0)
+            if (collection.CaraId != 0)
             {
 
-                int post = PostData(@"Insert Into [dbo].[Caras] ([SitioId],[Codigo],[TipoId],[CategoriaId],[Alto],[Ancho],[Sentido],[AlturaAlPiso],[MetodoInstalacion],[Observaciones],[Activo],[ReferenciaComercial],[NumSpotDigital],[CaraIluminada]) 
-                                                        Values (@SitioId,@Codigo,@TipoId,@Celular,@CategoriaId,@Alto,@Ancho,@Sentido,@AlturaAlPiso,@MetodoInstalacion,@Observaciones,@Activo,@ReferenciaComercial,@NumSpotDigital,@CaraIluminada)", true, param, false).Result;
+                string idSitio = await FilterData<string>($"Select SitioId from Caras where CaraId = {collection.CaraId}");
+                if (Convert.ToInt64(idSitio) != collection.SitioId)
+                {
+                    await UpdateData($"update Caras Set Activo = 0 where CaraId = {collection.CaraId}",false);
+                    await _log.AddLog(new LogDto()
+                    {
+                        Descripcion = collection.CaraId == 0 ? "Creación" : "Actualización",
+                        Entidad = nameof(Caras),
+                        EntidadId = collection.CaraId == 0 ? (int)result.data : collection.CaraId,
+                    });
+                    collection.CaraId = 0;
+                }
+            }
+
+            
+            
+            if (collection.CaraId == 0)
+            {
+                collection.Codigo = tipo +"-" + sitio +"-"+ collection.Sentido;
+                int post = PostData(@"Insert Into [dbo].[Caras] ([SitioId],[NotaInstalacion],[Codigo],[TipoId],[CategoriaId],[Alto],[Ancho],[Sentido],[AlturaAlPiso],[MetodoInstalacion],[Observaciones],[Activo],[ReferenciaComercial],[NumSpotDigital],[CaraIluminada]) 
+                                                        Values (@SitioId,@NotaInstalacion,@Codigo,@TipoId,@CategoriaId,@Alto,@Ancho,@Sentido,@AlturaAlPiso,@MetodoInstalacion,@Observaciones,@Activo,@ReferenciaComercial,@NumSpotDigital,@CaraIluminada)", true, param, false).Result;
 
                 result = new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
             }
             else
             {
-
-            int post = UpdateData(@"update [dbo].[Clientes] set SitioId = @SitioId ,Codigo = @Codigo ,TipoId = @TipoId, Celular = @Celular ,CategoriaId= @CategoriaId ,Alto = @Alto ,
+                collection.Codigo = tipo + "-" + sitio + "-" + collection.Sentido;
+                int post = UpdateData(@"update [dbo].[Caras] set SitioId = @SitioId ,Codigo = @Codigo ,TipoId = @TipoId ,CategoriaId= @CategoriaId ,Alto = @Alto ,
                                                  Ancho = @Ancho,Sentido = @Sentido,AlturaAlPiso = @AlturaAlPiso ,MetodoInstalacion = @MetodoInstalacion ,Observaciones= @Observaciones,  
-                                                 Activo = @Activo, ReferenciaComercial = @ReferenciaComercial, NumSpotDigital = @NumSpotDigital, CaraIluminada = @CaraIluminada Where ClienteId = @ClienteId ", true, param, false).Result;
-                result = new ResultClass() { data = post, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
+                                                 Activo = @Activo, ReferenciaComercial = @ReferenciaComercial, NumSpotDigital = @NumSpotDigital, CaraIluminada = @CaraIluminada Where CaraId = @CaraId ", true, param, false).Result;
+                result = new ResultClass() { data = post != 0? collection.CaraId: 0, state = post != 0 ? true : false, message = post != 0 ? "Exito" : "No se a podido guardar" };
             }
-
+            
             await _log.AddLog(new LogDto()
             {
                 Descripcion = collection.CaraId == 0 ? "Creación" : "Actualización",
@@ -113,7 +135,7 @@ namespace OOH.Data.Repos
                 EntidadId = id
             });
 
-            return RemoveData($"delete from  [dbo].[Caras] Where CaraIds = {id}", false).Result == 1 ? true : false;
+            return RemoveData($"delete from  [dbo].[Caras] Where CaraId = {id}", false).Result == 1 ? true : false;
         }
 
         public async Task<IEnumerable<Caras>> Select(string _Where = "")
@@ -122,7 +144,7 @@ namespace OOH.Data.Repos
         }
         public async Task<IEnumerable<FaceDto>> SelectCaras()
         {
-            return await SelectData<FaceDto>("SELECT t1.CaraId, t1.SitioId ,( select t2.Codigo From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as sitio ,t1.Codigo ,(select t3.Nombre from CarasTipos t3 where  t3.TipoId =  t1.TipoId) as tipo, TipoId,(select t4.Nombre from Municipios t4 Where t4.MunicipioId = (select t5.MunicipioId From [dbo].[Sitios] t5 where t5.SitioId =  t1.SitioId) ) as municipio,t1.Activo as activa from [dbo].[Caras] t1");
+            return await SelectData<FaceDto>("SELECT t1.CaraId, t1.SitioId ,( select t2.Codigo From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as sitio ,t1.Codigo ,(select t3.Nombre from CarasTipos t3 where  t3.TipoId =  t1.TipoId) as tipo, TipoId,(select t4.Nombre from Municipios t4 Where t4.MunicipioId = (select t5.MunicipioId From [dbo].[Sitios] t5 where t5.SitioId =  t1.SitioId) ) as municipio,t1.Activo as activa, t1.ReferenciaComercial as referencia, t1.CaraIluminada as iluminada from [dbo].[Caras] t1");
         }
         
         public async Task<Caras> FilterFace(int id)

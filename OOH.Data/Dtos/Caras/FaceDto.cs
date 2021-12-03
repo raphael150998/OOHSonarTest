@@ -16,5 +16,7 @@ namespace OOH.Data.Dtos.Caras
         public string tipo { get; set; }
         public string municipio { get; set; }
         public bool activa { get; set; }
+        public bool iluminada { get; set; }
+        public string referencia { get; set; }
     }
 }

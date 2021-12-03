@@ -16,7 +16,7 @@ namespace OOH.Data.Models
         public decimal Alto { get; set; }
         public decimal Ancho { get; set; }
         public string Sentido { get; set; }
-        public decimal AlturaPiso { get; set; }
+        public decimal AlturaAlPiso { get; set; }
         public string MetodoInstalacion { get; set; }
         public string Observaciones { get; set; }
         public bool Activo { get; set; }
