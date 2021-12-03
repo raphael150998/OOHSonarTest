@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Newtonsoft.Json;
 using OOH.Data.Dtos;
 using OOH.Data.Dtos.Logs;
 using OOH.Data.Dtos.Site;
@@ -16,7 +17,7 @@ namespace OOH.Data.Repos
     /// <summary>
     /// Todas las variables son en honor a Don Lord Señor Carroña
     /// </summary>
-    public class ProviderRepository : OOHContext, IBaseRepository<Proveedores>
+    public class ProviderRepository : OOHContext
     {
         private readonly ILogHelper _log;
 
@@ -39,36 +40,35 @@ namespace OOH.Data.Repos
 
             result.state = (int)result.data > 0;
 
+            Proveedores oldVwersion = new();
+
+            if (proveedor.ProveedorId > 0)
+            {
+                oldVwersion = await Find(proveedor.ProveedorId);
+            }
+
             await _log.AddLog(new LogDto()
             {
                 Descripcion = proveedor.ProveedorId == 0 ? "Creación" : "Actualización",
                 Entidad = nameof(Proveedores),
                 EntidadId = proveedor.ProveedorId == 0 ? (int)result.data : proveedor.ProveedorId,
+                OldVersionJson = proveedor.ProveedorId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;
         }
 
-        public async Task<Proveedores> Find(int id)
+        public async Task<Proveedores> Find(long id)
         {
             return await FilterData<Proveedores>($"Select * from Proveedores Where ProveedorId = {id}");
         }
 
-        public async Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        public async Task<IEnumerable<LogOutputDto>> GetLogs(long id)
         {
             return await _log.GetLogs(new LogInputDto(id, nameof(Proveedores)));
         }
 
-        public async Task<IEnumerable<Proveedores>> Select(string _Where = "")
-        {
-            return (await SelectData<Proveedores>("Select * from Proveedores " + _Where)).ToList();
-        }
-        public async Task<IEnumerable<ProveedoresCategorias>> Category(string _Where = "")
-        {
-            return (await SelectData<ProveedoresCategorias>("Select * from ProveedoresCategorias " + _Where)).ToList();
-        }
-
-        public async Task<bool> Remove(int id)
+        public async Task<bool> Remove(long id)
         {
             await _log.AddLog(new LogDto()
             {

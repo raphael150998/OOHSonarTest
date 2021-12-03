@@ -1,6 +1,6 @@
 ﻿var SweetAlert = {
 
-    ConfirmForm : function (callback, showConfirm = true){
+    ConfirmForm: function (callback, showConfirm = true) {
         Swal.fire({
             title: 'Confirmar?',
             text: "La informacion sera enviada!",
@@ -19,15 +19,15 @@
                     });
                 }
                 callback(result);
-            } 
+            }
         })
     },
-    RemoveAlert: function (url, data, subtitle ,callback) {
+    RemoveAlert: function (url, data, subtitle, callback) {
         data = JSON.stringify(data);
         console.log(data);
         Swal.fire({
             title: 'Desea Eliminar?',
-            text: subtitle == "" ? "La informacion sera eliminada Permanentemente!" : subtitle,
+            text: subtitle == "" || subtitle == null ? "La informacion sera eliminada Permanentemente!" : subtitle,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -37,10 +37,10 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 fns.NPostDataAsync(url, data, function (response) {
-                    callback(response);       
+                    callback(response);
                 });
             }
-              
+
         })
     }
 }

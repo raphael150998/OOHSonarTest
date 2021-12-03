@@ -42,6 +42,8 @@
     <link href="~/css/fontawesome/all.css" rel="stylesheet" />
 
     <link href="~/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="~/css/jquery.schedule.css" rel="stylesheet" />
     <script src="~/js/jquery-3.5.1.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @*<script src="//code.jquery.com/jquery-3.5.1.js"></script>*@
@@ -87,6 +89,10 @@
         }
 
         table.logTable {
+            width: inherit !important;
+        }
+
+        .table-full-width-viva {
             width: inherit !important;
         }
 
@@ -1046,6 +1052,8 @@
     <script src="~/bower_components/pnotify/js/pnotify.mobile.js"></script>
     <script src="~/bower_components/pnotify/js/pnotify.nonblock.js"></script>
     <script src="~/assets/pages/pnotify/notify.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.schedule.js"></script>
     <script src="~/js/main.js"></script>
     @RenderSection("scripts", required: false)
 </body>

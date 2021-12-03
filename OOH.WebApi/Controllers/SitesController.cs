@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Models;
+using OOH.WebApi.Models.Site;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OOH.WebApi.Controllers
 
         public IActionResult CreateUpdate(int id = 0)
         {
-            Sitios sitio = new();
+            SiteVm sitio = new();
             sitio.SitioId = id;
             return View(sitio);
         }

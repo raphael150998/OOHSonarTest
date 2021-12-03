@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Newtonsoft.Json;
 using OOH.Data.Dtos.Logs;
+using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -12,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class ProviderSiteRepository : OOHContext
+    public class SiteProviderRepository : OOHContext
     {
         private readonly ILogHelper _log;
 
-        public ProviderSiteRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        public SiteProviderRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
         }
@@ -40,9 +41,10 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = model.Id == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = model.Id == 0 ? "Creación" : $"Actualización",
                 Entidad = nameof(SitiosProveedor),
                 EntidadId = model.Id == 0 ? (int)result.data : model.Id,
+                OldVersionJson = model.Id == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;
@@ -73,6 +75,16 @@ namespace OOH.Data.Repos
         public async Task<IEnumerable<SitiosProveedor>> Select()
         {
             return await SelectData<SitiosProveedor>("SELECT * FROM SitiosProveedor");
+        }
+
+        /// <summary>
+        /// Obtiene un listado con left join de las tablas SitiosProveedor y Proveedores filtrado por el sitio id
+        /// </summary>
+        /// <param name="sitioId"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<ProviderSiteOutputDto>> SelectBySitioId(long sitioId)
+        {
+            return await SelectData<ProviderSiteOutputDto>($"SELECT s.*, p.Nombre FROM SitiosProveedor s left join Proveedores p on s.ProveedorId = p.ProveedorId WHERE SitioId = {sitioId}");
         }
     }
 }

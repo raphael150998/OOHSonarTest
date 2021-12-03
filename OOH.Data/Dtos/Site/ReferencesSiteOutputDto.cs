@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOH.Data.Models
+namespace OOH.Data.Dtos.Site
 {
     /// <summary>
-    /// Modelo de tabla relacion entre sitios y restricciones comerciales
+    /// DTO de salida para la tabla relacional entre sitios y referencias comerciales
     /// </summary>
-    public class SitiosRestriccionesComerciales
+    public class ReferencesSiteOutputDto
     {
         /// <summary>
-        /// Id de tabla relacional sitios y restricciones comerciales
+        /// Id de la tabla relacional siutio y referencias comerciales
         /// </summary>
         public long Id { get; set; }
 
@@ -22,13 +22,18 @@ namespace OOH.Data.Models
         public long SitioId { get; set; }
 
         /// <summary>
-        /// Id de restrccion comercial
+        /// Id de referencia comercial
         /// </summary>
-        public int RestriccionId { get; set; }
+        public int ReferenciaId { get; set; }
 
         /// <summary>
         /// Comentarios
         /// </summary>
         public string Comentarios { get; set; }
+
+        /// <summary>
+        /// Nombre de la referencia
+        /// </summary>
+        public string Nombre { get; set; }
     }
 }

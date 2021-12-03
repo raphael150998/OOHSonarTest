@@ -1,4 +1,4 @@
-﻿@model OOH.Data.Models.Sitios
+﻿@model OOH.WebApi.Models.Site.SiteVm
 
 <style>
     .btn {
@@ -29,6 +29,14 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    .h-line-viva {
+        width: 100%;
+        border-bottom: 1px solid rgba(204, 204, 204, 1);
+        padding-bottom: 10px;
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
 </style>
 
 <form id="frmSitio">
@@ -41,19 +49,38 @@
                 <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-primary" />
                 <a class="btn btn-outline-primary" href="@Url.Action("CreateUpdate","Sites", new { id = 0 })" target="_blank">Nuevo</a>
             </div>
-            <div class="col-md-5">
-                <label class="control-label">Requiere permiso</label>
-                <input type="checkbox" class="js-switch bool" id="RequierePermiso" name="RequierePermiso" />
-                <label class="control-label">Activo</label>
-                <input type="checkbox" class="js-switch bool" id="Activo" name="Activo" />
-                <label class="control-label">Ajeno</label>
-                <input type="checkbox" class="js-switch bool" id="Ajeno" name="Ajeno" />
-            </div>
         </div>
     </div>
     <div class="card">
         <div class="card-block">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-single-switch-viva">
+                        <label class="control-label">Requiere permiso</label>
+                        <input type="checkbox" class="js-switch bool" id="RequierePermiso" name="RequierePermiso" />
+                    </div>
+                    <div class="col-md-2 col-single-switch-viva">
+                        <label class="control-label">Tiene antena</label>
+                        <input type="checkbox" class="js-switch bool" id="TieneAntena" name="TieneAntena" />
+                    </div>
+                    <div class="col-md-2 col-single-switch-viva">
+                        <label class="control-label">Aplica antena</label>
+                        <input type="checkbox" class="js-switch bool" id="AplicaAntena" name="AplicaAntena" />
+                    </div>
+                    <div class="col-md-2 col-single-switch-viva">
+                        <label class="control-label">Activo</label>
+                        <input type="checkbox" class="js-switch bool" id="Activo" name="Activo" />
+                    </div>
+                    <div class="col-md-2 col-single-switch-viva">
+                        <label class="control-label">Ajeno</label>
+                        <input type="checkbox" class="js-switch bool" id="Ajeno" name="Ajeno" />
+                    </div>
+                    <div class="col-md-2 col-single-switch-viva">
+                        <label class="control-label">Privado</label>
+                        <input type="checkbox" class="js-switch bool" id="Privado" name="Privado" />
+                    </div>
+                    <span class="h-line-viva"></span>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <label class="control-label">Código</label>
@@ -67,14 +94,37 @@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Departamento</label>
-                        <input asp-for="DiasSolicitudPermiso" class="form-control number" />
-                        <span asp-validation-for="DiasSolicitudPermiso" class="text-danger"></span>
+                        <input name="otro" class="form-control number" />
+                        @*<span asp-validation-for="DiasSolicitudPermiso" class="text-danger"></span>*@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Proveedor</label>
                         <select asp-for="ProveedorId" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="ProveedorId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label">Proveedor de electricidad</label>
+                        <select asp-for="ProveedorElectricidadId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="ProveedorElectricidadId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Porcentaje</label>
+                        <input asp-for="Porcentaje" class="form-control number" />
+                        <span asp-validation-for="Porcentaje" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Número de contador eléctrico</label>
+                        <input asp-for="ContadorElectrico" class="form-control" />
+                        <span asp-validation-for="ContadorElectrico" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">NIC</label>
+                        <input asp-for="NIC" class="form-control" />
+                        <span asp-validation-for="NIC" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -95,6 +145,11 @@
                         <input asp-for="DiasSolicitudPermiso" class="form-control number" />
                         <span asp-validation-for="DiasSolicitudPermiso" class="text-danger"></span>
                     </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Fecha de activación</label>
+                        <input asp-for="FechaActivacion" type="datetime-local" class="form-control" />
+                        <span asp-validation-for="FechaActivacion" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
@@ -113,6 +168,11 @@
                         <input asp-for="Altura" class="form-control number" />
                         <span asp-validation-for="Altura" class="text-danger"></span>
                     </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Enlace web</label>
+                        <input asp-for="EnlaceWeb" class="form-control" />
+                        <span asp-validation-for="EnlaceWeb" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
@@ -130,17 +190,27 @@
                         <textarea rows="1" asp-for="Observaciones" class="form-control"></textarea>
                         <span asp-validation-for="Observaciones" class="text-danger"></span>
                     </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Notas a instaladores</label>
+                        <textarea rows="1" asp-for="NotasInstaladores" class="form-control"></textarea>
+                        <span asp-validation-for="NotasInstaladores" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="control-label">Dirección</label>
                         <textarea rows="4" asp-for="Direccion" class="form-control"></textarea>
                         <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="control-label">Referencia</label>
                         <textarea rows="4" asp-for="Referencia" class="form-control"></textarea>
                         <span asp-validation-for="Referencia" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">Observaciones Web</label>
+                        <textarea rows="4" asp-for="ObservacionesWeb" class="form-control"></textarea>
+                        <span asp-validation-for="ObservacionesWeb" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -157,15 +227,154 @@
                             <a class="nav-link active" data-toggle="tab" href="#map" role="tab">Mapa</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#sideConfig" role="tab">Configuración de lados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#accessTime" role="tab">Horas de acceso</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#references" role="tab">Referencias comerciales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#restrictions" role="tab">Restricciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#permissions" role="tab">Permisos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#insurances" role="tab">Seguros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#costCenter" role="tab">Centros de costo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#providers" role="tab">Proveedor por sitio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#gastos" role="tab">Gastos por sitio</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#faces" role="tab">Caras</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#transactions" role="tab">Transacciones</a>
                         </li>
                     </ul>
-                    <div class="tab-content tabs card-block">
+                    <div class="tab-content tabs card-block" id="tabs-container">
                         <div class="tab-pane active" id="map" role="tabpanel">
                             <div id="sample" style="width:100%; height:400px;"></div>
+                        </div>
+                        <div class="tab-pane" id="sideConfig" role="tabpanel">
+                            @*<h1>Caras</h1>*@
+                        </div>
+                        <div class="tab-pane" id="accessTime" role="tabpanel">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="schedule" class="jqs-demo mb-3 jqs jqs-mode-edit jqs-mode-7"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="references" role="tabpanel">
+                            <button class="dt-button" type="button" id="btnAddReference"><i class="fas fa-plus"></i></button>
+                            <table id="referencesTable" class="table table-hover table-full-width-viva">
+                                <thead>
+                                    <tr>
+                                        <th class="filter-action">Acciones</th>
+                                        <th class="filter">Referencia comercial</th>
+                                        <th class="filter">Comentarios</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="restrictions" role="tabpanel">
+                            <button class="dt-button" type="button" id="btnAddRestriction"><i class="fas fa-plus"></i></button>
+                            <table id="restrictionsTable" class="table table-hover table-full-width-viva">
+                                <thead>
+                                    <tr>
+                                        <th class="filter-action">Acciones</th>
+                                        <th class="filter">Restricción</th>
+                                        <th class="filter">Comentarios</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="permissions" role="tabpanel">
+                            <button class="dt-button" type="button" id="btnAddPermission"><i class="fas fa-plus"></i></button>
+                            <table id="permissionsTable" class="table table-hover table-full-width-viva">
+                                <thead>
+                                    <tr style="height:0;">
+                                        <th class="filter-action">Acciones</th>
+                                        <th class="filter">Permiso</th>
+                                        <th class="filter">Monto</th>
+                                        <th class="filter">Frecuencia de pago</th>
+                                        <th class="filter">Fecha de inicio</th>
+                                        <th class="filter">Fecha fin</th>
+                                        <th class="filter">Fecha inicio cuotas</th>
+                                        <th class="filter">Estado</th>
+                                        <th class="filter">Activo</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="insurances" role="tabpanel">
+                            <button class="dt-button" type="button" id="btnAddInsurance"><i class="fas fa-plus"></i></button>
+                            <table id="insurancesTable" class="table table-hover table-full-width-viva">
+                                <thead>
+                                    <tr>
+                                        <th class="filter-action">Acciones</th>
+                                        <th class="filter">Seguro</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="costCenter" role="tabpanel">
+                            <button class="dt-button" type="button" id="btnAddCost"><i class="fas fa-plus"></i></button>
+                            <table id="costCenterTable" class="table table-hover table-full-width-viva">
+                                <thead>
+                                    <tr>
+                                        <th class="filter-action">Acciones</th>
+                                        <th class="filter">Centro de costo</th>
+                                        <th class="filter">Porcentaje</th>
+                                        <th class="filter">Monto</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="providers" role="tabpanel">
+                            <button class="dt-button" type="button" id="btnAddProvider"><i class="fas fa-plus"></i></button>
+                            <table id="providersTable" class="table table-hover table-full-width-viva">
+                                <thead>
+                                    <tr>
+                                        <th class="filter-action">Acciones</th>
+                                        <th class="filter">Proveedor</th>
+                                        <th class="filter">Porcentaje</th>
+                                        <th class="filter">Monto</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="gastos" role="tabpanel">
+                            <table id="gastosTable" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th># Documento</th>
+                                        <th>Tipo</th>
+                                        <th>Tipo gasto</th>
+                                        <th>Proveedor</th>
+                                        <th>Fecha documento</th>
+                                        <th>Sumas afecto</th>
+                                        <th>IVA</th>
+                                        <th>Total compra</th>
+                                        <th>OK</th>
+                                        <th>No ok</th>
+                                        <th>Fecha inicio</th>
+                                        <th>Fecha fin</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                         <div class="tab-pane" id="faces" role="tabpanel">
                             @*<h1>Caras</h1>*@
@@ -180,6 +389,291 @@
     </div>
 </form>
 
+<!-- #region modal referencias -->
+<div class="modal fade" id="modalReference" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmReference" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitleReference"></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="number" style="display:none" class="form-control number" name="Id" />
+                        <input type="number" style="display:none" class="form-control number" id="sitioIdReference" name="SitioId" />
+                        <div class="col-md-6">
+                            <label>Referencia</label>
+                            <select id="ReferenciaId" name="ReferenciaId" class="number select-viva-validation">
+                            </select>
+                            @*<span asp-validation-for="ProveedorId" class="text-danger"></span>*@
+                        </div>
+                        <div class="col-md-6">
+                            <label>Comentarios</label>
+                            <textarea rows="1" id="Comentarios" name="Comentarios" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="btnCloseReference">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region modal restricciones -->
+<div class="modal fade" id="modalRestriction" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmRestriction" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitleRestriction"></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="number" style="display:none" class="form-control number" name="Id" />
+                        <input type="number" style="display:none" class="form-control number" id="sitioIdRestriction" name="SitioId" />
+                        <div class="col-md-6">
+                            <label>Restriccion</label>
+                            <select id="RestriccionId" name="RestriccionId" class="number select-viva-validation">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Comentarios</label>
+                            <textarea rows="1" id="Comentarios" name="Comentarios" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="btnCloseRestriction">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region modal seguros -->
+<div class="modal fade" id="modalInsurance" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmInsurance" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitleInsurance"></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="number" style="display:none" class="form-control number" name="Id" />
+                        <input type="number" style="display:none" class="form-control number" id="sitioIdInsurance" name="SitioId" />
+                        <div class="col-md-12">
+                            <label>Seguro</label>
+                            <select id="SeguroId" name="SeguroId" class="number select-viva-validation">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="btnCloseInsurance">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region modal permisos -->
+<div class="modal fade" id="modalPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmPermission" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitlePermission"></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="number" style="display:none" class="form-control number" name="Id" />
+                        <input type="number" style="display:none" class="form-control number" id="sitioIdPermission" name="SitioId" />
+                        <div class="col-md-6">
+                            <label>Permiso</label>
+                            <select id="PermisoId" name="PermisoId" class="number select-viva-validation">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Estado</label>
+                            <select id="EstadoId" name="EstadoId" class="number select-viva-validation">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Fecha de inicio</label>
+                            <input type="datetime-local" class="form-control" name="FechaInicio" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Fecha fin</label>
+                            <input type="datetime-local" class="form-control" name="FechaFin" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Monto</label>
+                            <input type="number" class="form-control number" name="Monto" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Frecuencia de pago</label>
+                            <input type="number" class="form-control number" name="FrecuenciaPago" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Fecha de inicio de cuotas</label>
+                            <input type="datetime-local" class="form-control" name="FechaInicioCuotas" />
+                        </div>
+                        <div class="col-md-6 col-single-switch-viva">
+                            <label class="control-label">Activo</label>
+                            <input type="checkbox" class="js-switch bool" name="Activo" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="btnClosePermission">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region modal proveedores -->
+<div class="modal fade" id="modalProvider" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmProvider" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitleProvider"></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="number" style="display:none" class="form-control number" name="Id" />
+                        <input type="number" style="display:none" class="form-control number" id="sitioIdProvider" name="SitioId" />
+                        <div class="col-md-4">
+                            <label>Proveedor</label>
+                            <select id="ProviderListId" name="ProveedorId" class="number select-viva-validation">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Porcentaje</label>
+                            <input type="number" class="form-control number" name="Porcentaje" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Monto</label>
+                            <input type="number" class="form-control number" name="Monto" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="btnCloseProvider">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region modal centro de costos -->
+<div class="modal fade" id="modalCost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+            <form asp-controller="Agencies" asp-action="CreateUpdate" id="frmCost" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitleCost"></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="number" style="display:none" class="form-control number" name="Id" />
+                        <input type="number" style="display:none" class="form-control number" id="sitioIdCost" name="SitioId" />
+                        <div class="col-md-4">
+                            <label>Centro de costo</label>
+                            <select id="CostoId" name="CostoId" class="number select-viva-validation">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Porcentaje</label>
+                            <input type="number" class="form-control number" name="Porcentaje" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Monto</label>
+                            <input type="number" class="form-control number" name="Monto" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="btnCloseCost">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
 @section scripts{
+    <script>
+        function getTimes() {
+
+            var id = $("#SitioId").val();
+
+            fns.CallGetAsync(`api/time/times/${id}`, null, function (dataResponse) {
+                console.log(dataResponse);
+                $('#schedule').jqs('import', dataResponse);
+            });
+        }
+
+        function setTimes() {
+            var id = $("#SitioId").val();
+
+            var exportData = $('#schedule').jqs('export');
+
+            SweetAlert.ConfirmForm(function () {
+
+                fns.PostDataNoAsync(`api/time/times/${id}`, exportData, function (dataResult) {
+                    if (!dataResult) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Intente nuevamente o llame al administrador'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logrado',
+                        })
+                    }
+                })
+            }, false);
+
+        }
+        $(function () {
+            $('#schedule').jqs({
+                periodOptions: false,
+                periodDuration: 60,
+                periodBackgroundColor: 'rgba(0, 255, 0, 0.5)',
+                periodBorderColor: 'rgb(0, 255, 0)',
+                //data: dataSchedule,
+            });
+
+            getTimes();
+
+            //var exportData = $('#schedule').jqs('export');
+
+
+
+
+
+            //console.log(exportData);
+
+        })
+    </script>
     <script src="~/js/Site/jquery.EditCreate.js"></script>
 }

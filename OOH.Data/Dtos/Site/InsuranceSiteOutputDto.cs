@@ -4,31 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOH.Data.Models
+namespace OOH.Data.Dtos.Site
 {
     /// <summary>
-    /// Modelo de tabla relacion entre sitios y restricciones comerciales
+    /// DTO de salida de la relacion entre tabla segurosTipo y Sitios
     /// </summary>
-    public class SitiosRestriccionesComerciales
+    public class InsuranceSiteOutputDto
     {
         /// <summary>
-        /// Id de tabla relacional sitios y restricciones comerciales
+        /// id de la tabla relacional
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Id de sitio
+        /// id del sitio
         /// </summary>
         public long SitioId { get; set; }
 
         /// <summary>
-        /// Id de restrccion comercial
+        /// id del seguro
         /// </summary>
-        public int RestriccionId { get; set; }
+        public int SeguroId { get; set; }
 
         /// <summary>
-        /// Comentarios
+        /// Nombre de seguro
         /// </summary>
-        public string Comentarios { get; set; }
+        public string Nombre { get; set; }
     }
 }

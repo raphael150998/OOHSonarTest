@@ -25,7 +25,7 @@ namespace OOH.Data.Repos
         {
             ResultClass result = new ResultClass();
 
-            string sql = permiso.PermisoId == 0 ? "INSERT INTO PermisosMunicipalesTipos(Nombre) VALUES (@Nombre);" : "UPDATE PermisosMunicipalesTipos SET Nombre = @Nombre;";
+            string sql = permiso.PermisoId == 0 ? "INSERT INTO PermisosMunicipalesTipos(Nombre) VALUES (@Nombre);" : "UPDATE PermisosMunicipalesTipos SET Nombre = @Nombre WHERE PermisoId = @PermisoId;";
 
             result.data = permiso.PermisoId == 0 ? await PostData(sql, true, new DynamicParameters(permiso)) : await UpdateData(sql, true, new DynamicParameters(permiso));
 
@@ -40,9 +40,10 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = permiso.PermisoId == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = permiso.PermisoId == 0 ? "Creación" : $"Actualización",
                 Entidad = nameof(PermisosMunicipalesTipos),
                 EntidadId = permiso.PermisoId == 0 ? (int)result.data : permiso.PermisoId,
+                OldVersionJson = permiso.PermisoId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;

@@ -25,7 +25,7 @@ namespace OOH.Data.Repos
         {
             ResultClass result = new ResultClass();
 
-            string sql = restriccion.RestriccionId == 0 ? "INSERT INTO RestriccionesComercialesTipos(Nombre) VALUES (@Nombre);" : "UPDATE RestriccionesComercialesTipos SET Nombre = @Nombre;";
+            string sql = restriccion.RestriccionId == 0 ? "INSERT INTO RestriccionesComercialesTipos(Nombre) VALUES (@Nombre);" : "UPDATE RestriccionesComercialesTipos SET Nombre = @Nombre WHERE RestriccionId = @RestriccionId;";
 
             result.data = restriccion.RestriccionId == 0 ? await PostData(sql, true, new DynamicParameters(restriccion)) : await UpdateData(sql, true, new DynamicParameters(restriccion));
 
@@ -40,9 +40,10 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = restriccion.RestriccionId == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = restriccion.RestriccionId == 0 ? "Creación" : $"Actualización",
                 Entidad = nameof(RestriccionesComercialesTipos),
                 EntidadId = restriccion.RestriccionId == 0 ? (int)result.data : restriccion.RestriccionId,
+                OldVersionJson = restriccion.RestriccionId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;

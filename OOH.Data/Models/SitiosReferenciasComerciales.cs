@@ -25,7 +25,7 @@ namespace OOH.Data.Models
         /// <summary>
         /// Id de referencia comercial
         /// </summary>
-        public int RefComercialId { get; set; }
+        public int ReferenciaId { get; set; }
 
         /// <summary>
         /// Comentarios
