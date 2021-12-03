@@ -31,12 +31,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\css\jquery.schedule.css" />
+	  <Content Remove="wwwroot\css\jquery.schedule.min.css" />
 	  <Content Remove="wwwroot\js\Agency\jquery.agency.js" />
 	  <Content Remove="wwwroot\js\Contacts\jquery.buildContact.js" />
 	  <Content Remove="wwwroot\js\Contacts\jquery.contacts.js" />
 	  <Content Remove="wwwroot\js\jquery.fnHelpers.js" />
 	  <Content Remove="wwwroot\js\jquery.inputmask.js" />
 	  <Content Remove="wwwroot\js\jquery.InputMaskHelper.js" />
+	  <Content Remove="wwwroot\js\jquery.schedule.js" />
+	  <Content Remove="wwwroot\js\jquery.schedule.min.js" />
 	  <Content Remove="wwwroot\js\jquery.SweetAlertHelper.js" />
 	  <Content Remove="wwwroot\js\jquery.ValidateHelper.js" />
 	  <Content Remove="wwwroot\js\main.js" />

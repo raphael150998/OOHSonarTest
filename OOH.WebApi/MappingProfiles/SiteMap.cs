@@ -12,7 +12,11 @@ namespace OOH.WebApi.MappingProfiles
     {
         public SiteMap()
         {
-            CreateMap<Sitios, SiteVm>();
+            CreateMap<Sitios, SiteVm>()
+                .ForMember(x => x.FechaActivacion, o => o.MapFrom(y => y.FechaActivacion.HasValue ? y.FechaActivacion.Value.ToString() : ""));
+
+            CreateMap<SiteVm, Sitios>().
+                ForMember(x => x.FechaActivacion, o => o.MapFrom(y => string.IsNullOrEmpty(y.FechaActivacion) ? new Nullable<DateTime>() : DateTime.Parse(y.FechaActivacion)));
         }
     }
 }

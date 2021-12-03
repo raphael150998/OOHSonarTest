@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Newtonsoft.Json;
 using OOH.Data.Dtos.Logs;
+using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -25,7 +26,7 @@ namespace OOH.Data.Repos
         {
             ResultClass result = new ResultClass();
 
-            string sql = model.Id == 0 ? "INSERT INTO SitiosRestriccionesComerciales(SitioId, RestComercialId, Comentarios) VALUES (@SitioId, @RestComercialId, @Comentarios);" : "UPDATE SitiosRestriccionesComerciales SET SitioId = @SitioId, RestComercialId = @RestComercialId, Comentarios = @Comentarios WHERE Id = @Id;";
+            string sql = model.Id == 0 ? "INSERT INTO SitiosRestriccionesComerciales(SitioId, RestriccionId, Comentarios) VALUES (@SitioId, @RestriccionId, @Comentarios);" : "UPDATE SitiosRestriccionesComerciales SET SitioId = @SitioId, RestriccionId = @RestriccionId, Comentarios = @Comentarios WHERE Id = @Id;";
 
             result.data = model.Id == 0 ? await PostData(sql, true, new DynamicParameters(model)) : await UpdateData(sql, true, new DynamicParameters(model));
 
@@ -40,9 +41,10 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = model.Id == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = model.Id == 0 ? "Creación" : $"Actualización",
                 Entidad = nameof(SitiosRestriccionesComerciales),
                 EntidadId = model.Id == 0 ? (int)result.data : model.Id,
+                OldVersionJson = model.Id == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;
@@ -73,6 +75,16 @@ namespace OOH.Data.Repos
         public async Task<IEnumerable<SitiosRestriccionesComerciales>> Select(string where = "")
         {
             return await SelectData<SitiosRestriccionesComerciales>("SELECT * FROM SitiosRestriccionesComerciales");
+        }
+
+        /// <summary>
+        /// Obtiene un listado con left join de las tablas SitiosRestriccionesComerciales y RestriccionesComercialesTipos filtrado por el sitio id
+        /// </summary>
+        /// <param name="sitioId"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<RestrictionSiteOutputDto>> SelectBySitioId(long sitioId)
+        {
+            return await SelectData<RestrictionSiteOutputDto>($"SELECT s.*, r.Nombre FROM SitiosRestriccionesComerciales s left join RestriccionesComercialesTipos r on s.RestriccionId = r.RestriccionId WHERE s.SitioId = {sitioId}");
         }
     }
 }

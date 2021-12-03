@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOH.Data.Models
+namespace OOH.Data.Dtos.Site
 {
     /// <summary>
-    /// modelo de tabla relacional entre sitios y permisos municipales
+    /// DTO de salida para tabla relacional de permisos y sitios
     /// </summary>
-    public class SitiosPermisosMunicipales
+    public class PermissionSiteOutputDto
     {
         /// <summary>
         /// Id de la tabla relacion entre sitio y permisos municipales
         /// </summary>
         public long Id { get; set; }
-
 
         /// <summary>
         /// Id de sitio
@@ -61,5 +60,15 @@ namespace OOH.Data.Models
         /// determina si esta activo 
         /// </summary>
         public bool Activo { get; set; }
+
+        /// <summary>
+        /// Nombre del permiso
+        /// </summary>
+        public string NombrePermiso { get; set; }
+
+        /// <summary>
+        /// Nombre del estado 
+        /// </summary>
+        public string NombreEstado { get; set; }
     }
 }

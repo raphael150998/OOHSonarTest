@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class SiteRepository : OOHContext, IBaseRepository<Sitios>
+    public class SiteRepository : OOHContext
     {
         private readonly ILogHelper _log;
         public SiteRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
@@ -24,34 +24,42 @@ namespace OOH.Data.Repos
             ResultClass result = new ResultClass();
 
             string sql = sitio.SitioId == 0 ?
-                            "INSERT INTO Sitios (Codigo, ProveedorId, Direccion, Referencia, Latitud, Longitud, MunicipioId, ZonaId, RequierePermiso, Activo, RegistroCatastral, Altura, Observaciones) VALUES (@Codigo, @ProveedorId, @Direccion, @Referencia, @Latitud, @Longitud, @MunicipioId, @ZonaId, @RequierePermiso, @Activo, @RegistroCatastral, @Altura, @Observaciones)" :
-                            "UPDATE Sitios SET Codigo = @Codigo, ProveedorId = @ProveedorId, Direccion = @Direccion, Referencia = @Referencia, Latitud = @Latitud, Longitud = @Longitud, MunicipioId = @MunicipioId, ZonaId = @ZonaId, RequierePermiso = @RequierePermiso, Activo = @Activo, RegistroCatastral = @RegistroCatastral, Altura = @Altura, Observaciones = @Observaciones WHERE SitioId = @SitioId";
+                            "INSERT INTO Sitios (Codigo, ProveedorId, Direccion, Referencia, Latitud, Longitud, MunicipioId, ZonaId, RequierePermiso, Activo, RegistroCatastral, Altura, Observaciones, CategoriaSitio, EstructuraTipo, Ajeno, DiasSolicitudPermiso, TieneAntena, AplicaAntena, Privado, FechaActivacion, NotasInstaladores, ObservacionesWeb, EnlaceWeb) VALUES (@Codigo, @ProveedorId, @Direccion, @Referencia, @Latitud, @Longitud, @MunicipioId, @ZonaId, @RequierePermiso, @Activo, @RegistroCatastral, @Altura, @Observaciones, @CategoriaSitio, @EstructuraTipo, @Ajeno, @DiasSolicitudPermiso, @TieneAntena, @AplicaAntena, @Privado, @FechaActivacion, @NotasInstaladores, @ObservacionesWeb, @EnlaceWeb)" :
+                            "UPDATE Sitios SET Codigo = @Codigo, ProveedorId = @ProveedorId, Direccion = @Direccion, Referencia = @Referencia, Latitud = @Latitud, Longitud = @Longitud, MunicipioId = @MunicipioId, ZonaId = @ZonaId, RequierePermiso = @RequierePermiso, Activo = @Activo, RegistroCatastral = @RegistroCatastral, Altura = @Altura, Observaciones = @Observaciones, CategoriaSitio = @CategoriaSitio, EstructuraTipo = @EstructuraTipo, Ajeno = @Ajeno, DiasSolicitudPermiso = @DiasSolicitudPermiso, TieneAntena = @TieneAntena, AplicaAntena = @AplicaAntena, Privado = @Privado, FechaActivacion = @FechaActivacion, NotasInstaladores = @NotasInstaladores, ObservacionesWeb = @ObservacionesWeb, EnlaceWeb = @EnlaceWeb WHERE SitioId = @SitioId";
 
             result.data = sitio.SitioId == 0 ? await PostData(sql, true, new DynamicParameters(sitio)) : await UpdateData(sql, true, new DynamicParameters(sitio));
 
             result.state = (int)result.data > 0;
+
+            Sitios oldVwersion = new();
+
+            if (sitio.SitioId > 0)
+            {
+                oldVwersion = await Find(sitio.SitioId);
+            }
 
             await _log.AddLog(new LogDto()
             {
                 Descripcion = sitio.SitioId == 0 ? "Creación" : "Actualización",
                 Entidad = nameof(Sitios),
                 EntidadId = sitio.SitioId == 0 ? (int)result.data : sitio.SitioId,
+                OldVersionJson = sitio.SitioId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;
         }
 
-        public async Task<Sitios> Find(int Id)
+        public async Task<Sitios> Find(long Id)
         {
             return await FilterData<Sitios>($"SELECT * FROM Sitios WHERE SitioId = {Id}");
         }
 
-        public async Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        public async Task<IEnumerable<LogOutputDto>> GetLogs(long id)
         {
             return await _log.GetLogs(new LogInputDto(id, nameof(Sitios)));
         }
 
-        public async Task<bool> Remove(int id)
+        public async Task<bool> Remove(long id)
         {
             await _log.AddLog(new LogDto()
             {

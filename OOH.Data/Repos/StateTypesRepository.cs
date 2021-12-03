@@ -25,7 +25,7 @@ namespace OOH.Data.Repos
         {
             ResultClass result = new ResultClass();
 
-            string sql = estado.EstadoId == 0 ? "INSERT INTO EstadosTipos(Nombre) VALUES (@Nombre);" : "UPDATE EstadosTipos SET Nombre = @Nombre;";
+            string sql = estado.EstadoId == 0 ? "INSERT INTO EstadosTipos(Nombre) VALUES (@Nombre);" : "UPDATE EstadosTipos SET Nombre = @Nombre WHERE EstadoId = @EstadoId;";
 
             result.data = estado.EstadoId == 0 ? await PostData(sql, true, new DynamicParameters(estado)) : await UpdateData(sql, true, new DynamicParameters(estado));
 
@@ -40,9 +40,10 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = estado.EstadoId == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = estado.EstadoId == 0 ? "Creación" : $"Actualización",
                 Entidad = nameof(EstadosTipos),
                 EntidadId = estado.EstadoId == 0 ? (int)result.data : estado.EstadoId,
+                OldVersionJson = estado.EstadoId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
 
             return result;

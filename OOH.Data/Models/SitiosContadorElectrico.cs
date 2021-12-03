@@ -6,12 +6,19 @@ namespace OOH.Data.Models
 {
     public class SitiosContadorElectrico
     {
+        public SitiosContadorElectrico()
+        {
+            Active = true;
+        }
+
         public long Id { get; set; }
+
         public long SitioId { get; set; }
 
         public long ProveedorId { get; set; }
-        public int ContadorId { get; set; }
+
         public bool Active { get; set; }
+
         public decimal Porcentaje { get; set; }
 
         public string ContadorElectrico { get; set; }

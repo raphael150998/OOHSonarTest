@@ -13,26 +13,26 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class InsuranceSiteRepository : OOHContext
+    public class CostSiteRepository : OOHContext
     {
         private readonly ILogHelper _log;
 
-        public InsuranceSiteRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        public CostSiteRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
         }
 
-        public async Task<ResultClass> AddOrUpdate(SitiosSeguros model)
+        public async Task<ResultClass> AddOrUpdate(SitiosCostos model)
         {
             ResultClass result = new ResultClass();
 
-            string sql = model.Id == 0 ? "INSERT INTO SitiosSeguros(SitioId, SeguroId) VALUES (@SitioId, @SeguroId);" : "UPDATE SitiosSeguros SET SitioId = @SitioId, SeguroId = @SeguroId WHERE Id = @Id;";
+            string sql = model.Id == 0 ? "INSERT INTO SitiosCostos(SitioId, CostoId, Porcentaje,Monto) VALUES (@SitioId, @CostoId, @Porcentaje, @Monto);" : "UPDATE SitiosCostos SET SitioId = @SitioId, CostoId = @CostoId, Porcentaje = @Porcentaje, Monto = @Monto WHERE Id = @Id;";
 
             result.data = model.Id == 0 ? await PostData(sql, true, new DynamicParameters(model)) : await UpdateData(sql, true, new DynamicParameters(model));
 
             result.state = (int)result.data > 0;
 
-            SitiosSeguros oldVwersion = new();
+            SitiosCostos oldVwersion = new();
 
             if (model.Id > 0)
             {
@@ -42,7 +42,7 @@ namespace OOH.Data.Repos
             await _log.AddLog(new LogDto()
             {
                 Descripcion = model.Id == 0 ? "Creación" : $"Actualización",
-                Entidad = nameof(SitiosSeguros),
+                Entidad = nameof(SitiosCostos),
                 EntidadId = model.Id == 0 ? (int)result.data : model.Id,
                 OldVersionJson = model.Id == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
             });
@@ -50,14 +50,14 @@ namespace OOH.Data.Repos
             return result;
         }
 
-        public async Task<SitiosSeguros> Find(long id)
+        public async Task<SitiosCostos> Find(long id)
         {
-            return await FilterData<SitiosSeguros>($"SELECT * FROM SitiosSeguros WHERE Id = {id}");
+            return await FilterData<SitiosCostos>($"SELECT * FROM SitiosCostos WHERE Id = {id}");
         }
 
         public async Task<IEnumerable<LogOutputDto>> GetLogs(long id)
         {
-            return await _log.GetLogs(new LogInputDto(id, nameof(SitiosSeguros)));
+            return await _log.GetLogs(new LogInputDto(id, nameof(SitiosCostos)));
         }
 
         public async Task<bool> Remove(long id)
@@ -65,26 +65,26 @@ namespace OOH.Data.Repos
             await _log.AddLog(new LogDto()
             {
                 Descripcion = "Eliminación",
-                Entidad = nameof(SitiosSeguros),
+                Entidad = nameof(SitiosCostos),
                 EntidadId = id
             });
 
-            return await (RemoveData($"DELETE FROM SitiosSeguros WHERE Id = {id}")) > 0;
+            return await (RemoveData($"DELETE FROM SitiosCostos WHERE Id = {id}")) > 0;
         }
 
-        public async Task<IEnumerable<SitiosSeguros>> Select()
+        public async Task<IEnumerable<SitiosCostos>> Select()
         {
-            return await SelectData<SitiosSeguros>("SELECT * FROM SitiosSeguros");
+            return await SelectData<SitiosCostos>("SELECT * FROM SitiosCostos");
         }
 
         /// <summary>
-        /// Obtiene un listado con left join de las tablas SitiosSeguros y SegurosTipos filtrado por el sitio id
+        /// Obtiene un listado con left join de las tablas SitiosCostos y CentroCostos filtrado por el sitio id
         /// </summary>
         /// <param name="sitioId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<InsuranceSiteOutputDto>> SelectBySitioId(long sitioId)
+        public async Task<IEnumerable<CostSiteOutputDto>> SelectBySitioId(long sitioId)
         {
-            return await SelectData<InsuranceSiteOutputDto>($"SELECT ss.*, st.Nombre FROM SitiosSeguros ss left join SegurosTipos st on st.SeguroId = ss.SeguroId WHERE SitioId = {sitioId}");
+            return await SelectData<CostSiteOutputDto>($"SELECT s.*, c.Nombre FROM SitiosCostos s left join CentroCostos c on s.CostoId = c.CostoId WHERE SitioId = {sitioId}");
         }
     }
 }

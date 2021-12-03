@@ -18,7 +18,7 @@ namespace OOH.Data
         public OOHContext(IWebUserHelper userHelper)
         {
             _userHelper = userHelper;
-            _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Cesar1983****;MultipleActiveResultSets=True;App=EntityFramework";
+            _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Tamao1234;MultipleActiveResultSets=True;App=EntityFramework";
         }
 
         public async Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null)
