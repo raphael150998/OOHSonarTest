@@ -15,19 +15,21 @@ namespace OOH.Data.Repos
         {
         }
 
-        public async Task<IEnumerable<>> GetPrice()
+        public async Task<IEnumerable<CarasPrecios>> GetPrice()
         {
+            throw new NotImplementedException();
 
         }
 
         public async Task<bool> RemovePrice(long id)
         {
+            throw new NotImplementedException();
 
         }
 
         public async Task<ResultClass> AddOrUpdate(CarasPrecios collection)
         {
-
+            throw new  NotImplementedException();
         }
     }
 }

@@ -133,5 +133,10 @@ namespace OOH.Data.Repos
         {
             return await SelectData<Proveedores>("Select * from Proveedores");
         }
+        
+        public async Task<IEnumerable<ProveedoresCategorias>> Category()
+        {
+            return await SelectData<ProveedoresCategorias>("Select * from ProveedoresCategorias");
+        }
     }
 }
