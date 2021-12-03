@@ -138,5 +138,10 @@ namespace OOH.Data.Repos
         {
             return await FilterData<FaceQuotationDto>($"SELECT  t1.ReferenciaComercial as ReferenciaComercial,   t1.Codigo as Codigo, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion FROM [dbo].[Caras] t1  WHERE t1.CaraId =  {Id}");
         }
+
+        public async Task<IEnumerable<Caras>> Select()
+        {
+            return await SelectData<Caras>("SELECT t1.CaraId, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion ,t1.Codigo , from [dbo].[Caras] t1");
+        }
     }
 }

@@ -1,19 +1,19 @@
 ﻿
 var DataTableHelper = {
     Draw: function (identify, config) {
-        
-       var table= $(identify).DataTable(config);
+
+        var table = $(identify).DataTable(config);
         return {
             FilterColum: function () {
                 $(identify + ' thead tr').clone(true).appendTo(identify + ' thead');
                 $(identify + ' thead tr:eq(1) th.filter-action').each(function (e) {
                     $(this).html("");
                     $(this).removeAttr("class");
-                  
+
                 });
                 $(identify + ' thead tr:eq(1) th.filter').each(function (i) {
                     i = i + 1;
-                  
+
                     var title = $(this).text();
                     $(this).removeAttr("class");
                     $(this).removeAttr("aria-label");
@@ -50,9 +50,9 @@ var DataTableHelper = {
                 $(identify + ' tbody').on('click', 'td.details-control', function () {
 
                     var tr = $(this).closest('tr');
-                    
+
                     var row = table.row(tr);
-                   
+
 
                     //var td = $(this);
                     //td = td[0];
@@ -67,7 +67,8 @@ var DataTableHelper = {
                         tr.addClass('shown');
                     }
                 });
-            }
+            },
+            Table: table
         }
     }
 }

@@ -44,7 +44,8 @@ namespace OOH.Data.Repos
 
             await _log.AddLog(new LogDto()
             {
-                Descripcion = agencia.AgenciaId == 0 ? "Creación" : $"Actualización {JsonConvert.SerializeObject(oldVwersion)}",
+                Descripcion = agencia.AgenciaId == 0 ? "Creación" : $"Actualización",
+                OldVersionJson = agencia.AgenciaId == 0 ? "" : $"{JsonConvert.SerializeObject(oldVwersion)}",
                 Entidad = nameof(AgenciasPublicidad),
                 EntidadId = agencia.AgenciaId == 0 ? (int)result.data : agencia.AgenciaId,
             });
@@ -73,10 +74,10 @@ namespace OOH.Data.Repos
 
             return await (RemoveData($"DELETE FROM AgenciasPublicidad WHERE AgenciaId = {id}")) > 0;
         }
-
-        public async Task<IEnumerable<AgenciasPublicidad>> Select(string _Where = "")
+        
+        public async Task<IEnumerable<AgenciasPublicidad>> Select()
         {
-            return await SelectData<AgenciasPublicidad>("SELECT * FROM AgenciasPublicidad " + _Where);
+            return await SelectData<AgenciasPublicidad>("SELECT * FROM AgenciasPublicidad");
         }
     }
 }

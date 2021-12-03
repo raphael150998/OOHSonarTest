@@ -11,7 +11,7 @@ namespace OOH.Data.Dtos.Logs
     /// </summary>
     public record LogInputDto
     {
-        public LogInputDto(int id, string entidad)
+        public LogInputDto(long id, string entidad)
         {
             Id = id;
             Entidad = entidad;
@@ -22,7 +22,7 @@ namespace OOH.Data.Dtos.Logs
         /// <summary>
         /// IdEntidad del registro que se busca
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Nombre de la entidad

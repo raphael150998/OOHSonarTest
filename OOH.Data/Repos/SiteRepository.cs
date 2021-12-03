@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Newtonsoft.Json;
 using OOH.Data.Dtos.Logs;
 using OOH.Data.Dtos.Site;
 using OOH.Data.Helpers;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class SitioRepository : OOHContext, IBaseRepository<Sitios>
+    public class SiteRepository : OOHContext, IBaseRepository<Sitios>
     {
         private readonly ILogHelper _log;
-        public SitioRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
+        public SiteRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
             _log = log;
         }
@@ -60,11 +61,6 @@ namespace OOH.Data.Repos
             });
 
             return (await RemoveData($"DELETE FROM Sitios WHERE SitioId = {id}")) > 0;
-        }
-
-        public async Task<IEnumerable<Sitios>> Select(string _Where = "")
-        {
-            return await SelectData<Sitios>("SELECT * FROM Sitios " + _Where);
         }
 
         /// <summary>
@@ -126,6 +122,11 @@ namespace OOH.Data.Repos
             modelReturn.Pagination.More = (request.CurrentPage * request.ItemsPerPage) < total;
 
             return modelReturn;
+        }
+
+        public async Task<IEnumerable<Sitios>> Select()
+        {
+            return await SelectData<Sitios>("SELECT * FROM Sitios");
         }
     }
 }

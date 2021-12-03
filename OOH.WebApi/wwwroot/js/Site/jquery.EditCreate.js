@@ -3,10 +3,13 @@
     $("#Latitud").val('');
     $("#Longitud").val('');
     $("#Altura").val('');
+    $("#DiasSolicitudPermiso").val('');
 
     DropDownListProviders();
     DropDownListMunicipio();
     DropDownListZones();
+    DropDownListCategories();
+    DropDownListStructures();
 
     $.validator.addMethod('greaterThan', function (value, element, param) {
         return this.optional(element) || parseFloat(value) > parseFloat(param);
@@ -21,6 +24,12 @@
                 required: true
             },
             ZonaId: {
+                required: true
+            },
+            EstructuraTipo: {
+                required: true
+            },
+            CategoriaSitio: {
                 required: true
             },
             Latitud: {
@@ -48,6 +57,12 @@
             },
             ZonaId: {
                 required: "Seleccione una zona"
+            },
+            EstructuraTipo: {
+                required: "Seleccione un tipo de estructura"
+            },
+            CategoriaSitio: {
+                required: "Selecciones una categoría"
             },
             Latitud: {
                 required: "Latitud requerida, seleccione punto en mapa",
@@ -152,13 +167,13 @@ function llenar() {
             $('#dropdownMunicipio').val(dataResult.municipioId).trigger('change.select2');
             $("#ProveedorId").val(dataResult.proveedorId).trigger('change.select2');
             $("#ZonaId").val(dataResult.zonaId).trigger('change.select2');
+            $("#CategoriaSitio").val(dataResult.categoriaSitio).trigger('change.select2');
+            $("#EstructuraTipo").val(dataResult.estructuraTipo).trigger('change.select2');
             $("#Codigo").attr("readonly", true);
-            var altura = $("#Altura").val();
 
-            console.log(altura);
+            $("#DiasSolicitudPermiso").val() == 0 ? $("#DiasSolicitudPermiso").val('') : $("#DiasSolicitudPermiso").val();
 
-            if (altura == 0)
-                $("#Altura").val('');
+            $("#Altura").val() == 0 ? $("#Altura").val('') : $("#Altura").val();
 
             loadMap();
         });
@@ -207,13 +222,44 @@ function DropDownListProviders() {
     })
 }
 
-
 function DropDownListZones() {
     fns.CallGetAsync("api/zone/dropdown", null, function (zones) {
 
         var selectTarget = $("#ZonaId");
 
         var html = "<option disabled selected>Seleccione zona</option>";
+
+        zones.forEach(x => {
+            html += `<option value="${x.id}">${x.name}</option>`;
+        });
+
+        selectTarget.html(html);
+        selectTarget.select2Validation();
+    })
+}
+
+function DropDownListCategories() {
+    fns.CallGetAsync("api/siteCategory/dropdown", null, function (zones) {
+
+        var selectTarget = $("#CategoriaSitio");
+
+        var html = "<option disabled selected>Seleccione categoría</option>";
+
+        zones.forEach(x => {
+            html += `<option value="${x.id}">${x.name}</option>`;
+        });
+
+        selectTarget.html(html);
+        selectTarget.select2Validation();
+    })
+}
+
+function DropDownListStructures() {
+    fns.CallGetAsync("api/structureType/dropdown", null, function (zones) {
+
+        var selectTarget = $("#EstructuraTipo");
+
+        var html = "<option disabled selected>Seleccione estructura</option>";
 
         zones.forEach(x => {
             html += `<option value="${x.id}">${x.name}</option>`;

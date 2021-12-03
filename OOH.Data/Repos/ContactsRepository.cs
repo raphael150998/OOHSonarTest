@@ -80,5 +80,10 @@ namespace OOH.Data.Repos
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<ClientesContactos>> Select()
+        {
+            return await SelectData<ClientesContactos>($"Select * from [dbo].[ClientesContactos]");
+        }
     }
 }

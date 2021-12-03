@@ -24,7 +24,7 @@ namespace OOH.WebApi.ApiControllers
         }
         [HttpGet]
         [Route("api/contacts/list")]
-        public async Task<List<ClientesContactos>> Contactos(int clientId)
+        public async Task<List<ClientesContactos>> Contactos(string clientId)
         {
             return _repo.Select($"Where ClienteId = {clientId}").Result.ToList();
         }

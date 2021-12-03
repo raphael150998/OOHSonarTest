@@ -40,9 +40,9 @@ namespace OOH.Data.Repos
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Municipios>> Select(string _Where = "")
+        public async Task<IEnumerable<Municipios>> Select()
         {
-            return SelectData<Municipios>("Select t0.MunicipioId ,t0.DepartamentoId ,t1.Nombre as Departamento,t0.Nombre from Municipios t0 inner join Departamentos t1 on t0.DepartamentoId = t1.DepartamentoId",false,null).Result.ToList();
+            return await SelectData<Municipios>("Select t0.MunicipioId ,t0.DepartamentoId ,t1.Nombre as Departamento,t0.Nombre from Municipios t0 inner join Departamentos t1 on t0.DepartamentoId = t1.DepartamentoId");
         }
     }
 }

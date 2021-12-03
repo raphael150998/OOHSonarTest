@@ -10,6 +10,10 @@
         $('#tabs-container').find('div.active').removeClass('active');
         $(tab_id).addClass('active');
     });
+
+    $("#modalLogs").on("shown.bs.modal", function () {
+        $("#logTable").DataTable().columns.adjust();
+    })
 });
 
 function GetLogs(entidad, url, id) {
@@ -21,15 +25,17 @@ function GetLogs(entidad, url, id) {
 
     $("#modalTitleLogs").html(`Registro de actividad de ${entidad} con identificador ${id}`);
     $("#modalLogs").modal("show");
+    //$("#logTable").DataTable().columns.adjust();
 }
 
 //Metodo para crear el Datatable de clientes
 function BuildLogDatatable() {
-    DataTableHelper.Draw("#logTable", {
+    var result = DataTableHelper.Draw("#logTable", {
         destroy: true,
         orderCellsTop: true,
         fixedHeader: true,
         data: [],
+        scrollX: true,
         columns: [
             //{
             //    data: "agenciaId",
@@ -48,6 +54,7 @@ function BuildLogDatatable() {
             },
             { data: "platform" },
             { data: "version" },
+            { data: "oldVersionJson" },
 
         ],
         "language": {

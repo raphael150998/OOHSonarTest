@@ -48,5 +48,10 @@ namespace OOH.Data.Models
         /// Version del software
         /// </summary>
         public string Version { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OldVersionJson { get; set; }
     }
 }
