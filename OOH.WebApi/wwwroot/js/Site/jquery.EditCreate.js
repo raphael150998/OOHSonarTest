@@ -1,11 +1,21 @@
 ﻿$(function () {
 
+    $('#schedule').jqs({
+        periodOptions: false,
+        periodDuration: 60,
+        periodBackgroundColor: 'rgba(0, 255, 0, 0.5)',
+        periodBorderColor: 'rgb(0, 255, 0)',
+    });
+
+    getTimes();
+
     $("#Latitud").val('');
     $("#Longitud").val('');
     $("#Altura").val('');
 
     DropDownListProviders();
-    DropDownListMunicipio();
+    DropDownListDepartments();
+    DropDownListCities();
     DropDownListZones();
     DropDownListCategories();
     DropDownListStructures();
@@ -60,6 +70,12 @@
             },
             NIC: {
                 required: true
+            },
+            DepartamentoId: {
+                required: true
+            },
+            MunicipioId: {
+                required: true
             }
         },
         messages: {
@@ -107,6 +123,13 @@
             },
             NIC: {
                 required: "Digite el NIC"
+            },
+
+            DepartamentoId: {
+                required: "Seleccione un departamento"
+            },
+            MunicipioId: {
+                required: "Seleccione un municipio"
             }
         }
     }, function (data) {
@@ -127,10 +150,53 @@
         }
     });
 
+    $("#DepartamentoId").on('change.select2', function (e) {
+
+        var idMunicipio = $("#MunicipioIdAux").val();
+
+        idMunicipio == 0 ? DropDownListCities() : DropDownListCities(idMunicipio);
+    });
+
     llenar();
 
     loadMap();
+
+    $("#FechaActivacion").datetimepicker({ format: 'DD/MM/YYYY HH:mm', showClose: true });
 })
+
+function getTimes() {
+
+    var id = $("#SitioId").val();
+
+    fns.CallGetAsync(`api/time/times/${id}`, null, function (dataResponse) {
+        $('#schedule').jqs('import', dataResponse);
+    });
+}
+
+function setTimes() {
+    var id = $("#SitioId").val();
+
+    var exportData = $('#schedule').jqs('export');
+
+    SweetAlert.ConfirmForm(function () {
+
+        fns.PostDataNoAsync(`api/time/times/${id}`, exportData, function (dataResult) {
+            if (!dataResult) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Intente nuevamente o contacte al administrador'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logrado',
+                })
+            }
+        })
+    }, false);
+
+}
 
 function loadMap() {
 
@@ -193,7 +259,8 @@ function llenar() {
     else {
         fns.CallGetAsync("api/site/find", { id: id }, function (dataResult) {
             $("#frmSitio").assignJsonToForm(dataResult);
-            $('#dropdownMunicipio').val(dataResult.municipioId).trigger('change.select2');
+            $('#MunicipioIdAux').val(dataResult.municipioId);
+            $('#DepartamentoId').val(dataResult.departamentoId).trigger('change.select2');
             $("#ProveedorId").val(dataResult.proveedorId).trigger('change.select2');
             $("#ProveedorElectricidadId").val(dataResult.proveedorElectricidadId).trigger('change.select2');
             $("#ZonaId").val(dataResult.zonaId).trigger('change.select2');
@@ -219,31 +286,55 @@ function llenar() {
     }
 }
 
-function DropDownListMunicipio() {
+function DropDownListCities(selected) {
 
-    fns.CallGetAsync("api/municipio/call", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single number" id="dropdownMunicipio" name="MunicipioId">`
-        var departamento = 0;
-        dataResult.forEach(mun => {
+    var id = $("#DepartamentoId").val();
 
-            let optionGrp = "";
-            if (mun.departamentoId != departamento) {
-                departamento = mun.departamentoId;
-                optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
+    var selectTarget = $("#MunicipioId");
+
+    var html = "<option disabled selected>Seleccione municipio</option>";
+
+    if (id != null) {
+
+        selectTarget.select2('destroy');
+
+        fns.CallGetAsync(`api/address/dropdownCities/${id}`, null, function (list) {
+
+            list.forEach(x => {
+                html += `<option value="${x.id}">${x.name}</option>`;
+            });
+
+            selectTarget.html(html);
+
+            selectTarget.select2Validation();
+
+            if (selected != null) {
+                selectTarget.val(selected).trigger('change.select2');
             }
-            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
 
-            if (mun.departamentoId != departamento) {
-                option = option + "  </optgroup>";
-            }
-            select = select + option;
+        })
+    }
+    else {
+        selectTarget.html(html);
+
+        selectTarget.select2Validation();
+    }
+}
+
+function DropDownListDepartments() {
+    fns.CallGetAsync("api/address/dropdownDepartments", null, function (list) {
+
+        var selectTarget = $("#DepartamentoId");
+
+        var html = "<option disabled selected>Seleccione departamento</option>";
+
+        list.forEach(x => {
+            html += `<option value="${x.id}">${x.name}</option>`;
         });
-        select = select + "</select>";
 
-        $("#divMunicipio").html(select);
-        $('#dropdownMunicipio').select2();
-
-    });
+        selectTarget.html(html);
+        selectTarget.select2Validation();
+    })
 }
 
 function DropDownListProviders() {

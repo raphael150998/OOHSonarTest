@@ -43,6 +43,7 @@
     <div class="col-md-2" hidden>
         <input asp-for="SitioId" class="form-control number" readonly />
     </div>
+    <input type="hidden" name="MunicipioIdAux" id="MunicipioIdAux" value="0" />
     <div class="card">
         <div class="card-block row action-card-header-viva">
             <div class="col-md-3 btn-viva-flex">
@@ -89,13 +90,15 @@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Municipio</label>
-
-                        <div id="divMunicipio"></div>
+                        <select asp-for="MunicipioId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="MunicipioId" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Departamento</label>
-                        <input name="otro" class="form-control number" />
-                        @*<span asp-validation-for="DiasSolicitudPermiso" class="text-danger"></span>*@
+                        <select asp-for="DepartamentoId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="DepartamentoId" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Proveedor</label>
@@ -147,7 +150,7 @@
                     </div>
                     <div class="col-md-3">
                         <label class="control-label">Fecha de activación</label>
-                        <input asp-for="FechaActivacion" type="datetime-local" class="form-control" />
+                        <input asp-for="FechaActivacion" type="text" class="form-control" />
                         <span asp-validation-for="FechaActivacion" class="text-danger"></span>
                     </div>
                 </div>
@@ -256,9 +259,6 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#faces" role="tab">Caras</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transactions" role="tab">Transacciones</a>
-                        </li>
                     </ul>
                     <div class="tab-content tabs card-block" id="tabs-container">
                         <div class="tab-pane active" id="map" role="tabpanel">
@@ -268,6 +268,7 @@
                             @*<h1>Caras</h1>*@
                         </div>
                         <div class="tab-pane" id="accessTime" role="tabpanel">
+                            <button class="btn btn-primary" type="button" onclick="setTimes()">Guardar horario</button>
                             <div class="row">
                                 <div class="col">
                                     <div id="schedule" class="jqs-demo mb-3 jqs jqs-mode-edit jqs-mode-7"></div>
@@ -378,9 +379,6 @@
                         </div>
                         <div class="tab-pane" id="faces" role="tabpanel">
                             @*<h1>Caras</h1>*@
-                        </div>
-                        <div class="tab-pane" id="transactions" role="tabpanel">
-                            @*<h1>Transacciones</h1>*@
                         </div>
                     </div>
                 </div>
@@ -619,61 +617,5 @@
 <!-- #endregion -->
 
 @section scripts{
-    <script>
-        function getTimes() {
-
-            var id = $("#SitioId").val();
-
-            fns.CallGetAsync(`api/time/times/${id}`, null, function (dataResponse) {
-                console.log(dataResponse);
-                $('#schedule').jqs('import', dataResponse);
-            });
-        }
-
-        function setTimes() {
-            var id = $("#SitioId").val();
-
-            var exportData = $('#schedule').jqs('export');
-
-            SweetAlert.ConfirmForm(function () {
-
-                fns.PostDataNoAsync(`api/time/times/${id}`, exportData, function (dataResult) {
-                    if (!dataResult) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Intente nuevamente o llame al administrador'
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Logrado',
-                        })
-                    }
-                })
-            }, false);
-
-        }
-        $(function () {
-            $('#schedule').jqs({
-                periodOptions: false,
-                periodDuration: 60,
-                periodBackgroundColor: 'rgba(0, 255, 0, 0.5)',
-                periodBorderColor: 'rgb(0, 255, 0)',
-                //data: dataSchedule,
-            });
-
-            getTimes();
-
-            //var exportData = $('#schedule').jqs('export');
-
-
-
-
-
-            //console.log(exportData);
-
-        })
-    </script>
     <script src="~/js/Site/jquery.EditCreate.js"></script>
 }

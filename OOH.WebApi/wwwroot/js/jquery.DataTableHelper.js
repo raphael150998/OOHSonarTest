@@ -22,7 +22,7 @@ var DataTableHelper = {
                     $(this).removeAttr("style");
                     $(this).removeAttr("text");
                     $(this).removeAttr("tabindex");
-                    $(this).html('<input type="text" placeholder="" />');
+                    $(this).html('<input type="text" placeholder="" class="form-control input-viva-filter"/>');
 
                     $('input', this).on('keyup change', function () {
                         if (table.column(i).search() !== this.value) {
