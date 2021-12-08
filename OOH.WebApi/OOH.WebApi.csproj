@@ -38,6 +38,9 @@
 	  <Content Remove="wwwroot\js\Contacts\jquery.contacts.js" />
 	  <Content Remove="wwwroot\js\Face\jquery.AddOrUpdate.js" />
 	  <Content Remove="wwwroot\js\Face\jquery.face.js" />
+	  <Content Remove="wwwroot\js\Face\Material\jqeury.facematerial.js" />
+	  <Content Remove="wwwroot\js\Face\Precio\jquery.faceprice.js" />
+	  <Content Remove="wwwroot\js\Face\Saliente\jquery.facesalientes.js" />
 	  <Content Remove="wwwroot\js\jquery.fnHelpers.js" />
 	  <Content Remove="wwwroot\js\jquery.inputmask.js" />
 	  <Content Remove="wwwroot\js\jquery.InputMaskHelper.js" />

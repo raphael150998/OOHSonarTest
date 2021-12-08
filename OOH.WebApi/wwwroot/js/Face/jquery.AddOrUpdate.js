@@ -1,56 +1,9 @@
 ﻿$().ready(function ($) {
-    LLamarSalientes();
-    $(".grid").hover(function () {
-        var DIV = this;
-        var CaraId = $("#CaraId").val();
-        if (CaraId == 0) {
-            $(DIV).addClass('grid-denied');
-        } else {
-            $(DIV).removeClass('grid-denied');
-        }
-    });
-    $(".grid").click(function () {
-        var DIV = this;
-        var Cara = $("#CaraId").val();
-        var obj = {
-            Id: $(DIV).attr("idsql"),
-            CaraId: Cara,
-            SalienteId: $(DIV).attr("idgrid")
-        };
-
-        if (Cara == 0) {
-            //N0 HACE NADA
-        } else {
-            var flag = DIV.getAttribute("selected");
-            if (flag == "true") {
-                fns.PostDataAsync("api/salientes/clickRemove", JSON.stringify(obj), function (dataResult) {
-                    if (dataResult) {
-                        $(DIV).removeClass('item-selected');
-                        DIV.setAttribute('selected', false);
-                       
-                    }
-                });
-
-            } else {
-
-                fns.PostDataAsync("api/salientes/clickAdd", JSON.stringify(obj), function (dataResult) {
-                    if (dataResult != 0) {
-                        console.log(dataResult);
-                        $(DIV).addClass('item-selected');
-                        DIV.setAttribute('selected', true);
-                        DIV.idsql = dataResult;
-                        $(DIV).attr("idsql", dataResult);
-                    }
-                });
-            }
-        }
-    });
+   
     DropSitio();
     DropCategoria();
     DropTipo();
-    DataTableMaterial();
     Llenar();
-    DataTableMaterial();
     Validate.Form("#formFaces", "api/caras/CEdata", {
 
         rules: {
@@ -191,26 +144,9 @@ function DropCategoria() {
 
     });
 }
-function DropMaterial() {
-    fns.CallGetAsync("api/Materiales/getLst", null, function (dataResult) {
-        let select = `<select class="js-example-basic-single number" id="dropdownMaterial" name="MaterialId">`
-        select = select + `<option value="null"></option>`;
-        dataResult.forEach(mat => {
-
-            let option = `<option value="` + mat.materialId + `"> ` + mat.mateNombre + `</option> `;
-            select = select + option;
-        });
-        select = select + "</select>";
-
-        $("#divMaterial").html(select);
-        $('#dropdownMaterial').select2();
-
-    });
-}
 
 function DropTipo() {
     fns.CallGetAsync("api/face/type/get", null, function (dataResult) {
-        console.log(dataResult);
         let select = `<select class="js-example-basic-single number" id="dropdownTipo" name="TipoId">`
         select = select + `<option value="null"></option>`;
         dataResult.forEach(tipo => {
@@ -234,95 +170,9 @@ function Llenar() {
            
             $('#dropdownCategoria').val(dataResult.categoriaId).trigger('change.select2');
             $('#dropdownSitio').val(dataResult.sitioId).trigger('change.select2');
-            console.log(dataResult.sitioId);
             $('#dropdownTipo').val(dataResult.tipoId).trigger('change.select2');
         });
     }
-}
-
-function GetDataTableMateriales() {
-    fns.CallGetAsync("api/Face/Materiales/get", { id: $("#CaraId").val() }, function (callbackDT) {
-        console.log(callbackDT);
-
-        $("#tablaMaterial").DataTable().clear();
-        $("#tablaMaterial").DataTable().rows.add(callbackDT).draw();
-
-    });
-}
-
-function DataTableMaterial() {
-    DataTableHelper.Draw("#tablaMaterial", {
-        destroy: true,
-        orderCellsTop: true,
-        dom: "Brtp",
-        buttons: [
-            {
-                text: '<i class="fa fa-plus" id="addbtn" ></i>',
-                action: function (e, dt, node, config) {
-                    addMaterial(0);
-                }
-            }
-        ],
-        fixedHeader: true,
-        data: [],
-        columns: [
-            {
-                data: "id",
-                orderable: false,
-                render: function (data, type, full, meta) {
-                    return `
-                     <i class="fa fa-pencil-square btnDatatable text-primary" onclick="addMaterial('` + data + `')"></i>
-                     <i class="fa fa-trash btnDatatable text-danger" onclick="removeCosto('`+ data + `')"></i>
-                     `;
-                }
-            },
-            {
-                data: "material",
-                render: function (data, type, full, meta) {
-                    return "<a href='index'>" + data + "</a>";
-                }
-            },
-            { data: "codigo" },
-            { data: "costo" }
-
-        ],
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-        }
-    });
-    GetDataTableMateriales();
-}
-
-function addMaterial(id =0) {
-    $("#ModalMaterial").modal("show");
-    DropMaterial();
-}
-
-function guardarMaterial() {
-    var idMaterial = $("#dropdownMaterial option:selected").val();
-    var objetoMaterial = {
-        CaraId: $("#CaraId").val(),
-        MaterialId: idMaterial
-    };
-
-    fns.PostDataAsync("api/face/material/CEdata", JSON.stringify(objetoMaterial), function (dataResult) {
-
-        console.log(dataResult);
-    });
-}
-function LLamarSalientes() {
-
-    fns.CallGetAsync("api/face/salientes/get", { id: $("#CaraId").val() }, function (callback) {
-        callback.forEach(x => {
-            var DIV = $(".grid[idgrid='" + x.salienteId + "']");
-            DIV[0].setAttribute('idsql', x.id);
-            DIV[0].setAttribute('selected', true);
-            $(DIV).addClass('item-selected');
-            $(DIV).attr("idsql", x.id);
-
-
-        });
-    });
 }
 
 

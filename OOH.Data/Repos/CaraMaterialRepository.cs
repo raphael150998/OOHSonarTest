@@ -22,7 +22,7 @@ namespace OOH.Data.Repos
             try
             {
                 model.Id = 0;
-                return new ResultClass() { data = PostData("insert into CarasMateriales(CaraId,MaterialId) values(@CaraId,@MaterialId) ", true,new(model)) };
+                return new ResultClass() { data =await PostData("insert into CarasMateriales(CaraId,MaterialId) values(@CaraId,@MaterialId) ", true,new(model)) };
             }
             catch (Exception ex)
             {
@@ -38,9 +38,9 @@ namespace OOH.Data.Repos
             return await RemoveData($"Delete from CarasMateriales where Id = {id}") == 1 ? true : false;
         }
 
-        public Task<IEnumerable<FaceMaterialDto>> Select(long id)
+        public async Task<IEnumerable<FaceMaterialDto>> Select(long id)
         {
-            return SelectData<FaceMaterialDto>($"Select t1.Id  , (select t2.Codigo from Materiales t2 where t2.MaterialId = t1.MaterialId) as Codigo , (select t2.mateNombre from Materiales t2 where t2.MaterialId = t1.MaterialId) as Material ,  (select t3.Costo from Materiales t3 where t3.MaterialId = t1.MaterialId) as Costo from CarasMateriales t1 where t1.CaraId = {id}");
+            return  await SelectData<FaceMaterialDto>($"Select t1.Id  , (select t2.Codigo from Materiales t2 where t2.MaterialId = t1.MaterialId) as Codigo , (select t2.mateNombre from Materiales t2 where t2.MaterialId = t1.MaterialId) as Material ,  (select t3.Costo from Materiales t3 where t3.MaterialId = t1.MaterialId) as Costo from CarasMateriales t1 where t1.CaraId = {id}");
         }
        
     }
