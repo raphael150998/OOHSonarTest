@@ -19,15 +19,17 @@ namespace OOH.WebApi.ApiControllers
     public class SitesApiController : ControllerBase
     {
         private readonly SiteRepository _siteRepo;
+        private readonly AddressRepository _addressRepo;
         private readonly SiteElectricMeterRepository _electricityMeterRepo;
         private readonly IMapper _mapper;
 
 
-        public SitesApiController(SiteRepository repo, IMapper mapper, SiteElectricMeterRepository electricityMeterRepo)
+        public SitesApiController(SiteRepository repo, IMapper mapper, SiteElectricMeterRepository electricityMeterRepo, AddressRepository addressRepo)
         {
             _siteRepo = repo;
             _mapper = mapper;
             _electricityMeterRepo = electricityMeterRepo;
+            _addressRepo = addressRepo;
         }
 
         [HttpGet("select")]
@@ -55,6 +57,7 @@ namespace OOH.WebApi.ApiControllers
             SitiosContadorElectrico electricityInfo = await _electricityMeterRepo.FindBySitioId(site.SitioId);
 
             SiteVm siteVm = _mapper.Map<SiteVm>(site);
+            siteVm.DepartamentoId = (await _addressRepo.GetMunicipioById(siteVm.MunicipioId)).DepartamentoId;
 
             if (electricityInfo != null)
             {

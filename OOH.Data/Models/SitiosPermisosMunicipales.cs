@@ -11,6 +11,11 @@ namespace OOH.Data.Models
     /// </summary>
     public class SitiosPermisosMunicipales
     {
+        public SitiosPermisosMunicipales()
+        {
+            Activo = true;
+        }
+
         /// <summary>
         /// Id de la tabla relacion entre sitio y permisos municipales
         /// </summary>
@@ -61,5 +66,10 @@ namespace OOH.Data.Models
         /// determina si esta activo 
         /// </summary>
         public bool Activo { get; set; }
+
+        /// <summary>
+        /// Determina si el registro ha sido eliminado de manera logica en la base de datos
+        /// </summary>
+        public bool Eliminado { get; set; }
     }
 }

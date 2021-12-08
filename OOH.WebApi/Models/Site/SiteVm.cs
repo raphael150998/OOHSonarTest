@@ -51,6 +51,11 @@ namespace OOH.WebApi.Models.Site
         public int MunicipioId { get; set; }
 
         /// <summary>
+        /// Id del departamento del sitio
+        /// </summary>
+        public int DepartamentoId { get; set; }
+
+        /// <summary>
         /// id de la zona del sitio
         /// </summary>
         public int ZonaId { get; set; }

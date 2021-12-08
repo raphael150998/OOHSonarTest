@@ -31,9 +31,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\css\bootstrap-datetimepicker.css" />
+	  <Content Remove="wwwroot\css\bootstrap-datetimepicker.min.css" />
 	  <Content Remove="wwwroot\css\jquery.schedule.css" />
 	  <Content Remove="wwwroot\css\jquery.schedule.min.css" />
 	  <Content Remove="wwwroot\js\Agency\jquery.agency.js" />
+	  <Content Remove="wwwroot\js\bootstrap-datetimepicker.js" />
+	  <Content Remove="wwwroot\js\bootstrap-datetimepicker.min.js" />
 	  <Content Remove="wwwroot\js\Contacts\jquery.buildContact.js" />
 	  <Content Remove="wwwroot\js\Contacts\jquery.contacts.js" />
 	  <Content Remove="wwwroot\js\Face\jquery.AddOrUpdate.js" />

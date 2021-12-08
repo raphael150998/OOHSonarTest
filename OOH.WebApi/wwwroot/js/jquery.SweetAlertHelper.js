@@ -2,20 +2,20 @@
 
     ConfirmForm: function (callback, showConfirm = true) {
         Swal.fire({
-            title: 'Confirmar?',
-            text: "La informacion sera enviada!",
-            icon: 'warning',
+            title: '¿Desea guardar?',
+            text: "La información sera enviada",
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar'
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
                 if (showConfirm) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Logrado',
+                        title: 'Exitoso',
                     });
                 }
                 callback(result);
@@ -26,14 +26,14 @@
         data = JSON.stringify(data);
         console.log(data);
         Swal.fire({
-            title: 'Desea Eliminar?',
-            text: subtitle == "" || subtitle == null ? "La informacion sera eliminada Permanentemente!" : subtitle,
+            title: '¿Desea eliminar?',
+            text: subtitle == "" || subtitle == null ? "La información sera eliminada permanentemente" : subtitle,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar'
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
                 fns.NPostDataAsync(url, data, function (response) {
