@@ -908,11 +908,57 @@ $(function () {
         frmPermission.resetForm();
         $('#PermisoId').val('').trigger('change.select2');
         $('#EstadoId').val('').trigger('change.select2');
+        $("#FechaInicioPermiso").data("DateTimePicker").maxDate(false);
+        $("#FechaInicioPermiso").data("DateTimePicker").clear();
+        $("#FechaFinPermiso").data("DateTimePicker").minDate(false);
+        $("#FechaFinPermiso").data("DateTimePicker").clear();
         $("#modalPermission").modal("hide");
     });
 
     DropDownListPermissions();
     DropDownListStates();
+
+
+    $("#FechaInicioCuotasPermiso").datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+        showClose: true,
+        useCurrent: false
+    });
+
+    $("#FechaFinPermiso").datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+        showClose: true,
+        useCurrent: false
+    });
+
+
+    $("#FechaInicioPermiso").datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+        showClose: true,
+        useCurrent: false
+    });
+
+    $("#FechaFinPermiso").on("dp.change", function () {
+
+        var maxDate = $("#FechaFinPermiso").val();
+
+        console.log("maxDate" + maxDate);
+
+        if (maxDate != null && maxDate != "") {
+            $("#FechaInicioPermiso").data("DateTimePicker").maxDate(maxDate)
+        }
+    })
+
+    $("#FechaInicioPermiso").on("dp.change", function () {
+
+        var minDate = $("#FechaInicioPermiso").val();
+
+        console.log("minDate" + minDate);
+
+        if (minDate != null && minDate != "") {
+            $("#FechaFinPermiso").data("DateTimePicker").minDate(minDate)
+        }
+    })
 });
 
 function DropDownListPermissions() {
