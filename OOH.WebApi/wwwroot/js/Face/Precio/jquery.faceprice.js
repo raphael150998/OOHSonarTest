@@ -33,6 +33,7 @@ function DataTablePrecios() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `
+                    <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + full["id"] + `')"></i>
                      <i class="fa fa-trash btnDatatable text-danger" onclick="removePriceFace('`+ data + `')"></i>
                      `;
                 }
@@ -62,7 +63,7 @@ function DropDownTipoPrecio() {
         select = select + "</select>";
 
         $("#divPrecios").html(select);
-        $('#dropdownTypesPrice').select2Validation();
+        $('#dropdownTypesPrice').select2();
 
     });
 }
@@ -88,6 +89,7 @@ function guardarPriceFace() {
                 icon: 'success',
                 title: 'Logrado',
             });
+            $("#ModalPrecio").modal("hide");
             GetDataTablePrecios();
         } else {
 

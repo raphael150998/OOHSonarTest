@@ -36,7 +36,6 @@ namespace OOH.Data.Repos
         {
             try
             {
-
                 return new ResultClass() { data = await PostData("insert into CarasPrecios(TipoId,CaraId,Precio) values (@TipoId,@CaraId,@Precio)",true,new(collection)), message = "Logrado" };
             }
             catch (Exception ex)

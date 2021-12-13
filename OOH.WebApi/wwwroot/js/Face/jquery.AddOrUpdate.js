@@ -176,4 +176,7 @@ function Llenar() {
 }
 
 
+function edit(id) {
+    window.open("/Face/AddOrUpdate/" + id, '_blank');
+}
 

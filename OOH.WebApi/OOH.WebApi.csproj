@@ -46,6 +46,7 @@
 	  <Content Remove="wwwroot\js\Face\Precio\jquery.faceprice.js" />
 	  <Content Remove="wwwroot\js\Face\Saliente\jquery.facesalientes.js" />
 	  <Content Remove="wwwroot\js\jquery.fnHelpers.js" />
+	  <Content Remove="wwwroot\js\jquery.InputGroupHelpers.js" />
 	  <Content Remove="wwwroot\js\jquery.inputmask.js" />
 	  <Content Remove="wwwroot\js\jquery.InputMaskHelper.js" />
 	  <Content Remove="wwwroot\js\jquery.schedule.js" />

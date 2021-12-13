@@ -29,6 +29,7 @@ namespace OOH.Data.Models
         public int CategoriaId { get; set; }
         public string RazonSocial { get; set; }
         public int MunicipioId { get; set; }
+        public int DepartamentoId { get; set; }
 
 
     }

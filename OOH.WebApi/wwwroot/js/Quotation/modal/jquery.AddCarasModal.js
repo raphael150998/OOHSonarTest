@@ -1,15 +1,11 @@
-﻿function addCara(idCara) {
-    $("#ModalCaras").modal({
-        show: true,
-        backdrop: 'static',
-        keyboard: false
-    });
+﻿$("#tabcaras").click(function () {
 
     DatatableAdd();
     DropSitio();
     DropCategoria();
     DropTipo();
-}
+
+});
 
 //Dropdonlist de filtros para usar en el modal de add caras
 function DropSitio() {

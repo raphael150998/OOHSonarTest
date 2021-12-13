@@ -4,34 +4,49 @@
     ViewData["Title"] = "CreateUpdate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .btn-viva-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .btn {
+        min-width: 7vw;
+    }
+
+    .action-card-header-viva {
+        justify-content: space-between;
+    }
+</style>
+
 <form id="formClient">
 
     <div class="card">
-        <div class="card-block row">
-            <div class="col-md-2">
+        <div class="card-block row  action-card-header-viva">
+            <div class="col-md-3 btn-viva-flex">
                 <button type="submit" id="BtnSubmit" class="btn btn-primary"><i class="far fa-save"></i>Guardar</button>
-            </div>
-            <div class="col-md-1">
-
                 <label class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</label>
             </div>
-            
-
-            <div class="col-md-3 container">
-           
-            </div>
-
             <div class="col-md-2">
             </div>
+
+
+            <div class="col-md-4 container">
+
+            </div>
+
+
             <div class="col-md-2">
                 <label class="control-label" asp-for="Activo"></label>:
-               
-                <input type="checkbox" class="js-switch bool"  id="Activo" name="Activo" />
+
+                <input type="checkbox" class="js-switch bool" id="Activo" name="Activo" />
             </div>
 
 
         </div>
     </div>
+    
     <div class="card">
         <div class="card-block">
 
@@ -188,7 +203,7 @@
 <div class="modal fade" id="ModalContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
         <div class="modal-content">
-            <form  id="formContact" >
+            <form id="formContact">
                 <div class="modal-header">
                     <h5 class="modal-title text-center w-100" id="modalTitle">Contactos</h5>
                 </div>

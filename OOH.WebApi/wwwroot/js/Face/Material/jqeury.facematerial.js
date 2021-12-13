@@ -52,6 +52,8 @@ function DataTableMaterial() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `
+                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + full["id"] + `')"></i>
+
                      <i class="fa fa-trash btnDatatable text-danger" onclick="removeCosto('`+ data + `')"></i>
                      `;
                 }
