@@ -162,6 +162,7 @@
     loadMap();
 
     $("#FechaActivacion").datetimepicker({ format: 'DD/MM/YYYY HH:mm', showClose: true });
+
 })
 
 function getTimes() {
@@ -959,6 +960,11 @@ $(function () {
             $("#FechaFinPermiso").data("DateTimePicker").minDate(minDate)
         }
     })
+
+    //Funcion para solucionar error de que las columnas del datatable aparecen desajustadas al seleccionar el tab
+    $("#tabPermissionLink").click(function () {
+        $("#permissionsTable").DataTable().columns.adjust();
+    })
 });
 
 function DropDownListPermissions() {
@@ -1141,6 +1147,38 @@ $(function () {
         $("#modalProvider").modal("hide");
     });
 
+    $("#TipoValor").change(function () {
+        var control = $(this);
+        var isTypeValuePorcentage = control.prop("checked");
+
+        var porcentaje = $("#divPorcentajeProveedor");
+        var monto = $("#divMontoProveedor");
+
+        var inputPorcentaje = $("#porcentajeProveedor");
+        var inputMonto = $("#montoProveedor");
+
+
+        if (isTypeValuePorcentage) {
+            monto.hide();
+            porcentaje.show();
+
+            inputMonto.rules("remove", "required");
+            inputMonto.val('');
+            inputPorcentaje.rules("add", { required: true });
+
+        }
+        else {
+            porcentaje.hide();
+            monto.show();
+
+            inputPorcentaje.rules("remove", "required");
+            inputPorcentaje.val('');
+            inputMonto.rules("add", { required: true });
+        }
+
+        //inputMonto.valid();
+        //inputPorcentaje.valid();
+    });
 
 });
 

@@ -126,6 +126,12 @@
         .input-viva-filter {
             width: 90% !important;
         }
+
+        html {
+            -moz-transform: scale(0.9, 0.9) !important; /* Moz-browsers */
+            zoom: 0.9 !important; /* Other non-webkit browsers */
+            zoom: 90% !important; /* Webkit browsers */
+        }
     </style>
 </head>
 

@@ -163,10 +163,11 @@ $.fn.select2Paged = function (url) {
 }
 
 $.fn.select2Validation = function () {
-    var id = this.closest("form").attr("id");
-
     this.select2().on('change', function (e) {
-        $(`#${id}`).valid();
+
+        var elementId = $(this).attr("id");
+
+        $(`#${elementId}`).valid();
     });
 }
 

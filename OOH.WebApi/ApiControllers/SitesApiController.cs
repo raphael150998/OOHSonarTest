@@ -98,6 +98,8 @@ namespace OOH.WebApi.ApiControllers
 
                 SitiosContadorElectrico electricityInfo = await _electricityMeterRepo.FindBySitioId(site.SitioId);
 
+                model.SitioId = site.SitioId == 0 ? (int)response.data : site.SitioId;
+
                 electricityInfo = model.SitioId == 0 || electricityInfo == null ? new() : electricityInfo;
 
                 electricityInfo.SitioId = model.SitioId;
