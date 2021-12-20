@@ -17,7 +17,7 @@ namespace OOH.Data.Repos
     /// <summary>
     /// Todas las variables son en honor a Don Lord Señor Carroña
     /// </summary>
-    public class ProviderRepository : OOHContext
+    public class ProviderRepository : AddressRepository
     {
         private readonly ILogHelper _log;
 
@@ -60,7 +60,9 @@ namespace OOH.Data.Repos
 
         public async Task<Proveedores> Find(long id)
         {
-            return await FilterData<Proveedores>($"Select * from Proveedores Where ProveedorId = {id}");
+            Proveedores objeto = await FilterData<Proveedores>($"Select * from Proveedores Where ProveedorId = {id}");
+            objeto.DepartamentoId = GetDepartamentoByMunicipioId(objeto.MunicipioId).Result.DepartamentoId;
+            return objeto;
         }
 
         public async Task<IEnumerable<LogOutputDto>> GetLogs(long id)

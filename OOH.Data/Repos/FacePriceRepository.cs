@@ -1,4 +1,5 @@
-﻿using OOH.Data.Helpers;
+﻿using OOH.Data.Dtos.Caras;
+using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using System;
@@ -15,21 +16,32 @@ namespace OOH.Data.Repos
         {
         }
 
-        public async Task<IEnumerable<CarasPrecios>> GetPrice()
+        public async Task<IEnumerable<TiposPrecios>> GetType()
         {
-            throw new NotImplementedException();
+            return await SelectData<TiposPrecios>("Select * from TiposPrecios");
+        }
+        public async Task<IEnumerable<FacePriceDto>> GetPriceByFace(long id)
+        {
+            return await SelectData<FacePriceDto>($"Select t1.Id, t1.TipoId, (Select t2.Nombre From TiposPrecios t2 where t2.Id = t1.TipoId) as Tipo, t1.Precio from CarasPrecios t1 where t1.CaraId ={id}");
 
         }
 
         public async Task<bool> RemovePrice(long id)
         {
-            throw new NotImplementedException();
+            return await RemoveData($"delete from CarasPrecios where id= {id}") == 1 ? true : false;
 
         }
 
         public async Task<ResultClass> AddOrUpdate(CarasPrecios collection)
         {
-            throw new  NotImplementedException();
+            try
+            {
+                return new ResultClass() { data = await PostData("insert into CarasPrecios(TipoId,CaraId,Precio) values (@TipoId,@CaraId,@Precio)",true,new(collection)), message = "Logrado" };
+            }
+            catch (Exception ex)
+            {
+                return new ResultClass() { message = "Error" , data = 0 , state = false};
+            }
         }
     }
 }

@@ -7,6 +7,14 @@
     .ch {
         width: 30%
     }
+     <div class="card">
+        <div class="card-block row action-card-header-viva">
+            <div class="col-md-3 btn-viva-flex">
+                <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-primary" />
+                <a class="btn btn-outline-primary" href="@Url.Action("CreateUpdate","Sites", new { id = 0 })" target="_blank">Nuevo</a>
+            </div>
+        </div>
+    </div>
 </style>
 <input asp-for="CotizacionId" hidden />
 
@@ -100,9 +108,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#contacts" role="tab">Detalle de caras</a>
                     </li>
-                    @*<li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile1" role="tab">Profile</a>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#faces" id="tabcaras" role="tab">Caras</a>
                         </li>
+                    @*
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">Messages</a>
                         </li>
@@ -130,9 +139,117 @@
                             </tbody>
                         </table>
                     </div>
-                    @*<div class="tab-pane" id="profile1" role="tabpanel">
-                            <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                    <div class="tab-pane" id="faces" role="tabpanel">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Sitio</label>
+                                    <select id="dropdownSitio">
+                                    </select>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Categoria</label>
+
+                                    <div id="divDropCategoria">
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Tipo</label>
+
+                                    <div id="divDropTipo">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                            </div>
                         </div>
+                        <div>
+                            <table class="table" id="addCarasTable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="filter-action"></th>
+                                        <th class="filter">Cara</th>
+                                        <th class="filter">Categoria</th>
+                                        <th class="filter">ReferenciaComercial</th>
+                                        <th class="filter">Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <!-- Modal CaraDetalle -->
+                        <div class="modal fade" id="ModalCarasDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                            <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-center w-100" id="modalTitle">Costo de Cara</h5>
+                                        <button type="button" class="close" id="btnDetalleCaraClose" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form id="formularioCostos">
+                                                <div class="row">
+                                                    <input id="idCaraAdd" hidden />
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Costo de arrendamiento</label>
+                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Costo de impresion</label>
+                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Costo de instalacion</label>
+                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Costo saliente</label>
+                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Fecha Desde</label>
+                                                        <input type="date" class="form-control" id="FechaDesde" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Fecha Hasta</label>
+                                                        <input type="date" class="form-control" id="FechaHasta" />
+                                                    </div>
+
+
+                                                </div>
+
+                                            </form>
+
+                                            <br />
+                                            <br />
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col-md-4" style="float:right">
+                                                <label></label>
+                                                <button class="btn btn-success form-control" onclick="AddArray()">Agregar</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*
                         <div class="tab-pane" id="messages1" role="tabpanel">
                             <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
                         </div>
@@ -161,114 +278,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Sitio</label>
-                            <select id="dropdownSitio">
-                            </select>
-
-                        </div>
-                        <div class="col-md-4">
-                            <label>Categoria</label>
-
-                            <div id="divDropCategoria">
-
-                            </div>
-
-                        </div>
-                        <div class="col-md-4">
-                            <label>Tipo</label>
-
-                            <div id="divDropTipo">
-
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                    </div>
-                </div>
-                <div>
-                    <table class="table" id="addCarasTable" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th class="filter-action"></th>
-                                <th class="filter">Cara</th>
-                                <th class="filter">Categoria</th>
-                                <th class="filter">ReferenciaComercial</th>
-                                <th class="filter">Tipo</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <!-- Modal CaraDetalle -->
-                <div class="modal fade" id="ModalCarasDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
-                    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <h5 class="modal-title text-center w-100" id="modalTitle">Costo de Cara</h5>
-                                <button type="button" class="close" id="btnDetalleCaraClose" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <form id="formularioCostos">
-                                        <div class="row">
-                                            <input id="idCaraAdd" hidden />
-                                            <div class="col-md-4">
-                                                <label class="control-label">Costo de arrendamiento</label>
-                                                <input type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">Costo de impresion</label>
-                                                <input type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">Costo de instalacion</label>
-                                                <input type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">Costo saliente</label>
-                                                <input type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">Fecha Desde</label>
-                                                <input type="date" class="form-control" id="FechaDesde" />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="control-label">Fecha Hasta</label>
-                                                <input type="date" class="form-control" id="FechaHasta" />
-                                            </div>
-
-
-                                        </div>
-
-                                    </form>
-
-                                    <br />
-                                    <br />
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="col-md-4" style="float:right">
-                                        <label></label>
-                                        <button class="btn btn-success form-control" onclick="AddArray()">Agregar</button>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
 
             </div>
             <div class="modal-footer">

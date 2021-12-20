@@ -17,12 +17,14 @@ namespace OOH.WebApi.ApiControllers
         private readonly FaceRepository _repo;
         private readonly MaterialRepository _repoMaterial;
         private readonly CaraMaterialRepository _repoFaceMaterial;
+        private readonly FacePriceRepository _repoFacePrice;
 
-        public FaceApiController(FaceRepository repo, MaterialRepository repoMaterial, CaraMaterialRepository repoFaceMaterial)
+        public FaceApiController(FaceRepository repo, MaterialRepository repoMaterial, CaraMaterialRepository repoFaceMaterial, FacePriceRepository repoFacePrice)
         {
             _repo = repo;
             _repoMaterial = repoMaterial;
             _repoFaceMaterial = repoFaceMaterial;
+            _repoFacePrice = repoFacePrice;
         }
 
         #region MaestroCaras
@@ -77,7 +79,34 @@ namespace OOH.WebApi.ApiControllers
 
         #region CostosCaras
 
+        [HttpGet]
+        [Route("api/PriceType/getLst")]
+        public async Task<IActionResult> getTypePrices()
+        {
+            return Ok(await _repoFacePrice.GetType());
+        }
 
+        [HttpGet]
+        [Route("api/priceface/get")]
+        public async Task<IActionResult> getFacePrices(long id)
+        {
+            return Ok(await _repoFacePrice.GetPriceByFace(id));
+        }
+
+        [HttpPost]
+        [Route("api/priceface/post")]
+        public async Task<IActionResult> PostFacePrice(CarasPrecios collection)
+        {
+            return Ok(await _repoFacePrice.AddOrUpdate(collection));
+         
+        } 
+        [HttpPost]
+        [Route("api/priceface/remove")]
+        public async Task<IActionResult> RemoveFacePrice(Identify<long> data)
+        {
+            return Ok(await _repoFacePrice.RemovePrice(data.Id));
+         
+        }
         #endregion
 
         #region MaterialCaras
@@ -89,7 +118,7 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost]
-        [Route("api/api/materiales/remove")]
+        [Route("api/face/materiales/remove")]
         public async Task<IActionResult> removeFaceMaterial(Identify<long> id)
         {
             return Ok(await _repoFaceMaterial.Remove(id.Id));

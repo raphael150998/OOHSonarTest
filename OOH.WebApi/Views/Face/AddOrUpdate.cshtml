@@ -4,6 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
+    .btn-viva-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .btn {
+        min-width: 7vw;
+    }
+
+    .action-card-header-viva {
+        justify-content: space-between;
+    }
+
     .grid-denied {
         cursor: not-allowed;
     }
@@ -41,22 +55,20 @@
 <form id="formFaces">
 
     <div class="card">
-        <div class="card-block row">
-            <div class="col-md-2">
+        <div class="card-block row  action-card-header-viva">
+            <div class="col-md-3 btn-viva-flex">
                 <button type="submit" id="BtnSubmit" class="btn btn-primary"><i class="far fa-save"></i>Guardar</button>
-            </div>
-            <div class="col-md-1">
-
                 <label class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</label>
             </div>
-
-
-            <div class="col-md-3 container">
-
-            </div>
-
             <div class="col-md-2">
             </div>
+
+
+            <div class="col-md-4 container">
+
+            </div>
+
+
             <div class="col-md-2">
                 <label class="control-label" asp-for="Activo"></label>:
 
@@ -135,25 +147,25 @@
                     </div>
                     <div class="col-md-3">
                         <label asp-for="AlturaAlPiso" class="control-label"></label>
-                        <input asp-for="AlturaAlPiso" class="form-control" />
+                        <input data-icon="Mts."  data-mask="Decimal" asp-for="AlturaAlPiso" class="form-control" />
                         <span asp-validation-for="AlturaAlPiso" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
                         <label asp-for="Ancho" class="control-label"></label>
-                        <input asp-for="Ancho" class="form-control" />
+                        <input data-icon="Mts." asp-for="Ancho" data-mask="Decimal" class="form-control" />
                         <span asp-validation-for="Ancho" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-3">
                         <label asp-for="Alto" class="control-label"></label>
-                        <input asp-for="Alto" class="form-control" />
+                        <input data-icon="Mts." asp-for="Alto" data-mask="Decimal" class="form-control" />
                         <span asp-validation-for="Alto" class="text-danger"></span>
                     </div>
 
 
                     <div class="col-md-3">
                         <label asp-for="NumSpotDigital" class="control-label"></label>
-                        <input asp-for="NumSpotDigital" class="form-control" />
+                        <input asp-for="NumSpotDigital" data-mask="Entero" class="form-control" />
                         <span asp-validation-for="NumSpotDigital" class="text-danger"></span>
                     </div>
 
@@ -227,7 +239,15 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="price" role="tabpanel">
-                        <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                        <table id="tablaPrecio" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Acciones</th>
+                                    <th>Tipo</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
 
                     @*<div class="tab-pane" id="settings1" role="tabpanel">
@@ -249,7 +269,7 @@
     <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center w-100" id="modalTitle">Contactos</h5>
+                    <h5 class="modal-title text-center w-100" id="modalTitle">Materiales</h5>
                 </div>
                 <div class="modal-body">
                     <div class="container">
@@ -268,5 +288,39 @@
         </div>
     </div>
 </div>
+    
+    <!-- Modal Precios -->
+<div class="modal fade" id="ModalPrecio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100" id="modalTitle">Precios</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                    <div class="row">
+                         <div class="col-md-9">
+                            <label class="label-control">Tipo de precio</label>
+                           <div id="divPrecios"></div>
+                        </div>
+                         <div class="col-md-3">
+                             <label class="label-control">Precio</label>
+                             <input type="text" name="precio" id="precio" data-mask="Decimal" class="form-control" />
+                         </div>
+                       
+
+                    </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="guardarPriceFace()" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+        </div>
+    </div>
+</div>
 
 <script src="~/js/Face/jquery.AddOrUpdate.js"></script>
+<script src="~/js/Face/Material/jqeury.facematerial.js"></script>
+<script src="~/js/Face/Saliente/jquery.facesalientes.js"></script>
+<script src="~/js/Face/Precio/jquery.faceprice.js"></script>
