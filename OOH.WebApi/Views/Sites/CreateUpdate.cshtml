@@ -568,23 +568,23 @@
                             <select id="ProviderListId" name="ProveedorId" class="number select-viva-validation">
                             </select>
                         </div>
-                        <div class="col-md-4" style="display: flex; align-items: end;">
-                            <label class="control-label">Monto</label>
-                            <div class="col-single-switch-viva">
-                                <label class="control-label">Tipo de valor</label>
+                        <div class="col-md-4" style="display: flex; flex-direction: column; justify-content: flex-start;">
+                            <label class="control-label">Tipo de valor</label>
+                            <div>
+                                <label class="control-label">Monto</label>
                                 <input type="checkbox" checked class="js-switch bool" name="TipoValor" id="TipoValor" />
+                                <label class="control-label">Porcentaje</label>
                             </div>
-                            <label class="control-label">Porcentaje</label>
+
                         </div>
                         <div class="col-md-4">
                             <div id="divPorcentajeProveedor">
                                 <label>Porcentaje</label>
-
-0                                <input type="number" class="form-control number" id="porcentajeProveedor" name="Porcentaje" />
+                                <input type="number" data-icon="%" class="form-control number" id="porcentajeProveedor" name="Porcentaje" />
                             </div>
                             <div style="display:none;" id="divMontoProveedor">
                                 <label>Monto</label>
-                                <input type="number" class="form-control number" id="montoProveedor" name="Monto" />
+                                <input type="number" data-icon="$" class="form-control number" id="montoProveedor" name="Monto" />
                             </div>
                         </div>
                     </div>

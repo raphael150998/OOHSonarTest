@@ -29,11 +29,11 @@ namespace OOH.Data.Models
         /// <summary>
         /// porcentaje
         /// </summary>
-        public decimal Porcentaje { get; set; }
+        public decimal? Porcentaje { get; set; }
 
         /// <summary>
         /// Monto
         /// </summary>
-        public decimal Monto { get; set; }
+        public decimal? Monto { get; set; }
     }
 }

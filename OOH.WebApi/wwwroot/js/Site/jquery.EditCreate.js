@@ -20,10 +20,6 @@
     DropDownListCategories();
     DropDownListStructures();
 
-    $.validator.addMethod('greaterThan', function (value, element, param) {
-        return this.optional(element) || parseFloat(value) > parseFloat(param);
-    }, jQuery.validator.format("Number must be greater than {0}"));
-
     var validator = Validate.Form("#frmSitio", "api/site/CreateUpdate", {
         rules: {
             Codigo: {
@@ -1089,6 +1085,9 @@ function BuildPermissionsDatatable() {
 
 //tabla proveedores
 
+var providerHasTypeData = false;
+var providerTypeData = "porcentaje";
+
 $(function () {
     $("#modalProvider").modal({
         backdrop: "static",
@@ -1117,10 +1116,14 @@ $(function () {
                 min: 1,
             },
             Porcentaje: {
-                required: true
+                required: true,
+                number: true,
+                min: 0,
+                max: 100
             },
             Monto: {
-                required: true
+                required: true,
+                money: true
             },
         },
         messages: {
@@ -1129,10 +1132,14 @@ $(function () {
                 min: "Seleccione un proveedor",
             },
             Porcentaje: {
-                required: "Digite el porcentaje"
+                required: "Digite el porcentaje",
+                number: "Solo se permiten números",
+                min: "El porcentaje debe ser mayor o igual a cero",
+                max: "El porcentaje debe ser menor o igual a cien"
             },
             Monto: {
-                required: "Digite el monto"
+                required: "Digite el monto",
+                money: "Digite un formato válido de dinero"
             },
         }
     }, function (data) {
@@ -1159,25 +1166,23 @@ $(function () {
 
 
         if (isTypeValuePorcentage) {
-            monto.hide();
-            porcentaje.show();
 
             inputMonto.rules("remove", "required");
             inputMonto.val('');
+            inputMonto.valid();
+            monto.hide();
+            porcentaje.show();
             inputPorcentaje.rules("add", { required: true });
 
         }
         else {
-            porcentaje.hide();
-            monto.show();
-
             inputPorcentaje.rules("remove", "required");
             inputPorcentaje.val('');
+            inputPorcentaje.valid();
+            porcentaje.hide();
+            monto.show();
             inputMonto.rules("add", { required: true });
         }
-
-        //inputMonto.valid();
-        //inputPorcentaje.valid();
     });
 
 });
@@ -1187,6 +1192,19 @@ function GetProviders() {
     var id = $("#SitioId").val();
 
     fns.CallGetAsync("api/providerSite/selectProviders", { id: id }, function (dataResponse) {
+        providerTypeData = dataResponse.some(item => item.monto != "" && item.monto != null && item.monto != 0) ? "monto" : "porcentaje"
+        providerHasTypeData = dataResponse.some(item => (item.porcentaje != "" && item.porcentaje != null && item.porcentaje != 0) || (item.monto != "" && item.monto != null && item.monto != 0));
+
+        if (providerHasTypeData) {
+            $("#TipoValor").siblings("span.switchery").addClass("disabled-switch");
+            if (providerTypeData == "monto") {
+                $("#TipoValor").changeSwitch(false);
+            }
+            else {
+                $("#TipoValor").changeSwitch(true);
+            }
+        }
+
         $("#providersTable").DataTable().clear();
         $("#providersTable").DataTable().rows.add(dataResponse).draw();
     });
@@ -1196,6 +1214,13 @@ function UpdateProvider(id) {
     fns.CallGetAsync(`api/providerSite/Find`, { id: id }, function (response) {
         $("#frmProvider").assignJsonToForm(response);
         $('#ProviderListId').val(response.proveedorId).trigger('change.select2');
+
+        if (providerTypeData == "monto") {
+            $("#TipoValor").changeSwitch(false);
+        }
+        else {
+            $("#TipoValor").changeSwitch(true);
+        }
     })
     $("#modalTitleProvider").html("Modificando proveedor");
     $("#modalProvider").modal("show");
