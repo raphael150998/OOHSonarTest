@@ -136,5 +136,17 @@ namespace OOH.Data.Repos
         {
             return await SelectData<Sitios>("SELECT * FROM Sitios");
         }
+
+        /// <summary>
+        /// Determina si el codigo enviado en el parametro esta disponible en la base de datos
+        /// </summary>
+        /// <param name="code">Codigo a verificar</param>
+        /// <returns></returns>
+        public async Task<bool> IsCodeAvailable(string code)
+        {
+            int result = await FilterData<int>("SELECT COUNT(SitioId) FROM Sitios WHERE Codigo = @Codigo;");
+
+            return result == 0;
+        }
     }
 }

@@ -126,5 +126,12 @@ namespace OOH.WebApi.ApiControllers
         {
             return Ok(await _siteRepo.Remove(obj.Id));
         }
+
+        [HttpPost("IsCodeAvailable")]
+        [OhhFilterAttribute("Sites", Data.ActionPermission.Read)]
+        public async Task<IActionResult> IsCodeAvailable([FromBody] string code)
+        {
+            return Ok(await _siteRepo.IsCodeAvailable(code));
+        }
     }
 }

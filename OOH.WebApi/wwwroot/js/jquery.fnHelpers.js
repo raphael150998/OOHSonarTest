@@ -122,11 +122,7 @@ $.fn.assignJsonToForm = function (json) {
 //Cambia el switch que contenga la clase css js-single al valor especificado
 $.fn.changeSwitch = function (value) {
     if (this.hasClass("js-single") || this.hasClass("js-switch")) {
-        if (value == this.prop("checked")) {
-            this.trigger("click");
-            this.trigger("click");
-        }
-        else {
+        if (value != this.prop("checked")) {
             this.trigger("click");
         }
     }

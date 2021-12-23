@@ -23,7 +23,16 @@
     var validator = Validate.Form("#frmSitio", "api/site/CreateUpdate", {
         rules: {
             Codigo: {
-                required: true
+                required: true,
+                remote: {
+                    url: "/api/site/IsCodeAvailable",
+                    type: "post",
+                    data: {
+                        code: function () {
+                            return $("#Codigo").val();
+                        }
+                    }
+                }
             },
             ProveedorId: {
                 required: true
@@ -173,26 +182,27 @@ function getTimes() {
 function setTimes() {
     var id = $("#SitioId").val();
 
-    var exportData = $('#schedule').jqs('export');
+    if (parseInt(id) > 0) {
+        var exportData = $('#schedule').jqs('export');
 
-    SweetAlert.ConfirmForm(function () {
+        SweetAlert.ConfirmForm(function () {
 
-        fns.PostDataNoAsync(`api/time/times/${id}`, exportData, function (dataResult) {
-            if (!dataResult) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Intente nuevamente o contacte al administrador'
-                });
-            } else {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Logrado',
-                })
-            }
-        })
-    }, false);
-
+            fns.PostDataNoAsync(`api/time/times/${id}`, exportData, function (dataResult) {
+                if (!dataResult) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Intente nuevamente o contacte al administrador'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logrado',
+                    })
+                }
+            })
+        }, false);
+    }
 }
 
 function loadMap() {
@@ -709,7 +719,6 @@ $(function () {
         }
     });
 
-
     var frmInsurance = Validate.Form("#frmInsurance", "api/insuranceSite/CreateUpdate", {
         rules: {
             SeguroId: {
@@ -1072,7 +1081,12 @@ function BuildPermissionsDatatable() {
                 }
             },
             { data: "nombreEstado" },
-            { data: "activo" }
+            {
+                data: "activo",
+                render: function (data, type, full, meta) {
+                    return `<input onclick="return false;" type="checkbox" ${data ? "checked" : ""} class="js-switch bool form-control" />`;
+                }
+            }
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
@@ -1087,6 +1101,7 @@ function BuildPermissionsDatatable() {
 
 var providerHasTypeData = false;
 var providerTypeData = "porcentaje";
+var providerRateTaken = 0;
 
 $(function () {
     $("#modalProvider").modal({
@@ -1108,6 +1123,19 @@ $(function () {
         }
     });
 
+    $.validator.addMethod('rateLimitProvider', function (value, element, param) {
+
+        var valueFloat = parseFloat(value);
+
+        var totalRate = valueFloat + providerRateTaken;
+
+        return this.optional(element) || totalRate <= 100;
+    }, function (param, element) {
+
+        var maxLimit = 100 - providerRateTaken;
+
+        return jQuery.validator.format("La suma total de los porcentajes debe ser menor o igual a 100%. Porcentaje maximo permitido {0}%", maxLimit)
+    });
 
     var frmProvider = Validate.Form("#frmProvider", "api/providerSite/CreateUpdate", {
         rules: {
@@ -1119,7 +1147,8 @@ $(function () {
                 required: true,
                 number: true,
                 min: 0,
-                max: 100
+                max: 100,
+                rateLimitProvider: true
             },
             Monto: {
                 required: true,
@@ -1195,7 +1224,14 @@ function GetProviders() {
         providerTypeData = dataResponse.some(item => item.monto != "" && item.monto != null && item.monto != 0) ? "monto" : "porcentaje"
         providerHasTypeData = dataResponse.some(item => (item.porcentaje != "" && item.porcentaje != null && item.porcentaje != 0) || (item.monto != "" && item.monto != null && item.monto != 0));
 
+        providerRateTaken = 0;
+
         if (providerHasTypeData) {
+
+            dataResponse.forEach(function (item, index) {
+                providerRateTaken += item.porcentaje;
+            });
+
             $("#TipoValor").siblings("span.switchery").addClass("disabled-switch");
             if (providerTypeData == "monto") {
                 $("#TipoValor").changeSwitch(false);
@@ -1204,6 +1240,9 @@ function GetProviders() {
                 $("#TipoValor").changeSwitch(true);
             }
         }
+        else {
+            $("#TipoValor").siblings("span.switchery").removeClass("disabled-switch");
+        }
 
         $("#providersTable").DataTable().clear();
         $("#providersTable").DataTable().rows.add(dataResponse).draw();
@@ -1211,7 +1250,9 @@ function GetProviders() {
 }
 
 function UpdateProvider(id) {
+    $("#modalProvider").modal("show");
     fns.CallGetAsync(`api/providerSite/Find`, { id: id }, function (response) {
+
         $("#frmProvider").assignJsonToForm(response);
         $('#ProviderListId').val(response.proveedorId).trigger('change.select2');
 
@@ -1223,7 +1264,7 @@ function UpdateProvider(id) {
         }
     })
     $("#modalTitleProvider").html("Modificando proveedor");
-    $("#modalProvider").modal("show");
+
 }
 
 function RemoveProvider(id) {
@@ -1262,8 +1303,24 @@ function BuildProvidersDatatable() {
                 }
             },
             { data: "nombre" },
-            { data: "porcentaje" },
-            { data: "monto" }
+            {
+                data: "porcentaje",
+                render: function (data, type, full, meta) {
+                    if (data == 0 || data == null || data == "") {
+                        return ``;
+                    }
+                    return `${data}%`;
+                }
+            },
+            {
+                data: "monto",
+                render: function (data, type, full, meta) {
+                    if (data == 0 || data == null || data == "") {
+                        return ``;
+                    }
+                    return `$${data}`;
+                }
+            }
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
@@ -1275,6 +1332,11 @@ function BuildProvidersDatatable() {
 //fin tabla proveedores
 
 //tabla centro de costos
+
+var costHasTypeData = false;
+var costTypeData = "porcentaje";
+var costRateTaken = 0;
+var previousCostValue = 0;
 
 $(function () {
     $("#modalCost").modal({
@@ -1296,6 +1358,19 @@ $(function () {
         }
     });
 
+    $.validator.addMethod('rateLimitCost', function (value, element, param) {
+
+        var valueFloat = parseFloat(value);
+
+        var totalRate = valueFloat + costRateTaken;
+
+        return this.optional(element) || totalRate <= 100;
+    }, function (param, element) {
+
+        var maxLimit = 100 - costRateTaken;
+
+        return jQuery.validator.format("La suma total de los porcentajes debe ser menor o igual a 100%. Porcentaje maximo permitido {0}%", maxLimit)
+    });
 
     var frmCost = Validate.Form("#frmCost", "api/costSite/CreateUpdate", {
         rules: {
@@ -1304,10 +1379,15 @@ $(function () {
                 min: 1,
             },
             Porcentaje: {
-                required: true
+                required: true,
+                number: true,
+                min: 0,
+                max: 100,
+                rateLimitCost: true
             },
             Monto: {
-                required: true
+                required: true,
+                money: true
             },
         },
         messages: {
@@ -1316,10 +1396,14 @@ $(function () {
                 min: "Seleccione un costo",
             },
             Porcentaje: {
-                required: "Digite el porcentaje"
+                required: "Digite el porcentaje",
+                number: "Solo se permiten números",
+                min: "El porcentaje debe ser mayor o igual a cero",
+                max: "El porcentaje debe ser menor o igual a cien"
             },
             Monto: {
-                required: "Digite el monto"
+                required: "Digite el monto",
+                money: "Digite un formato válido de dinero"
             },
         }
     }, function (data) {
@@ -1332,6 +1416,37 @@ $(function () {
         frmCost.resetForm();
         $('#CostoId').val('').trigger('change.select2');
         $("#modalCost").modal("hide");
+    });
+
+    $("#TipoValorCost").change(function () {
+        var control = $(this);
+        var isTypeValuePorcentage = control.prop("checked");
+
+        var porcentaje = $("#divPorcentajeCosto");
+        var monto = $("#divMontoCosto");
+
+        var inputPorcentaje = $("#porcentajeCosto");
+        var inputMonto = $("#montoCosto");
+
+
+        if (isTypeValuePorcentage) {
+
+            inputMonto.rules("remove", "required");
+            inputMonto.val('');
+            inputMonto.valid();
+            monto.hide();
+            porcentaje.show();
+            inputPorcentaje.rules("add", { required: true });
+
+        }
+        else {
+            inputPorcentaje.rules("remove", "required");
+            inputPorcentaje.val('');
+            inputPorcentaje.valid();
+            porcentaje.hide();
+            monto.show();
+            inputMonto.rules("add", { required: true });
+        }
     });
 
     DropDownListCosts();
@@ -1358,6 +1473,29 @@ function GetCosts() {
     var id = $("#SitioId").val();
 
     fns.CallGetAsync("api/costSite/selectCosts", { id: id }, function (dataResponse) {
+        costTypeData = dataResponse.some(item => item.monto != "" && item.monto != null && item.monto != 0) ? "monto" : "porcentaje"
+        costHasTypeData = dataResponse.some(item => (item.porcentaje != "" && item.porcentaje != null && item.porcentaje != 0) || (item.monto != "" && item.monto != null && item.monto != 0));
+
+        costRateTaken = 0;
+
+        if (costHasTypeData) {
+
+            dataResponse.forEach(function (item, index) {
+                costRateTaken += item.porcentaje;
+            });
+
+            $("#TipoValorCost").siblings("span.switchery").addClass("disabled-switch");
+            if (costTypeData == "monto") {
+                $("#TipoValorCost").changeSwitch(false);
+            }
+            else {
+                $("#TipoValorCost").changeSwitch(true);
+            }
+        }
+        else {
+            $("#TipoValorCost").siblings("span.switchery").removeClass("disabled-switch");
+        }
+
         $("#costCenterTable").DataTable().clear();
         $("#costCenterTable").DataTable().rows.add(dataResponse).draw();
     });
@@ -1367,6 +1505,15 @@ function UpdateCost(id) {
     fns.CallGetAsync(`api/costSite/Find`, { id: id }, function (response) {
         $("#frmCost").assignJsonToForm(response);
         $('#CostoId').val(response.costoId).trigger('change.select2');
+
+        previousCostValue = response.porcentaje;
+
+        if (costTypeData == "monto") {
+            $("#TipoValor").changeSwitch(false);
+        }
+        else {
+            $("#TipoValor").changeSwitch(true);
+        }
     })
     $("#modalTitleCost").html("Modificando costo");
     $("#modalCost").modal("show");
@@ -1408,8 +1555,24 @@ function BuildCostsDatatable() {
                 }
             },
             { data: "nombre" },
-            { data: "porcentaje" },
-            { data: "monto" }
+            {
+                data: "porcentaje",
+                render: function (data, type, full, meta) {
+                    if (data == 0 || data == null || data == "") {
+                        return ``;
+                    }
+                    return `${data}%`;
+                }
+            },
+            {
+                data: "monto",
+                render: function (data, type, full, meta) {
+                    if (data == 0 || data == null || data == "") {
+                        return ``;
+                    }
+                    return `$${data}`;
+                }
+            }
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
@@ -1418,4 +1581,4 @@ function BuildCostsDatatable() {
     GetCosts();
 }
 
-//fin tabla proveedores
+//fin tabla centro de costos

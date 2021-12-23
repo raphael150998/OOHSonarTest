@@ -8,7 +8,7 @@
         var re = new RegExp(/^\$?\d+(,\d{3})*(\.\d{1,2})?$/);
 
         return this.optional(element) || re.test(value);
-    }, "Please enter a valid money format")
+    }, "Please enter a valid money format");
 
     BuildLogDatatable();
     $("#btnCloseLog").click(function () {

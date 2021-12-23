@@ -615,13 +615,24 @@
                             <select id="CostoId" name="CostoId" class="number select-viva-validation">
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label>Porcentaje</label>
-                            <input type="number" class="form-control number" name="Porcentaje" />
+                        <div class="col-md-4" style="display: flex; flex-direction: column; justify-content: flex-start;">
+                            <label class="control-label">Tipo de valor</label>
+                            <div>
+                                <label class="control-label">Monto</label>
+                                <input type="checkbox" checked class="js-switch bool" name="TipoValorCost" id="TipoValorCost" />
+                                <label class="control-label">Porcentaje</label>
+                            </div>
+
                         </div>
                         <div class="col-md-4">
-                            <label>Monto</label>
-                            <input type="number" class="form-control number" name="Monto" />
+                            <div id="divPorcentajeCosto">
+                                <label>Porcentaje</label>
+                                <input type="number" data-icon="%" class="form-control number" id="porcentajeCosto" name="Porcentaje" />
+                            </div>
+                            <div style="display:none;" id="divMontoCosto">
+                                <label>Monto</label>
+                                <input type="number" data-icon="$" class="form-control number" id="montoCosto" name="Monto" />
+                            </div>
                         </div>
                     </div>
                 </div>
