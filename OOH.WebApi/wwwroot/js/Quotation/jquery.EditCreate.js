@@ -4,10 +4,10 @@ let IdCotizacion = $("#CotizacionId").val();
 $().ready(function ($) {
     DropDownListClientes();
     DropDownListAgencias();
-    //Validate.Form("#form-cotizacion", "api/Quotation/SaveMD", {}, function () {
+    Validate.Form("#form-cotizacion", "api/Quotation/SaveMD", {}, function () {
 
 
-    //},);
+    });
     llenarData();
 });
 
@@ -109,15 +109,7 @@ function DetalleDT() {
 
     DataTableHelper.Draw("#CarasTable", {
         destroy: true,
-        dom: "Bfrltip",
-        buttons: [
-            {
-                text: '<i class="fa fa-plus"></i>',
-                action: function (e, dt, node, config) {
-                    addCara(0);
-                }
-            }
-        ],
+        dom: "1frltip",
         orderCellsTop: true,
         fixedHeader: true,
         data: [],

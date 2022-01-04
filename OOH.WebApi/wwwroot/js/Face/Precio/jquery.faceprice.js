@@ -33,7 +33,7 @@ function DataTablePrecios() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `
-                    <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + full["id"] + `')"></i>
+                    <i class="fa fa-pencil-square btnDatatable text-primary" onclick="addPrecio('` + full["id"] + `')"></i>
                      <i class="fa fa-trash btnDatatable text-danger" onclick="removePriceFace('`+ data + `')"></i>
                      `;
                 }
@@ -69,36 +69,56 @@ function DropDownTipoPrecio() {
 }
 
 function addPrecio(id) {
-    $("#ModalPrecio").modal("show");
-    DropDownTipoPrecio();
+    if ($("#CaraId").val() != 0) {
+
+        $("#ModalPrecio").modal("show");
+        $("#precio").val("");
+        $("#priccaraid").val("");
+
+        DropDownTipoPrecio();
+        $("#priccaraid").val(id);
+        if (id != 0) {
+
+            fns.CallGetAsync("api/priceface/byid", { id: id }, function (dataRequest) {
+                console.log(dataRequest);
+                $("#precio").val(dataRequest["precio"]);
+                $('#dropdownTypesPrice').val(dataRequest["tipoId"]).trigger('change.select2');
+            });
+
+        }
+    }
 }
 
 function guardarPriceFace() {
+    var TipoSelected = $("#dropdownTypesPrice option:selected").val();
+    if (TipoSelected != null) {
 
-    var sendObject = {
-        TipoId: $("#dropdownTypesPrice option:selected").val(),
-        CaraId: $("#CaraId").val(),
-        Precio: $("#precio").val()
-    }
-
-    fns.PostDataAsync("api/priceface/post", JSON.stringify(sendObject), function (callback) {
-
-        if (callback["state"]) {
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Logrado',
-            });
-            $("#ModalPrecio").modal("hide");
-            GetDataTablePrecios();
-        } else {
-
-            Swal.fire({
-                icon: 'error',
-                title: 'A ocurrido un error',
-            });
+        var sendObject = {
+            TipoId: TipoSelected,
+            CaraId: $("#CaraId").val(),
+            Precio: $("#precio").val(),
+            Id: $("#priccaraid").val()
         }
-    })
+
+        fns.PostDataAsync("api/priceface/post", JSON.stringify(sendObject), function (callback) {
+
+            if (callback["state"]) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logrado',
+                });
+                $("#ModalPrecio").modal("hide");
+                GetDataTablePrecios();
+            } else {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'A ocurrido un error',
+                });
+            }
+        });
+    }
 
 }
 

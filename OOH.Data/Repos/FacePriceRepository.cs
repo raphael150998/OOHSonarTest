@@ -1,4 +1,5 @@
 ﻿using OOH.Data.Dtos.Caras;
+using OOH.Data.Dtos.Logs;
 using OOH.Data.Helpers;
 using OOH.Data.Interfaces;
 using OOH.Data.Models;
@@ -12,8 +13,10 @@ namespace OOH.Data.Repos
 {
     public class FacePriceRepository : OOHContext
     {
-        public FacePriceRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+        public FacePriceRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public async Task<IEnumerable<TiposPrecios>> GetType()
@@ -25,9 +28,24 @@ namespace OOH.Data.Repos
             return await SelectData<FacePriceDto>($"Select t1.Id, t1.TipoId, (Select t2.Nombre From TiposPrecios t2 where t2.Id = t1.TipoId) as Tipo, t1.Precio from CarasPrecios t1 where t1.CaraId ={id}");
 
         }
+        public async Task<FacePriceDto> findbyid(long id)
+        {
+            return await FilterData<FacePriceDto>($"Select t1.Id, t1.TipoId, (Select t2.Nombre From TiposPrecios t2 where t2.Id = t1.TipoId) as Tipo, t1.Precio from CarasPrecios t1 where t1.Id ={id}");
 
+        }
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        {
+            return _log.GetLogs(new LogInputDto(id, nameof(CarasPrecios)));
+        }
+          
         public async Task<bool> RemovePrice(long id)
         {
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = "Eliminación",
+                Entidad = nameof(CarasPrecios),
+                EntidadId = id
+            });
             return await RemoveData($"delete from CarasPrecios where id= {id}") == 1 ? true : false;
 
         }
@@ -36,7 +54,15 @@ namespace OOH.Data.Repos
         {
             try
             {
-                return new ResultClass() { data = await PostData("insert into CarasPrecios(TipoId,CaraId,Precio) values (@TipoId,@CaraId,@Precio)",true,new(collection)), message = "Logrado" };
+                long save = collection.Id != 0 ? await UpdateData("update CarasPrecios set Precio = @Precio , TipoId = @TipoId where Id = @Id",true,new(collection)) : await PostData("insert into CarasPrecios(TipoId,CaraId,Precio) values (@TipoId,@CaraId,@Precio)", true, new(collection));
+                await _log.AddLog(new LogDto()
+                {
+                    Descripcion = collection.Id == 0 ? "Creación" : "Actualización",
+                    Entidad = nameof(CarasPrecios),
+                    EntidadId = collection.Id == 0 ? (int)save : collection.Id,
+                });
+
+                return new ResultClass() { data = save, message = "Logrado" };
             }
             catch (Exception ex)
             {

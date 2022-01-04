@@ -7,14 +7,6 @@
     .ch {
         width: 30%
     }
-     <div class="card">
-        <div class="card-block row action-card-header-viva">
-            <div class="col-md-3 btn-viva-flex">
-                <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-primary" />
-                <a class="btn btn-outline-primary" href="@Url.Action("CreateUpdate","Sites", new { id = 0 })" target="_blank">Nuevo</a>
-            </div>
-        </div>
-    </div>
 </style>
 <input asp-for="CotizacionId" hidden />
 
@@ -203,23 +195,23 @@
                                                     <input id="idCaraAdd" hidden />
                                                     <div class="col-md-4">
                                                         <label class="control-label">Costo de arrendamiento</label>
-                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
+                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label class="control-label">Costo de impresion</label>
-                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
+                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label class="control-label">Costo de instalacion</label>
-                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
+                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label class="control-label">Costo saliente</label>
-                                                        <input type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
+                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label class="control-label">Fecha Desde</label>
-                                                        <input type="date" class="form-control" id="FechaDesde" />
+                                                        <input  type="date" class="form-control" id="FechaDesde" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label class="control-label">Fecha Hasta</label>

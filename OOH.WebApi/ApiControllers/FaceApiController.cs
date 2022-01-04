@@ -91,7 +91,16 @@ namespace OOH.WebApi.ApiControllers
         public async Task<IActionResult> getFacePrices(long id)
         {
             return Ok(await _repoFacePrice.GetPriceByFace(id));
+        } 
+        
+        [HttpGet]
+        [Route("api/priceface/byid")]
+        public async Task<IActionResult> getFacePricesbyId(long id)
+        {
+            return Ok(await _repoFacePrice.findbyid(id));
         }
+
+
 
         [HttpPost]
         [Route("api/priceface/post")]
@@ -115,6 +124,13 @@ namespace OOH.WebApi.ApiControllers
         public async Task<IActionResult> getFaceMaterial(long id)
         {
             return Ok(await _repoFaceMaterial.Select(id));
+        }  
+        
+        [HttpGet]
+        [Route("api/face/material/by")]
+        public async Task<IActionResult> getFaceMaterialbyId(long id)
+        {
+            return Ok(await _repoFaceMaterial.findbyid(id));
         }
 
         [HttpPost]
@@ -173,9 +189,14 @@ namespace OOH.WebApi.ApiControllers
         #endregion
 
 
-       
+        [Route("api/face/log")]
+        public async Task<IActionResult> GetLogs(int id)
+        {
+            return Ok(await _repo.GetLogs(id));
+        }
 
 
-      
+
+
     }
 }

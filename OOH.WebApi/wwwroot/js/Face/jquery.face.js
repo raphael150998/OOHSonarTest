@@ -28,9 +28,10 @@ function DrawDataTableFace() {
             {
                 data: "id",
                 render: function (data, type, full, meta) {
-                    console.log(full);
                     return ` <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + full["caraId"] + `')"></i>
-                             <i class="fa fa-trash  btnDatatable text-danger"  onclick="removeFace('` + full.caraId + `','` + full.id + `')"></i>`;
+                             <i class="fa fa-trash  btnDatatable text-danger"  onclick="removeFace('` + full.caraId + `','` + full.id + `')"></i>
+                        <i onclick = "GetLogs('Caras', 'api/face/log', ${data})" class="fa fa-history btnDatatable text-warning" ></i >
+                        `;
                 }
             },
             {

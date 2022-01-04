@@ -52,7 +52,7 @@ function DataTableMaterial() {
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `
-                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="edit('` + full["id"] + `')"></i>
+                      <i class="fa fa-pencil-square btnDatatable text-primary" onclick="addMaterial('` + full["id"] + `')"></i>
 
                      <i class="fa fa-trash btnDatatable text-danger" onclick="removeCosto('`+ data + `')"></i>
                      `;
@@ -77,26 +77,46 @@ function DataTableMaterial() {
 
 
 function addMaterial(id = 0) {
-    $("#ModalMaterial").modal("show");
-    DropMaterial();
+    if ($("#CaraId").val() != 0) {
+
+        $("#ModalMaterial").modal("show");
+        $("#matcaraid").val(id)
+        DropMaterial();
+        if (id != 0) {
+            fns.CallGetAsync("api/face/material/by", { id: id }, function (dataRequest) {
+
+
+                $('#dropdownMaterial').val(dataRequest["materialId"]).trigger('change.select2');
+
+
+            });
+        }
+    }
+
 }
 
 
 function guardarMaterial() {
     var idMaterial = $("#dropdownMaterial option:selected").val();
-    var objetoMaterial = {
-        CaraId: $("#CaraId").val(),
-        MaterialId: idMaterial
-    };
+    debugger;
+    if (idMaterial != "null") {
 
-    fns.PostDataAsync("api/face/material/CEdata", JSON.stringify(objetoMaterial), function (dataResult) {
+        var objetoMaterial = {
+            CaraId: $("#CaraId").val(),
+            MaterialId: idMaterial,
+            Id: $("#matcaraid").val()
+        };
 
-        console.log(dataResult);
-        if (dataResult["state"]) {
-            $("#ModalMaterial").modal("hide");
-            GetDataTableMateriales();
-        }
-    });
+        fns.PostDataAsync("api/face/material/CEdata", JSON.stringify(objetoMaterial), function (dataResult) {
+
+            console.log(dataResult);
+            if (dataResult["state"]) {
+                $("#ModalMaterial").modal("hide");
+                GetDataTableMateriales();
+            }
+        });
+    }
+
 }
 
 function removeCosto(id) {

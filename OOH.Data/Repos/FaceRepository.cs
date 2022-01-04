@@ -123,7 +123,7 @@ namespace OOH.Data.Repos
 
         public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
         {
-            throw new NotImplementedException();
+            return _log.GetLogs(new LogInputDto(id, nameof(Caras)));
         }
 
         public async Task<bool> Remove(int id)
