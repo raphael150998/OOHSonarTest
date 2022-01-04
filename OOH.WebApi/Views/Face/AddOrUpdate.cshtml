@@ -95,17 +95,11 @@
                         <span asp-validation-for="Codigo" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
-                        <label class="control-label">Referencia</label>
-                        <input asp-for="ReferenciaComercial" class="form-control" />
-                        <span asp-validation-for="ReferenciaComercial" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
                         <label class="control-label">Sitio</label>
                         <div id="divSitio">
                         </div>
 
                     </div>
-
                     <div class="col-md-3">
                         <label class="control-label">Metodo de Inst.</label>
                         <input asp-for="MetodoInstalacion" class="form-control" />
@@ -113,12 +107,10 @@
                     </div>
 
 
-                    <div class="col-md-6">
-                        <label class="control-label">Observaciones</label>
-                        <input asp-for="Observaciones" class="form-control" />
-                        <span asp-validation-for="Observaciones" class="text-danger"></span>
-                    </div>
+                  
 
+
+               
                     <div class="col-md-3">
                         <label class="control-label">Categoria</label>
 
@@ -133,13 +125,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="control-label">Notas</label>
-                        <input asp-for="NotaInstalacion" class="form-control" />
-                        <span asp-validation-for="NotaInstalacion" class="text-danger"></span>
-                    </div>
-
-
+               
                     <div class="col-md-3">
                         <label asp-for="Sentido" class="control-label"></label>
                         <input asp-for="Sentido" class="form-control" />
@@ -147,7 +133,7 @@
                     </div>
                     <div class="col-md-3">
                         <label asp-for="AlturaAlPiso" class="control-label"></label>
-                        <input data-icon="Mts."  data-mask="Decimal" asp-for="AlturaAlPiso" class="form-control" />
+                        <input data-icon="Mts." data-mask="Decimal" asp-for="AlturaAlPiso" class="form-control" />
                         <span asp-validation-for="AlturaAlPiso" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
@@ -169,7 +155,31 @@
                         <span asp-validation-for="NumSpotDigital" class="text-danger"></span>
                     </div>
 
+                    <div class="col-md-3">
 
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="control-label">Referencia</label>
+                        <textarea asp-for="ReferenciaComercial" class="form-control"></textarea>
+
+                        <span asp-validation-for="ReferenciaComercial" class="text-danger"></span>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <label class="control-label">Observaciones</label>
+                        <textarea asp-for="Observaciones" class="form-control" ></textarea>
+                        <span asp-validation-for="Observaciones" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="control-label">Notas</label>
+                        <textarea asp-for="NotaInstalacion" class="form-control"></textarea>
+                        <span asp-validation-for="NotaInstalacion" class="text-danger"></span>
+
+                    </div>
                 </div>
 
             </div>
@@ -275,16 +285,16 @@
                     <div class="container">
                          <div class="col-md-12">
                             <label class="label-control">Material</label>
+                             <input hidden id="matcaraid" />
                            <div id="divMaterial"></div>
                         </div>
-                       
-
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="guardarMaterial()" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
+
         </div>
     </div>
 </div>
@@ -304,8 +314,9 @@
                            <div id="divPrecios"></div>
                         </div>
                          <div class="col-md-3">
+                             <input hidden id="priccaraid" />
                              <label class="label-control">Precio</label>
-                             <input type="text" name="precio" id="precio" data-mask="Decimal" class="form-control" />
+                             <input data-icon="$"  type="text" name="precio" id="precio" data-mask="Decimal" class="form-control" />
                          </div>
                        
 

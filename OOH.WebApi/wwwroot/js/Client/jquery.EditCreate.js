@@ -110,7 +110,7 @@ function DropDownListMunicipio() {
                 departamento = mun.departamentoId;
                 optionGrp = `<optgroup label="` + mun.departamento + `" group-id="` + mun.departamentoId + `" >`;
             }
-            let option = optionGrp + `<option value="` + mun.municipioId + `"> ` + mun.departamento + "/" + mun.nombre + `</option> `;
+            let option = optionGrp + `<option value="` + mun.municipioId + `"> `+ mun.nombre + `</option> `;
 
             if (mun.departamentoId != departamento) {
                 option = option + "  </optgroup>";

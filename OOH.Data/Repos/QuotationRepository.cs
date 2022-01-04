@@ -86,7 +86,7 @@ namespace OOH.Data.Repos
             {
                 QuotationDto dto = new QuotationDto();
                 dto = await FilterData<QuotationDto>($"SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.ClienteId ,t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, t1.AgenciaId,(select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado , t1.EstadoId, t1.AtencionA , t1.ConsolidaCostos , t1.UserId ,t1.Comentarios FROM [dbo].[Cotizaciones] t1 WHERE CotizacionId = {Idcotizacion} ");
-                dto.User =  SelectData<QuotationDto>($"SELECT [Username] as [User] FROM [dbo].[Usuarios] Where UserId ={dto.UserId}", "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Cesar1983****;MultipleActiveResultSets=True;App=EntityFramework").Result.FirstOrDefault().User;
+                dto.User =  SelectData<QuotationDto>($"SELECT [Username] as [User] FROM [dbo].[Usuarios] Where UserId ={dto.UserId}", "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Tamao1234;MultipleActiveResultSets=True;App=EntityFramework").Result.FirstOrDefault().User;
                 return dto;
             }
             catch (Exception ex)
@@ -96,9 +96,9 @@ namespace OOH.Data.Repos
             }
 
         } 
-        public async Task<IEnumerable<Cotizaciones>> Select(string _Where = "")
+        public async Task<IEnumerable<Cotizaciones>> Select()
         {
-            return await SelectData<Cotizaciones>("SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, (select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado, t1.AtencionA , t1.ConsolidaCostos, t1.EstadoId FROM [dbo].[Cotizaciones] t1 " + _Where, false);
+            return await SelectData<Cotizaciones>("SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, (select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado, t1.AtencionA , t1.ConsolidaCostos, t1.EstadoId FROM [dbo].[Cotizaciones] t1 ", false);
 
         }
 
@@ -206,9 +206,5 @@ namespace OOH.Data.Repos
             return await RemoveData($"Delete From [dbo].[CotizacionesDetalle] Where Id ={IdDetail}") == 1 ? true : false;
         }
 
-        public Task<IEnumerable<Cotizaciones>> Select()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

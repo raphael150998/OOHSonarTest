@@ -61,7 +61,7 @@ namespace OOH.WebApi.ApiControllers
 
                 var authProperties = new AuthenticationProperties
                 {
-                    IsPersistent = true,
+                    IsPersistent = false,
                 };
 
                 await HttpContext.SignInAsync(

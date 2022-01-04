@@ -13,16 +13,25 @@ namespace OOH.Data.Repos
 {
     public class CaraMaterialRepository : OOHContext
     {
-        public CaraMaterialRepository(IWebUserHelper userHelper) : base(userHelper)
+        private readonly ILogHelper _log;
+        public CaraMaterialRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
         {
+            _log = log;
         }
 
         public async Task<ResultClass> AddOrUpdate(CarasMateriales model)
         {
             try
             {
-                model.Id = 0;
-                return new ResultClass() { data =await PostData("insert into CarasMateriales(CaraId,MaterialId) values(@CaraId,@MaterialId) ", true,new(model)) };
+                long save = model.Id ==  0 ? await PostData("insert into CarasMateriales(CaraId,MaterialId) values(@CaraId,@MaterialId) ", true, new(model))
+                    : await UpdateData($"update CarasMateriales set MaterialId = @MaterialId where Id = @Id",true,new (model));
+                await _log.AddLog(new LogDto()
+                {
+                    Descripcion = model.Id == 0 ? "Creación" : "Actualización",
+                    Entidad = nameof(CarasPrecios),
+                    EntidadId = model.Id == 0 ? (int)save : model.Id,
+                });
+                return new ResultClass() { data = save};
             }
             catch (Exception ex)
             {
@@ -31,11 +40,26 @@ namespace OOH.Data.Repos
             }
 
         }
-
+        public Task<IEnumerable<LogOutputDto>> GetLogs(int id)
+        {
+            return _log.GetLogs(new LogInputDto(id, nameof(CarasMateriales)));
+        }
 
         public async Task<bool> Remove(long id)
         {
+            await _log.AddLog(new LogDto()
+            {
+                Descripcion = "Eliminación",
+                Entidad = nameof(CarasMateriales),
+                EntidadId = id
+            });
             return await RemoveData($"Delete from CarasMateriales where Id = {id}") == 1 ? true : false;
+        }
+
+        public async Task<CarasMateriales> findbyid(long id)
+        {
+            return await FilterData<CarasMateriales>($"select * from CarasMateriales t1 where Id = {id}");
+
         }
 
         public async Task<IEnumerable<FaceMaterialDto>> Select(long id)
