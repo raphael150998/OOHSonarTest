@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using OOH.Data.Dtos;
 using OOH.Data.Helpers;
 using OOH.Data.Models;
 using OOH.Data.Repos;
+using OOH.WebApi.Models.Site.Permission;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,12 @@ namespace OOH.WebApi.ApiControllers
     public class PermissionSiteApiController : Controller
     {
         private readonly PermissionSiteRepository _repo;
+        private readonly IMapper _mapper;
 
-        public PermissionSiteApiController(PermissionSiteRepository repo)
+        public PermissionSiteApiController(PermissionSiteRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpGet("selectPermissions")]
@@ -28,7 +32,7 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost("CreateUpdate")]
-        public async Task<IActionResult> CreateUpdate([FromBody] SitiosPermisosMunicipales model)
+        public async Task<IActionResult> CreateUpdate([FromBody] SitePermissionVm model)
         {
             ResultClass response = new ResultClass();
 
@@ -38,16 +42,7 @@ namespace OOH.WebApi.ApiControllers
 
                 sitePermission = sitePermission ?? new();
 
-                sitePermission.Id = model.Id;
-                sitePermission.PermisoId = model.PermisoId;
-                sitePermission.SitioId = model.SitioId;
-                sitePermission.EstadoId = model.EstadoId;
-                sitePermission.Monto = model.Monto;
-                sitePermission.FrecuenciaPago = model.FrecuenciaPago;
-                sitePermission.FechaInicio = model.FechaInicio;
-                sitePermission.FechaFin = model.FechaFin;
-                sitePermission.FechaInicioCuotas = model.FechaInicioCuotas;
-                sitePermission.Activo = model.Activo;
+                sitePermission = _mapper.Map<SitiosPermisosMunicipales>(model);
 
                 response = await _repo.AddOrUpdate(sitePermission);
             }
@@ -67,7 +62,7 @@ namespace OOH.WebApi.ApiControllers
 
             if (sitePermission == null) return NotFound();
 
-            return Ok(sitePermission);
+            return Ok(_mapper.Map<SitePermissionVm>(sitePermission));
         }
 
         [HttpGet("Log")]

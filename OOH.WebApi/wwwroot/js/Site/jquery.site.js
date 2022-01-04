@@ -18,7 +18,7 @@ function BuildDatatable() {
         scrollX: true,
         columns: [
             {
-                data: "sitioId", 
+                data: "sitioId",
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return `<a href="Sites/CreateUpdate/${data}" target="_blank"><i class="fa fa-pencil-square btnDatatable text-primary"></i></a>
@@ -35,8 +35,19 @@ function BuildDatatable() {
             { data: "longitud" },
             { data: "nombreMunicipio" },
             { data: "nombreZona" },
-            { data: "requierePermiso" },
-            { data: "activo" },
+            {
+                data: "requierePermiso",
+                render: function (data, type, full, meta) {
+                    console.log(data);
+                    return `<input onclick="return false;" type="checkbox" ${data ? "checked" : ""} class="js-switch bool form-control" />`;
+                }
+            },
+            {
+                data: "activo",
+                render: function (data, type, full, meta) {
+                    return `<input onclick="return false;" type="checkbox" ${data ? "checked" : ""} class="js-switch bool form-control" />`;
+                }
+            },
             { data: "registroCatastral" },
             { data: "altura" },
             { data: "observaciones" },
@@ -50,7 +61,7 @@ function BuildDatatable() {
 }
 
 function RemoveSite(id) {
-    SweetAlert.RemoveAlert("api/site/remove", { Id: parseInt(id) }, "",function (response) {
+    SweetAlert.RemoveAlert("api/site/remove", { Id: parseInt(id) }, "", function (response) {
         GetSites();
         if (response) {
             Swal.fire({

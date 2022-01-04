@@ -24,7 +24,6 @@
     },
     RemoveAlert: function (url, data, subtitle, callback) {
         data = JSON.stringify(data);
-        console.log(data);
         Swal.fire({
             title: '¿Desea eliminar?',
             text: subtitle == "" || subtitle == null ? "La información sera eliminada permanentemente" : subtitle,

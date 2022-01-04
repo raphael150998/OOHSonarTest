@@ -37,6 +37,10 @@
         padding-top: 20px;
         margin-bottom: 20px;
     }
+
+    .hide-viva {
+        display: none;
+    }
 </style>
 
 <form id="frmSitio">
@@ -70,7 +74,7 @@
                     </div>
                     <div class="col-md-2 col-single-switch-viva">
                         <label class="control-label">Activo</label>
-                        <input type="checkbox" class="js-switch bool" id="Activo" name="Activo" />
+                        <input type="checkbox" checked class="js-switch bool" id="Activo" name="Activo" />
                     </div>
                     <div class="col-md-2 col-single-switch-viva">
                         <label class="control-label">Ajeno</label>
@@ -83,137 +87,141 @@
                     <span class="h-line-viva"></span>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Código</label>
                         <input asp-for="Codigo" class="form-control" />
                         <span asp-validation-for="Codigo" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Municipio</label>
-                        <select asp-for="MunicipioId" class="number select-viva-validation">
-                        </select>
-                        <span asp-validation-for="MunicipioId" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Departamento</label>
                         <select asp-for="DepartamentoId" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="DepartamentoId" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
+                        <label class="control-label">Municipio</label>
+                        <select asp-for="MunicipioId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="MunicipioId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
                         <label class="control-label">Proveedor</label>
                         <select asp-for="ProveedorId" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="ProveedorId" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Proveedor de electricidad</label>
                         <select asp-for="ProveedorElectricidadId" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="ProveedorElectricidadId" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Porcentaje</label>
                         <input asp-for="Porcentaje" class="form-control number" />
                         <span asp-validation-for="Porcentaje" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
                         <label class="control-label">Número de contador eléctrico</label>
                         <input asp-for="ContadorElectrico" class="form-control" />
                         <span asp-validation-for="ContadorElectrico" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">NIC</label>
                         <input asp-for="NIC" class="form-control" />
                         <span asp-validation-for="NIC" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Categoría</label>
                         <select asp-for="CategoriaSitio" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="CategoriaSitio" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
                         <label class="control-label">Tipo de estructura</label>
                         <select asp-for="EstructuraTipo" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="EstructuraTipo" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label"># días solicitud de permiso</label>
                         <input asp-for="DiasSolicitudPermiso" class="form-control number" />
                         <span asp-validation-for="DiasSolicitudPermiso" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Fecha de activación</label>
                         <input asp-for="FechaActivacion" type="text" class="form-control" />
                         <span asp-validation-for="FechaActivacion" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
-                        <label class="control-label">Registro catastral</label>
-                        <input asp-for="RegistroCatastral" class="form-control" />
-                        <span asp-validation-for="RegistroCatastral" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Zona/Calle</label>
                         <select asp-for="ZonaId" class="number select-viva-validation">
                         </select>
                         <span asp-validation-for="ZonaId" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Altura</label>
                         <input asp-for="Altura" class="form-control number" />
                         <span asp-validation-for="Altura" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Enlace web</label>
                         <input asp-for="EnlaceWeb" class="form-control" />
                         <span asp-validation-for="EnlaceWeb" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Latitud</label>
                         <input asp-for="Latitud" readonly class="form-control number" />
                         <span asp-validation-for="Latitud" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label class="control-label">Longitud</label>
                         <input asp-for="Longitud" readonly class="form-control number" />
                         <span asp-validation-for="Longitud" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Observaciones</label>
-                        <textarea rows="1" asp-for="Observaciones" class="form-control"></textarea>
-                        <span asp-validation-for="Observaciones" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Notas a instaladores</label>
-                        <textarea rows="1" asp-for="NotasInstaladores" class="form-control"></textarea>
-                        <span asp-validation-for="NotasInstaladores" class="text-danger"></span>
+                    <div class="col-md-4">
+                        <label class="control-label">Registro catastral</label>
+                        <input asp-for="RegistroCatastral" class="form-control" />
+                        <span asp-validation-for="RegistroCatastral" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label">Dirección</label>
-                        <textarea rows="4" asp-for="Direccion" class="form-control"></textarea>
-                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                        <label class="control-label">Observaciones</label>
+                        <textarea rows="1" asp-for="Observaciones" class="form-control"></textarea>
+                        <span asp-validation-for="Observaciones" class="text-danger"></span>
                     </div>
                     <div class="col-md-4">
+                        <label class="control-label">Notas a instaladores</label>
+                        <textarea rows="1" asp-for="NotasInstaladores" class="form-control"></textarea>
+                        <span asp-validation-for="NotasInstaladores" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">Observaciones Web</label>
+                        <textarea rows="1" asp-for="ObservacionesWeb" class="form-control"></textarea>
+                        <span asp-validation-for="ObservacionesWeb" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <label class="control-label">Referencia</label>
                         <textarea rows="4" asp-for="Referencia" class="form-control"></textarea>
                         <span asp-validation-for="Referencia" class="text-danger"></span>
                     </div>
-                    <div class="col-md-4">
-                        <label class="control-label">Observaciones Web</label>
-                        <textarea rows="4" asp-for="ObservacionesWeb" class="form-control"></textarea>
-                        <span asp-validation-for="ObservacionesWeb" class="text-danger"></span>
+                    <div class="col-md-6">
+                        <label class="control-label">Dirección</label>
+                        <textarea rows="4" asp-for="Direccion" class="form-control"></textarea>
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -242,7 +250,7 @@
                             <a class="nav-link" data-toggle="tab" href="#restrictions" role="tab">Restricciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#permissions" role="tab">Permisos</a>
+                            <a class="nav-link" data-toggle="tab" href="#permissions" role="tab" id="tabPermissionLink">Permisos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#insurances" role="tab">Seguros</a>
@@ -560,13 +568,24 @@
                             <select id="ProviderListId" name="ProveedorId" class="number select-viva-validation">
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label>Porcentaje</label>
-                            <input type="number" class="form-control number" name="Porcentaje" />
+                        <div class="col-md-4" style="display: flex; flex-direction: column; justify-content: flex-start;">
+                            <label class="control-label">Tipo de valor</label>
+                            <div>
+                                <label class="control-label">Monto</label>
+                                <input type="checkbox" checked class="js-switch bool" name="TipoValor" id="TipoValor" />
+                                <label class="control-label">Porcentaje</label>
+                            </div>
+
                         </div>
                         <div class="col-md-4">
-                            <label>Monto</label>
-                            <input type="number" class="form-control number" name="Monto" />
+                            <div id="divPorcentajeProveedor">
+                                <label>Porcentaje</label>
+                                <input type="number" data-icon="%" class="form-control number" id="porcentajeProveedor" name="Porcentaje" />
+                            </div>
+                            <div style="display:none;" id="divMontoProveedor">
+                                <label>Monto</label>
+                                <input type="number" data-icon="$" class="form-control number" id="montoProveedor" name="Monto" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -596,13 +615,24 @@
                             <select id="CostoId" name="CostoId" class="number select-viva-validation">
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label>Porcentaje</label>
-                            <input type="number" class="form-control number" name="Porcentaje" />
+                        <div class="col-md-4" style="display: flex; flex-direction: column; justify-content: flex-start;">
+                            <label class="control-label">Tipo de valor</label>
+                            <div>
+                                <label class="control-label">Monto</label>
+                                <input type="checkbox" checked class="js-switch bool" name="TipoValorCost" id="TipoValorCost" />
+                                <label class="control-label">Porcentaje</label>
+                            </div>
+
                         </div>
                         <div class="col-md-4">
-                            <label>Monto</label>
-                            <input type="number" class="form-control number" name="Monto" />
+                            <div id="divPorcentajeCosto">
+                                <label>Porcentaje</label>
+                                <input type="number" data-icon="%" class="form-control number" id="porcentajeCosto" name="Porcentaje" />
+                            </div>
+                            <div style="display:none;" id="divMontoCosto">
+                                <label>Monto</label>
+                                <input type="number" data-icon="$" class="form-control number" id="montoCosto" name="Monto" />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -98,6 +98,8 @@ namespace OOH.WebApi.ApiControllers
 
                 SitiosContadorElectrico electricityInfo = await _electricityMeterRepo.FindBySitioId(site.SitioId);
 
+                model.SitioId = site.SitioId == 0 ? (int)response.data : site.SitioId;
+
                 electricityInfo = model.SitioId == 0 || electricityInfo == null ? new() : electricityInfo;
 
                 electricityInfo.SitioId = model.SitioId;
@@ -123,6 +125,13 @@ namespace OOH.WebApi.ApiControllers
         public async Task<IActionResult> Remove([FromBody] Identify<int> obj)
         {
             return Ok(await _siteRepo.Remove(obj.Id));
+        }
+
+        [HttpPost("IsCodeAvailable")]
+        [OhhFilterAttribute("Sites", Data.ActionPermission.Read)]
+        public async Task<IActionResult> IsCodeAvailable([FromBody] string code)
+        {
+            return Ok(await _siteRepo.IsCodeAvailable(code));
         }
     }
 }

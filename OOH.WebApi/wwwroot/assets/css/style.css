@@ -7453,7 +7453,7 @@ table tbody .border-bottom-info td {
   display: block;
   position: relative;
   background: #F6F7FB;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh + 42px);
 }
 
 .pcoded .pcoded-content {

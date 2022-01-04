@@ -1,9 +1,25 @@
-﻿<div>
-    <div class="card">
+﻿<style>
+    .btn {
+        min-width: 7vw;
+    }
 
-        <div class="card-header">
-            <a class="btn btn-primary" href="@Url.Action("CreateUpdate","Sites")" target="_blank"> <i class="fa fa-pencil-square-o"></i>Agregar sitio</a>
-            <button class="btn btn-primary btn-outline-primary" onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
+    .btn-viva-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .action-card-header-viva {
+        justify-content: space-between;
+    }
+</style>
+<div>
+    <div class="card">
+        <div class="card-block row action-card-header-viva">
+            <div class="col-md-4 btn-viva-flex">
+                <a class="btn btn-primary" href="@Url.Action("CreateUpdate","Sites")" target="_blank"> <i class="fa fa-pencil-square-o"></i>Agregar</a>
+                <button class="btn btn-primary btn-outline-primary" onclick="refresh()"><i class="fa fa-refresh"></i>Actualizar</button>
+            </div>
         </div>
     </div>
 
