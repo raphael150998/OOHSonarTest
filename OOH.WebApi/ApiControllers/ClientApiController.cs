@@ -6,6 +6,7 @@ using OOH.Data.Interfaces;
 using OOH.Data.Models;
 using OOH.Data.Repos;
 using OOH.WebApi.Controllers;
+using OOH.WebApi.Filters.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace OOH.WebApi.ApiControllers
         {
             _repo = repo;
         }
-
+        [OhhFilter("Client", Data.ActionPermission.Read)]
         [HttpGet]
        [Route("api/Client/Get")]
        public async Task<IActionResult> Clientes()
@@ -33,6 +34,7 @@ namespace OOH.WebApi.ApiControllers
             return  Ok(_repo.Select().Result.ToList());
         }
 
+        [OhhFilter("Client", Data.ActionPermission.Read)]
         [HttpGet]
         [Route("api/client/find")]
         public async Task<IActionResult> Cliente(int id)
@@ -43,13 +45,15 @@ namespace OOH.WebApi.ApiControllers
 
         }
         
+        [OhhFilter("Client", Data.ActionPermission.Update)]
+        [OhhFilter("Client", Data.ActionPermission.Create)]
         [HttpPost]
         [Route("api/client/CEdata")]
         public async Task<ResultClass> CreateEdit([FromBody] Clientes clientes)
         {           
             return _repo.AddOrUpdate(clientes).Result;
         }
-
+        [OhhFilter("Client", Data.ActionPermission.Delete)]
         [HttpPost]
         [Route("api/client/remove")]
         public async Task<IActionResult> Remove([FromBody] Identify<int> objeto)

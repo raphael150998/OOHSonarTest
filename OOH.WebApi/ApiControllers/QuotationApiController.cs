@@ -47,6 +47,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/facequotation/get")]
+        [OhhFilter("ListQuotation", Data.ActionPermission.Read)]
         public async Task<List<FaceQuotationDto>> FaceQuotations()
         {
             try
@@ -64,6 +65,7 @@ namespace OOH.WebApi.ApiControllers
         [HttpPost]
         [Route("api/Quotation/SaveMD")]
         [OhhFilter("Quotation", Data.ActionPermission.Create)]
+        [OhhFilter("Quotation", Data.ActionPermission.Update)]
         public async Task<ResultClass> SaveMaestroDetalle([FromBody]QuotationDto collection)
         {
 
