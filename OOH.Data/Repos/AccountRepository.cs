@@ -27,11 +27,11 @@ namespace OOH.Data.Repos
 
                 }
 
-                DynamicParameters parameters = new DynamicParameters();
+                DynamicParameters parameters = new();
                 parameters.Add("@Login", Login);
                 parameters.Add("@Pass", EncryptClass.EncripTar(Password.Trim()));
 
-                var user = FilterData<Usuarios>("SP_Login", true, parameters);
+                var user = FilterData<Usuarios>("SP_Login", true, parameters, true);
                 if (user.Result == null)
                 {
 
@@ -42,7 +42,7 @@ namespace OOH.Data.Repos
                 string LstPermisosQuery = string.Format("SELECT * FROM UsuariosPermisos WHERE (PerfilId = {0}) AND (PlataformaId = 1) OR (PlataformaId = 2)", user.Result.PerfilId);
                 var ListaPermisos = SelectData<UsuariosPermisos>(LstPermisosQuery, empresa.ConnectionString);
 
-                UserPermisoDto userPermiso = new UserPermisoDto() { User = user.Result, Permisos = ListaPermisos.Result, StringConecction = empresa.ConnectionString };
+                UserPermisoDto userPermiso = new() { User = user.Result, Permisos = ListaPermisos.Result, StringConecction = empresa.ConnectionString };
 
                 return new ResultClass() { data = userPermiso, state = true };
             }
@@ -60,7 +60,7 @@ namespace OOH.Data.Repos
                 return new ResultClass() { data = 2, message = "La contraseña debe tener mas de 8 letras", state = false };
             }
 
-            DynamicParameters parameters = new DynamicParameters();
+            DynamicParameters parameters = new();
             parameters.Add("@correo", registro.Correo);
             parameters.Add("@login", registro.Login);
             parameters.Add("@pass", EncryptClass.EncripTar(registro.Pass.Trim()));

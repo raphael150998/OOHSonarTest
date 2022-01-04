@@ -37,7 +37,7 @@ namespace OOH.Data.Interfaces
         /// <param name="_isProcedure">Define si es un procedimiento almacenado</param>
         /// <param name="parameters">Parametros</param>
         /// <returns></returns>
-        Task<T> FilterData<T>(string _query, bool _isProcedure = false, DynamicParameters parameters = null);
+        Task<T> FilterData<T>(string _query, bool _withParameters = true, DynamicParameters parameters = null, bool _isProcedure = false);
 
         /// <summary>
         /// Crea un nuevo registro en la base de datos dado los parametros
