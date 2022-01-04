@@ -23,23 +23,21 @@ namespace OOH.Data.Repos
         public LogHelper(IWebUserHelper userHelper)
         {
             _userHelper = userHelper;
-            _userDbConnection = "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Tamao1234;MultipleActiveResultSets=True;App=EntityFramework";
-            _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Tamao1234;MultipleActiveResultSets=True;App=EntityFramework";
+            _userDbConnection = "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=rafa;password=Orangelemon15;MultipleActiveResultSets=True;App=EntityFramework";
+            _connectionString = _userHelper.GetUserConnectionString() ?? "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=rafa;password=Orangelemon15;MultipleActiveResultSets=True;App=EntityFramework";
         }
 
         public async Task<Log> Find(int id)
         {
-            using (IDbConnection cn = new SqlConnection(_connectionString))
-            {
-                return await cn.QueryFirstOrDefaultAsync<Log>($"SELECT * FROM Log WHERE Id = {id}");
-            }
+            using IDbConnection cn = new SqlConnection(_connectionString);
+            return await cn.QueryFirstOrDefaultAsync<Log>($"SELECT * FROM Log WHERE Id = {id}");
         }
 
         public async Task<IEnumerable<LogOutputDto>> GetLogs(LogInputDto request)
         {
-            List<Usuarios> users = new List<Usuarios>();
+            List<Usuarios> users = new();
 
-            List<Log> logs = new List<Log>();
+            List<Log> logs = new();
 
             List<LogOutputDto> modelReturn = new();
 
@@ -97,10 +95,8 @@ namespace OOH.Data.Repos
 
             string sql = "INSERT INTO Log (UserId, Entidad, Descripcion, Fecha, EntidadId, PlataformaId, Version, OldVersionJson) VALUES (@UserId, @Entidad, @Descripcion, @Fecha, @EntidadId, @PlataformaId, @Version, @OldVersionJson);";
 
-            using (IDbConnection cn = new SqlConnection(_connectionString))
-            {
-                var ObjetoReturn = await cn.ExecuteAsync(sql, new DynamicParameters(logDb));
-            }
+            using IDbConnection cn = new SqlConnection(_connectionString);
+            var ObjetoReturn = await cn.ExecuteAsync(sql, new DynamicParameters(logDb));
 
         }
     }

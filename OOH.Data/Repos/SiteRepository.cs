@@ -144,7 +144,7 @@ namespace OOH.Data.Repos
         /// <returns></returns>
         public async Task<bool> IsCodeAvailable(string code)
         {
-            int result = await FilterData<int>("SELECT COUNT(SitioId) FROM Sitios WHERE Codigo = @Codigo;");
+            int result = await FilterData<int>("SELECT COUNT(SitioId) FROM Sitios WHERE Codigo = @Codigo;", true, new DynamicParameters(new { Codigo = code }));
 
             return result == 0;
         }

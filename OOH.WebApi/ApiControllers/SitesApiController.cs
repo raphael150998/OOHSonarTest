@@ -33,21 +33,21 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpGet("select")]
-        [OhhFilterAttribute("ListSites", Data.ActionPermission.Read)]
+        [OhhFilter("ListSites", Data.ActionPermission.Read)]
         public async Task<IActionResult> GetList()
         {
             return Ok(await _siteRepo.GetList());
         }
 
         [HttpGet("log")]
-        [OhhFilterAttribute("Sites", Data.ActionPermission.Execute)]
+        [OhhFilter("Sites", Data.ActionPermission.Execute)]
         public async Task<IActionResult> GetLogs(int id)
         {
             return Ok(await _siteRepo.GetLogs(id));
         }
 
         [HttpGet("find")]
-        [OhhFilterAttribute("Sites", Data.ActionPermission.Read)]
+        [OhhFilter("Sites", Data.ActionPermission.Read)]
         public async Task<IActionResult> Find(int id)
         {
             Sitios site = await _siteRepo.Find(id);
@@ -71,7 +71,7 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost("select2")]
-        [OhhFilterAttribute("ListSites", Data.ActionPermission.Read)]
+        [OhhFilter("ListSites", Data.ActionPermission.Read)]
         public async Task<IActionResult> GetListAsSelect2([FromBody] SiteSelect2InputDto model)
         {
             List<string> keys = string.IsNullOrEmpty(model.term) ? new() : model.term.Split(' ').ToList();
@@ -83,11 +83,11 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost("CreateUpdate")]
-        [OhhFilterAttribute("Sites", Data.ActionPermission.Create)]
-        [OhhFilterAttribute("Sites", Data.ActionPermission.Update)]
+        [OhhFilter("Sites", Data.ActionPermission.Create)]
+        [OhhFilter("Sites", Data.ActionPermission.Update)]
         public async Task<IActionResult> CreateUpdate([FromBody] SiteVm model)
         {
-            ResultClass response = new ResultClass();
+            ResultClass response = new();
 
 
             try
@@ -121,17 +121,17 @@ namespace OOH.WebApi.ApiControllers
         }
 
         [HttpPost("Remove")]
-        [OhhFilterAttribute("Sites", Data.ActionPermission.Delete)]
+        [OhhFilter("Sites", Data.ActionPermission.Delete)]
         public async Task<IActionResult> Remove([FromBody] Identify<int> obj)
         {
             return Ok(await _siteRepo.Remove(obj.Id));
         }
 
-        [HttpPost("IsCodeAvailable")]
-        [OhhFilterAttribute("Sites", Data.ActionPermission.Read)]
-        public async Task<IActionResult> IsCodeAvailable([FromBody] string code)
+        [HttpGet("IsCodeAvailable")]
+        [OhhFilter("Sites", Data.ActionPermission.Read)]
+        public async Task<IActionResult> IsCodeAvailable(string Codigo)
         {
-            return Ok(await _siteRepo.IsCodeAvailable(code));
+            return Ok(await _siteRepo.IsCodeAvailable(Codigo));
         }
     }
 }

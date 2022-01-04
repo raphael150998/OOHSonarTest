@@ -26,12 +26,14 @@
                 required: true,
                 remote: {
                     url: "/api/site/IsCodeAvailable",
-                    type: "post",
-                    data: {
-                        code: function () {
-                            return $("#Codigo").val();
-                        }
-                    }
+                    type: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    //data: {
+                    //    code: function () {
+                    //        return $("#Codigo").val();
+                    //    }
+                    //}
                 }
             },
             ProveedorId: {
@@ -85,7 +87,8 @@
         },
         messages: {
             Codigo: {
-                required: "El código es requerido"
+                required: "El código es requerido",
+                remote: "Este código ya existe en la base de datos"
             },
             ProveedorId: {
                 required: "Seleccione un proveedor"
