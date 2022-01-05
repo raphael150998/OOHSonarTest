@@ -9,12 +9,24 @@ var fns = {
             data: data,
             async: false,
             dataType: "json",
-            contentType: "application/json; charset=utf-8"
+            contentType: "application/json; charset=utf-8",
+            statusCode: {
+                403: function () {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Usuario sin acceso a esta sección',
+                    });
+                }
+            }
         }).done(function (data) {
             rt = data;
         }).fail(function (xhr, textStatus, errorThrown) {
-            alert(xhr.responseText);
-            alert(textStatus);
+            //alert(xhr.responseText);
+            //alert(textStatus);
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error, contacte con el administrador'
+            });
         });
         return rt;
     },
@@ -29,15 +41,27 @@ var fns = {
             data: data,
             async: true,
             dataType: "json",
-            contentType: "application/json; charset=utf-8"
+            contentType: "application/json; charset=utf-8",
+            statusCode: {
+                403: function () {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Usuario sin acceso a esta sección',
+                    });
+                }
+            }
         }).done(function (data) {
             rt = data;
             $.unblockUI();
             callBack(data);
         }).fail(function (xhr, textStatus, errorThrown) {
-            alert(xhr.responseText);
-            alert(textStatus);
             $.unblockUI();
+            //alert(xhr.responseText);
+            //alert(textStatus);
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error, contacte con el administrador'
+            });
         });
         return rt;
     },
@@ -51,7 +75,15 @@ var fns = {
             data: data,
             async: true,
             dataType: "json",
-            contentType: "application/json; charset=utf-8"
+            contentType: "application/json; charset=utf-8",
+            statusCode: {
+                403: function () {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Usuario sin acceso a esta sección',
+                    });
+                }
+            }
         }).done(function (data) {
             rt = data;
             $.unblockUI();
@@ -59,7 +91,7 @@ var fns = {
         }).fail(function (xhr, textStatus, errorThrown) {
             Swal.fire({
                 icon: 'error',
-                title: 'A ocurrido un error',
+                title: 'Ha ocurrido un error, contacte con el administrador'
             });
             $.unblockUI();
         });
@@ -74,14 +106,24 @@ var fns = {
             type: "POST",
             data: data,
             dataType: "json",
-            contentType: "application/json; charset=utf-8"
+            contentType: "application/json; charset=utf-8",
+            statusCode: {
+                403: function () {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Usuario sin acceso a esta sección',
+                    });
+                }
+            }
         }).done(function (data) {
             rt = data;
             $.unblockUI();
             callBack(data);
         }).fail(function (xhr, textStatus, errorThrown) {
-            alert(xhr.responseText);
-            alert(textStatus);
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error, contacte con el administrador'
+            });
             $.unblockUI();
         });
         return rt;
@@ -94,12 +136,22 @@ var fns = {
             type: "GET",
             data: data,
             async: false,
-            contentType: "application/json; charset=utf-8"
+            contentType: "application/json; charset=utf-8",
+            statusCode: {
+                403: function () {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Usuario sin acceso a esta sección',
+                    });
+                }
+            }
         }).done(function (data) {
             rt = data;
         }).fail(function (xhr, textStatus, errorThrown) {
-            alert(xhr.responseText);
-            alert(textStatus);
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error, contacte con el administrador'
+            });
         });
         return rt;
     },
@@ -126,8 +178,10 @@ var fns = {
             rt = data;
             callBack(data);
         }).fail(function (xhr, textStatus, errorThrown) {
-            //alert(xhr.responseText);
-            //alert(textStatus);
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error, contacte con el administrador'
+            });
             $.unblockUI();
         });
         return rt;

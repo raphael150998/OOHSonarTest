@@ -141,12 +141,13 @@ namespace OOH.Data.Repos
         /// Determina si el codigo enviado en el parametro esta disponible en la base de datos
         /// </summary>
         /// <param name="code">Codigo a verificar</param>
+        /// <param name="id">id del sitio en caso de ser una actualizacion</param>
         /// <returns></returns>
-        public async Task<bool> IsCodeAvailable(string code)
+        public async Task<bool> IsCodeAvailable(string code, long id)
         {
-            int result = await FilterData<int>("SELECT COUNT(SitioId) FROM Sitios WHERE Codigo = @Codigo;", true, new DynamicParameters(new { Codigo = code }));
+            int result = await FilterData<int>($"SELECT COUNT(SitioId) FROM Sitios WHERE Codigo = @Codigo {(id > 0 ? $" OR (Codigo = @Codigo AND SitioId = @SitioId)" : "")};", true, new DynamicParameters(new { Codigo = code, SitioId = id }));
 
-            return result == 0;
+            return id > 0 ? result == 1 : result == 0;
         }
     }
 }

@@ -129,9 +129,9 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet("IsCodeAvailable")]
         [OhhFilter("Sites", Data.ActionPermission.Read)]
-        public async Task<IActionResult> IsCodeAvailable(string Codigo)
+        public async Task<IActionResult> IsCodeAvailable([FromQuery] string Codigo, [FromQuery] long id)
         {
-            return Ok(await _siteRepo.IsCodeAvailable(Codigo));
+            return Ok(await _siteRepo.IsCodeAvailable(Codigo, id));
         }
     }
 }

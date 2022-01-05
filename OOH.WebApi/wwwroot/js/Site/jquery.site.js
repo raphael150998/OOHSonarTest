@@ -38,7 +38,6 @@ function BuildDatatable() {
             {
                 data: "requierePermiso",
                 render: function (data, type, full, meta) {
-                    console.log(data);
                     return `<input onclick="return false;" type="checkbox" ${data ? "checked" : ""} class="js-switch bool form-control" />`;
                 }
             },

@@ -8,5 +8,7 @@ namespace OOH.Data.Dtos.Usuario
     {
         public string Login { get; set; }
         public string Pass { get; set; }
+
+        public bool Remember { get; set; }
     }
 }

@@ -1,5 +1,18 @@
 ﻿$(function () {
 
+    $(".msg-develop").click(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Estamos trabajando en ello',
+            text: "Actualmente esta sección se encuentra en desarrollo",
+            iconHtml: '<img src="/images/cogs.gif" alt="cogs" style="max-width: 6vw;" class="img-msg-develop"/>',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+        });
+
+        $(".img-msg-develop").parent().parent().css('border', 'none')
+    })
+
     $.validator.addMethod('greaterThan', function (value, element, param) {
         return this.optional(element) || parseFloat(value) > parseFloat(param);
     }, jQuery.validator.format("Number must be greater than {0}"));

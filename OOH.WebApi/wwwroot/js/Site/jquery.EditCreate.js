@@ -29,11 +29,14 @@
                     type: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    //data: {
-                    //    code: function () {
-                    //        return $("#Codigo").val();
-                    //    }
-                    //}
+                    data: {
+                        Codigo: function () {
+                            return $("#Codigo").val();
+                        },
+                        id: function () {
+                            return $("#SitioId").val();
+                        }
+                    }
                 }
             },
             ProveedorId: {
