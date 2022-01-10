@@ -49,7 +49,7 @@
     
     <div class="card">
         <div class="card-block">
-
+            <input type="hidden" name="MunicipioIdAux" id="MunicipioIdAux" value="0" />
             <div class="container">
                 <div class="row">
 
@@ -69,36 +69,35 @@
                         <span asp-validation-for="NombreComercial" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
-                        <label class="control-label">Municipios</label>
-
-                        <div id="divMunicipio"></div>
-                    </div>
-                    <div class="col-md-3">
                         <label asp-for="NIT" class="control-label"></label>
                         <input asp-for="NIT" class="form-control" data-mask="NIT" />
                         <span asp-validation-for="NIT" class="text-danger"></span>
                     </div>
-
-                    <div class="col-md-6">
-                        <label class="control-label">Razon Social</label>
-                        <input asp-for="RazonSocial" class="form-control" />
-                        <span asp-validation-for="RazonSocial" class="text-danger"></span>
+                    <div class="col-md-3">
+                        <label class="control-label">Departamento</label>
+                        <select asp-for="DepartamentoId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="DepartamentoId" class="text-danger"></span>
                     </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Municipio</label>
+                        <select asp-for="MunicipioId" class="number select-viva-validation">
+                        </select>
+                        <span asp-validation-for="MunicipioId" class="text-danger"></span>
+                    </div>
+
+
                     <div class="col-md-3">
                         <label asp-for="Celular" class="control-label"></label>
                         <input asp-for="Celular" class="form-control" />
                         <span asp-validation-for="Celular" class="text-danger"></span>
                     </div>
+
                     <div class="col-md-3">
                         <label asp-for="Telefono" class="control-label"></label>
                         <input asp-for="Telefono" class="form-control" />
                         <span asp-validation-for="Telefono" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-3">
@@ -108,6 +107,19 @@
 
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Razon Social</label>
+                        <input asp-for="RazonSocial" class="form-control" />
+                        <span asp-validation-for="RazonSocial" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+
                     <div class="col-md-6">
                         <label asp-for="Giro" class="control-label"></label>
                         <input asp-for="Giro" class="form-control" />

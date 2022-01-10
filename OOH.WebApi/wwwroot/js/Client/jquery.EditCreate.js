@@ -1,6 +1,10 @@
 ﻿$().ready(function ($) {
+
     DropDownListMunicipio();
     DropDownListCategoria();
+    DropDownListDepartments();
+    DropDownListCities();
+
     llenar();
     Validate.Form("#formClient", "api/client/CEdata", {
 
@@ -75,6 +79,12 @@
         }
     });
     //LLenarTextBox();
+    $("#DepartamentoId").on('change.select2', function (e) {
+
+        var idMunicipio = $("#MunicipioIdAux").val();
+
+        idMunicipio == 0 ? DropDownListCities() : DropDownListCities(idMunicipio);
+    });
 });
 
 function edit(id) {
@@ -91,10 +101,10 @@ function llenar() {
     }
     if (idCliente != 0) {
         fns.CallGetAsync("api/client/find", { id: idCliente }, function (dataResult) {
-           
             $("#formClient").assignJsonToForm(dataResult);
-            $('#dropdownMunicipio ').val(dataResult["municipioId"]).trigger('change.select2');
-
+            $('#MunicipioIdAux').val(dataResult["municipioId"]);
+            $('#DepartamentoId').val(dataResult.departamentoId).trigger('change.select2');
+            $('#MunicipioId').val(dataResult.municipioId).trigger('change.select2');
         });
     }
 }
@@ -125,6 +135,58 @@ function DropDownListMunicipio() {
     });
 
 }
+
+function DropDownListCities(selected) {
+
+    var id = $("#DepartamentoId").val();
+
+    var selectTarget = $("#MunicipioId");
+
+    var html = "<option disabled selected>Seleccione municipio</option>";
+
+    if (id != null) {
+
+        selectTarget.select2('destroy');
+
+        fns.CallGetAsync(`api/address/dropdownCities/${id}`, null, function (list) {
+
+            list.forEach(x => {
+                html += `<option value="${x.id}">${x.name}</option>`;
+            });
+
+            selectTarget.html(html);
+
+            selectTarget.select2Validation();
+
+            if (selected != null) {
+                selectTarget.val(selected).trigger('change.select2');
+            }
+
+        })
+    }
+    else {
+        selectTarget.html(html);
+
+        selectTarget.select2Validation();
+    }
+}
+
+function DropDownListDepartments() {
+    fns.CallGetAsync("api/address/dropdownDepartments", null, function (list) {
+
+        var selectTarget = $("#DepartamentoId");
+
+        var html = "<option disabled selected>Seleccione departamento</option>";
+
+        list.forEach(x => {
+            html += `<option value="${x.id}">${x.name}</option>`;
+        });
+
+        selectTarget.html(html);
+        selectTarget.select2Validation();
+    })
+}
+
 function DropDownListCategoria() {
 
     fns.CallGetAsync("api/client/category/call", null, function (dataResult) {

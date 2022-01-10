@@ -25,6 +25,7 @@ namespace OOH.Data.Models
         public int  Categoria { get; set; }
         public int  MunicipioId { get; set; }
         public int  Municipio { get; set; }
+        public int DepartamentoId { get; set; }
 
     }
 }

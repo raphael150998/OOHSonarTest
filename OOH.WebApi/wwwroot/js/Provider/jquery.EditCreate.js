@@ -189,7 +189,6 @@ function llenar() {
     }
     if (idProvider != 0) {
         fns.CallGetAsync("api/provider/find", { id: idProvider }, function (dataResult) {
-            console.log(dataResult);
             $('#MunicipioIdAux').val(dataResult["municipioId"]);
             $('#DepartamentoId').val(dataResult.departamentoId).trigger('change.select2');
             $("#formProveedor").assignJsonToForm(dataResult);
