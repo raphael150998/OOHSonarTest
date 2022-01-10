@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class ClientRepository : OOHContext, IBaseRepository<Clientes>
+    public class ClientRepository : AddressRepository
     {
         private readonly ILogHelper _log;
         public ClientRepository(IWebUserHelper userHelper, ILogHelper log) : base(userHelper)
@@ -63,8 +63,9 @@ namespace OOH.Data.Repos
 
         public async Task<Clientes> Find(int Id)
         {
-            return FilterData<Clientes>($"Select * from [dbo].[clientes] Where ClienteId = '{Id}'", false, null).Result;
-
+            Clientes objeto =  FilterData<Clientes>($"Select * from [dbo].[clientes] Where ClienteId = '{Id}'", false, null).Result;
+            objeto.DepartamentoId = GetDepartamentoByMunicipioId(objeto.MunicipioId).Result.DepartamentoId;
+            return objeto;
         }
 
         public async Task<IEnumerable<LogOutputDto>> GetLogs(int id)
