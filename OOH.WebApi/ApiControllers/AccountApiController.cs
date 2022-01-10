@@ -82,7 +82,7 @@ namespace OOH.WebApi.ApiControllers
         }
         [HttpPost]
         [Route("api/Account/Register")]
-        public async Task<ResultClass> Register([FromForm] Usuarios registro)
+        public async Task<ResultClass> Register([FromBody] Usuarios registro)
         {
             return _repo.RegistroUser(registro);
         }

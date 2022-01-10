@@ -14,7 +14,7 @@
         $("#txtError").text("La contraseña no coincide");
     } else {
 
-        fns.PostDataAsync("api/Account/Register", Registro, function (dataRequest) {
+        fns.PostDataAsync("api/Account/Register", JSON.stringify(Registro), function (dataRequest) {
             if (!dataRequest["State"]) {
                 switch (dataRequest["Data"]) {
                     case 1:
