@@ -22,7 +22,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/face/type/get")]
-        [OhhFilter("ListFaceTypes", Data.ActionPermission.Execute)]
+        [OhhFilter("ListFaceTypes", Data.ActionPermission.Read)]
         public async Task<IEnumerable<CarasTipos>> CarasTipos()
         {
             return await _repo.SelectCaraTipos();

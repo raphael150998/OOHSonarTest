@@ -101,11 +101,12 @@ function DatatableAdd() {
 function addMdetalle(IdCara) {
 
     $("#idCaraAdd").val(IdCara);
-    $("#ModalCarasDetalle").modal({
-        show: true,
-        backdrop: 'static',
-        keyboard: false
-    });
+    //$("#ModalCarasDetalle").modal({
+    //    show: true,
+    //    backdrop: 'static',
+    //    keyboard: false
+    //});
+    AddArray();
 }
 
 $("#btnDetalleCaraClose").click(function () {
