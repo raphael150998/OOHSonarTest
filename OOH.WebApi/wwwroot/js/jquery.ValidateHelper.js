@@ -1,4 +1,15 @@
-﻿var Validate = {
+﻿$.validator.addMethod('greaterThan', function (value, element, param) {
+    return this.optional(element) || parseFloat(value) > parseFloat(param);
+}, jQuery.validator.format("Number must be greater than {0}"));
+
+$.validator.addMethod('money', function (value, element, param) {
+    var re = new RegExp(/^\$?\d+(,\d{3})*(\.\d{1,2})?$/);
+
+    return this.optional(element) || re.test(value);
+}, "Please enter a valid money format");
+
+
+var Validate = {
 
     Form: function (identify, url, config, callback, dataSend = null) {
 
