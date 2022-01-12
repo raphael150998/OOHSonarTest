@@ -22,7 +22,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/client/category/call")]
-        [OhhFilter("ListClient", Data.ActionPermission.Execute)]
+        [OhhFilter("ListClient", Data.ActionPermission.Read)]
         public async Task<IEnumerable<ClientesCategorias>> Categorias()
         {
             return await _repo.SelectClientCategory();
@@ -31,7 +31,7 @@ namespace OOH.WebApi.ApiControllers
 
         [HttpGet]
         [Route("api/face/category/get")]
-        [OhhFilter("ListFaceCategory", Data.ActionPermission.Execute)]
+        [OhhFilter("ListFaceCategory", Data.ActionPermission.Read)]
         public async Task<IEnumerable<CarasCategorias>> CarasCategorias()
         {
 
