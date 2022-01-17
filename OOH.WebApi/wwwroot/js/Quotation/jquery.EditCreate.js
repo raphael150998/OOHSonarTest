@@ -118,7 +118,11 @@ function DetalleDT() {
             {
                 data: "id",
                 render: function (data, type, full, meta) {
-                    return `<i class="fa fa-trash  btnDatatable text-danger""  onclick="RemoveDetalle('` + full.caraId + `','` + full.id + `')"></i>`;
+
+                    return `
+                   <i class="fa fa-pen  btnDatatable text-primary"  onclick="EditMdetalle('` + full.caraId + `','` + full.id + `')"></i>
+                   <i class="fa fa-trash  btnDatatable text-danger"  onclick="RemoveDetalle('` + full.caraId + `','` + full.id + `')"></i>
+                   `;
                 }
             },
             {
@@ -148,14 +152,14 @@ function DetalleDT() {
 }
 
 function GetDetailCaras() {
-
+    console.log(lstCaraDetalle);
     $("#CarasTable").DataTable().clear();
     $("#CarasTable").DataTable().rows.add(lstCaraDetalle).draw();
 }
 
-function AddArray() {
-
-    var send = JSON.stringify({ Id: $("#idCaraAdd").val() });
+function AddArray(id) {
+    console.log(id);
+    var send = id;
 
     var DetalleCara = {
         id: 0,
@@ -175,12 +179,13 @@ function AddArray() {
         fechaHasta: $("#FechaHasta").val()
     }
     $("#formularioCostos").trigger("reset");
-    fns.PostDataAsync("api/caras/get", send, function (caraRequest) {
+    fns.CallGetAsync("api/quotation/face/get", { id: parseInt(send) }, function (caraRequest) {
 
+        console.log(caraRequest);
         DetalleCara.codigo = caraRequest.codigo;
         DetalleCara.referencia = caraRequest.referenciaComercial;
         DetalleCara.direccion = caraRequest.direccion;
-        DetalleCara.precio = DetalleCara.costoArrendamiento;
+        DetalleCara.precio = caraRequest.precio;
         DetalleCara.departamento = "";
         DetalleCara.iluminada = caraRequest.iluminada;
 

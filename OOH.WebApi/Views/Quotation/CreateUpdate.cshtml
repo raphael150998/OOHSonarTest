@@ -90,170 +90,194 @@
         </div>
     </div>
 
-<div class="card">
-    <div class="card-block">
+    <div class="card">
+        <div class="card-block">
 
-        <div class="row">
-            <div class="col-lg-12 col-xl-12">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs  tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#contacts" role="tab">Detalle de caras</a>
-                    </li>
+            <div class="row">
+                <div class="col-lg-12 col-xl-12">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs  tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#contacts" role="tab">Detalle de caras</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#faces" id="tabcaras" role="tab">Caras</a>
                         </li>
-                    @*
+                        @*
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#messages1" role="tab">Messages</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#settings1" role="tab">Settings</a>
                         </li>*@
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content tabs card-block" id="tabs-container">
-                    <div class="tab-pane active" id="contacts" role="tabpanel">
-                        <table class="table" style="width:100%" id="CarasTable">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Codigo</th>
-                                    <th>Referencia</th>
-                                    <th>Dirección</th>
-                                    <th>Precio</th>
-                                    <th>Departamento</th>
-                                    <th>Iluminada</th>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs card-block" id="tabs-container">
+                        <div class="tab-pane active" id="contacts" role="tabpanel">
+                            <div class="container">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane" id="faces" role="tabpanel">
-                        <div class="container">
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Sitio</label>
-                                    <select id="dropdownSitio">
-                                    </select>
-
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Categoria</label>
-
-                                    <div id="divDropCategoria">
-
+                                <div class="row">
+                               
+                                    <div class="col-md-4">
+                                        <label class="control-label">Fecha Desde</label>
+                                        <input type="date" class="form-control" id="FechaDesde" />
                                     </div>
-
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Tipo</label>
-
-                                    <div id="divDropTipo">
-
+                                    <div class="col-md-4">
+                                        <label class="control-label">Fecha Hasta</label>
+                                        <input type="date" class="form-control" id="FechaHasta" />
                                     </div>
+                                    <br />
+                                    <br />
+                                    <br />
+
+                                    <br />
                                 </div>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
                             </div>
-                        </div>
-                        <div>
-                            <table class="table" id="addCarasTable" style="width:100%">
+                            <table class="table" style="width:100%" id="CarasTable">
                                 <thead>
                                     <tr>
-                                        <th class="filter-action"></th>
-                                        <th class="filter">Cara</th>
-                                        <th class="filter">Categoria</th>
-                                        <th class="filter">ReferenciaComercial</th>
-                                        <th class="filter">Tipo</th>
+                                        <th></th>
+                                        <th>Codigo</th>
+                                        <th>Referencia</th>
+                                        <th>Dirección</th>
+                                        <th>Precio</th>
+                                        <th>Departamento</th>
+                                        <th>Iluminada</th>
+
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                </tbody>
                             </table>
                         </div>
-                        <!-- Modal CaraDetalle -->
-                        <div class="modal fade" id="ModalCarasDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="tab-pane" id="faces" role="tabpanel">
+                            <div class="container">
 
-                            <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
-                                <div class="modal-content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Sitio</label>
+                                        <select id="dropdownSitio">
+                                        </select>
 
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-center w-100" id="modalTitle">Costo de Cara</h5>
-                                        <button type="button" class="close" id="btnDetalleCaraClose" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="container">
-                                            <form id="formularioCostos">
-                                                <div class="row">
-                                                    <input id="idCaraAdd" hidden />
-                                                    <div class="col-md-4">
-                                                        <label class="control-label">Costo de arrendamiento</label>
-                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="control-label">Costo de impresion</label>
-                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="control-label">Costo de instalacion</label>
-                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="control-label">Costo saliente</label>
-                                                        <input data-icon="$"  type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="control-label">Fecha Desde</label>
-                                                        <input  type="date" class="form-control" id="FechaDesde" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="control-label">Fecha Hasta</label>
-                                                        <input type="date" class="form-control" id="FechaHasta" />
-                                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Categoria</label>
 
-
-                                                </div>
-
-                                            </form>
-
-                                            <br />
-                                            <br />
-
+                                        <div id="divDropCategoria">
 
                                         </div>
-                                        <div class="modal-footer">
-                                            <div class="col-md-4" style="float:right">
-                                                <label></label>
-                                                <button class="btn btn-success form-control" onclick="AddArray()">Agregar</button>
 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Tipo</label>
 
-                                            </div>
+                                        <div id="divDropTipo">
+
                                         </div>
                                     </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
                                 </div>
                             </div>
+                            <div>
+                                <table class="table" id="addCarasTable" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="filter-action"></th>
+                                            <th class="filter">Cara</th>
+                                            <th class="filter">Categoria</th>
+                                            <th class="filter">ReferenciaComercial</th>
+                                            <th class="filter">Tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <!-- Modal CaraDetalle -->
+
                         </div>
-                    </div>
-                    @*
+                        @*
                         <div class="tab-pane" id="messages1" role="tabpanel">
                             <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
                         </div>
                         <div class="tab-pane" id="settings1" role="tabpanel">
                             <p class="m-0">4.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
                         </div>*@
+                    </div>
                 </div>
+
             </div>
+            <!-- Row end -->
 
         </div>
-        <!-- Row end -->
+    </div>
 
+<div class="modal fade" id="ModalCarasDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg h-100 d-flex flex-column justify-content-center my-0" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="modalTitle">Costo de Cara</h5>
+                <button type="button" class="close" id="btnDetalleCaraClose" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form id="formularioCostos">
+                        <div class="row">
+                            <input id="idCaraAdd" hidden />
+                            <input id="idDetalle" hidden />
+                            <div class="col-md-4">
+                                <label class="control-label">Costo de arrendamiento</label>
+                                <input data-icon="$" type="text" class="form-control" data-mask="Decimal" id="CostoArrendamiento" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">Costo de impresion</label>
+                                <input data-icon="$" type="text" class="form-control" data-mask="Decimal" id="CostoImpresion" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">Costo de instalacion</label>
+                                <input data-icon="$" type="text" class="form-control" data-mask="Decimal" id="CostoInstalacion" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">Costo saliente</label>
+                                <input data-icon="$" type="text" class="form-control" data-mask="Decimal" id="CostoSaliente" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="control-label">Fecha Desde</label>
+                                <input type="date" class="form-control" id="FechaDesdeModal" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">Fecha Hasta</label>
+                                <input type="date" class="form-control" id="FechaHastaModal" />
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <br />
+                    <br />
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-4" style="float:right">
+                        <label></label>
+                        <button class="btn btn-success form-control" onclick="AddArray()">Agregar</button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

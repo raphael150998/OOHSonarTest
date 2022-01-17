@@ -58,7 +58,7 @@
         <div class="card-block row  action-card-header-viva">
             <div class="col-md-3 btn-viva-flex">
                 <button type="submit" id="BtnSubmit" class="btn btn-primary"><i class="far fa-save"></i>Guardar</button>
-                <label class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</label>
+                <span class="btn btn-outline-primary" onclick="edit('0')"> <i class="fa fa-pencil-square-o"></i>Nuevo</span>
             </div>
             <div class="col-md-2">
             </div>
@@ -72,7 +72,7 @@
             <div class="col-md-2">
                 <label class="control-label" asp-for="Activo"></label>:
 
-                <input type="checkbox" class="js-switch bool" id="Activo" name="Activo" />
+                <input type="checkbox" checked="true" class="js-switch bool" id="Activo" name="Activo" />
             </div>
 
 
@@ -101,15 +101,15 @@
 
                     </div>
                     <div class="col-md-3">
+                        <label class="control-label">Lado</label>
+                        <input asp-for="Lado" class="form-control" />
+                        <span asp-validation-for="Lado" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
                         <label class="control-label">Metodo de Inst.</label>
                         <input asp-for="MetodoInstalacion" class="form-control" />
                         <span asp-validation-for="MetodoInstalacion" class="text-danger"></span>
                     </div>
-
-
-                  
-
-
                
                     <div class="col-md-3">
                         <label class="control-label">Categoria</label>
@@ -155,9 +155,7 @@
                         <span asp-validation-for="NumSpotDigital" class="text-danger"></span>
                     </div>
 
-                    <div class="col-md-3">
-
-                    </div>
+                   
 
                     <div class="col-md-4">
                         <label class="control-label">Referencia</label>

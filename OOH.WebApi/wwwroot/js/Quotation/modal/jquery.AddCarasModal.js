@@ -99,18 +99,64 @@ function DatatableAdd() {
     GetCarasCotizacion();
 }
 function addMdetalle(IdCara) {
-
+    console.log(IdCara);
     $("#idCaraAdd").val(IdCara);
     //$("#ModalCarasDetalle").modal({
     //    show: true,
     //    backdrop: 'static',
     //    keyboard: false
     //});
-    AddArray();
+    AddArray(IdCara);
 }
+function EditMdetalle(IdCara, IdDetalle) {
+
+    var cara = Where(lstCaraDetalle, "caraId", IdCara);
+    $("#CostoArrendamiento").val(cara.precio);
+    $("#CostoImpresion").val(0.00);
+    $("#CostoInstalacion").val(0.00);
+    $("#CostoSaliente").val(0.00);
+    $("#idCaraAdd").val(IdCara);
+    $("#idDetalle").val(IdDetalle);
+    $("#ModalCarasDetalle").modal({
+        show: true,
+        backdrop: 'static',
+        keyboard: false
+    });
+  
+}
+
+function editArray(IdCara, IdDetalle) {
+    console.log(id);
+    var send = id;
+
+    var DetalleCara = {
+        id: $("#idDetalle").val(),
+        caraId: $("#idCaraAdd").val(),
+        cotizacionId: 0,
+        codigo: "ABC",
+        referencia: "1234",
+        direccion: "IZALCO",
+        precio: "20.00",
+        departamento: "SONSONATE",
+        iluminada: true,
+        costoArrendamiento: $("#CostoArrendamiento").val(),
+        costoImpresion: $("#CostoImpresion").val(),
+        costoInstalacion: $("#CostoInstalacion").val(),
+        costoSaliente: $("#CostoSaliente").val(),
+        fechaDesde: $("#FechaDesde").val(),
+        fechaHasta: $("#FechaHasta").val()
+    }
+
+    lstCaraDetalle.push(DetalleCara);
+    $("#ModalCarasDetalle").modal("hide");
+    GetCarasCotizacion();
+    DetalleDT();
+    $("#formularioCostos").trigger("reset");
+}
+
 
 $("#btnDetalleCaraClose").click(function () {
     $("#ModalCarasDetalle").modal("hide");
-
+    $("#formularioCostos").trigger("reset");
 });
 

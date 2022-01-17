@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OOH.Data.Dtos.Cotizacion;
+using OOH.Data.Dtos.Caras;
 
 namespace OOH.Data.Repos
 {
@@ -86,7 +87,7 @@ namespace OOH.Data.Repos
             {
                 QuotationDto dto = new QuotationDto();
                 dto = await FilterData<QuotationDto>($"SELECT t1.CotizacionId, (select t2.NombreComercial from [dbo].[Clientes] t2 where t2.ClienteId = t1.ClienteId) as Cliente, t1.ClienteId ,t1.Fecha,(select t3.Nombre from [dbo].[AgenciasPublicidad] t3 where t3.AgenciaId = t1.AgenciaId) as Agencia, t1.AgenciaId,(select t4.Descripcion from [dbo].[CotizacionesEstados] t4 where t4.EstadoId = t1.EstadoId) as Estado , t1.EstadoId, t1.AtencionA , t1.ConsolidaCostos , t1.UserId ,t1.Comentarios FROM [dbo].[Cotizaciones] t1 WHERE CotizacionId = {Idcotizacion} ");
-                dto.User =  SelectData<QuotationDto>($"SELECT [Username] as [User] FROM [dbo].[Usuarios] Where UserId ={dto.UserId}", "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=jose;password=Tamao1234;MultipleActiveResultSets=True;App=EntityFramework").Result.FirstOrDefault().User;
+                dto.User =  SelectData<QuotationDto>($"SELECT [Username] as [User] FROM [dbo].[Usuarios] Where UserId ={dto.UserId}", "data source=192.168.10.238;initial catalog=OOH_Seguridad;user id=rafa;password=Orangelemon15;MultipleActiveResultSets=True;App=EntityFramework").Result.FirstOrDefault().User;
                 return dto;
             }
             catch (Exception ex)
@@ -205,6 +206,16 @@ namespace OOH.Data.Repos
         {
             return await RemoveData($"Delete From [dbo].[CotizacionesDetalle] Where Id ={IdDetail}") == 1 ? true : false;
         }
+
+        public async Task<FaceQuotationDto> getCarasDireccion(long id)
+        {
+            var FaceQuotation = await FilterData<FaceQuotationDto>($"SELECT  t1.ReferenciaComercial as ReferenciaComercial,   t1.Codigo as Codigo, ( select t2.Direccion From [dbo].[Sitios] t2 where t2.SitioId =  t1.SitioId ) as direccion FROM [dbo].[Caras] t1  WHERE t1.CaraId =  {id}");
+            var preciodefault = await FilterData<FacePriceDto>($"SELECT * FROM [dbo].[CarasPrecios] WHERE CaraId =  {id} and TipoId = 2 ");
+            FaceQuotation.precio = preciodefault == null ? 0.00 : preciodefault.Precio;
+            return FaceQuotation;
+
+        }
+
 
     }
 }
