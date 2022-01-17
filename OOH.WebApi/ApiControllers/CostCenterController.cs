@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class CostCenterController : ControllerBase
     {
-        private readonly CostCenterRepository _repo;
+        private readonly CostCenterRepo _repo;
 
-        public CostCenterController(CostCenterRepository repo)
+        public CostCenterController(CostCenterRepo repo)
         {
             _repo = repo;
         }

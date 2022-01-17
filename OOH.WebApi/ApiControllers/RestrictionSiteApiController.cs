@@ -14,9 +14,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class RestrictionSiteApiController : ControllerBase
     {
-        private readonly RestrictionSiteRepository _repo;
+        private readonly RestrictionSiteRepo _repo;
 
-        public RestrictionSiteApiController(RestrictionSiteRepository repo)
+        public RestrictionSiteApiController(RestrictionSiteRepo repo)
         {
             _repo = repo;
         }

@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class ReferenceApiController : ControllerBase
     {
-        private readonly CommercialReferencesRepository _repo;
+        private readonly CommercialReferencesRepo _repo;
 
-        public ReferenceApiController(CommercialReferencesRepository repo)
+        public ReferenceApiController(CommercialReferencesRepo repo)
         {
             _repo = repo;
         }

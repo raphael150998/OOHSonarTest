@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class SiteCategoryApiController : ControllerBase
     {
-        private readonly SiteCategoryRepository _repo;
+        private readonly SiteCategoryRepo _repo;
 
-        public SiteCategoryApiController(SiteCategoryRepository repo)
+        public SiteCategoryApiController(SiteCategoryRepo repo)
         {
             _repo = repo;
         }

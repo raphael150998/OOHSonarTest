@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class IndustryRepo : OOHContext, IBaseRepository<Rubros>
+    public class IndustryRepo : OOHContext, IBaseRepo<Rubros>
     {
         private readonly ILogHelper _log;
 

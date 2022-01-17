@@ -20,9 +20,9 @@ namespace OOH.WebApi.ApiControllers
     public class ClientApiController : BaseApiController
     {
 
-        private readonly ClientRepository _repo;
+        private readonly ClientRepo _repo;
 
-        public ClientApiController(ClientRepository repo)
+        public ClientApiController(ClientRepo repo)
         {
             _repo = repo;
         }

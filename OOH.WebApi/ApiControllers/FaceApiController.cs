@@ -15,12 +15,12 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class FaceApiController : ControllerBase
     {
-        private readonly FaceRepository _repo;
-        private readonly MaterialRepository _repoMaterial;
-        private readonly CaraMaterialRepository _repoFaceMaterial;
-        private readonly FacePriceRepository _repoFacePrice;
+        private readonly FaceRepo _repo;
+        private readonly MaterialRepo _repoMaterial;
+        private readonly CaraMaterialRepo _repoFaceMaterial;
+        private readonly FacePriceRepo _repoFacePrice;
 
-        public FaceApiController(FaceRepository repo, MaterialRepository repoMaterial, CaraMaterialRepository repoFaceMaterial, FacePriceRepository repoFacePrice)
+        public FaceApiController(FaceRepo repo, MaterialRepo repoMaterial, CaraMaterialRepo repoFaceMaterial, FacePriceRepo repoFacePrice)
         {
             _repo = repo;
             _repoMaterial = repoMaterial;

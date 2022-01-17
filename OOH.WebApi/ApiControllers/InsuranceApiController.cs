@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class InsuranceApiController : ControllerBase
     {
-        private readonly InsuranceTypesRepository _repo;
+        private readonly InsuranceTypesRepo _repo;
 
-        public InsuranceApiController(InsuranceTypesRepository repo)
+        public InsuranceApiController(InsuranceTypesRepo repo)
         {
             _repo = repo;
         }

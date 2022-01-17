@@ -23,10 +23,10 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class AccountApiController : ControllerBase
     {
-        private readonly AccountRepository _repo;
+        private readonly AccountRepo _repo;
         private readonly ILogger _logger;
 
-        public AccountApiController(ILogger<AccountApiController> logger, AccountRepository repo)
+        public AccountApiController(ILogger<AccountApiController> logger, AccountRepo repo)
         {
             _logger = logger;
             _repo = repo;

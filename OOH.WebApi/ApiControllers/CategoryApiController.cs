@@ -13,9 +13,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class CategoryApiController : BaseApiController
     {
-        CategoryRepository _repo;
+        CategoryRepo _repo;
 
-        public CategoryApiController(CategoryRepository repo)
+        public CategoryApiController(CategoryRepo repo)
         {
             _repo = repo;
         }

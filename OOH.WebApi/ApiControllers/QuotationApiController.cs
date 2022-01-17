@@ -19,10 +19,10 @@ namespace OOH.WebApi.ApiControllers
     public class QuotationApiController : ControllerBase
     {
 
-        private readonly QuotationRepository _repo;
-        private readonly FaceRepository _repoFace;
-        private readonly SiteRepository _repoSite;
-        public QuotationApiController(QuotationRepository repo, FaceRepository repoFace, SiteRepository repoSite)
+        private readonly QuotationRepo _repo;
+        private readonly FaceRepo _repoFace;
+        private readonly SiteRepo _repoSite;
+        public QuotationApiController(QuotationRepo repo, FaceRepo repoFace, SiteRepo repoSite)
         {
             _repo = repo;
             _repoFace = repoFace;

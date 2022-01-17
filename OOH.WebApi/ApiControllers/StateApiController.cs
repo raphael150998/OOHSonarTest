@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class StateApiController : ControllerBase
     {
-        private readonly StateTypesRepository _repo;
+        private readonly StateTypesRepo _repo;
 
-        public StateApiController(StateTypesRepository repo)
+        public StateApiController(StateTypesRepo repo)
         {
             _repo = repo;
         }

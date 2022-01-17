@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class PermissionApiController : ControllerBase
     {
-        private readonly PermissionTypesRepository _repo;
+        private readonly PermissionTypesRepo _repo;
 
-        public PermissionApiController(PermissionTypesRepository repo)
+        public PermissionApiController(PermissionTypesRepo repo)
         {
             _repo = repo;
         }

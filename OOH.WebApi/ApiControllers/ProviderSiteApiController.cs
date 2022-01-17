@@ -14,9 +14,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class ProviderSiteApiController : Controller
     {
-        private readonly SiteProviderRepository _repo;
+        private readonly SiteProviderRepo _repo;
 
-        public ProviderSiteApiController(SiteProviderRepository repo)
+        public ProviderSiteApiController(SiteProviderRepo repo)
         {
             _repo = repo;
         }

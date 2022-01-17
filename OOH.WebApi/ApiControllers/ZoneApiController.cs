@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class ZoneApiController : ControllerBase
     {
-        private readonly ZoneRepository _repo;
+        private readonly ZoneRepo _repo;
 
-        public ZoneApiController(ZoneRepository repo)
+        public ZoneApiController(ZoneRepo repo)
         {
             _repo = repo;
         }

@@ -56,7 +56,7 @@ namespace OOH.Test
 
             };
 
-            SiteRepository _repo = new SiteRepository(TestHelpers.GetWebUserHelper(data), TestHelpers.GetLogHelper(logs, log));
+            SiteRepo _repo = new SiteRepo(TestHelpers.GetWebUserHelper(data), TestHelpers.GetLogHelper(logs, log));
 
             IEnumerable<SiteListDto> result = await _repo.GetList();
 
@@ -102,7 +102,7 @@ namespace OOH.Test
 
             };
 
-            SiteRepository _repo = new SiteRepository(TestHelpers.GetWebUserHelper(data), TestHelpers.GetLogHelper(logs, log));
+            SiteRepo _repo = new SiteRepo(TestHelpers.GetWebUserHelper(data), TestHelpers.GetLogHelper(logs, log));
 
             Select2PagingOutputDto result = await _repo.GetListForSelect2(new Select2PagingInputDto() {  });
 

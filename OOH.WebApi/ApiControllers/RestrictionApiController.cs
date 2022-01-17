@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class RestrictionApiController : ControllerBase
     {
-        private readonly CommercialRestrictionsRepository _repo;
+        private readonly CommercialRestrictionsRepo _repo;
 
-        public RestrictionApiController(CommercialRestrictionsRepository repo)
+        public RestrictionApiController(CommercialRestrictionsRepo repo)
         {
             _repo = repo;
         }

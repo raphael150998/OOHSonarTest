@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class AddressApiController : Controller
     {
-        private readonly AddressRepository _repo;
+        private readonly AddressRepo _repo;
 
-        public AddressApiController(AddressRepository repo)
+        public AddressApiController(AddressRepo repo)
         {
             _repo = repo;
         }

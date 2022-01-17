@@ -16,10 +16,10 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class PermissionSiteApiController : Controller
     {
-        private readonly PermissionSiteRepository _repo;
+        private readonly PermissionSiteRepo _repo;
         private readonly IMapper _mapper;
 
-        public PermissionSiteApiController(PermissionSiteRepository repo, IMapper mapper)
+        public PermissionSiteApiController(PermissionSiteRepo repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

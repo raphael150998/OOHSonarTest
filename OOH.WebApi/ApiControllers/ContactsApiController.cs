@@ -16,9 +16,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class ContactsApiController : BaseApiController
     {
-        private readonly ContactsRepository _repo;
+        private readonly ContactsRepo _repo;
 
-        public ContactsApiController(ContactsRepository repo)
+        public ContactsApiController(ContactsRepo repo)
         {
             _repo = repo;
         }

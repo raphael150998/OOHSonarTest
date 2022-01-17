@@ -54,7 +54,7 @@ namespace OOH.Test
 
             };
 
-            AccessTimeRepository _repo = new AccessTimeRepository(TestHelpers.GetWebUserHelper(data), TestHelpers.GetLogHelper(logs, log));
+            AccessTimeRepo _repo = new AccessTimeRepo(TestHelpers.GetWebUserHelper(data), TestHelpers.GetLogHelper(logs, log));
 
             List<DayOfWeek> dayList = EnumHelper.GetItems<DayOfWeek>();
 

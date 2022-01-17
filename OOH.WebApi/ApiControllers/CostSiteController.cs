@@ -14,9 +14,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class CostSiteController : ControllerBase
     {
-        private readonly CostSiteRepository _repo;
+        private readonly CostSiteRepo _repo;
 
-        public CostSiteController(CostSiteRepository repo)
+        public CostSiteController(CostSiteRepo repo)
         {
             _repo = repo;
         }

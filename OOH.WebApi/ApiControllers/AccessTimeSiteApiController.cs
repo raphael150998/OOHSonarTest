@@ -14,9 +14,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class AccessTimeSiteApiController : ControllerBase
     {
-        private readonly AccessTimeRepository _repo;
+        private readonly AccessTimeRepo _repo;
 
-        public AccessTimeSiteApiController(AccessTimeRepository repo)
+        public AccessTimeSiteApiController(AccessTimeRepo repo)
         {
             _repo = repo;
         }

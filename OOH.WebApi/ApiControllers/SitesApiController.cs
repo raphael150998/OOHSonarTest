@@ -18,13 +18,13 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class SitesApiController : ControllerBase
     {
-        private readonly SiteRepository _siteRepo;
-        private readonly AddressRepository _addressRepo;
-        private readonly SiteElectricMeterRepository _electricityMeterRepo;
+        private readonly SiteRepo _siteRepo;
+        private readonly AddressRepo _addressRepo;
+        private readonly SiteElectricMeterRepo _electricityMeterRepo;
         private readonly IMapper _mapper;
 
 
-        public SitesApiController(SiteRepository repo, IMapper mapper, SiteElectricMeterRepository electricityMeterRepo, AddressRepository addressRepo)
+        public SitesApiController(SiteRepo repo, IMapper mapper, SiteElectricMeterRepo electricityMeterRepo, AddressRepo addressRepo)
         {
             _siteRepo = repo;
             _mapper = mapper;

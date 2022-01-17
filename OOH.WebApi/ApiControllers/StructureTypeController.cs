@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class StructureTypeController : ControllerBase
     {
-        private readonly StructureTypesRepository _repo;
+        private readonly StructureTypesRepo _repo;
 
-        public StructureTypeController(StructureTypesRepository repo)
+        public StructureTypeController(StructureTypesRepo repo)
         {
             _repo = repo;
         }

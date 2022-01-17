@@ -12,9 +12,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class MunicipalityApiController : BaseApiController
     {
-        private readonly AddressRepository _repo;
+        private readonly AddressRepo _repo;
 
-        public MunicipalityApiController(AddressRepository repo)
+        public MunicipalityApiController(AddressRepo repo)
         {
             _repo = repo;
         }

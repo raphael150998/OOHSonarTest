@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OOH.Data.Repos
 {
-    public class OperatorRepo : OOHContext, IBaseRepository<Operadores>
+    public class OperatorRepo : OOHContext, IBaseRepo<Operadores>
     {
         public OperatorRepo(IWebUserHelper userHelper) : base(userHelper)
         {

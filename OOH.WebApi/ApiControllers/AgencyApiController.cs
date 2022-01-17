@@ -18,10 +18,10 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class AgencyApiController : ControllerBase
     {
-        private readonly AdvertisingAgencyRepository _repo;
+        private readonly AdvertisingAgencyRepo _repo;
         private readonly IMapper _mapper;
 
-        public AgencyApiController(AdvertisingAgencyRepository repo, IMapper mapper)
+        public AgencyApiController(AdvertisingAgencyRepo repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

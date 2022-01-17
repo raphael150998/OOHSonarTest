@@ -13,9 +13,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class TypesApiController : ControllerBase
     {
-        readonly TypesRepository _repo;
+        readonly TypesRepo _repo;
 
-        public TypesApiController(TypesRepository repo)
+        public TypesApiController(TypesRepo repo)
         {
             _repo = repo;
         }

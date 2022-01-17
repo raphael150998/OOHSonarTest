@@ -15,9 +15,9 @@ namespace OOH.WebApi.ApiControllers
     [ApiController]
     public class ReferenceSiteApiController : ControllerBase
     {
-        private readonly ReferenceSiteRepository _repo;
+        private readonly ReferenceSiteRepo _repo;
 
-        public ReferenceSiteApiController(ReferenceSiteRepository repo)
+        public ReferenceSiteApiController(ReferenceSiteRepo repo)
         {
             _repo = repo;
         }
