@@ -68,6 +68,10 @@ namespace OOH.WebApi
             services.AddScoped<IMapGenerator, MapGenerator>();
             services.AddScoped<IPowerpointProvider, PowerpointProvider>();
             services.AddScoped<TypesRepository>();
+            services.AddScoped<ContractFaceRepo>();
+            services.AddScoped<ContractRepo>();
+            services.AddScoped<IndustryRepo>();
+            services.AddScoped<PromotionRepo>();
             services.AddControllersWithViews();
             services.AddCors();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
