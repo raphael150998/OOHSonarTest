@@ -41,4 +41,11 @@ namespace OOH.Data
         Web = 2,
         Movil = 3
     }
+
+    public enum EstadoContrato
+    {
+        Creado,
+        Posteado,
+        Anulado
+    }
 }
