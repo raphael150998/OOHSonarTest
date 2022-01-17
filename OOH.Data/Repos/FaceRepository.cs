@@ -87,11 +87,11 @@ namespace OOH.Data.Repos
                 }
             }
 
-            
+             
             
             if (collection.CaraId == 0)
             {
-                collection.Codigo = tipo +"-" + sitio +"-"+ collection.Sentido;
+                collection.Codigo = tipo +"-" + sitio +"-"+ collection.Lado;
                 int post = PostData(@"Insert Into [dbo].[Caras] ([SitioId],[NotaInstalacion],[Codigo],[TipoId],[CategoriaId],[Alto],[Ancho],[Sentido],[AlturaAlPiso],[MetodoInstalacion],[Observaciones],[Activo],[ReferenciaComercial],[NumSpotDigital],[CaraIluminada]) 
                                                         Values (@SitioId,@NotaInstalacion,@Codigo,@TipoId,@CategoriaId,@Alto,@Ancho,@Sentido,@AlturaAlPiso,@MetodoInstalacion,@Observaciones,@Activo,@ReferenciaComercial,@NumSpotDigital,@CaraIluminada)", true, param, false).Result;
 

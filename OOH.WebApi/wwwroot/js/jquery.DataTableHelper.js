@@ -1,7 +1,22 @@
 ﻿
-var DataTableHelper = {
-    Draw: function (identify, config) {
 
+//Metodo para crear el Datatable de clientes
+var ButtonExcel = [{
+    extend: 'excelHtml5',
+    text: 'Archivo Excel',
+    titleAttr: 'Exportar a Excel',
+    className: 'btn btn-success',
+    exportOptions: {
+        columns: [1, 2, 3]
+    }
+},];
+
+var DataTableHelper = {
+    Draw: function (identify, config, execelBackend = false) {
+        if (execelBackend) {
+            config.dom = "Bfrltip";
+            config.buttons = ButtonExcel;
+        }
         var table = $(identify).DataTable(config);
         return {
             FilterColum: function () {

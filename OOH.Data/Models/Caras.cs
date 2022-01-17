@@ -24,6 +24,7 @@ namespace OOH.Data.Models
         public int NumSpotDigital { get; set; }
         public bool CaraIluminada { get; set; }
         public string NotaInstalacion { get; set; }
+        public string Lado { get; set; }
 
     }
 }

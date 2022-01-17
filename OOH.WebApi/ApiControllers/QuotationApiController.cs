@@ -106,6 +106,13 @@ namespace OOH.WebApi.ApiControllers
         {
             return Ok(await _repo.GetLogs(id));
         }
+        
+        [HttpGet]
+        [Route("api/quotation/face/get")]
+        public async Task<IActionResult> getCaras(long id)
+        {
+            return Ok(await _repo.getCarasDireccion(id));
+        }
 
     }
 }
